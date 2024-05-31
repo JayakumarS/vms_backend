@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html>
+<style>
+    .border1{
+        border: 1px solid black;
+      border-collapse: collapse;}
+    th{
+     border: 1px solid black;  
+     padding:0.5% !important;
+    }
+    td{
+     border: 1px solid black ;
+     padding:0.5% !important;
+    }
+    
+     @media print  {
+      @page {
+        size: 180mm 310mm; /* portrait */
+        /* you can also specify margins here: */
+        margin: 0;
+         margin-right: 0 ;/*for compatibility with both A4 and Letter */
+    } 
+    table {
+        border: 1px solid black;
+      
+    }
+    th, td {
+        border: 1px solid black;
+       
+    }
+     } 
+    .bold{
+      font-weight: 700;
+    }
+	body {
+font-family: Roboto, Helvetica, Arial, sans-serif
+}
+
+p {
+font-size:12px;
+}
+
+h1 {
+font-size:25px;
+text-align:right;
+}
+
+h3 {
+font-size:13px;
+text-align:right;
+margin:0px;
+}
+
+ol li {
+font-size:12px;
+}
+
+table.report-container {
+    page-break-after:always;
+}
+
+thead.report-header {
+    display:table-header-group;
+}
+
+div.footer {
+    display: block; 
+    text-align: center;
+    position: running(footer);       
+}
+
+@page { 
+    margin-bottom: 81px;    
+ 	@bottom-center: { 
+ 		content: element(footer) 
+ 	}    	
+ 	white-space: pre-line; 	
+  	@bottom-right {
+	white-space: nowrap;
+	padding-bottom:50px;
+	padding-left:20px;
+	content: counter(page) " of " counter(pages);
+	}
+       
+    </style>
+    
+    <div class="container border" id="salesOrderdview">
+        <div>
+            <div class="img">
+                <img src="http://213.42.28.72/assets/images/favicon.png" alt="" style="width: 18%; padding-left: 32px; padding-top: 45px;"/>
+           </div>
+            
+            <div class= "text-center" style="margin-top: -40px;text-align: center;">
+                <h4>BITUTECH LIMITED</h4>
+                   <h6>P.O. Box: 64338-00620,Nairobi,Kenya.<br>
+                    Tel: +254 709519000 Email: bitutech2@gmail.com<br>
+                    PIN: P051706137I
+                    </h6>
+            </div>
+    
+            <div class= "text-center" style="text-align: center;">
+                <h4>PRO FORMA INVOICE</h4>
+            </div>
+        </div>
+    
+        <div style="margin-top: 45px;"> 
+            <table style="width: 100% !important;">
+                <tr>
+                    <table   style="width: 100% !important;">
+                        <tr >
+                            <td style="width: 40%; font-size: 13px" >
+                                <b>Customer Name:</b> &nbsp; ${bean.customer}
+                            </td>
+                            
+                        <!--    <td style="padding-left:20px !important; padding-right: 111px !important;border-top-color: white;border-bottom-color: white;border:none;"></td>   --> 
+                            <td class="bold">
+                               <b style="font-size: 13px">PI No:</b>
+                            </td>
+                            <td style="font-size: 13px">
+                                ${bean.manualInvoiceNo}
+                            </td>
+                            <td class="bold" >
+                                <b style="font-size: 13px">Date:</b>
+                            </td>
+                            <td style="font-size: 13px">
+                                ${bean.invoiceDate}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td rowspan="2" style="font-size: 13px">
+                                <b >Address:</b>&nbsp;&nbsp; 
+                                 #if($bean.address)
+                                 <span> ${bean.address} </span>
+								#else
+		 						<span >	-</span>
+								#end
+                                 <br><b>Pin:</b>&nbsp;&nbsp; ${bean.pinNo}
+                            </td>
+                          <!-- <td style="border-bottom-color: white;border:none;"></td>   --> 
+                            <td colspan="2" class="bold">
+                                <b style="font-size: 13px">Payment Terms:</b>
+                            </td>
+                             <td colspan="2" style="font-size: 13px">
+                                100% Cash in advance
+                            </td>
+                              <td style="border-bottom-color: white;border:none;"></td>  
+                        </tr>
+                        <tr>
+                         <!--      <td style="border-bottom-color: white;border:none;"></td> -->
+                            <td colspan="2" class="bold">
+                                <b style="font-size: 13px">Delivery:</b>
+                            </td>
+                             <td colspan="2" style="font-size: 13px">
+                               	Ex-Nairobi W/Hse
+                            </td>
+                        </tr>
+                        <tr>
+                           
+                      </tr>
+                    </table>
+                </tr>
+                <tr>
+                    <table>
+    
+                    </table>
+                </tr>
+            </table>
+        </div> 
+    
+     #if($bean.type =='Letter Of Credit')
+        <div>
+            <table class="border1" style=" border: 1px solid black; width:100%;;
+            border-collapse: collapse; margin-top: 20px; " >
+                <tr style="font-weight: 600; background: #80808036;">
+                    <th style="font-size: 13px;text-align: center;">
+                        S.No 
+                    </th>
+                    <th style="font-size: 13px">
+                        Product Name
+                    </th>
+                    <th style="font-size: 13px">
+                      
+                        Unit
+                    </th>
+                    <th style="font-size: 13px">
+                        
+                        Unit Price
+                    </th>
+                    <th style="font-size: 13px">
+                       VAT %                    
+                    </th> 
+                
+                    <th  colspan="2" style="font-size: 13px">
+                        Value 
+                    </th>
+                 </tr>
+              #foreach($item in $bean.purchaseInvoiceDetailBean)       
+         		<tr>
+                    <td style="font-size: 13px;text-align: center;">$foreach.count</td>
+                    <td style="font-size: 13px">
+                        ${item.detailItem}
+                    </td>
+                    <td style="text-align: right;font-size: 13px">
+                        ${item.detailQuantity}
+                    </td>
+                    <td style="text-align: right;font-size: 13px">
+                        ${item.detailUnitPrice}
+                    </td>
+                    <td style="font-size: 13px;text-align: center;">
+                        ${item.detailTaxAmount}%
+                    </td>
+                   
+                   
+                    <td colspan="2" style="text-align: right;font-size: 13px">
+                        ${item.detailAmount}
+                    </td>
+                 </tr>
+                  #end
+                
+                <tr >
+                    <td colspan="5" style="font-weight: 600;text-align: right;font-size: 13px">
+                        Sub - Total
+                    </td>
+                    <td style="font-size: 13px">
+                        ${bean.currencyName}
+                    </td>
+                    <td style="font-size: 13px;text-align: right;">
+                        ${bean.subAmount}
+                    </td>
+                </tr>
+                <tr >
+                    <td colspan="5" style="font-weight: 600;text-align: right;font-size: 13px">
+                        VAT
+                    </td>
+                    <td style="font-size: 13px">
+                        ${bean.currencyName}
+                    </td>
+                    <td style="font-size: 13px;text-align: right;">
+                        ${bean.totalVat}
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="5"style="font-weight: 600;text-align: right;font-size: 13px">
+                        Charges Total
+                    </td>
+                    <td style="font-size: 13px">
+                        ${bean.currencyName}
+                    </td>
+                    <td style="font-size: 13px;text-align: right;">
+                        ${bean.totalSecondRow}
+                    </td>
+                </tr>
+				#if($bean.bankCharge !='0')
+                <tr>
+                    <td colspan="5"style="font-weight: 600;text-align: right;font-size: 13px">
+                        Bank Charge
+                    </td>
+                    <td style="font-size: 13px">
+                        ${bean.currencyName}
+                    </td>
+                    <td style="font-size: 13px;text-align: right;">
+                        ${bean.bankCharge}
+
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="5"style="font-weight: 600;text-align: right;font-size: 13px">
+                        Total
+                    </td>
+                    <td style="font-size: 13px">
+                        ${bean.currencyName}
+                    </td>
+                    <td style="font-size: 13px;text-align: right;">
+                        ${bean.totalVal}
+
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="5"style="font-weight: 600;text-align: right;font-size: 13px">
+                        Withholding vat (to be paid to KRA by 20th of following month after invoicing)
+                    </td>
+                    <td style="font-size: 13px">
+                        ${bean.currencyName}
+                    </td>
+                    <td style="font-size: 13px;text-align: right;">
+                        ${bean.withHoldingVatVal}
+
+                    </td>
+                </tr>
+                #end
+                <tr>
+                    <td colspan="5"style="font-weight: 600;text-align: right;font-size: 13px">
+                        Grand Total
+                    </td>
+                    <td style="font-size: 13px">
+                        ${bean.currencyName}
+                    </td>
+                    <td style="font-size: 13px;text-align: right;">
+                        ${bean.grandTotalVal}
+                    </td>
+                </tr>
+            </table>
+        </div>
+        #end
+        
+        #if($bean.type !='Letter Of Credit')      
+        <div>
+            <table class="border1" style=" border: 1px solid black; width:100%;;
+            border-collapse: collapse; margin-top: 20px; " >
+                <tr style="font-weight: 600; background: #80808036;">
+                    <th style="font-size: 13px">
+                        S.No 
+                    </th>
+                    <th style="font-size: 13px">
+                        Product Name
+                    </th>
+                    <th style="font-size: 13px">
+                      
+                        Unit
+                    </th>
+                    <th style="font-size: 13px">
+                        
+                        Unit Price
+                    </th>
+                    <th style="font-size: 13px">
+                       VAT %                    
+                    </th> 
+                
+                    <th  colspan="2" style="font-size: 13px">
+                        Value 
+                    </th>
+                 </tr>
+                 #foreach($item in $bean.purchaseInvoiceDetailBean) 
+                <tr >
+                   <td style="font-size: 13px;text-align: center;">$foreach.count</td>
+                    <td style="font-size: 13px">
+                        ${item.detailItem}
+                    </td>
+                    <td style="text-align: right;font-size: 13px">
+                        ${item.detailQuantity}
+                    </td>
+                    <td style="text-align: right;font-size: 13px">
+                        ${item.detailUnitPrice}
+                    </td>
+                    <td style="font-size: 13px;text-align: center;">
+                        ${item.detailTaxAmount}%
+                    </td>
+                   
+                   
+                    <td colspan="2" style="text-align: right;font-size: 13px">
+                        ${item.detailAmount}
+                    </td>
+					
+                 </tr>
+				 #end
+                <tr >
+                    <td colspan="5" style="font-weight: 600;text-align: right;font-size: 13px">
+                        Sub - Total
+                    </td>
+                    <td style="font-size: 13px">
+                        ${bean.currencyName}
+                    </td>
+                    <td style="font-size: 13px;text-align: right;">
+                        ${bean.subAmount}
+                    </td>
+                </tr>
+                <tr >
+                    <td colspan="5" style="font-weight: 600;text-align: right;font-size: 13px">
+                        VAT
+                    </td>
+                    <td style="font-size: 13px">
+                        ${bean.currencyName}
+                    </td>
+                    <td style="font-size: 13px;text-align: right;">
+                        ${bean.totalVat}
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="5"style="font-weight: 600;text-align: right;font-size: 13px">
+                        Charges Total
+                    </td>
+                    <td style="font-size: 13px">
+                        ${bean.currencyName}
+                    </td>
+                    <td style="font-size: 13px;text-align: right;">
+                        ${bean.totalSecondRow}
+
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="5"style="font-weight: 600;text-align: right;font-size: 13px">
+                        Grand Total
+                    </td>
+                    <td style="font-size: 13px">
+                        ${bean.currencyName}
+                    </td>
+                    <td style="font-size: 13px;text-align: right;">
+                        ${bean.grandTotalVal}
+                    </td>
+                </tr>
+            </table>
+        </div>
+        #end
+        <br>
+        <div>
+            <p><span><b>Amount in words:</b></span> Kenya Shillings ${bean.numberInWords}</p>
+            <p style="text-align: center;"><b>
+                Thank You For Your Business ...
+            </b></p>
+        </div>
+        <div>
+            <p><b>Terms & Conditions :</b></p>
+            <span>
+               <p >1 . Above quote validity: 1 (One) day only</p>
+               <p >2 . Delivery above should be stamped on delivery before offloading, all delays and penalties on customer account.</p>
+			   <p >1 . Above quote validity: 1 (One) day only</p>               
+           </span>                  
+        </div>
+       <div style="margin-top: 45px;"> 
+            <table style="width: 100% !important;">
+                <tr>
+                    <table   style="width: 100% !important;">
+                        <tr >
+                            <td style="width: 40%;border-bottom: none;border-left: none;border-right: none;border-top: none;" >
+                                <b>Bank Details:</b><br><br>
+								<b style="font-size: 13px">ACCOUNT NAME:</b>&nbsp;<b style="font-size: 13px">BITUTECH LTD</b><br>
+								<b style="font-size: 13px">BANK NAME:</b>&nbsp;<b style="font-size: 13px">I&M BANK LTD</b><br>
+								<b style="font-size: 13px">CURRENCY:</b>&nbsp;<b style="font-size: 13px">KENYA SHILLING</b><br>
+								<b style="font-size: 13px">ACCOUNT NO:</b>&nbsp;<b style="font-size: 13px">00901867761210</b><br>
+								<b style="font-size: 13px">BANK BRANCH/CODE:</b>&nbsp;<b style="font-size: 13px">PANARI CENTRE 57-009</b><br>
+								<b style="font-size: 13px">SWIFT CODE:</b>&nbsp;<b style="font-size: 13px">IMBLKENA</b>
+                            </td>
+                            
+                            <td style="padding-left:20px !important; padding-right: 111px !important;border-top-color: white;border-bottom-color: white;border:none;"></td>
+                            <td class="bold" style="border-bottom: none;border-left: none;border-right: none;border-top: none;">
+                               <b style="font-size: 13px">Mpesa Payment Details:</b>&nbsp;<b style="font-size: 13px">-</b><br>
+							   <b style="font-size: 13px">MPESA PAYBILL:</b>&nbsp;<b style="font-size: 13px">542542</b><br>
+							   <b style="font-size: 13px">A/C NO:</b>&nbsp;<b style="font-size: 13px">117117</b>
+                            </td>
+                        </tr>
+                        <tr>
+                           
+                      </tr>
+                    </table>
+                </tr>
+                <tr>
+                    <table>
+    
+                    </table>
+                </tr>
+            </table>
+        </div>
+    </div>
+    </html>

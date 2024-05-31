@@ -1,0 +1,248 @@
+<html>
+<head>
+<style>
+body
+{
+font-family: Roboto, Helvetica, Arial, sans-serif
+}
+p
+{
+font-size:12px;
+}
+.columnText {
+	float: left;
+	width: 32% !important;
+	font-size: 13px;
+	padding-bottom: 8px;
+    padding-left: 4px;
+}
+fieldset {
+	border :solid black 2px;
+    padding: 5px;
+}
+</style>
+</head>
+<body>
+<div id="customerInvoiceview">
+    <br>
+    <h4 style="margin-left:450px;">INVOICE</h4>
+    <table style="width: 70% !important; border-bottom: none;" border="1">
+
+<!-- 1 -->
+    <tr >
+    <td rowspan="3">
+        
+        <div class="col-md-12">
+        <div class="row"> 
+                <!-- <div class="img col-md-3" style="text-align: left;">
+                    <img src="/assets/images/logo.png" alt="" style="width: 116%; padding-left: 32px; padding-top: 0px;"/>
+                </div> -->
+                <div class="img col-md-3" style="text-align: left;">
+                    <img *ngIf="logoImg == null" src="/assets/images/logo.png" alt="" style="width: 80%; padding-left: 32px; padding-top: 0px;"/>
+               </div>
+               <div class="img col-md-3" style="text-align: left;">
+                    <img *ngIf="logoImg != null" src={{logoImg}} alt="" style="width: 80%; padding-left: 32px; padding-top: 0px;"/>
+               </div>
+                <div class= "text-left col-md-6" style="padding-left: 28px;">
+                    <h5>Bitutech Limited</h5>
+                       <h6>P.O. Box: 64338-00620<br>
+                        Nairobi<br>
+                        Tulip House,2nd Flr<br>
+                        Mombasa Road<br>
+                        E-Mail: bitutech2@gmail.com<br>
+                        </h6>
+                </div>
+                </div>
+        </div >
+        
+            
+        </td>
+        
+        <td valign="top" style="height: 10px;">
+        Invoice No.<br>
+        <b>${bean.custInvoiceNo}</b>
+       </td>
+
+       <td valign="top" style="height: 10px;">
+        Dated<br>
+        <b>${bean.custInvoiceDate}</b>
+       </td>
+    </tr>
+    <tr>
+       
+        <td valign="top" style="height: 10px;">
+            Delivery Note<br>
+            <b>${bean.deliveryNo}</b>
+           </td>
+           <td valign="top" style="height: 10px;">
+            Mode/Terms of Payment<br><br>
+           </td>
+        </tr>
+        <tr>
+            <td valign="top" style="height: 10px;">
+                Customer's Ref.<br><br>
+               </td>
+               <td valign="top" style="height: 10px;">
+                Other Reference(s)<br><br>
+               </td>
+            </tr>
+<!-- 1 -->
+            <!-- 2 -->
+            <tr>
+                <td rowspan="4" style="border-bottom: none; height: 400px; width:50%; text-align: left;" valign="top">
+                    Buyer<br>
+                    <b>${bean.customer}</b>
+                    </td>
+                    <td valign="top" style="height: 10px;">
+                        Buyer's Order No.<br>
+                        <b>${bean.salesOrderNo}</b>
+                       </td>
+                       <td valign="top" style="height: 10px;">
+                        Dated<br>
+                        <b>${bean.salesDate}</b>
+                       </td>
+                </tr>
+                <tr>
+                   
+                    <td valign="top" style="height: 10px;">
+                        Despatch Document No.<br><br>
+                       </td>
+                       <td valign="top" style="height: 10px;">
+                        Delivery Note Date<br>
+                        <b>${bean.deliveryDate}</b>
+                       </td>
+                    </tr>
+                    <tr>
+                        <td  rowspan="1" valign="top" style="height: 10px;">
+                            Despatched through<br><br>
+                           </td>
+                           <td  rowspan="1" valign="top" style="height: 10px;">
+                            Destination<br>
+                            <b>${bean.destination}</b>
+                           </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" style="border-bottom:none; height:235px"></td>
+                            
+                            </tr>
+<!-- 2 -->
+<!-- 3 -->
+
+<tr style="width: 100%;">
+    <td colspan="4" style="border-top:none;  padding: inherit;">
+    <table style="width: 100% !important;">
+<tr>
+    <th style="width:10px;">Sl No.</th>
+    <th colspan="2" style="width:180px;">Description of Goods</th>
+    <th>Quantity</th>
+    <th>Rate</th>
+    <th>Per</th>
+    <th style="border-right: solid 1px #FFF;">Amount</th>
+    
+    </tr>
+    #foreach($item in $bean.list)
+    <tr style="height:228px;">
+        <td valign="top"><b>{{i+1}}</b></td>
+        <td style="border-right: solid 1px #FFF; width:45%" valign="top"><b>${item.itemName}</b><br><br>
+         &nbsp;&nbsp;&nbsp;
+         <br><br><br>
+        Less:
+        </td>
+        <td style="text-align: right; width:113px"><b><br><br><br><br>Output VAT 16%<br>Rounding Off</b></td>
+        <td valign="top" style="text-align: right;"><b>${item.qty}</b></td>
+        <td valign="top" style="text-align: right;">
+            ${item.quotePrice}<br><br><br><br><br><br>16
+        </td>
+        <td valign="top" style="text-align: right;">
+            ${item.uomName}<br><br><br><br><br><br>%
+        </td>
+        <td style="border-right: solid 1px #FFF; text-align: right;" valign="top"><b>
+            ${item.itemTotal}<br><br><br><br><br><br>${item.vat}
+        </b></td>
+        </tr>
+        #end
+<!-- Total footer -->
+        <tr>
+            <td></td>
+            <td style="border-right: solid 1px #FFF;"></td>
+            <td valign="right" style="text-align: right;">Total</td>
+            <td style="text-align: right;text-align: right;"><b>${bean.quantityTotal}</b></td>
+            <td></td>
+            <td></td>
+            <td style="border-right: solid 1px #FFF; text-align: right;"><b>${bean.amountTotal}</b></td>
+        </tr>
+        <!-- Total footer -->
+  </table>
+  </td>
+</tr>
+<!-- 3 -->
+
+<!-- 4 -->
+<tr style="width: 80%;">
+    <td colspan="4" style="border-top:none; border-bottom: none; padding: inherit;">
+    <table style="width: 100% !important;">
+<tr style="height:120px;">
+    <th style="border-right: solid 1px #FFF; border-bottom: solid 1px #FFF; border-top: solid 1px #FFF; width:30%" valign="top">
+        <span style="font-weight: 400;">Amount Chargeable (in words)</span><br>
+        Kenyan Shilling ${bean.amountWords}
+    </th>
+    <th style="border-right: solid 1px #FFF; border-bottom: solid 1px #FFF; border-top: solid 1px #FFF;"></th>
+    <th style="border-right: solid 1px #FFF; border-bottom: solid 1px #FFF; border-top: solid 1px #FFF;"></th>
+    <th style="border-bottom: solid 1px #FFF; border-right: solid 1px #FFF; border-top: solid 1px #FFF; text-align: right; font-weight: 400;" valign="top">E & O.E</th>
+
+    
+    </tr>
+    <tr style="height:85px;">
+        <td style="border-right: solid 1px #FFF; border-top: solid 1px #FFF;  border-bottom: solid 1px #FFF; width: 10%;" colspan="2">
+            Company's PIN &nbsp;&nbsp;&nbsp;&nbsp; :<b>P0517068954</b>
+        </td>
+        <!-- <td style="border-right: solid 1px #FFF; border-top: solid 1px #FFF;  border-bottom: solid 1px #FFF; width: 10%;">2</td> -->
+        <td style="border-right: solid 1px #FFF; border-top: solid 1px #FFF; width:20%; text-align:left;">
+        Company's Bank Details<br>
+        Bank Name <br>
+        Account No. <br>
+        Branch & Bank Code <br>
+        SWIFT Code
+        </td>
+        <td style="border-right: solid 1px #FFF; border-top: solid 1px #FFF; text-align:left;">
+         <b>
+            <br>
+            : I&M KSH Account<br>
+            : 9845587878547<br>
+            : Panari Centre Branch & 57-009<br>
+            : IMBLKENA
+         </b></td>
+        </tr>
+
+        <tr style="height:52px;">
+            <td style="border-top: solid 1px #FFF; width: 10%; width:30%" colspan="2">
+            <u>Declaration</u><br>
+            We declare that this invoice shows the actual price of the goods<br>
+            described and that all particulars are true and correct.<br><br>
+            </td>
+            <!-- <td style="border-top: solid 1px #FFF; width: 15%;">6</td> -->
+            <td style="border-right: solid 1px #FFF;"></td>
+            <td style="border-right: solid 1px #FFF; text-align: right;" valign="top">
+            <b>for Bitutech Limited</b><br><br><br><br>
+            Authorised Signatory
+        </td>
+        </tr>
+  </table>
+  </td>
+</tr>
+
+<!-- 4 -->
+
+    </table>
+  
+    <div style="text-align: center;">
+            This is a Computer Generated Invoice
+        </div>
+</div>
+    <body>
+    
+    <html>
+    
+    
+    
+    

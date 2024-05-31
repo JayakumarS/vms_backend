@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<style>
+    .border1{
+        border: 1px solid black;
+      border-collapse: collapse;}
+    th{
+     border: 1px solid black;  
+     padding:0.5% !important;
+    }
+    td{
+     border: 1px solid black ;
+     padding:0.5% !important;
+    }
+     @media print  {
+      @page {
+        size: 180mm 310mm; /* portrait */
+        /* you can also specify margins here: */
+        margin: 0;
+         margin-right: 0 ;/*for compatibility with both A4 and Letter */
+    } 
+    table {
+        border: 1px solid black;
+      
+    }
+    th, td {
+        border: 1px solid black;
+       
+    }
+     } 
+    .bold{
+      font-weight: 700;
+    }body {
+font-family: Roboto, Helvetica, Arial, sans-serif
+}
+
+p {
+font-size:12px;
+}
+
+h1 {
+font-size:25px;
+text-align:right;
+}
+
+h3 {
+font-size:13px;
+text-align:right;
+margin:0px;
+}
+
+ol li {
+font-size:12px;
+}
+
+table.report-container {
+    page-break-after:always;
+}
+
+thead.report-header {
+    display:table-header-group;
+}
+
+div.footer {
+    display: block; 
+    text-align: center;
+    position: running(footer);       
+}
+
+@page { 
+    margin-bottom: 81px;    
+ 	@bottom-center: { 
+ 		content: element(footer) 
+ 	}    	
+ 	white-space: pre-line; 	
+  	@bottom-right {
+	white-space: nowrap;
+	padding-bottom:50px;
+	padding-left:20px;
+	content: counter(page) " of " counter(pages);
+	}
+}
+
+    </style>
+    <div class="container border" id="bean?">
+        <div>
+            <div class="img">
+                <img *ngIf="logoImg == null" src="/assets/images/logo.png" alt="" style="width: 19%; padding-left: 32px; padding-top: 45px;"/>
+           </div>
+           <div class="img">
+                <img *ngIf="logoImg != null" src={{logoImg}} alt="" style="width: 15%; padding-left: 32px; padding-top: 45px;"/>
+           </div>
+            <div class= "text-center" style="margin-top: -95px;">
+                <h4>BITUTECH LIMITED</h4>
+                   <h6>P.O. Box: 64338-00620,Nairobi,Kenya.<br>
+                    Tel: +254 709519000 Email: bitutech2@gmail.com<br>
+                    PIN: P051706137I
+                    </h6>
+            </div>
+            <div class= "text-center">
+                <h4>PURCHASE INVOICE</h4>
+            </div>
+        </div>
+        <div style="margin-top: 45px;"> 
+            <table style="width: 100% !important;">
+                <tr>
+                    <table   style="width: 100% !important;">
+                        <tr >
+                            <td style="width: 40%;" >
+                                <b>Customer:</b> &nbsp; ${bean.customer}
+                            </td>
+                            
+                            <td style="padding-left:20px !important; padding-right: 111px !important;border-top-color: white;border-bottom-color: white;"></td>
+                            <td class="bold">
+                               PI No:
+                            </td>
+                            <td>
+                                ${bean.purchaseInvoiceNo}
+                            </td>
+                            <td class="bold" >
+                                Date:
+                            </td>
+                            <td>
+                                ${bean.purchaseInvoiceDate}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td rowspan="2" >
+                            </td>
+                             <td style="border-bottom-color: white;"></td>
+                            <td colspan="2" class="bold">
+                                Payment Terms:
+                            </td>
+                             <td colspan="2">
+                                100% Cash in advance
+                            </td>
+                        </tr>
+                        <tr>
+                              <td style="border-bottom-color: white;"></td> 
+                            <td colspan="2" class="bold">
+                                Delivery:  
+                            </td>
+                             <td colspan="2">
+                                Ex-Nairobi W/Hse
+                            </td>
+                        </tr>
+                    </table>
+                </tr>
+                <tr>
+                    <table>
+    
+                    </table>
+                </tr>
+            </table>
+        </div> 
+    
+        <div>
+            <table class="border1" style=" border: 1px solid black; width:100%;;
+            border-collapse: collapse; margin-top: 20px; " >
+                <tr style="font-weight: 600; background: #80808036;">
+                    <th> SR.No </th>
+                    <th>Product Name</th>
+                     <th>Units</th> 
+                    <th>Qty</th>
+                    <th>Unit Price</th>
+                 </tr>
+                <tr >
+              #foreach($item in $bean.purchaseInvoiceDetailBean)
+                    <td>
+                        {{i+1}}
+                    </td>
+                    <td>
+                        ${item.itemIdName}
+                    </td>
+                    <td>
+                        ${item.uomid}
+                    </td>
+                    
+                    <td>
+                        ${item.qty}
+                    </td>
+                    <td style="text-align: right;"> 
+                        ${item.quotePrice}
+                    </td>
+                    #end
+                 </tr>
+                <tr>
+                    <td colspan="4"style="font-weight: 600;text-align: right;">
+                        Total
+                    </td>
+                    <td style="font-weight: 600;text-align: right;"> 
+                        KSH  ${bean.totalValue}
+                    </td>
+                </tr>
+            </table>
+        </div><br>
+        <div>
+            <p><span><b>Amount in words:</b></span> Kenya Shillings ${bean.numberInWords} Only</p>
+            <p><b>
+                Thank You for your business!
+            </b></p>
+        </div>
+        <div>
+             <span><b>Terms & Conditions;</b></span>
+                <p>1.30 Days Advance Should Be Paid. </p>
+                <p>2.Full Payment By Delivery Order.</p>        
+        </div>
+        <div style="margin-bottom: 10px;">
+          <h4 class="bold"style=" color: rgb(20, 99, 131);">Bank Details:</h4>
+            <div class="row">
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                    <p class=""style=" color: rgb(20, 99, 131); font-size: 13px;"><b>ACCOUNT NAME:</b> &nbsp;BITUTECH LTD</p>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                    <p class="" style=" color: rgb(20, 99, 131); font-size: 13px;"><b>BANK NAME:</b>&nbsp;I&M BANK LTD</p>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                    <p class=""style=" color: rgb(20, 99, 131); font-size: 13px;"><b>CURRENCY:</b>&nbsp;KENYA SHILLING</p>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                    <p class=""style=" color: rgb(20, 99, 131); font-size: 13px;"><b>ACCOUNT NO:</b>&nbsp;00901867761210</p>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                    <p class=""style=" color: rgb(20, 99, 131); font-size: 13px;"><b>BANK BRANCH/CODE:</b>&nbsp;PANARI CENTRE 57-009</p>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                    <p class="" style=" color: rgb(20, 99, 131); font-size: 13px;"><b>SWIFT CODE:</b>&nbsp;IMBLKENA</p>
+                </div>
+            </div>
+          
+        </div>
+    </div>
+    <br>
+</html>
