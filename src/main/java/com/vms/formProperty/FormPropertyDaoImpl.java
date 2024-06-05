@@ -45,21 +45,56 @@ public class FormPropertyDaoImpl implements FormPropertyDao{
 			  .sorted(Comparator.comparing(FormPropertyBean::getDisplayorder))
 			  .collect(Collectors.toList());
 
-			for(FormPropertyBean moduleBean:moduleList) {
-			    List<FormPropertyBean> firstLevelFormList = formList
+			for(FormPropertyBean moduleBean:moduleList) {List<FormPropertyBean> firstLevelFormList = formList
+					  .stream()
+					  .filter(c -> c.getFormcodeparent().equals(moduleBean.getForm_code()))
+					  .sorted(Comparator.comparing(FormPropertyBean::getDisplayorder))
+					  .collect(Collectors.toList());
+		    for(FormPropertyBean firstLevelBean:firstLevelFormList) {
+		    	
+		    	List<FormPropertyBean> secondLevelFormList = formList
 						  .stream()
-						  .filter(c -> c.getFormcodeparent().equals(moduleBean.getForm_code()))
+						  .filter(c -> c.getFormcodeparent().equals(firstLevelBean.getForm_code()))
 						  .sorted(Comparator.comparing(FormPropertyBean::getDisplayorder))
 						  .collect(Collectors.toList());
-			    for(FormPropertyBean firstLevelBean:firstLevelFormList) {
-			    	List<FormPropertyBean> secondLevelFormList = formList
-							  .stream()
-							  .filter(c -> c.getFormcodeparent().equals(firstLevelBean.getForm_code()))
-							  .sorted(Comparator.comparing(FormPropertyBean::getDisplayorder))
-							  .collect(Collectors.toList());
-			    	firstLevelBean.setSubMenuList(secondLevelFormList);
+		    	firstLevelBean.setSubMenuList(secondLevelFormList);
+		    	
+		    	for (FormPropertyBean secondLevelBean : secondLevelFormList) {
+			        List<FormPropertyBean> thirdLevelFormList = formList
+			            .stream()
+			            .filter(c -> c.getFormcodeparent().equals(secondLevelBean.getForm_code()))
+			            .sorted(Comparator.comparing(FormPropertyBean::getDisplayorder))
+			            .collect(Collectors.toList());
+
+			        secondLevelBean.setSubMenuList(thirdLevelFormList);
+			        
+			        for (FormPropertyBean thirdLevelBean : thirdLevelFormList) {
+				        List<FormPropertyBean> fourLevelFormList = formList
+				            .stream()
+				            .filter(c -> c.getFormcodeparent().equals(thirdLevelBean.getForm_code()))
+				            .sorted(Comparator.comparing(FormPropertyBean::getDisplayorder))
+				            .collect(Collectors.toList());
+
+				        thirdLevelBean.setSubMenuList(fourLevelFormList);
+				        
+				        for (FormPropertyBean fifthLevelBean : fourLevelFormList) {
+					        List<FormPropertyBean> fifthLevelFormList = formList
+					            .stream()
+					            .filter(c -> c.getFormcodeparent().equals(fifthLevelBean.getForm_code()))
+					            .sorted(Comparator.comparing(FormPropertyBean::getDisplayorder))
+					            .collect(Collectors.toList());
+
+					        fifthLevelBean.setSubMenuList(fifthLevelFormList);
+					    }
+				    }
+			        
+			        
+			        
+			        
 			    }
-			    moduleBean.setSubMenuList(firstLevelFormList);
+		    	
+		    }
+		      moduleBean.setSubMenuList(firstLevelFormList);		    
 			}
 					
 			objEmployeeMasterResultBean.setModuleLevelList(moduleList);
