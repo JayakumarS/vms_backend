@@ -5,7 +5,7 @@ public class VesselTypeQueryUtil {
 	public static final String SAVE_VESSEL_TYPE = "Insert into vessel_type (vsl_type_code,vsl_type_name,created_by,created_dt)"
 												+ "values (:code,:desc,:userName,now())";
 	
-	public static final String getList = "select vsl_type_code as code,vsl_type_name as description from vessel_type";
+	public static final String getList = "select vsl_type_code as code,vsl_type_name as description from vessel_type order by created_dt desc";
 	
 	public static final String getEdit = "select vsl_type_code as code,vsl_type_name as description from vessel_type where vsl_type_code = ?";
 	
