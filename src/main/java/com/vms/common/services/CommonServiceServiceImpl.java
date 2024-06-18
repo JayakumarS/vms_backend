@@ -1,6 +1,7 @@
 package com.vms.common.services;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,48 @@ public class CommonServiceServiceImpl implements CommonServiceService{
 	public HashMap<String, Object> forgotPassword(String emailId, String otpForForgotPassword) throws Exception {
 		// TODO Auto-generated method stub
 		return commonServicesDao.forgotPassword(emailId,otpForForgotPassword);
+	}
+
+	@Override
+	public List<CommonServiceBean> getFleetList() {
+		// TODO Auto-generated method stub
+		return commonServicesDao.getFleetList();
+	}
+
+	@Override
+	public List<CommonServiceBean> getClassList() {
+		// TODO Auto-generated method stub
+		return commonServicesDao.getClassList();
+	}
+
+	@Override
+	public List<CommonServiceBean> getVesselType() {
+		// TODO Auto-generated method stub
+		return commonServicesDao.getVesselType();
+	}
+
+	@Override
+	public List<CommonServiceBean> getVesselInsurance() {
+		// TODO Auto-generated method stub
+		return commonServicesDao.getVesselInsurance();
+	}
+
+	@Override
+	public List<CommonServiceBean> getWageScale() {
+		// TODO Auto-generated method stub
+		return commonServicesDao.getWageScale();
+	}
+
+	@Override
+	public List<CommonServiceBean> getPort() {
+		// TODO Auto-generated method stub
+		return commonServicesDao.getPort();
+	}
+
+	@Override
+	public List<CommonServiceBean> getCountry() {
+		// TODO Auto-generated method stub
+		return commonServicesDao.getCountry();
 	}
 
 }
