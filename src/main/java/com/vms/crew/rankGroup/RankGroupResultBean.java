@@ -8,7 +8,7 @@ public class RankGroupResultBean {
 	
 	public boolean success;
 	private List<RankGroupBean> list;
-	private RankGroupBean RankGroupBean;
+	private RankGroupBean rankGroupBean;
 
 
 
@@ -20,12 +20,14 @@ public class RankGroupResultBean {
 		this.list = list;
 	}
 
+	
+
 	public RankGroupBean getRankGroupBean() {
-		return RankGroupBean;
+		return rankGroupBean;
 	}
 
 	public void setRankGroupBean(RankGroupBean rankGroupBean) {
-		RankGroupBean = rankGroupBean;
+		this.rankGroupBean = rankGroupBean;
 	}
 
 	public boolean isSuccess() {

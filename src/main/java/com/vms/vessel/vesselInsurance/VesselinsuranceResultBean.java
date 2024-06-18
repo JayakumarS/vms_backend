@@ -15,18 +15,19 @@ public class VesselinsuranceResultBean {
 		this.list = list;
 	}
 
+
+	private List<VesselinsuranceBean> list;
+	private VesselinsuranceBean vesselinsuranceBean;
+
+	
+
 	public VesselinsuranceBean getVesselinsuranceBean() {
-		return VesselinsuranceBean;
+		return vesselinsuranceBean;
 	}
 
 	public void setVesselinsuranceBean(VesselinsuranceBean vesselinsuranceBean) {
-		VesselinsuranceBean = vesselinsuranceBean;
+		this.vesselinsuranceBean = vesselinsuranceBean;
 	}
-
-	private List<VesselinsuranceBean> list;
-	private VesselinsuranceBean VesselinsuranceBean;
-
-	
 
 	public boolean isSuccess() {
 		return success;
