@@ -95,20 +95,20 @@ public class WorkStatusDaoImpl implements WorkStatusDao{
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		try {
-			Map<String, Object> vesselType = new HashMap<String, Object>();
+			Map<String, Object> workStatus = new HashMap<String, Object>();
 			
 			for(WorkStatusBean listBean : bean.getWorkStatusBeanDtls()) {
-				vesselType.put("userName", userDetails.getUsername());
-				vesselType.put("code", listBean.getCode());
-				vesselType.put("desc", listBean.getDescription());
+				workStatus.put("userName", userDetails.getUsername());
+				workStatus.put("code", listBean.getCode());
+				workStatus.put("desc", listBean.getDescription());
 				
 				int k = jdbcTemplate.queryForObject(WorkStatusQueryUtil.checkDelete, new Object[] { listBean.getCode() },Integer.class);
 				
 				if(k == 0) {
-				   namedParameterJdbcTemplate.update(WorkStatusQueryUtil.SAVE_work_status,vesselType);
+				   namedParameterJdbcTemplate.update(WorkStatusQueryUtil.SAVE_work_status,workStatus);
 				}
 				else {
-					namedParameterJdbcTemplate.update(WorkStatusQueryUtil.UPDATE_work_status,vesselType);
+					namedParameterJdbcTemplate.update(WorkStatusQueryUtil.UPDATE_work_status,workStatus);
 				}
 			}
 		   resultBean.setSuccess(true);

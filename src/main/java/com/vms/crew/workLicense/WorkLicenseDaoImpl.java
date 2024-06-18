@@ -31,13 +31,13 @@ public class WorkLicenseDaoImpl implements WorkLicenseDao{
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		try {
-			Map<String, Object> vesselType = new HashMap<String, Object>();
+			Map<String, Object> workLicense = new HashMap<String, Object>();
 			
 			for(WorkLicenseBean listBean : bean.getWorkLicenseBeanDtls()) {
-				vesselType.put("userName", userDetails.getUsername());
-				vesselType.put("code", listBean.getCode());
-				vesselType.put("desc", listBean.getDescription());
-				namedParameterJdbcTemplate.update(WorkLicenseQueryUtil.SAVE_work_license,vesselType);
+				workLicense.put("userName", userDetails.getUsername());
+				workLicense.put("code", listBean.getCode());
+				workLicense.put("desc", listBean.getDescription());
+				namedParameterJdbcTemplate.update(WorkLicenseQueryUtil.SAVE_work_license,workLicense);
 			}
 			
 		   resultBean.setSuccess(true);
@@ -95,20 +95,20 @@ public class WorkLicenseDaoImpl implements WorkLicenseDao{
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		try {
-			Map<String, Object> vesselType = new HashMap<String, Object>();
+			Map<String, Object> workLicense = new HashMap<String, Object>();
 			
 			for(WorkLicenseBean listBean : bean.getWorkLicenseBeanDtls()) {
-				vesselType.put("userName", userDetails.getUsername());
-				vesselType.put("code", listBean.getCode());
-				vesselType.put("desc", listBean.getDescription());
+				workLicense.put("userName", userDetails.getUsername());
+				workLicense.put("code", listBean.getCode());
+				workLicense.put("desc", listBean.getDescription());
 				
 				int k = jdbcTemplate.queryForObject(WorkLicenseQueryUtil.checkDelete, new Object[] { listBean.getCode() },Integer.class);
 				
 				if(k == 0) {
-				   namedParameterJdbcTemplate.update(WorkLicenseQueryUtil.SAVE_work_license,vesselType);
+				   namedParameterJdbcTemplate.update(WorkLicenseQueryUtil.SAVE_work_license,workLicense);
 				}
 				else {
-					namedParameterJdbcTemplate.update(WorkLicenseQueryUtil.UPDATE_work_license,vesselType);
+					namedParameterJdbcTemplate.update(WorkLicenseQueryUtil.UPDATE_work_license,workLicense);
 				}
 			}
 		   resultBean.setSuccess(true);

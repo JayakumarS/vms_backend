@@ -33,18 +33,18 @@ public class MaintainRankDaoImpl implements MaintainRankDao{
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		try {
-			Map<String, Object> vesselType = new HashMap<String, Object>();
+			Map<String, Object> maintainRank = new HashMap<String, Object>();
 			
 			for(MaintainRankBean listBean : bean.getMaintainRankBeanDtls()) {
-				vesselType.put("userName", userDetails.getUsername());
-				vesselType.put("code", listBean.getCode());
-				vesselType.put("description", listBean.getDescription());
-				vesselType.put("groupage", listBean.getGroupage());
-				vesselType.put("oAndt", listBean.getoAndt());
-				vesselType.put("department", listBean.getDepartment());
-				vesselType.put("sno", listBean.getSno());
-				vesselType.put("remarks", listBean.getRemarks());
-				namedParameterJdbcTemplate.update(MaintainRankQueryUtil.SAVE_VESSEL_TYPE,vesselType);
+				maintainRank.put("userName", userDetails.getUsername());
+				maintainRank.put("code", listBean.getCode());
+				maintainRank.put("description", listBean.getDescription());
+				maintainRank.put("groupage", listBean.getGroupage());
+				maintainRank.put("oAndt", listBean.getoAndt());
+				maintainRank.put("department", listBean.getDepartment());
+				maintainRank.put("sno", listBean.getSno());
+				maintainRank.put("remarks", listBean.getRemarks());
+				namedParameterJdbcTemplate.update(MaintainRankQueryUtil.SAVE_VESSEL_TYPE,maintainRank);
 			}
 			
 		   resultBean.setSuccess(true);
@@ -102,25 +102,25 @@ public class MaintainRankDaoImpl implements MaintainRankDao{
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		try {
-			Map<String, Object> vesselType = new HashMap<String, Object>();
+			Map<String, Object> maintainRank = new HashMap<String, Object>();
 			
 			for(MaintainRankBean listBean : bean.getMaintainRankBeanDtls()) {
-				vesselType.put("userName", userDetails.getUsername());
-				vesselType.put("code", listBean.getCode());
-				vesselType.put("description", listBean.getDescription());
-				vesselType.put("groupage", listBean.getGroupage());
-				vesselType.put("oAndt", listBean.getoAndt());
-				vesselType.put("department", listBean.getDepartment());
-				vesselType.put("sno", listBean.getSno());
-				vesselType.put("remarks", listBean.getRemarks());
+				maintainRank.put("userName", userDetails.getUsername());
+				maintainRank.put("code", listBean.getCode());
+				maintainRank.put("description", listBean.getDescription());
+				maintainRank.put("groupage", listBean.getGroupage());
+				maintainRank.put("oAndt", listBean.getoAndt());
+				maintainRank.put("department", listBean.getDepartment());
+				maintainRank.put("sno", listBean.getSno());
+				maintainRank.put("remarks", listBean.getRemarks());
 				
 				int k = jdbcTemplate.queryForObject(MaintainRankQueryUtil.checkDelete, new Object[] { listBean.getCode() },Integer.class);
 				
 				if(k == 0) {
-				   namedParameterJdbcTemplate.update(MaintainRankQueryUtil.SAVE_VESSEL_TYPE,vesselType);
+				   namedParameterJdbcTemplate.update(MaintainRankQueryUtil.SAVE_VESSEL_TYPE,maintainRank);
 				}
 				else {
-					namedParameterJdbcTemplate.update(MaintainRankQueryUtil.UPDATE_VESSEL_TYPE,vesselType);
+					namedParameterJdbcTemplate.update(MaintainRankQueryUtil.UPDATE_VESSEL_TYPE,maintainRank);
 				}
 			}
 		   resultBean.setSuccess(true);
