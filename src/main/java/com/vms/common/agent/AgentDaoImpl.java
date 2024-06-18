@@ -1,4 +1,4 @@
-package com.vms.common.Languages;
+package com.vms.common.agent;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,10 +14,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
 
-
-
 @Repository
-public class LanguagesDaoImpl implements LanguagesDao{
+public class AgentDaoImpl implements AgentDao{
 
 	
 	@Autowired
@@ -27,19 +25,19 @@ public class LanguagesDaoImpl implements LanguagesDao{
 	JdbcTemplate jdbcTemplate;
 	
 	@Override
-	public LanguagesResultBean save(LanguagesBean bean) {
-		LanguagesResultBean resultBean = new LanguagesResultBean();
+	public AgentResultBean save(AgentBean bean) {
+		AgentResultBean resultBean = new AgentResultBean();
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		try {
 			Map<String, Object> fleet = new HashMap<String, Object>();
 			
-			for(LanguagesBean listBean : bean.getLanguageDetails()) {
+			for(AgentBean listBean : bean.getAgentDetails()) {
 				
 				fleet.put("code", listBean.getCode());
 				fleet.put("desc", listBean.getDescription());
 				fleet.put("userName", userDetails.getUsername());
-				namedParameterJdbcTemplate.update(LanguagesQueryUtil.SAVE_LANG,fleet);
+				namedParameterJdbcTemplate.update(AgentQueryUtil.SAVE_AGENT,fleet);
 			}
 			
 		   resultBean.setSuccess(true);
@@ -51,12 +49,12 @@ public class LanguagesDaoImpl implements LanguagesDao{
 	}
 
 	@Override
-	public LanguagesResultBean getList() {
-		LanguagesResultBean resultBean = new LanguagesResultBean();
-		List<LanguagesBean> listBean = new ArrayList<LanguagesBean>();
+	public AgentResultBean getList() {
+		AgentResultBean resultBean = new AgentResultBean();
+		List<AgentBean> listBean = new ArrayList<AgentBean>();
 		
 		try {
-			listBean = jdbcTemplate.query(LanguagesQueryUtil.getList,new BeanPropertyRowMapper<LanguagesBean>(LanguagesBean.class));
+			listBean = jdbcTemplate.query(AgentQueryUtil.getList,new BeanPropertyRowMapper<AgentBean>(AgentBean.class));
 			resultBean.setList(listBean);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -65,11 +63,11 @@ public class LanguagesDaoImpl implements LanguagesDao{
 	}
 
 	@Override
-	public LanguagesResultBean edit(String id) {		
-		LanguagesResultBean resultBean = new LanguagesResultBean();
+	public AgentResultBean edit(String id) {		
+		AgentResultBean resultBean = new AgentResultBean();
 		resultBean.setSuccess(false);
 		try {
-			resultBean.setList(jdbcTemplate.query(LanguagesQueryUtil.getEdit,new Object[] { id }, new BeanPropertyRowMapper<LanguagesBean>(LanguagesBean.class)));
+			resultBean.setList(jdbcTemplate.query(AgentQueryUtil.getEdit_AGENT,new Object[] { id }, new BeanPropertyRowMapper<AgentBean>(AgentBean.class)));
 		}
 		catch(Exception e){
 			e.printStackTrace();
@@ -78,10 +76,10 @@ public class LanguagesDaoImpl implements LanguagesDao{
 	}
 
 	@Override
-	public LanguagesResultBean delete(String id) {
-		LanguagesResultBean resultBean = new LanguagesResultBean();
+	public AgentResultBean delete(String id) {
+		AgentResultBean resultBean = new AgentResultBean();
 		try {
-			jdbcTemplate.update(LanguagesQueryUtil.delete,id);
+			jdbcTemplate.update(AgentQueryUtil.delete,id);
 			resultBean.setSuccess(true);
 		}
 		catch(Exception e) {
@@ -92,25 +90,25 @@ public class LanguagesDaoImpl implements LanguagesDao{
 	}
 
 	@Override
-	public LanguagesResultBean update(LanguagesBean bean) {
-		LanguagesResultBean resultBean = new LanguagesResultBean();
+	public AgentResultBean update(AgentBean bean) {
+		AgentResultBean resultBean = new AgentResultBean();
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		try {
 			Map<String, Object> fleet = new HashMap<String, Object>();
 			
-			for(LanguagesBean listBean : bean.getLanguageDetails()) {
+			for(AgentBean listBean : bean.getAgentDetails()) {
 				
 				fleet.put("code", listBean.getCode());
 				fleet.put("desc", listBean.getDescription());
 				fleet.put("userName", userDetails.getUsername());
-				int k = jdbcTemplate.queryForObject(LanguagesQueryUtil.checkDelete, new Object[] { listBean.getCode() },Integer.class);
+				int k = jdbcTemplate.queryForObject(AgentQueryUtil.checkDelete, new Object[] { listBean.getCode() },Integer.class);
 				
 				if(k == 0) {
-				   namedParameterJdbcTemplate.update(LanguagesQueryUtil.SAVE_LANG,fleet);
+				   namedParameterJdbcTemplate.update(AgentQueryUtil.SAVE_AGENT,fleet);
 				}
 				else {
-					namedParameterJdbcTemplate.update(LanguagesQueryUtil.UPDATE_LANG,fleet);
+					namedParameterJdbcTemplate.update(AgentQueryUtil.UPDATE_AGENT,fleet);
 				}
 			}
 		   resultBean.setSuccess(true);

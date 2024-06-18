@@ -1,13 +1,13 @@
-package com.vms.common.Languages;
+package com.vms.common.agent;
 
 import java.util.List;
 
 
-public class LanguagesBean {
+public class AgentBean {
 
 	private String code;
 	private String description;
-	private List<LanguagesBean> languageDetails;
+	private List<AgentBean> agentDetails;
 	public String getCode() {
 		return code;
 	}
@@ -20,11 +20,11 @@ public class LanguagesBean {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public List<LanguagesBean> getLanguageDetails() {
-		return languageDetails;
+	public List<AgentBean> getAgentDetails() {
+		return agentDetails;
 	}
-	public void setLanguageDetails(List<LanguagesBean> languageDetails) {
-		this.languageDetails = languageDetails;
+	public void setAgentDetails(List<AgentBean> agentDetails) {
+		this.agentDetails = agentDetails;
 	}
-	
+
 }
