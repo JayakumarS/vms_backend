@@ -67,5 +67,17 @@ public class CommonServiceServiceImpl implements CommonServiceService{
 		// TODO Auto-generated method stub
 		return commonServicesDao.getCountry();
 	}
+	
+	@Override
+	public List<CommonServiceBean> getCurrency() {
+		// TODO Auto-generated method stub
+		return commonServicesDao.getCurrency();
+	}
+	
+	@Override
+	public List<CommonServiceBean> getphoneCode() {
+		// TODO Auto-generated method stub
+		return commonServicesDao.getphoneCode();
+	}
 
 }

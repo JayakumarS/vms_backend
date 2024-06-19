@@ -23,4 +23,8 @@ public interface CommonServiceService {
 
 	public List<CommonServiceBean> getCountry();
 
+	public List<CommonServiceBean> getCurrency();
+
+	public List<CommonServiceBean> getphoneCode();
+
 }

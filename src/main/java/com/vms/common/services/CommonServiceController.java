@@ -118,4 +118,31 @@ public class CommonServiceController {
 		return commonUtilityResultBean;
 	}
 	
+	//Currency
+	@RequestMapping("/getCurrency")
+	public @ResponseBody CommonServicesResultBean getCurrency() throws CustomException {
+		CommonServicesResultBean commonUtilityResultBean = new CommonServicesResultBean();
+		try {
+			commonUtilityResultBean.setlCommonUtilityBean(commonServicesService.getCurrency());
+			commonUtilityResultBean.setSuccess(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return commonUtilityResultBean;
+	}
+	
+	
+	//phone code
+	@RequestMapping("/getphoneCode")
+	public @ResponseBody CommonServicesResultBean getphoneCode() throws CustomException {
+		CommonServicesResultBean commonUtilityResultBean = new CommonServicesResultBean();
+		try {
+			commonUtilityResultBean.setlCommonUtilityBean(commonServicesService.getphoneCode());
+			commonUtilityResultBean.setSuccess(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return commonUtilityResultBean;
+	}
+	
 }

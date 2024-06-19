@@ -27,4 +27,10 @@ public class CommonServiceQueryUtil {
 	public static final String GET_PORT = "select portcode as id,portname as text from port_master";
 	
 	public static final String GET_COUNTRY = "select country_code as id,country_name as text from country_master";
+
+
+	public static final String GET_CURRENCY = "select currency_code as id,currency_name as text from currency_master";
+
+
+	public static final String GET_PHONECODE = "select distinct phonecode as id,phonecode as text from country_master";
 }

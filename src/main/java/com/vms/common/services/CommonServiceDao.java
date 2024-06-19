@@ -23,4 +23,8 @@ public interface CommonServiceDao {
 
 	public List<CommonServiceBean> getCountry();
 
+	public List<CommonServiceBean> getCurrency();
+
+	public List<CommonServiceBean> getphoneCode();
+
 }
