@@ -104,6 +104,7 @@ public class CountryDaoImpl implements CountryDao{
 			Country.put("countryName", bean.getCountryName());
 			Country.put("currencyCode", bean.getCurrencyCode());
 			Country.put("phoneCode", bean.getPhoneCode());
+			Country.put("nationality", bean.getNationality());
 			Country.put("active", bean.isActive());
 								
 					namedParameterJdbcTemplate.update(CountryQueryUtil.UPDATE_COUNTRY,Country);
