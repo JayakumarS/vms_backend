@@ -108,8 +108,11 @@ public class OfficialManagersDaoImpl implements OfficialManagersDao{
 				officialManagers.put("description", listBean.getDescription());
 				officialManagers.put("city", listBean.getCity());
 				officialManagers.put("address", listBean.getAddress());
+				officialManagers.put("poscode", listBean.getPoscode());
 				officialManagers.put("phone", listBean.getPhone());
-			
+				officialManagers.put("remarks", listBean.getRemarks());
+				officialManagers.put("blogo", listBean.getBlogo());
+				officialManagers.put("plogo", listBean.getPlogo());
 				officialManagers.put("userName", userDetails.getUsername());
 
 				
