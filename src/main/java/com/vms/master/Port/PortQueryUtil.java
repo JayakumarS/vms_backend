@@ -6,7 +6,7 @@ public class PortQueryUtil {
 	
 	public static final String GET_PORT_LIST = "select port_code as portCode,port_name as portName,port_type as portType,isactive as isActive from port_master";
 	
-	public static final String GET_EDIT_PORT = "select port_code as portCode,port_name as portName,port_type as portType,isactive as isActive from port_master where port_code=?";
+	public static final String GET_EDIT_PORT = "select port_code as portCode,port_name as portName,port_type as portType,isactive as active from port_master where port_code=?";
 	
 	public static final String DELETE_PORT = "delete from port_master where port_code = ?";
 	

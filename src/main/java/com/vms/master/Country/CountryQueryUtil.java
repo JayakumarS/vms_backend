@@ -7,7 +7,7 @@ public class CountryQueryUtil {
 	
 	public static final String GET_COUNTRY_LIST = "select country_code as countryCode,country_name as countryName,currency_code as currencyCode,phonecode as phoneCode,nationality as nationality from country_master";
 
-	public static final String GET_EDIT_COUNTRY = "select country_code as countryCode,country_name as countryName,currency_code as currencyCode,phonecode as phoneCode,is_active as isActive,nationality as nationality\r\n"
+	public static final String GET_EDIT_COUNTRY = "select country_code as countryCode,country_name as countryName,currency_code as currencyCode,phonecode as phoneCode,is_active as active,nationality as nationality\r\n"
 			+ "from country_master where country_code=?";
 
 
