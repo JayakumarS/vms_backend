@@ -196,12 +196,83 @@ public class CommonServiceDaoImpl implements CommonServiceDao{
 		}
 		return lCommonUtilityBean;
 	}
+
+	@Override
+	public List<CommonServiceBean> getRankMasters() {
+		List<CommonServiceBean> lCommonUtilityBean = new ArrayList<CommonServiceBean>();
+		try {
+			lCommonUtilityBean = jdbcTemplate.query(CommonServiceQueryUtil.GET_RANK_MASTERS,new Object[]{},new BeanPropertyRowMapper<CommonServiceBean>(CommonServiceBean.class));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return lCommonUtilityBean;
+	}
  
 	@Override
 	public List<CommonServiceBean> getjoinport() {
 		List<CommonServiceBean> lCommonUtilityBean = new ArrayList<CommonServiceBean>();
 		try {
 			lCommonUtilityBean = jdbcTemplate.query(CommonServiceQueryUtil.GET_JOINPORT,new Object[]{},new BeanPropertyRowMapper<CommonServiceBean>(CommonServiceBean.class));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return lCommonUtilityBean;
+	}
+
+
+	@Override
+	public List<CommonServiceBean> getAgents() {
+		List<CommonServiceBean> lCommonUtilityBean = new ArrayList<CommonServiceBean>();
+		try {
+			lCommonUtilityBean = jdbcTemplate.query(CommonServiceQueryUtil.GET_AGENTS,new Object[]{},new BeanPropertyRowMapper<CommonServiceBean>(CommonServiceBean.class));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return lCommonUtilityBean;
+	}
+
+
+	@Override
+	public List<CommonServiceBean> getReligion() {
+		List<CommonServiceBean> lCommonUtilityBean = new ArrayList<CommonServiceBean>();
+		try {
+			lCommonUtilityBean = jdbcTemplate.query(CommonServiceQueryUtil.GET_RELIGION,new Object[]{},new BeanPropertyRowMapper<CommonServiceBean>(CommonServiceBean.class));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return lCommonUtilityBean;
+	}
+
+
+	@Override
+	public List<CommonServiceBean> getLicense() {
+		List<CommonServiceBean> lCommonUtilityBean = new ArrayList<CommonServiceBean>();
+		try {
+			lCommonUtilityBean = jdbcTemplate.query(CommonServiceQueryUtil.GET_WORK_LICENSE,new Object[]{},new BeanPropertyRowMapper<CommonServiceBean>(CommonServiceBean.class));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return lCommonUtilityBean;
+	}
+
+
+	@Override
+	public List<CommonServiceBean> getWorkStatus() {
+		List<CommonServiceBean> lCommonUtilityBean = new ArrayList<CommonServiceBean>();
+		try {
+			lCommonUtilityBean = jdbcTemplate.query(CommonServiceQueryUtil.GET_WORK_STATUS,new Object[]{},new BeanPropertyRowMapper<CommonServiceBean>(CommonServiceBean.class));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return lCommonUtilityBean;
+	}
+
+
+	@Override
+	public List<CommonServiceBean> getHealthStatus() {
+		List<CommonServiceBean> lCommonUtilityBean = new ArrayList<CommonServiceBean>();
+		try {
+			lCommonUtilityBean = jdbcTemplate.query(CommonServiceQueryUtil.GET_HEALTH_STATUS,new Object[]{},new BeanPropertyRowMapper<CommonServiceBean>(CommonServiceBean.class));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

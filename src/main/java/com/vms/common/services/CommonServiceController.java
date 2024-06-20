@@ -209,5 +209,83 @@ public class CommonServiceController {
 				}
 				return commonUtilityResultBean;
 			}
+			
+	//Rank Master
+	@RequestMapping("/getRankMasters")
+	public @ResponseBody CommonServicesResultBean getRankMasters() throws CustomException {
+		CommonServicesResultBean commonUtilityResultBean = new CommonServicesResultBean();
+		try {
+			commonUtilityResultBean.setlCommonUtilityBean(commonServicesService.getRankMasters());
+			commonUtilityResultBean.setSuccess(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return commonUtilityResultBean;
+	}
+	
+	//Agent List
+	@RequestMapping("/getAgents")
+	public @ResponseBody CommonServicesResultBean getAgents() throws CustomException {
+		CommonServicesResultBean commonUtilityResultBean = new CommonServicesResultBean();
+		try {
+			commonUtilityResultBean.setlCommonUtilityBean(commonServicesService.getAgents());
+			commonUtilityResultBean.setSuccess(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return commonUtilityResultBean;
+	}
+	
+	//Religion
+	@RequestMapping("/getReligion")
+	public @ResponseBody CommonServicesResultBean getReligion() throws CustomException {
+		CommonServicesResultBean commonUtilityResultBean = new CommonServicesResultBean();
+		try {
+			commonUtilityResultBean.setlCommonUtilityBean(commonServicesService.getReligion());
+			commonUtilityResultBean.setSuccess(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return commonUtilityResultBean;
+	}
+	
+	//License
+	@RequestMapping("/getLicense")
+	public @ResponseBody CommonServicesResultBean getLicense() throws CustomException {
+		CommonServicesResultBean commonUtilityResultBean = new CommonServicesResultBean();
+		try {
+			commonUtilityResultBean.setlCommonUtilityBean(commonServicesService.getLicense());
+			commonUtilityResultBean.setSuccess(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return commonUtilityResultBean;
+	}
+	
+	//Work Status
+	@RequestMapping("/getWorkStatus")
+	public @ResponseBody CommonServicesResultBean getWorkStatus() throws CustomException {
+		CommonServicesResultBean commonUtilityResultBean = new CommonServicesResultBean();
+		try {
+			commonUtilityResultBean.setlCommonUtilityBean(commonServicesService.getWorkStatus());
+			commonUtilityResultBean.setSuccess(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return commonUtilityResultBean;
+	}
+	
+	//Health Status
+	@RequestMapping("/getHealthStatus")
+	public @ResponseBody CommonServicesResultBean getHealthStatus() throws CustomException {
+		CommonServicesResultBean commonUtilityResultBean = new CommonServicesResultBean();
+		try {
+			commonUtilityResultBean.setlCommonUtilityBean(commonServicesService.getHealthStatus());
+			commonUtilityResultBean.setSuccess(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return commonUtilityResultBean;
+	}
 	
 }

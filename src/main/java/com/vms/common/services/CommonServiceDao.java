@@ -36,5 +36,17 @@ public interface CommonServiceDao {
 	public List<CommonServiceBean> getVessel();
 
 	public List<CommonServiceBean> getjoinport();
+	
+	public List<CommonServiceBean> getRankMasters();
+
+	public List<CommonServiceBean> getAgents();
+
+	public List<CommonServiceBean> getReligion();
+
+	public List<CommonServiceBean> getLicense();
+
+	public List<CommonServiceBean> getWorkStatus();
+
+	public List<CommonServiceBean> getHealthStatus();
 
 }

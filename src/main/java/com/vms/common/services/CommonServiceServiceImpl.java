@@ -108,4 +108,40 @@ public class CommonServiceServiceImpl implements CommonServiceService{
 		return commonServicesDao.getjoinport();
 	}
 
+	@Override
+	public List<CommonServiceBean> getRankMasters() {
+		// TODO Auto-generated method stub
+		return commonServicesDao.getRankMasters();
+	}
+
+	@Override
+	public List<CommonServiceBean> getAgents() {
+		// TODO Auto-generated method stub
+		return commonServicesDao.getAgents();
+	}
+
+	@Override
+	public List<CommonServiceBean> getReligion() {
+		// TODO Auto-generated method stub
+		return commonServicesDao.getReligion();
+	}
+
+	@Override
+	public List<CommonServiceBean> getLicense() {
+		// TODO Auto-generated method stub
+		return commonServicesDao.getLicense();
+	}
+
+	@Override
+	public List<CommonServiceBean> getWorkStatus() {
+		// TODO Auto-generated method stub
+		return commonServicesDao.getWorkStatus();
+	}
+
+	@Override
+	public List<CommonServiceBean> getHealthStatus() {
+		// TODO Auto-generated method stub
+		return commonServicesDao.getHealthStatus();
+	}
+
 }
