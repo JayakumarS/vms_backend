@@ -184,4 +184,30 @@ public class CommonServiceController {
 		return commonUtilityResultBean;
 	}
 	
+	//get Vessel
+		@RequestMapping("/getVessel")
+		public @ResponseBody CommonServicesResultBean getVessel() throws CustomException {
+			CommonServicesResultBean commonUtilityResultBean = new CommonServicesResultBean();
+			try {
+				commonUtilityResultBean.setlCommonUtilityBean(commonServicesService.getVessel());
+				commonUtilityResultBean.setSuccess(true);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return commonUtilityResultBean;
+		}
+		
+	//get Joining Port
+			@RequestMapping("/getjoinport")
+			public @ResponseBody CommonServicesResultBean getjoinport() throws CustomException {
+				CommonServicesResultBean commonUtilityResultBean = new CommonServicesResultBean();
+				try {
+					commonUtilityResultBean.setlCommonUtilityBean(commonServicesService.getjoinport());
+					commonUtilityResultBean.setSuccess(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				return commonUtilityResultBean;
+			}
+	
 }

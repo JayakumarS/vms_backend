@@ -33,4 +33,8 @@ public interface CommonServiceDao {
 
 	public List<CommonServiceBean> getShipManagers();
 
+	public List<CommonServiceBean> getVessel();
+
+	public List<CommonServiceBean> getjoinport();
+
 }

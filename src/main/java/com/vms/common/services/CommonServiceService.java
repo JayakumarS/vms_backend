@@ -33,4 +33,8 @@ public interface CommonServiceService {
 
 	public List<CommonServiceBean> getShipManagers();
 
+	public List<CommonServiceBean> getVessel();
+
+	public List<CommonServiceBean> getjoinport();
+
 }

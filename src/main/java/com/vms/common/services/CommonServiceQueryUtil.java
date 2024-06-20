@@ -37,4 +37,9 @@ public class CommonServiceQueryUtil {
 	public static final String GET_OFFICIAL_MANAGERS = "select official_manager_code as id,official_manager_name as text from official_managers";
 	
 	public static final String GET_SHIP_MANAGERS = "select ship_manager_code as id,ship_manager_name as text from ship_managers";
+
+	public static final String GET_VESSEL = "select vessel_code as id,vessel_name as text from vessel_hdr";
+
+	public static final String GET_JOINPORT = "select port_name as id,country_name as name from country_master cm\r\n"
+			+ "left join port_master pm on cm.country_code = pm.country_code";
 }

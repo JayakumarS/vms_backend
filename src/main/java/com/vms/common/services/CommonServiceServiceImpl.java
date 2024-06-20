@@ -97,5 +97,15 @@ public class CommonServiceServiceImpl implements CommonServiceService{
 		// TODO Auto-generated method stub
 		return commonServicesDao.getShipManagers();
 	}
+		
+	public List<CommonServiceBean> getVessel() {
+		// TODO Auto-generated method stub
+		return commonServicesDao.getVessel();
+	}
+	
+	public List<CommonServiceBean> getjoinport() {
+		// TODO Auto-generated method stub
+		return commonServicesDao.getjoinport();
+	}
 
 }

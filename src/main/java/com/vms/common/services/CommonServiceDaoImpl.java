@@ -185,5 +185,26 @@ public class CommonServiceDaoImpl implements CommonServiceDao{
 		}
 		return lCommonUtilityBean;
 	}
-
+	
+	@Override
+	public List<CommonServiceBean> getVessel() {
+		List<CommonServiceBean> lCommonUtilityBean = new ArrayList<CommonServiceBean>();
+		try {
+			lCommonUtilityBean = jdbcTemplate.query(CommonServiceQueryUtil.GET_VESSEL,new Object[]{},new BeanPropertyRowMapper<CommonServiceBean>(CommonServiceBean.class));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return lCommonUtilityBean;
+	}
+ 
+	@Override
+	public List<CommonServiceBean> getjoinport() {
+		List<CommonServiceBean> lCommonUtilityBean = new ArrayList<CommonServiceBean>();
+		try {
+			lCommonUtilityBean = jdbcTemplate.query(CommonServiceQueryUtil.GET_JOINPORT,new Object[]{},new BeanPropertyRowMapper<CommonServiceBean>(CommonServiceBean.class));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return lCommonUtilityBean;
+	}
 }
