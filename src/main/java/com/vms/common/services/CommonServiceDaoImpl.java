@@ -127,6 +127,42 @@ public class CommonServiceDaoImpl implements CommonServiceDao{
 		}
 		return lCommonUtilityBean;
 	}
+
+
+	@Override
+	public List<CommonServiceBean> getVesselOwner() {
+		List<CommonServiceBean> lCommonUtilityBean = new ArrayList<CommonServiceBean>();
+		try {
+			lCommonUtilityBean = jdbcTemplate.query(CommonServiceQueryUtil.GET_VESSEL_OWNER,new Object[]{},new BeanPropertyRowMapper<CommonServiceBean>(CommonServiceBean.class));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return lCommonUtilityBean;
+	}
+
+
+	@Override
+	public List<CommonServiceBean> getOfficialManagers() {
+		List<CommonServiceBean> lCommonUtilityBean = new ArrayList<CommonServiceBean>();
+		try {
+			lCommonUtilityBean = jdbcTemplate.query(CommonServiceQueryUtil.GET_OFFICIAL_MANAGERS,new Object[]{},new BeanPropertyRowMapper<CommonServiceBean>(CommonServiceBean.class));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return lCommonUtilityBean;
+	}
+
+
+	@Override
+	public List<CommonServiceBean> getShipManagers() {
+		List<CommonServiceBean> lCommonUtilityBean = new ArrayList<CommonServiceBean>();
+		try {
+			lCommonUtilityBean = jdbcTemplate.query(CommonServiceQueryUtil.GET_SHIP_MANAGERS,new Object[]{},new BeanPropertyRowMapper<CommonServiceBean>(CommonServiceBean.class));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return lCommonUtilityBean;
+	}
 	
 	@Override
 	public List<CommonServiceBean> getCurrency() {

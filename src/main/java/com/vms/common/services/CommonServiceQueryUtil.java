@@ -16,21 +16,25 @@ public class CommonServiceQueryUtil {
 	
 	public static final String FLEET_LIST = "select fleet_code as id,fleet_name as text from fleet_master";
 	
-	public static final String CLASS_LIST = "select vessel_class_code as id,vsl_class_desc as text from vessel_class";
+	public static final String CLASS_LIST = "select vessel_class_code as id,vessel_class_name as text from vessel_class";
 	
-	public static final String VESSEL_TYPE = "select vsl_type_code as id,vsl_type_name as text from vessel_type";
+	public static final String VESSEL_TYPE = "select vessel_type_code as id,vessel_type_name as text from vessel_type";
 	
-	public static final String VESSEL_INSURANCE = "select vsl_ins_code as id,description as text from vsl_insurance";
+	public static final String VESSEL_INSURANCE = "select vessel_insurance_code as id,vessel_insurance_name as text from vessel_insurance";
 	
-	public static final String WAGE_SCALE = "select wage_scale_code as id,wage_scale_desc as text from wage_scales";
+	public static final String WAGE_SCALE = "select wage_scale_code as id,wage_scale_name as text from wage_scales";
 	
-	public static final String GET_PORT = "select portcode as id,portname as text from port_master";
+	public static final String GET_PORT = "select port_code as id,port_name as text from port_master";
 	
 	public static final String GET_COUNTRY = "select country_code as id,country_name as text from country_master";
 
-
 	public static final String GET_CURRENCY = "select currency_code as id,currency_name as text from currency_master";
 
-
 	public static final String GET_PHONECODE = "select distinct phonecode as id,phonecode as text from country_master";
+		
+	public static final String GET_VESSEL_OWNER = "select vessel_owner_code as id,vessel_owner_name as text from vessel_owner";
+	
+	public static final String GET_OFFICIAL_MANAGERS = "select official_manager_code as id,official_manager_name as text from official_managers";
+	
+	public static final String GET_SHIP_MANAGERS = "select ship_manager_code as id,ship_manager_name as text from ship_managers";
 }

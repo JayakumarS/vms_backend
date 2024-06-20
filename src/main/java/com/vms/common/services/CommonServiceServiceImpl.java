@@ -80,4 +80,22 @@ public class CommonServiceServiceImpl implements CommonServiceService{
 		return commonServicesDao.getphoneCode();
 	}
 
+	@Override
+	public List<CommonServiceBean> getVesselOwner() {
+		// TODO Auto-generated method stub
+		return commonServicesDao.getVesselOwner();
+	}
+
+	@Override
+	public List<CommonServiceBean> getOfficialManagers() {
+		// TODO Auto-generated method stub
+		return commonServicesDao.getOfficialManagers();
+	}
+
+	@Override
+	public List<CommonServiceBean> getShipManagers() {
+		// TODO Auto-generated method stub
+		return commonServicesDao.getShipManagers();
+	}
+
 }

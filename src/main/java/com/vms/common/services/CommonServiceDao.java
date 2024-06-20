@@ -26,5 +26,11 @@ public interface CommonServiceDao {
 	public List<CommonServiceBean> getCurrency();
 
 	public List<CommonServiceBean> getphoneCode();
+	
+	public List<CommonServiceBean> getVesselOwner();
+
+	public List<CommonServiceBean> getOfficialManagers();
+
+	public List<CommonServiceBean> getShipManagers();
 
 }

@@ -131,6 +131,19 @@ public class CommonServiceController {
 		return commonUtilityResultBean;
 	}
 	
+	//Vessel Insurance
+	@RequestMapping("/getVesselOwner")
+	public @ResponseBody CommonServicesResultBean getVesselOwner() throws CustomException {
+		CommonServicesResultBean commonUtilityResultBean = new CommonServicesResultBean();
+		try {
+			commonUtilityResultBean.setlCommonUtilityBean(commonServicesService.getVesselOwner());
+			commonUtilityResultBean.setSuccess(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return commonUtilityResultBean;
+	}
+	
 	
 	//phone code
 	@RequestMapping("/getphoneCode")
@@ -138,6 +151,32 @@ public class CommonServiceController {
 		CommonServicesResultBean commonUtilityResultBean = new CommonServicesResultBean();
 		try {
 			commonUtilityResultBean.setlCommonUtilityBean(commonServicesService.getphoneCode());
+			commonUtilityResultBean.setSuccess(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return commonUtilityResultBean;
+	}
+	
+	//Official Managers
+	@RequestMapping("/getOfficialManagers")
+	public @ResponseBody CommonServicesResultBean getOfficialManagers() throws CustomException {
+		CommonServicesResultBean commonUtilityResultBean = new CommonServicesResultBean();
+		try {
+			commonUtilityResultBean.setlCommonUtilityBean(commonServicesService.getOfficialManagers());
+			commonUtilityResultBean.setSuccess(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return commonUtilityResultBean;
+	}
+	
+	//Official Managers
+	@RequestMapping("/getShipManagers")
+	public @ResponseBody CommonServicesResultBean getShipManagers() throws CustomException {
+		CommonServicesResultBean commonUtilityResultBean = new CommonServicesResultBean();
+		try {
+			commonUtilityResultBean.setlCommonUtilityBean(commonServicesService.getShipManagers());
 			commonUtilityResultBean.setSuccess(true);
 		} catch (Exception e) {
 			e.printStackTrace();
