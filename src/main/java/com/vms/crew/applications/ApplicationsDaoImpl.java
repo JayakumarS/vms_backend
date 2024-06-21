@@ -216,7 +216,7 @@ public class ApplicationsDaoImpl implements ApplicationsDao{
 				applications.put("sBookfilePath", bean.getsBookfilePath());
 				applications.put("sBookfileName", bean.getsBookfileName());
 				applications.put("applicantimagePath", bean.getApplicantimagePath());
-				applications.put("applicantimageFileName", bean.getApplicantimagePath());
+				applications.put("applicantimageFileName", bean.getApplicantimageFileName());
 				
 				
 				namedParameterJdbcTemplate.update(ApplicationsQueryUtil.SAVE_APPLICATION,applications);
