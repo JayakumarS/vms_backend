@@ -3,7 +3,10 @@ package com.vms.crew.applications;
 import java.util.List;
 
 
-public interface ApplicationsService {
+public interface ApplicationsService { 
+	
+	List<ApplicationsBean> getenginelist();
+
 	
 	List<ApplicationsBean> getlicence();
 

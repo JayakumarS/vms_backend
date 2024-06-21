@@ -27,6 +27,17 @@ public class ApplicationsController {
 	@Autowired
 	ApplicationsService ApplicationsService;
 	
+	
+	@RequestMapping("/getenginelist")
+	public @ResponseBody List<ApplicationsBean> getenginelist() {
+		List<ApplicationsBean> getenginelist = null;
+
+		getenginelist = ApplicationsService.getenginelist();
+
+		return getenginelist;
+	}
+	
+	
 	@RequestMapping("/getlicence")
 	public @ResponseBody List<ApplicationsBean> getlicence() {
 		List<ApplicationsBean> getlicence = null;

@@ -32,6 +32,23 @@ public class ApplicationsDaoImpl implements ApplicationsDao{
 	
 	
 	
+	
+	@Override
+	public List<ApplicationsBean> getenginelist() {
+		List<ApplicationsBean> getenginelist = new ArrayList<>();
+
+		try {
+			getenginelist = jdbcTemplate.query(ApplicationsQueryUtil.getenginelist, new Object[] {},new BeanPropertyRowMapper<>(ApplicationsBean.class));
+
+				
+
+		} catch (Exception e) {
+		}
+		return getenginelist;
+	}
+	
+	
+	
 	@Override
 	public List<ApplicationsBean> getlicence() {
 		List<ApplicationsBean> getlicence = new ArrayList<>();

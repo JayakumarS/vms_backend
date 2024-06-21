@@ -16,6 +16,12 @@ public class ApplicationsServiceImpl implements ApplicationsService{
 	ApplicationsDao ApplicationsDao;
 	
 	@Override
+	public List<ApplicationsBean> getenginelist() {
+		return ApplicationsDao.getenginelist();
+	}
+	
+	
+	@Override
 	public List<ApplicationsBean> getlicence() {
 		return ApplicationsDao.getlicence();
 	}

@@ -51,6 +51,8 @@ public class ApplicationsQueryUtil {
 			+ "cv_operations_file_name=:cvOperationsfileName,pass_book_file_path=:passBookfilePath,pass_book_file_name=:passBookfileName,\r\n"
 			+ "sbook_file_path=:sBookfilePath,sbook_file_name=:sBookfileName,applicant_image_path=:applicantimagePath,\r\n"
 			+ "applicant_image_file_name=:applicantimageFileName,modified_by = :userName,modified_dt = NOW() WHERE crew_applicant_code = :code";
+
+	public static final String getenginelist = "select engine_master_code as id , engine_master_name as text from engine_master";
 	
 	
 
