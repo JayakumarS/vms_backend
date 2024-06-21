@@ -149,5 +149,11 @@ public class CommonServiceServiceImpl implements CommonServiceService{
 		// TODO Auto-generated method stub
 		return commonServicesDao.getSeamenName();
 	}
+	
+	@Override
+	public List<CommonServiceBean> getExpEngine() {
+		// TODO Auto-generated method stub
+		return commonServicesDao. getExpEngine();
+	}
 
 }

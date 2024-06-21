@@ -289,4 +289,15 @@ public class CommonServiceDaoImpl implements CommonServiceDao{
 		}
 		return lCommonUtilityBean;
 	}
+	
+	@Override
+	public List<CommonServiceBean>  getExpEngine() {
+		List<CommonServiceBean> lCommonUtilityBean = new ArrayList<CommonServiceBean>();
+		try {
+			lCommonUtilityBean = jdbcTemplate.query(CommonServiceQueryUtil.GET_EXP_ENGINE,new Object[]{},new BeanPropertyRowMapper<CommonServiceBean>(CommonServiceBean.class));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return lCommonUtilityBean;
+	}
 }

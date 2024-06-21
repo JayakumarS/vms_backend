@@ -301,4 +301,19 @@ public class CommonServiceController {
 		return commonUtilityResultBean;
 	}
 	
+	
+
+	//Engine
+			@RequestMapping("/getExpEngine")
+			public @ResponseBody CommonServicesResultBean getExpEngine() throws CustomException {
+				CommonServicesResultBean commonUtilityResultBean = new CommonServicesResultBean();
+				try {
+					commonUtilityResultBean.setlCommonUtilityBean(commonServicesService.getExpEngine());
+					commonUtilityResultBean.setSuccess(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				return commonUtilityResultBean;
+			}
+
 }
