@@ -143,5 +143,11 @@ public class CommonServiceServiceImpl implements CommonServiceService{
 		// TODO Auto-generated method stub
 		return commonServicesDao.getHealthStatus();
 	}
+	
+	@Override
+	public List<CommonServiceBean> getSeamenName() {
+		// TODO Auto-generated method stub
+		return commonServicesDao.getSeamenName();
+	}
 
 }

@@ -49,4 +49,6 @@ public interface CommonServiceService {
 
 	public List<CommonServiceBean> getHealthStatus();
 
+	public List<CommonServiceBean> getSeamenName();
+
 }

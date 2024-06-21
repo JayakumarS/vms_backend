@@ -49,4 +49,6 @@ public interface CommonServiceDao {
 
 	public List<CommonServiceBean> getHealthStatus();
 
+	public List<CommonServiceBean> getSeamenName();
+
 }

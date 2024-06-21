@@ -288,4 +288,17 @@ public class CommonServiceController {
 		return commonUtilityResultBean;
 	}
 	
+	//Seamen Name
+	@RequestMapping("/getSeamenName")
+	public @ResponseBody CommonServicesResultBean getSeamenName() throws CustomException {
+		CommonServicesResultBean commonUtilityResultBean = new CommonServicesResultBean();
+		try {
+			commonUtilityResultBean.setlCommonUtilityBean(commonServicesService.getSeamenName());
+			commonUtilityResultBean.setSuccess(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return commonUtilityResultBean;
+	}
+	
 }
