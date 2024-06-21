@@ -43,13 +43,13 @@ public class CommonServiceQueryUtil {
 	public static final String GET_JOINPORT = "select port_name as id,country_name as name from country_master cm\r\n"
 			+ "left join port_master pm on cm.country_code = pm.country_code";
 	
-	public static final String GET_RANK_MASTERS = "select rank_id as id,rank_name as text from rank_master";
+	public static final String GET_RANK_MASTERS = "select rank_code as id,rank_name as text from rank_master";
 	
 	public static final String GET_AGENTS = "select agent_code as id,agent_code_name as text from agent_master";
 	
 	public static final String GET_RELIGION = "select religion_code as id,religion_name as text from religion_master";
 	
-	public static final String GET_WORK_LICENSE = "select work_license_code as id,work_license_name from work_license";
+	public static final String GET_WORK_LICENSE = "select work_license_code as id,work_license_name as text from work_license";
 	
 	public static final String GET_WORK_STATUS = "select work_status_code as id,work_status_name as text from work_status";
 	
