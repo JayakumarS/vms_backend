@@ -127,6 +127,47 @@ public class ApplicationsDaoImpl implements ApplicationsDao{
 		ApplicationsResultBean resultBean = new ApplicationsResultBean();
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
+		if(bean.getDob()=="") {
+			bean.setDob(null);
+		}
+		if(bean.getSignOffDate()=="") {
+			bean.setSignOffDate(null);
+		}
+		if(bean.getAppDate()=="") {
+			bean.setAppDate(null);
+		}
+		if(bean.getAvailfromDate()=="") {
+			bean.setAvailfromDate(null);
+		}
+		if(bean.getExpiryDate()=="") {
+			bean.setExpiryDate(null);
+		}
+		if(bean.getPassportExpiryDate()=="") {
+			bean.setPassportExpiryDate(null);
+		}
+		if(bean.getLicenceExpiryDate()=="") {
+			bean.setLicenceExpiryDate(null);
+		}
+		
+		
+		if(bean.getNation()=="") {
+			bean.setNation(null);
+		}
+		if(bean.getRank()=="") {
+			bean.setRank(null);
+		}
+		if(bean.getVessel()=="") {
+			bean.setVessel(null);
+		}
+		if(bean.getEngine()=="") {
+			bean.setEngine(null);
+		}
+		if(bean.getAgent()=="") {
+			bean.setAgent(null);
+		}
+		if(bean.getLicence()=="") {
+			bean.setLicence(null);
+		}
 		try {
 			Map<String, Object> applications = new HashMap<String, Object>();
 			
