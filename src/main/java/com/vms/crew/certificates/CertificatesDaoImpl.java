@@ -33,11 +33,14 @@ public class CertificatesDaoImpl implements CertificatesDao{
 		
 		try {
 			Map<String, Object> healthStatus = new HashMap<String, Object>();
-			
+			String certificateId =  jdbcTemplate.queryForObject(CertificatesQueryutil.get_certificate_Id,String.class);
+
 			for(CertificatesBean listBean : bean.getCertificatesBeanDtls()) {
 				healthStatus.put("userName", userDetails.getUsername());
 				healthStatus.put("code", listBean.getCode());
 				healthStatus.put("desc", listBean.getDescription());
+				healthStatus.put("certificateId", certificateId);
+
 				namedParameterJdbcTemplate.update(CertificatesQueryutil.SAVE_certificates,healthStatus);
 			}
 			

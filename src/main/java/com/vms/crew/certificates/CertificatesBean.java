@@ -5,7 +5,13 @@ import java.util.List;
 
 public class CertificatesBean {
 
-	
+	public String getCertificateId() {
+		return certificateId;
+	}
+	public void setCertificateId(String certificateId) {
+		this.certificateId = certificateId;
+	}
+	private String certificateId;
 	private String code;
 	private String description;
 	private List<CertificatesBean> certificatesBeanDtls;
