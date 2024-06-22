@@ -35,17 +35,16 @@ public class MaintainRankDaoImpl implements MaintainRankDao{
 		try {
 			Map<String, Object> maintainRank = new HashMap<String, Object>();
 			
-			for(MaintainRankBean listBean : bean.getMaintainRankBeanDtls()) {
 				maintainRank.put("userName", userDetails.getUsername());
-				maintainRank.put("code", listBean.getCode());
-				maintainRank.put("description", listBean.getDescription());
-				maintainRank.put("groupage", listBean.getGroupage());
-				maintainRank.put("oAndt", listBean.getoAndt());
-				maintainRank.put("department", listBean.getDepartment());
-				maintainRank.put("sno", listBean.getSno());
-				maintainRank.put("remarks", listBean.getRemarks());
+				maintainRank.put("code", bean.getCode());
+				maintainRank.put("description", bean.getDescription());
+				maintainRank.put("groupage", bean.getGroupage());
+				maintainRank.put("oAndt", bean.getoAndt());
+				maintainRank.put("department", bean.getDepartment());
+				maintainRank.put("sno", bean.getSno());
+				maintainRank.put("remarks", bean.getRemarks());
 				namedParameterJdbcTemplate.update(MaintainRankQueryUtil.SAVE_VESSEL_TYPE,maintainRank);
-			}
+			
 			
 		   resultBean.setSuccess(true);
 		}catch(Exception e) {
@@ -104,17 +103,16 @@ public class MaintainRankDaoImpl implements MaintainRankDao{
 		try {
 			Map<String, Object> maintainRank = new HashMap<String, Object>();
 			
-			for(MaintainRankBean listBean : bean.getMaintainRankBeanDtls()) {
 				maintainRank.put("userName", userDetails.getUsername());
-				maintainRank.put("code", listBean.getCode());
-				maintainRank.put("description", listBean.getDescription());
-				maintainRank.put("groupage", listBean.getGroupage());
-				maintainRank.put("oAndt", listBean.getoAndt());
-				maintainRank.put("department", listBean.getDepartment());
-				maintainRank.put("sno", listBean.getSno());
-				maintainRank.put("remarks", listBean.getRemarks());
+				maintainRank.put("code", bean.getCode());
+				maintainRank.put("description", bean.getDescription());
+				maintainRank.put("groupage", bean.getGroupage());
+				maintainRank.put("oAndt", bean.getoAndt());
+				maintainRank.put("department", bean.getDepartment());
+				maintainRank.put("sno", bean.getSno());
+				maintainRank.put("remarks", bean.getRemarks());
 				
-				int k = jdbcTemplate.queryForObject(MaintainRankQueryUtil.checkDelete, new Object[] { listBean.getCode() },Integer.class);
+				int k = jdbcTemplate.queryForObject(MaintainRankQueryUtil.checkDelete, new Object[] { bean.getCode() },Integer.class);
 				
 				if(k == 0) {
 				   namedParameterJdbcTemplate.update(MaintainRankQueryUtil.SAVE_VESSEL_TYPE,maintainRank);
@@ -122,7 +120,7 @@ public class MaintainRankDaoImpl implements MaintainRankDao{
 				else {
 					namedParameterJdbcTemplate.update(MaintainRankQueryUtil.UPDATE_VESSEL_TYPE,maintainRank);
 				}
-			}
+			
 		   resultBean.setSuccess(true);
 		}catch(Exception e) {
 			e.printStackTrace();

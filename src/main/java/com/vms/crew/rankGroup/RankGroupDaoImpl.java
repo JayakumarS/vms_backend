@@ -33,15 +33,14 @@ public class RankGroupDaoImpl implements RankGroupDao {
 		try {
 			Map<String, Object> rankgroup = new HashMap<String, Object>();
 			
-			for(RankGroupBean listBean : bean.getRankGroupDtls()) {
 				rankgroup.put("userName", userDetails.getUsername());
-				rankgroup.put("code", listBean.getCode());
-				rankgroup.put("desc", listBean.getDescription());
-				rankgroup.put("remarks", listBean.getRemarks());
+				rankgroup.put("code", bean.getCode());
+				rankgroup.put("desc", bean.getDescription());
+				rankgroup.put("remarks", bean.getRemarks());
 
 				
 				namedParameterJdbcTemplate.update(RankGroupQueryUtil.SAVE_rank_group,rankgroup);
-			}
+			
 			
 		   resultBean.setSuccess(true);
 		}catch(Exception e) {
@@ -100,13 +99,12 @@ public class RankGroupDaoImpl implements RankGroupDao {
 		try {
 			Map<String, Object> rankgroup = new HashMap<String, Object>();
 			
-			for(RankGroupBean listBean : bean.getRankGroupDtls()) {
 				rankgroup.put("userName", userDetails.getUsername());
-				rankgroup.put("code", listBean.getCode());
-				rankgroup.put("desc", listBean.getDescription());
-				rankgroup.put("remarks", listBean.getRemarks());
+				rankgroup.put("code", bean.getCode());
+				rankgroup.put("desc", bean.getDescription());
+				rankgroup.put("remarks", bean.getRemarks());
 
-				int k = jdbcTemplate.queryForObject(RankGroupQueryUtil.checkDelete, new Object[] { listBean.getCode() },Integer.class);
+				int k = jdbcTemplate.queryForObject(RankGroupQueryUtil.checkDelete, new Object[] { bean.getCode() },Integer.class);
 				
 				if(k == 0) {
 				   namedParameterJdbcTemplate.update(RankGroupQueryUtil.SAVE_rank_group,rankgroup);
@@ -114,7 +112,7 @@ public class RankGroupDaoImpl implements RankGroupDao {
 				else {
 					namedParameterJdbcTemplate.update(RankGroupQueryUtil.UPDATE_rank_group,rankgroup);
 				}
-			}
+			
 		   resultBean.setSuccess(true);
 		}catch(Exception e) {
 			e.printStackTrace();
