@@ -3,32 +3,54 @@ package com.vms.crew.personMaintenance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.vms.vessel.vesselParticular.VesselParticularResultBean;
-
 
 
 @Service
 public class PersonMaintenanceServiceImpl implements PersonMaintenanceService{
 	
 	@Autowired
-	PersonMaintenanceDao RankWorkingShiftDao;
+	PersonMaintenanceDao personMaintenanceDao;
 	
 	@Override
 	public PersonMaintenanceResultBean save(PersonMaintenanceBean bean) {
 		// TODO Auto-generated method stub
-		return RankWorkingShiftDao.save(bean);
+		return personMaintenanceDao.save(bean);
 	}
 
 	@Override
 	public PersonMaintenanceResultBean getList() {
 		// TODO Auto-generated method stub
-		return RankWorkingShiftDao.getList();
+		return personMaintenanceDao.getList();
+	}
+
+	@Override
+	public PersonMaintenanceResultBean delete(String id) {
+		// TODO Auto-generated method stub
+		return personMaintenanceDao.delete(id);
+	}
+
+	@Override
+	public PersonMaintenanceResultBean edit(String id) {
+		// TODO Auto-generated method stub
+		return personMaintenanceDao.edit(id);
+	}
+
+	@Override
+	public PersonMaintenanceResultBean update(PersonMaintenanceBean bean) {
+		// TODO Auto-generated method stub
+		return personMaintenanceDao.update(bean);
+	}
+
+	@Override
+	public PersonMaintenanceResultBean getApplicantList() {
+		// TODO Auto-generated method stub
+		return personMaintenanceDao.getApplicantList();
 	}
 
 	@Override
 	public PersonMaintenanceResultBean getDetails(String id) {
 		// TODO Auto-generated method stub
-		return RankWorkingShiftDao.getDetails(id);
+		return personMaintenanceDao.getDetails(id);
 	}
 
 }

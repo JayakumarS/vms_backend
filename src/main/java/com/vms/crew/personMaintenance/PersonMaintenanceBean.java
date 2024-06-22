@@ -23,7 +23,7 @@ public class PersonMaintenanceBean {
 	private String agent;
 	private Integer expMonth;
 	private Integer noVoyage;
-	private String ProposedType;
+	private String proposedType;
 	private String signedOff;
 	private String availableFrom;
 	private String remarksOne;
@@ -31,7 +31,27 @@ public class PersonMaintenanceBean {
 	private String reCom;
 	private String active;
 	private String code;
+	private String rankName;
+	private String select;
 	
+	public String getSelect() {
+		return select;
+	}
+	public void setSelect(String select) {
+		this.select = select;
+	}
+	public String getRankName() {
+		return rankName;
+	}
+	public void setRankName(String rankName) {
+		this.rankName = rankName;
+	}
+	public String getProposedType() {
+		return proposedType;
+	}
+	public void setProposedType(String proposedType) {
+		this.proposedType = proposedType;
+	}
 	public String getCode() {
 		return code;
 	}
@@ -152,12 +172,6 @@ public class PersonMaintenanceBean {
 	public void setNoVoyage(Integer noVoyage) {
 		this.noVoyage = noVoyage;
 	}
-	public String getProposedType() {
-		return ProposedType;
-	}
-	public void setProposedType(String proposedType) {
-		ProposedType = proposedType;
-	}
 	public String getSignedOff() {
 		return signedOff;
 	}
@@ -194,6 +208,137 @@ public class PersonMaintenanceBean {
 	public void setActive(String active) {
 		this.active = active;
 	}
+	
+	//Document Details
+	private String passport;
+	private String pIssue;
+	private String pExpiry;
+	private String pIssuePlace;
+	private String sBook;
+	private String sIssue;
+	private String sExpiry;
+	private String sIssuePlace;
+	private boolean usVisa;
+	private String sid;
+	private String sidIssue;
+	private String sidExpiry;
+	private String usPassport;
+	private String pan;
+	private String adhar;
+	private String indos;
+	private String usVisaNo;
+	private String usExpiry;
+	
+	public boolean isUsVisa() {
+		return usVisa;
+	}
+	public void setUsVisa(boolean usVisa) {
+		this.usVisa = usVisa;
+	}
+
+	public String getUsVisaNo() {
+		return usVisaNo;
+	}
+	public void setUsVisaNo(String usVisaNo) {
+		this.usVisaNo = usVisaNo;
+	}
+	public String getUsExpiry() {
+		return usExpiry;
+	}
+	public void setUsExpiry(String usExpiry) {
+		this.usExpiry = usExpiry;
+	}
+	public String getPassport() {
+		return passport;
+	}
+	public void setPassport(String passport) {
+		this.passport = passport;
+	}
+	public String getpIssue() {
+		return pIssue;
+	}
+	public void setpIssue(String pIssue) {
+		this.pIssue = pIssue;
+	}
+	public String getpExpiry() {
+		return pExpiry;
+	}
+	public void setpExpiry(String pExpiry) {
+		this.pExpiry = pExpiry;
+	}
+	public String getpIssuePlace() {
+		return pIssuePlace;
+	}
+	public void setpIssuePlace(String pIssuePlace) {
+		this.pIssuePlace = pIssuePlace;
+	}
+	public String getsBook() {
+		return sBook;
+	}
+	public void setsBook(String sBook) {
+		this.sBook = sBook;
+	}
+	public String getsIssue() {
+		return sIssue;
+	}
+	public void setsIssue(String sIssue) {
+		this.sIssue = sIssue;
+	}
+	public String getsExpiry() {
+		return sExpiry;
+	}
+	public void setsExpiry(String sExpiry) {
+		this.sExpiry = sExpiry;
+	}
+	public String getsIssuePlace() {
+		return sIssuePlace;
+	}
+	public void setsIssuePlace(String sIssuePlace) {
+		this.sIssuePlace = sIssuePlace;
+	}
+	public String getSid() {
+		return sid;
+	}
+	public void setSid(String sid) {
+		this.sid = sid;
+	}
+	public String getSidIssue() {
+		return sidIssue;
+	}
+	public void setSidIssue(String sidIssue) {
+		this.sidIssue = sidIssue;
+	}
+	public String getSidExpiry() {
+		return sidExpiry;
+	}
+	public void setSidExpiry(String sidExpiry) {
+		this.sidExpiry = sidExpiry;
+	}
+	public String getUsPassport() {
+		return usPassport;
+	}
+	public void setUsPassport(String usPassport) {
+		this.usPassport = usPassport;
+	}
+	public String getPan() {
+		return pan;
+	}
+	public void setPan(String pan) {
+		this.pan = pan;
+	}
+	public String getAdhar() {
+		return adhar;
+	}
+	public void setAdhar(String adhar) {
+		this.adhar = adhar;
+	}
+	public String getIndos() {
+		return indos;
+	}
+	public void setIndos(String indos) {
+		this.indos = indos;
+	}
+	
 	
 	
 }

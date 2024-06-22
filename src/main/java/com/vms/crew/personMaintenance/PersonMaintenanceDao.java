@@ -8,5 +8,13 @@ public interface PersonMaintenanceDao {
 	
 	public PersonMaintenanceResultBean getDetails(String id);
 
+	public PersonMaintenanceResultBean delete(String id);
+
+	public PersonMaintenanceResultBean edit(String id);
+
+	public PersonMaintenanceResultBean update(PersonMaintenanceBean bean);
+
+	public PersonMaintenanceResultBean getApplicantList();
+
 
 }
