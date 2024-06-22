@@ -39,8 +39,10 @@ public class OfficialManagersDaoImpl implements OfficialManagersDao{
 				officialManagers.put("poscode", listBean.getPoscode());
 				officialManagers.put("phone", listBean.getPhone());
 				officialManagers.put("remarks", listBean.getRemarks());
-				officialManagers.put("blogo", listBean.getBlogo());
-				officialManagers.put("plogo", listBean.getPlogo());
+				officialManagers.put("blogofileName", listBean.getBlogofileName());
+				officialManagers.put("blogofilePath", listBean.getBlogofilePath());
+				officialManagers.put("plogofileName", listBean.getPlogofileName());
+				officialManagers.put("plogofilePath", listBean.getPlogofilePath());
 				officialManagers.put("userName", userDetails.getUsername());
 				
 				namedParameterJdbcTemplate.update(OfficialManagersQueryUtil.SAVE_OFFICIAL_MANAGERS,officialManagers);
@@ -111,8 +113,13 @@ public class OfficialManagersDaoImpl implements OfficialManagersDao{
 				officialManagers.put("poscode", listBean.getPoscode());
 				officialManagers.put("phone", listBean.getPhone());
 				officialManagers.put("remarks", listBean.getRemarks());
-				officialManagers.put("blogo", listBean.getBlogo());
-				officialManagers.put("plogo", listBean.getPlogo());
+				officialManagers.put("remarks", listBean.getRemarks());
+				officialManagers.put("blogofileName", listBean.getBlogofileName());
+				officialManagers.put("blogofilePath", listBean.getBlogofilePath());
+				officialManagers.put("plogofileName", listBean.getPlogofileName());
+				officialManagers.put("plogofilePath", listBean.getPlogofilePath());
+				
+				
 				officialManagers.put("userName", userDetails.getUsername());
 
 				

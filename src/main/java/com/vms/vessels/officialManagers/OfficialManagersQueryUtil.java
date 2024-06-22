@@ -2,8 +2,8 @@ package com.vms.vessels.officialManagers;
 
 public class OfficialManagersQueryUtil {
 	
-	public static final String SAVE_OFFICIAL_MANAGERS = "  Insert into official_managers ( official_manager_code,official_manager_name,city,address,postal_code,phoneno,official_manager_remarks,bank_letter_logo,payslip_logo,created_by,created_dt)"
-			+ "values (:code,:description,:city,:address,:poscode,:phone,:remarks,:blogo,:plogo,:userName,now())";
+	public static final String SAVE_OFFICIAL_MANAGERS = "  Insert into official_managers ( official_manager_code,official_manager_name,city,address,postal_code,phoneno,official_manager_remarks,blogo_file_Name,blogo_file_Path,plogo_file_Name,plogo_file_Path,created_by,created_dt)"
+			+ "values (:code,:description,:city,:address,:poscode,:phone,:remarks,:blogofileName,:blogofilePath,:plogofileName,:plogofilePath,:userName,now())";
 
 public static final String getList = "select  official_manager_code as code, official_manager_name as description,city as city,address as address ,phoneno as phone from official_managers order by created_dt desc";
 		

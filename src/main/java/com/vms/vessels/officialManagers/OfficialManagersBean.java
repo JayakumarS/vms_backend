@@ -12,8 +12,37 @@ public class OfficialManagersBean {
 	private String poscode;
 	private String phone;
 	private String remarks;
-	private String blogo;
-    private String plogo;
+    private String blogofilePath;
+	public String getBlogofilePath() {
+		return blogofilePath;
+	}
+	public void setBlogofilePath(String blogofilePath) {
+		this.blogofilePath = blogofilePath;
+	}
+	public String getBlogofileName() {
+		return blogofileName;
+	}
+	public void setBlogofileName(String blogofileName) {
+		this.blogofileName = blogofileName;
+	}
+	public String getPlogofilePath() {
+		return plogofilePath;
+	}
+	public void setPlogofilePath(String plogofilePath) {
+		this.plogofilePath = plogofilePath;
+	}
+	public String getPlogofileName() {
+		return plogofileName;
+	}
+	public void setPlogofileName(String plogofileName) {
+		this.plogofileName = plogofileName;
+	}
+	private String blogofileName;
+	private String plogofilePath;
+	private String plogofileName;
+		
+	
+	
     private List<OfficialManagersBean>officialManagersBeanDtls;
 
 	public List<OfficialManagersBean> getOfficialManagersBeanDtls() {
@@ -63,18 +92,6 @@ public class OfficialManagersBean {
 	}
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;
-	}
-	public String getBlogo() {
-		return blogo;
-	}
-	public void setBlogo(String blogo) {
-		this.blogo = blogo;
-	}
-	public String getPlogo() {
-		return plogo;
-	}
-	public void setPlogo(String plogo) {
-		this.plogo = plogo;
 	}
 
 }

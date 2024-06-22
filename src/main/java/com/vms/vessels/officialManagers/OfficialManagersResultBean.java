@@ -10,7 +10,14 @@ public class OfficialManagersResultBean {
 	public boolean success;
 	private List<OfficialManagersBean> list;
 	private OfficialManagersBean OfficialManagersBean;
+	private String path;
 
+	public String getPath() {
+		return path;
+	}
+	public void setPath(String path) {
+		this.path = path;
+	}
 	public OfficialManagersBean getOfficialManagersBean() {
 		return OfficialManagersBean;
 	}
