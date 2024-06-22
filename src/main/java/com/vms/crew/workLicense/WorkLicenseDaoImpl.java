@@ -33,12 +33,11 @@ public class WorkLicenseDaoImpl implements WorkLicenseDao{
 		try {
 			Map<String, Object> workLicense = new HashMap<String, Object>();
 			
-			for(WorkLicenseBean listBean : bean.getWorkLicenseBeanDtls()) {
 				workLicense.put("userName", userDetails.getUsername());
-				workLicense.put("code", listBean.getCode());
-				workLicense.put("desc", listBean.getDescription());
+				workLicense.put("code", bean.getCode());
+				workLicense.put("desc", bean.getDescription());
 				namedParameterJdbcTemplate.update(WorkLicenseQueryUtil.SAVE_work_license,workLicense);
-			}
+			
 			
 		   resultBean.setSuccess(true);
 		}catch(Exception e) {
@@ -97,12 +96,11 @@ public class WorkLicenseDaoImpl implements WorkLicenseDao{
 		try {
 			Map<String, Object> workLicense = new HashMap<String, Object>();
 			
-			for(WorkLicenseBean listBean : bean.getWorkLicenseBeanDtls()) {
 				workLicense.put("userName", userDetails.getUsername());
-				workLicense.put("code", listBean.getCode());
-				workLicense.put("desc", listBean.getDescription());
+				workLicense.put("code", bean.getCode());
+				workLicense.put("desc", bean.getDescription());
 				
-				int k = jdbcTemplate.queryForObject(WorkLicenseQueryUtil.checkDelete, new Object[] { listBean.getCode() },Integer.class);
+				int k = jdbcTemplate.queryForObject(WorkLicenseQueryUtil.checkDelete, new Object[] { bean.getCode() },Integer.class);
 				
 				if(k == 0) {
 				   namedParameterJdbcTemplate.update(WorkLicenseQueryUtil.SAVE_work_license,workLicense);
@@ -110,7 +108,7 @@ public class WorkLicenseDaoImpl implements WorkLicenseDao{
 				else {
 					namedParameterJdbcTemplate.update(WorkLicenseQueryUtil.UPDATE_work_license,workLicense);
 				}
-			}
+			
 		   resultBean.setSuccess(true);
 		}catch(Exception e) {
 			e.printStackTrace();

@@ -31,14 +31,12 @@ public class WorkStatusDaoImpl implements WorkStatusDao{
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		try {
-			Map<String, Object> vesselType = new HashMap<String, Object>();
+			Map<String, Object> workStatus = new HashMap<String, Object>();
 			
-			for(WorkStatusBean listBean : bean.getWorkStatusBeanDtls()) {
-				vesselType.put("userName", userDetails.getUsername());
-				vesselType.put("code", listBean.getCode());
-				vesselType.put("desc", listBean.getDescription());
-				namedParameterJdbcTemplate.update(WorkStatusQueryUtil.SAVE_work_status,vesselType);
-			}
+			workStatus.put("userName", userDetails.getUsername());
+			workStatus.put("code", bean.getCode());
+			workStatus.put("desc", bean.getDescription());
+				namedParameterJdbcTemplate.update(WorkStatusQueryUtil.SAVE_work_status,workStatus);
 			
 		   resultBean.setSuccess(true);
 		}catch(Exception e) {
@@ -97,12 +95,11 @@ public class WorkStatusDaoImpl implements WorkStatusDao{
 		try {
 			Map<String, Object> workStatus = new HashMap<String, Object>();
 			
-			for(WorkStatusBean listBean : bean.getWorkStatusBeanDtls()) {
 				workStatus.put("userName", userDetails.getUsername());
-				workStatus.put("code", listBean.getCode());
-				workStatus.put("desc", listBean.getDescription());
+				workStatus.put("code", bean.getCode());
+				workStatus.put("desc", bean.getDescription());
 				
-				int k = jdbcTemplate.queryForObject(WorkStatusQueryUtil.checkDelete, new Object[] { listBean.getCode() },Integer.class);
+				int k = jdbcTemplate.queryForObject(WorkStatusQueryUtil.checkDelete, new Object[] { bean.getCode() },Integer.class);
 				
 				if(k == 0) {
 				   namedParameterJdbcTemplate.update(WorkStatusQueryUtil.SAVE_work_status,workStatus);
@@ -110,7 +107,7 @@ public class WorkStatusDaoImpl implements WorkStatusDao{
 				else {
 					namedParameterJdbcTemplate.update(WorkStatusQueryUtil.UPDATE_work_status,workStatus);
 				}
-			}
+			
 		   resultBean.setSuccess(true);
 		}catch(Exception e) {
 			e.printStackTrace();
