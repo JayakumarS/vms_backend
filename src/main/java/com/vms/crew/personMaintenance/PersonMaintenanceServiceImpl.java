@@ -25,4 +25,10 @@ public class PersonMaintenanceServiceImpl implements PersonMaintenanceService{
 		return RankWorkingShiftDao.getList();
 	}
 
+	@Override
+	public PersonMaintenanceResultBean getDetails(String id) {
+		// TODO Auto-generated method stub
+		return RankWorkingShiftDao.getDetails(id);
+	}
+
 }

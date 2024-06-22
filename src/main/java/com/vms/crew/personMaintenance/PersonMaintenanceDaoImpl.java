@@ -90,6 +90,22 @@ public class PersonMaintenanceDaoImpl implements PersonMaintenanceDao{
 		return resultBean;
 	}
 
+	@Override
+	public PersonMaintenanceResultBean getDetails(String id) {
+		// TODO Auto-generated method stub
+		PersonMaintenanceResultBean resultBean = new PersonMaintenanceResultBean();
+		
+		try {
+			resultBean.setPersonMaintenanceBean(jdbcTemplate.queryForObject(PersonMaintenanceQueryUtil.GET_DETAILS, new Object[] {id}, new BeanPropertyRowMapper<PersonMaintenanceBean>(PersonMaintenanceBean.class)));
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return resultBean;
+		
+		
+	}
+
 
 	
 

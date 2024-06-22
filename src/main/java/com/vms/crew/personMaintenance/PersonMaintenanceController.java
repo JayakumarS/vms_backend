@@ -39,6 +39,18 @@ public class PersonMaintenanceController {
 		}
    		return rbean;
    	}
+	
+	@RequestMapping(value="/getdetails")
+	public PersonMaintenanceResultBean getDetails(@RequestParam("id") String id) {
+		PersonMaintenanceResultBean rbean= new PersonMaintenanceResultBean();
+		try {
+			rbean =personMaintenanceService.getDetails(id);
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		return rbean;
+	}
 
 		
 }

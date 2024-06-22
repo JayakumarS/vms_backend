@@ -6,4 +6,6 @@ public interface PersonMaintenanceService {
 
 	public PersonMaintenanceResultBean getList();
 
+	public PersonMaintenanceResultBean getDetails(String id);
+
 }

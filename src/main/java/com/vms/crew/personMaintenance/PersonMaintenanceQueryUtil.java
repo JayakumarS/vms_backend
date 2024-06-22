@@ -21,4 +21,13 @@ public class PersonMaintenanceQueryUtil {
 			+ "left join work_status w on w.work_status_code  = pm.work_status "
 			+ "left join country_master cm on cm.country_code = pm.nationality "
 			+ "order by person_maintenance_code desc ";
+	
+	public static final String GET_DETAILS="SELECT crew_master_id as id, crew_master_code as code, crew_master_surname as surname, crew_master_name as name,"
+			+"crew_master_middle_name as middle, crew_master_nationality as nationality, crew_master_rank as rank, to_char(crew_master_birth_date,'dd/mm/yyyy') as birthDate,"
+			+"crew_master_gender as gender, crew_master_father_name as father, crew_master_mother_name as mother, crew_master_place as place,"
+			+"crew_master_license as licence, crew_master_health_status as health, crew_master_decision_c as decision, crew_master_work_status as workStatus,"
+			+"crew_master_religion as religion, crew_master_agent as agent, exp_month as expMonth, no_voyages as noVoyage,"
+			+"to_char(crew_master_last_sign_off,'dd/mm/yyyy') as signedOff, to_char(crew_master_available_from,'dd/mm/yyyy') as availableFrom, remarks_one as remarksOne, status as active FROM crew_master"
+			+ " WHERE crew_master_code = ? ";
+	
 }
