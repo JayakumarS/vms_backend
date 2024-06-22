@@ -35,12 +35,11 @@ public class HealthStatusDaoImpl implements HealthStatusDao{
 		try {
 			Map<String, Object> healthStatus = new HashMap<String, Object>();
 			
-			for(HealthStatusBean listBean : bean.getHealthStatusBeanDtls()) {
 				healthStatus.put("userName", userDetails.getUsername());
-				healthStatus.put("code", listBean.getCode());
-				healthStatus.put("desc", listBean.getDescription());
+				healthStatus.put("code", bean.getCode());
+				healthStatus.put("desc", bean.getDescription());
 				namedParameterJdbcTemplate.update(HealthStatusQueryUtil.SAVE_health_status,healthStatus);
-			}
+			
 			
 		   resultBean.setSuccess(true);
 		}catch(Exception e) {
@@ -99,12 +98,11 @@ public class HealthStatusDaoImpl implements HealthStatusDao{
 		try {
 			Map<String, Object> healthStatus = new HashMap<String, Object>();
 			
-			for(HealthStatusBean listBean : bean.getHealthStatusBeanDtls()) {
 				healthStatus.put("userName", userDetails.getUsername());
-				healthStatus.put("code", listBean.getCode());
-				healthStatus.put("desc", listBean.getDescription());
+				healthStatus.put("code", bean.getCode());
+				healthStatus.put("desc", bean.getDescription());
 				
-				int k = jdbcTemplate.queryForObject(HealthStatusQueryUtil.checkDelete, new Object[] { listBean.getCode() },Integer.class);
+				int k = jdbcTemplate.queryForObject(HealthStatusQueryUtil.checkDelete, new Object[] { bean.getCode() },Integer.class);
 				
 				if(k == 0) {
 				   namedParameterJdbcTemplate.update(HealthStatusQueryUtil.SAVE_health_status,healthStatus);
@@ -112,7 +110,7 @@ public class HealthStatusDaoImpl implements HealthStatusDao{
 				else {
 					namedParameterJdbcTemplate.update(HealthStatusQueryUtil.UPDATE_health_status,healthStatus);
 				}
-			}
+			
 		   resultBean.setSuccess(true);
 		}catch(Exception e) {
 			e.printStackTrace();

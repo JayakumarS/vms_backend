@@ -33,12 +33,11 @@ public class VesselOwnerDaoImpl implements VesselOwnerDao{
 		try {
 			Map<String, Object> vesselowner = new HashMap<String, Object>();
 			
-			for(VesselOwnerBean listBean : bean.getVesselOwnerBeanDtls()) {
 				vesselowner.put("userName", userDetails.getUsername());
-				vesselowner.put("code", listBean.getCode());
-				vesselowner.put("desc", listBean.getDescription());
+				vesselowner.put("code", bean.getCode());
+				vesselowner.put("desc", bean.getDescription());
 				namedParameterJdbcTemplate.update(VesselOwnerQueryUtil.SAVE_vessel_owner,vesselowner);
-			}
+			
 			
 		   resultBean.setSuccess(true);
 		}catch(Exception e) {
@@ -97,12 +96,11 @@ public class VesselOwnerDaoImpl implements VesselOwnerDao{
 		try {
 			Map<String, Object> vesselowner = new HashMap<String, Object>();
 			
-			for(VesselOwnerBean listBean : bean.getVesselOwnerBeanDtls()) {
 				vesselowner.put("userName", userDetails.getUsername());
-				vesselowner.put("code", listBean.getCode());
-				vesselowner.put("desc", listBean.getDescription());
+				vesselowner.put("code", bean.getCode());
+				vesselowner.put("desc", bean.getDescription());
 				
-				int k = jdbcTemplate.queryForObject(VesselOwnerQueryUtil.checkDelete, new Object[] { listBean.getCode() },Integer.class);
+				int k = jdbcTemplate.queryForObject(VesselOwnerQueryUtil.checkDelete, new Object[] { bean.getCode() },Integer.class);
 				
 				if(k == 0) {
 				   namedParameterJdbcTemplate.update(VesselOwnerQueryUtil.SAVE_vessel_owner,vesselowner);
@@ -110,7 +108,7 @@ public class VesselOwnerDaoImpl implements VesselOwnerDao{
 				else {
 					namedParameterJdbcTemplate.update(VesselOwnerQueryUtil.UPDATE_vessel_owner,vesselowner);
 				}
-			}
+			
 		   resultBean.setSuccess(true);
 		}catch(Exception e) {
 			e.printStackTrace();

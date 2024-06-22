@@ -35,12 +35,10 @@ public class VesselinsuranceDaoImpl implements VesselinsuranceDao{
 		try {
 			Map<String, Object> vesselinsurance = new HashMap<String, Object>();
 			
-			for(VesselinsuranceBean listBean : bean.getVesselInsuranceDtls()) {
 				vesselinsurance.put("userName", userDetails.getUsername());
-				vesselinsurance.put("code", listBean.getCode());
-				vesselinsurance.put("desc", listBean.getDescription());
+				vesselinsurance.put("code", bean.getCode());
+				vesselinsurance.put("desc", bean.getDescription());
 				namedParameterJdbcTemplate.update(VesselinsuranceQueryUtil.SAVE_vsl_insurance,vesselinsurance);
-			}
 			
 		   resultBean.setSuccess(true);
 		}catch(Exception e) {
@@ -99,12 +97,11 @@ public class VesselinsuranceDaoImpl implements VesselinsuranceDao{
 		try {
 			Map<String, Object> vesselinsurance = new HashMap<String, Object>();
 			
-			for(VesselinsuranceBean listBean : bean.getVesselInsuranceDtls()) {
 				vesselinsurance.put("userName", userDetails.getUsername());
-				vesselinsurance.put("code", listBean.getCode());
-				vesselinsurance.put("desc", listBean.getDescription());
+				vesselinsurance.put("code", bean.getCode());
+				vesselinsurance.put("desc", bean.getDescription());
 				
-				int k = jdbcTemplate.queryForObject(VesselinsuranceQueryUtil.checkDelete, new Object[] { listBean.getCode() },Integer.class);
+				int k = jdbcTemplate.queryForObject(VesselinsuranceQueryUtil.checkDelete, new Object[] { bean.getCode() },Integer.class);
 				
 				if(k == 0) {
 				   namedParameterJdbcTemplate.update(VesselinsuranceQueryUtil.SAVE_vsl_insurance,vesselinsurance);
@@ -112,7 +109,7 @@ public class VesselinsuranceDaoImpl implements VesselinsuranceDao{
 				else {
 					namedParameterJdbcTemplate.update(VesselinsuranceQueryUtil.UPDATE_vsl_insurance,vesselinsurance);
 				}
-			}
+			
 		   resultBean.setSuccess(true);
 		}catch(Exception e) {
 			e.printStackTrace();
