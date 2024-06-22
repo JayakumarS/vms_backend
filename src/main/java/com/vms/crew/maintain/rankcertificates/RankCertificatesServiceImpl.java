@@ -1,7 +1,10 @@
 package com.vms.crew.maintain.rankcertificates;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 
 
 @Service
@@ -11,9 +14,9 @@ public class RankCertificatesServiceImpl implements RankCertificatesService{
 	RankCertificatesDao RankCertificatesDao;
 	
 	@Override
-	public RankCertificatesResultBean save(RankCertificatesBean bean) {
+	public RankCertificatesResultBean save(List<RankCertificatesBean> selectedCertificates) {
 		// TODO Auto-generated method stub
-		return RankCertificatesDao.save(bean);
+		return RankCertificatesDao.save(selectedCertificates);
 	}
 
 	@Override
@@ -22,4 +25,13 @@ public class RankCertificatesServiceImpl implements RankCertificatesService{
 		return RankCertificatesDao.getList();
 	}
 
+	@Override
+	public RankCertificatesResultBean getsavelist() {
+		// TODO Auto-generated method stub
+		return RankCertificatesDao.getsavelist();
+	}
+	@Override
+	public List<RankCertificatesBean> getrank() {
+		return RankCertificatesDao.getrank();
+	}
 }

@@ -1,27 +1,59 @@
 package com.vms.crew.maintain.rankcertificates;
 
+import java.util.List;
+
+
 public class RankCertificatesBean {
 
 	private String categories;
+	private String certificatecode;
+	private String rankcode;
+	private List<RankCertificatesBean>certificateStatusDtls;
+	public String getCertificatecode() {
+		return certificatecode;
+	}
+	public void setCertificatecode(String certificatecode) {
+		this.certificatecode = certificatecode;
+	}
+	public String getRankcode() {
+		return rankcode;
+	}
+	public void setRankcode(String rankcode) {
+		this.rankcode = rankcode;
+	}
 	private boolean master;
 	private boolean bmaster;
 	private boolean cheifofc;
 	private boolean scndofc;
 	private boolean thrdofc;
-	private boolean JO;
+	private boolean Juniorofficer;
 	private boolean TOF;
-	private boolean DCT;
+	private boolean Dualclutchtrans;
 	private boolean chiefeng;
 	private boolean scndEng;
 	private boolean thirdEng;
 	private boolean fourthEng;
-	private boolean JE;
-	private boolean TEG;
+	private boolean JuniorEngineer;
+	private boolean thermoelectricgenerator;
 	private boolean ECT;
-	private boolean EE;
-	private boolean ETO;
+	private boolean Electricalengineer;
+	private boolean Electrotechofficer;
 	private boolean JEE;
 	private boolean TEE;
+	private String id;
+	private String text;
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public String getText() {
+		return text;
+	}
+	public void setText(String text) {
+		this.text = text;
+	}
 	public String getCategories() {
 		return categories;
 	}
@@ -58,11 +90,24 @@ public class RankCertificatesBean {
 	public void setThrdofc(boolean thrdofc) {
 		this.thrdofc = thrdofc;
 	}
-	public boolean isJO() {
-		return JO;
+	
+	public boolean isDualclutchtrans() {
+		return Dualclutchtrans;
 	}
-	public void setJO(boolean jO) {
-		JO = jO;
+	public void setDualclutchtrans(boolean dualclutchtrans) {
+		Dualclutchtrans = dualclutchtrans;
+	}
+	public boolean isElectricalengineer() {
+		return Electricalengineer;
+	}
+	public void setElectricalengineer(boolean electricalengineer) {
+		Electricalengineer = electricalengineer;
+	}
+	public boolean isElectrotechofficer() {
+		return Electrotechofficer;
+	}
+	public void setElectrotechofficer(boolean electrotechofficer) {
+		Electrotechofficer = electrotechofficer;
 	}
 	public boolean isTOF() {
 		return TOF;
@@ -70,12 +115,7 @@ public class RankCertificatesBean {
 	public void setTOF(boolean tOF) {
 		TOF = tOF;
 	}
-	public boolean isDCT() {
-		return DCT;
-	}
-	public void setDCT(boolean dCT) {
-		DCT = dCT;
-	}
+	
 	public boolean isChiefeng() {
 		return chiefeng;
 	}
@@ -100,36 +140,16 @@ public class RankCertificatesBean {
 	public void setFourthEng(boolean fourthEng) {
 		this.fourthEng = fourthEng;
 	}
-	public boolean isJE() {
-		return JE;
-	}
-	public void setJE(boolean jE) {
-		JE = jE;
-	}
-	public boolean isTEG() {
-		return TEG;
-	}
-	public void setTEG(boolean tEG) {
-		TEG = tEG;
-	}
+	
+	
 	public boolean isECT() {
 		return ECT;
 	}
 	public void setECT(boolean eCT) {
 		ECT = eCT;
 	}
-	public boolean isEE() {
-		return EE;
-	}
-	public void setEE(boolean eE) {
-		EE = eE;
-	}
-	public boolean isETO() {
-		return ETO;
-	}
-	public void setETO(boolean eTO) {
-		ETO = eTO;
-	}
+	
+	
 	public boolean isJEE() {
 		return JEE;
 	}
@@ -153,6 +173,30 @@ public class RankCertificatesBean {
 	}
 	public void setBSN(boolean bSN) {
 		BSN = bSN;
+	}
+	public boolean isJuniorEngineer() {
+		return JuniorEngineer;
+	}
+	public void setJuniorEngineer(boolean juniorEngineer) {
+		JuniorEngineer = juniorEngineer;
+	}
+	public boolean isThermoelectricgenerator() {
+		return thermoelectricgenerator;
+	}
+	public void setThermoelectricgenerator(boolean thermoelectricgenerator) {
+		this.thermoelectricgenerator = thermoelectricgenerator;
+	}
+	public boolean isJuniorofficer() {
+		return Juniorofficer;
+	}
+	public void setJuniorofficer(boolean juniorofficer) {
+		Juniorofficer = juniorofficer;
+	}
+	public List<RankCertificatesBean> getCertificateStatusDtls() {
+		return certificateStatusDtls;
+	}
+	public void setCertificateStatusDtls(List<RankCertificatesBean> certificateStatusDtls) {
+		this.certificateStatusDtls = certificateStatusDtls;
 	}
 	private boolean ELC;
 	private boolean BSN;
