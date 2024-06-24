@@ -51,7 +51,7 @@ public class RankWorkingShiftController {
    	}
 	
 	@RequestMapping(value="/edit")
-	public RankWorkingShiftResultBean edit(@RequestParam("id") String id) {
+	public RankWorkingShiftResultBean edit(@RequestParam("id") int id) {
 		RankWorkingShiftResultBean rbean = new RankWorkingShiftResultBean();
 		try {
 			rbean = RankWorkingShiftService.edit(id);
@@ -73,7 +73,7 @@ public class RankWorkingShiftController {
 	}
 	
 	@RequestMapping(value="/delete")
-	public RankWorkingShiftResultBean delete(@RequestParam("id") String id) {
+	public RankWorkingShiftResultBean delete(@RequestParam("id") int id) {
 		RankWorkingShiftResultBean rbean = new RankWorkingShiftResultBean();
 		try {
 			rbean = RankWorkingShiftService.delete(id);

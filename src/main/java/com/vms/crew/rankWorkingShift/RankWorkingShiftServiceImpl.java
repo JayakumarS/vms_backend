@@ -30,13 +30,13 @@ public class RankWorkingShiftServiceImpl implements RankWorkingShiftService{
 	}
 
 	@Override
-	public RankWorkingShiftResultBean edit(String id) {
+	public RankWorkingShiftResultBean edit(int id) {
 		// TODO Auto-generated method stub
 		return RankWorkingShiftDao.edit(id);
 	}
 
 	@Override
-	public RankWorkingShiftResultBean delete(String id) {
+	public RankWorkingShiftResultBean delete(int id) {
 		// TODO Auto-generated method stub
 		return RankWorkingShiftDao.delete(id);
 	}

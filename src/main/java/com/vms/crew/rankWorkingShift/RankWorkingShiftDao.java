@@ -10,9 +10,9 @@ public interface RankWorkingShiftDao {
 
 	public RankWorkingShiftResultBean getList();
 
-	public RankWorkingShiftResultBean edit(String id);
+	public RankWorkingShiftResultBean edit(int id);
 
-	public RankWorkingShiftResultBean delete(String id);
+	public RankWorkingShiftResultBean delete(int id);
 
 	public RankWorkingShiftResultBean update(RankWorkingShiftBean bean);
 

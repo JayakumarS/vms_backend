@@ -7,15 +7,33 @@ public class RankWorkingShiftBean {
 	private String vessel;
 	private String rank;
 	private String sDate;
-	private String code;
-	public String getCode() {
+	private int code;
+	public int getCode() {
 		return code;
 	}
 
 
-	public void setCode(String code) {
+	public void setCode(int code) {
 		this.code = code;
 	}
+
+
+	private Boolean watchkeepers;
+	
+
+
+	
+
+	public Boolean getWatchkeepers() {
+		return watchkeepers;
+	}
+
+
+	public void setWatchkeepers(Boolean watchkeepers) {
+		this.watchkeepers = watchkeepers;
+	}
+
+
 
 
 	public String getVessel() {

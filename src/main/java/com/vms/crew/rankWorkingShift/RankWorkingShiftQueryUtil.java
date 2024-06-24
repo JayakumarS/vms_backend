@@ -2,24 +2,26 @@ package com.vms.crew.rankWorkingShift;
 
 public class RankWorkingShiftQueryUtil {
 	
-	public static final String SAVE_rank_Working_Shift_hdr = "Insert into rank_Working_Shift_hdr (rank_working_shift_vessel,rank_working_shift_rank,rank_working_shift_sDate,rank_working_shift_eDate,rank_working_shift_remarks,created_by,created_dt)"
-			+"values (:vessel,:rank, :sDate::TIMESTAMP, :eDate::TIMESTAMP,:remarks,:userName,now())";
+	public static final String SAVE_rank_shift_master = "Insert into rank_shift_master (rank_shift_vessel_code,rank_shift_rank_code,rank_shift_start_date,rank_shift_end_date,rank_shift_remarks,rank_shift_watchkeep_hrs_flag,created_by,created_dt)"
+			+ "values (:vessel,:rank, to_date(:sDate,'DD/MM/YYYY'),to_date(:eDate,'DD/MM/YYYY'),:remarks,:watchkeepers,:userName,now())";
 	
-	public static final String SAVE_rank_Working_Shift_dtl = "Insert into rank_working_shift_dtl (rank_working_shift_shiftStart,rank_working_shift_shiftEnd,rank_working_shift_place,rank_working_shift_watchKeeping,created_by,created_dt)"
+	public static final String SAVE_rank_shift_dtl = "Insert into rank_shift_dtl (rank_shift_dtl_start_date,rank_shift_dtl_end_date,rank_shift_place,rank_shift_watch_keeping,created_by,created_dt)"
 			+"values (:shiftStart::TIME,:shiftEnd::TIME,:place,:watchKeeping,:userName,now())";
 
 
-	public static final String getList = "select rank_working_shift_vessel as vessel,rank_working_shift_rank as rank,rank_working_shift_sDate as sDate ,rank_working_shift_eDate as eDate,rank_working_shift_remarks as remarks from rank_working_shift_hdr order by created_dt desc";
+	public static final String getList = "select rank_shift_vessel_code as vessel,rank_shift_rank_code as rank,rank_shift_start_date as sDate ,rank_shift_end_date as eDate,rank_shift_remarks as remarks, code as code  from rank_shift_master order by created_dt desc";
 			
 
-	public static final String getEdit = "select pay_types_code as code,pay_types_name as description from pay_types where pay_types_code = ?";
+	public static final String getEdit = "select rank_shift_vessel_code as vessel,rank_shift_rank_code as rank,to_char(rank_shift_start_date,'DD/MM/YYYY') as sDate, to_char(rank_shift_end_date,'DD/MM/YYYY') as eDate,rank_shift_remarks as remarks,rank_shift_watchkeep_hrs_flag as watchkeepers,code as code  from rank_shift_master where code =?";
 
-	public static final String delete = "delete from rank_working_shift_hdr where rank_working_shift_hdr_code = ? ";
 
-	public static final String checkDelete = "select count(*) from pay_types where pay_types_code = ?";
+	public static final String delete = "delete from rank_shift_master where code = ? ";
 
-	public static final String UPDATE_rank_Working_Shift_hdr = "update pay_types set pay_types_code=:code,pay_types_name=:desc,modified_by=:userName,modified_dt=now() where pay_types_code = :code";
+	public static final String checkDelete = "select count(*) from rank_shift_master where code = ?";
 
+	public static final String UPDATE_rank_Shift_dtl = "update rank_shift_master set rank_shift_vessel_code=:vessel,rank_shift_rank_code=:rank,rank_shift_start_date=:sDate::TIMESTAMP,rank_shift_end_date=:eDate::TIMESTAMP,rank_shift_remarks=:remarks,rank_shift_watchkeep_hrs_flag as watchkeepers,modified_by=:userName,modified_dt=now() where code = :code";
+
+	
 
 
 }
