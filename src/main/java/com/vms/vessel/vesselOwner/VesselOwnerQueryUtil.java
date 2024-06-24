@@ -17,6 +17,14 @@ public class VesselOwnerQueryUtil {
 	public static final String get_code = "select count(vessel_owner_code) from vessel_owner where vessel_owner_code=?";
 
 	public static final String get_desc = "select count(vessel_owner_name) from vessel_owner where vessel_owner_name=?";
+	
+	public static final String vessel_code = "select vessel_owner_code from vessel_owner where vessel_owner_id = ?";
+
+	public static final String vessel_desc = "select vessel_owner_name from vessel_owner where vessel_owner_id = ?";
+
+	public static final String get_code_edit = "SELECT COUNT(vessel_owner_code) FROM vessel_owner WHERE vessel_owner_code = ?  AND vessel_owner_code != ?;";
+
+	public static final String get_desc_edit = "SELECT COUNT(vessel_owner_name) FROM vessel_owner WHERE vessel_owner_name = ?  AND vessel_owner_name != ?;";
 
 
 

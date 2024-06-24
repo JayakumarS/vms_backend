@@ -53,7 +53,7 @@ public class HealthStatusDaoImpl implements HealthStatusDao{
 				   resultBean.setSuccess(true);
   		  }
   		  else {
-  	 		   resultBean.setMessage("These datails are already exist");
+  	 		   resultBean.setMessage("These details already exist");
 
   	        }		}catch(Exception e) {
 			e.printStackTrace();
@@ -137,7 +137,7 @@ public class HealthStatusDaoImpl implements HealthStatusDao{
 					   resultBean.setSuccess(true);
     		  }
     		  else {
-    	 		   resultBean.setMessage("These datails are already exist");
+    	 		   resultBean.setMessage("These details already exist");
 
     	        }			}catch(Exception e) {
 			e.printStackTrace();

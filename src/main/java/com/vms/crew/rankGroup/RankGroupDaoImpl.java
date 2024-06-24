@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
 import com.vms.crew.certificates.CertificatesQueryutil;
+import com.vms.vessel.vesselOwner.VesselOwnerQueryUtil;
 
 
 
@@ -54,7 +55,7 @@ public class RankGroupDaoImpl implements RankGroupDao {
 		   resultBean.setSuccess(true);
              }
         else {
- 		   resultBean.setMessage("These datails are already exist");
+ 		   resultBean.setMessage("These details already exist");
 
         }
 		}catch(Exception e) {
@@ -113,9 +114,15 @@ public class RankGroupDaoImpl implements RankGroupDao {
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		try {
-			int code =  jdbcTemplate.queryForObject(RankGroupQueryUtil.get_code,new Object[] { bean.getCode() },Integer.class);
+			
+			String rankGroupcode =  jdbcTemplate.queryForObject(RankGroupQueryUtil.rankGroup_code,new Object[] { bean.getRankgroupid() },String.class);
+			String rankGroupdesc =  jdbcTemplate.queryForObject(RankGroupQueryUtil.rankGroup_desc,new Object[] { bean.getRankgroupid() },String.class);
 
-		    int desc =  jdbcTemplate.queryForObject(RankGroupQueryUtil.get_desc,new Object[] { bean.getDescription() },Integer.class);
+			
+			
+			int code =  jdbcTemplate.queryForObject(RankGroupQueryUtil.get_code_edit,new Object[] { bean.getCode(),rankGroupcode },Integer.class);
+
+		    int desc =  jdbcTemplate.queryForObject(RankGroupQueryUtil.get_desc_edit,new Object[] { bean.getDescription(),rankGroupdesc },Integer.class);
 
 			
             if(code==0 && desc==0) {
@@ -134,7 +141,7 @@ public class RankGroupDaoImpl implements RankGroupDao {
 		   resultBean.setSuccess(true);
             }
             else {
-     		   resultBean.setMessage("These datails are already exist");
+     		   resultBean.setMessage("These details already exist");
 
             }
 		}catch(Exception e) {

@@ -13,6 +13,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
+import com.vms.crew.healthStatus.HealthStatusQueryUtil;
 import com.vms.crew.rankGroup.RankGroupQueryUtil;
 
 
@@ -53,7 +54,7 @@ public class VesselOwnerDaoImpl implements VesselOwnerDao{
 		   resultBean.setSuccess(true);
 		  }
 		  else {
-	 		   resultBean.setMessage("These datails are already exist");
+	 		   resultBean.setMessage("These details already exist");
 
 	        }
 		}catch(Exception e) {
@@ -112,10 +113,14 @@ public class VesselOwnerDaoImpl implements VesselOwnerDao{
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		try {
+			String vesselcode =  jdbcTemplate.queryForObject(VesselOwnerQueryUtil.vessel_code,new Object[] { bean.getVesselownerid() },String.class);
+			String vesseldesc =  jdbcTemplate.queryForObject(VesselOwnerQueryUtil.vessel_desc,new Object[] { bean.getVesselownerid() },String.class);
 
-			int code =  jdbcTemplate.queryForObject(VesselOwnerQueryUtil.get_code,new Object[] { bean.getCode() },Integer.class);
 
-		    int desc =  jdbcTemplate.queryForObject(VesselOwnerQueryUtil.get_desc,new Object[] { bean.getDescription() },Integer.class);
+
+			int code =  jdbcTemplate.queryForObject(VesselOwnerQueryUtil.get_code_edit,new Object[] { bean.getCode(),vesselcode },Integer.class);
+
+		    int desc =  jdbcTemplate.queryForObject(VesselOwnerQueryUtil.get_desc_edit,new Object[] { bean.getDescription(),vesseldesc },Integer.class);
 
 			
             if(code==0 && desc==0) {
@@ -136,7 +141,7 @@ public class VesselOwnerDaoImpl implements VesselOwnerDao{
 					   resultBean.setSuccess(true);
   		  }
   		  else {
-  	 		   resultBean.setMessage("These datails are already exist");
+  	 		   resultBean.setMessage("These details already exist");
 
   	        }
             }catch(Exception e) {

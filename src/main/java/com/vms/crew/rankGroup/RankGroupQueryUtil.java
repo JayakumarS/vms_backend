@@ -20,4 +20,12 @@ public static final String get_code = "select count(rank_group_code) from rank_g
 
 public static final String get_desc = "select count(rank_group_name) from rank_group where rank_group_name=?";
 
+public static final String rankGroup_code = "select rank_group_code from rank_group where rank_group_id = ?";
+
+public static final String rankGroup_desc = "select rank_group_name  from rank_group where rank_group_id = ?";
+
+public static final String get_code_edit = "SELECT COUNT(rank_group_code) FROM rank_group WHERE rank_group_code = ?  AND rank_group_code != ?";
+
+public static final String get_desc_edit = "SELECT COUNT(rank_group_name) FROM rank_group WHERE rank_group_name = ?  AND rank_group_name != ?";
+
 }
