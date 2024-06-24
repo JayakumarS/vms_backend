@@ -8,9 +8,9 @@ public interface RankGroupDao {
 
 	public RankGroupResultBean getList();
 
-	public RankGroupResultBean edit(String id);
+	public RankGroupResultBean edit(Integer id);
 
-	public RankGroupResultBean delete(String id);
+	public RankGroupResultBean delete(Integer id);
 
 	public RankGroupResultBean update(RankGroupBean bean);
 

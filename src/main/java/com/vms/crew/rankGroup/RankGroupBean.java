@@ -4,6 +4,13 @@ import java.util.List;
 
 
 public class RankGroupBean {
+	public Integer getRankgroupid() {
+		return rankgroupid;
+	}
+	public void setRankgroupid(Integer rankgroupid) {
+		this.rankgroupid = rankgroupid;
+	}
+	private Integer rankgroupid;
 	private String remarks;
 	
 	public String getRemarks() {

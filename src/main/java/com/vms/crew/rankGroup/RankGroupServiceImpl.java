@@ -25,13 +25,13 @@ public class RankGroupServiceImpl implements RankGroupService{
 	}
 
 	@Override
-	public RankGroupResultBean edit(String id) {
+	public RankGroupResultBean edit(Integer id) {
 		// TODO Auto-generated method stub
 		return RankGroupDao.edit(id);
 	}
 
 	@Override
-	public RankGroupResultBean delete(String id) {
+	public RankGroupResultBean delete(Integer id) {
 		// TODO Auto-generated method stub
 		return RankGroupDao.delete(id);
 	}

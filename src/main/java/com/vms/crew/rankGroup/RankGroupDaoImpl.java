@@ -13,6 +13,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
+import com.vms.crew.certificates.CertificatesQueryutil;
+
 
 
 @Repository
@@ -31,6 +33,13 @@ public class RankGroupDaoImpl implements RankGroupDao {
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		try {
+			
+			int code =  jdbcTemplate.queryForObject(RankGroupQueryUtil.get_code,new Object[] { bean.getCode() },Integer.class);
+
+		    int desc =  jdbcTemplate.queryForObject(RankGroupQueryUtil.get_desc,new Object[] { bean.getDescription() },Integer.class);
+
+			
+            if(code==0 && desc==0) {
 			Map<String, Object> rankgroup = new HashMap<String, Object>();
 			
 				rankgroup.put("userName", userDetails.getUsername());
@@ -43,9 +52,16 @@ public class RankGroupDaoImpl implements RankGroupDao {
 			
 			
 		   resultBean.setSuccess(true);
+             }
+        else {
+ 		   resultBean.setMessage("These datails are already exist");
+
+        }
 		}catch(Exception e) {
 			e.printStackTrace();
 			resultBean.setSuccess(false);
+	 		   resultBean.setMessage("Not Updated");
+
 		}
 		return resultBean;
 	}
@@ -65,7 +81,7 @@ public class RankGroupDaoImpl implements RankGroupDao {
 	}
 
 	@Override
-	public RankGroupResultBean edit(String id) {		
+	public RankGroupResultBean edit(Integer id) {		
 		RankGroupResultBean resultBean = new RankGroupResultBean();
 		resultBean.setSuccess(false);
 		try {
@@ -78,7 +94,7 @@ public class RankGroupDaoImpl implements RankGroupDao {
 	}
 
 	@Override
-	public RankGroupResultBean delete(String id) {
+	public RankGroupResultBean delete(Integer id) {
 		RankGroupResultBean resultBean = new RankGroupResultBean();
 		try {
 			jdbcTemplate.update(RankGroupQueryUtil.delete,id);
@@ -97,6 +113,13 @@ public class RankGroupDaoImpl implements RankGroupDao {
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		try {
+			int code =  jdbcTemplate.queryForObject(RankGroupQueryUtil.get_code,new Object[] { bean.getCode() },Integer.class);
+
+		    int desc =  jdbcTemplate.queryForObject(RankGroupQueryUtil.get_desc,new Object[] { bean.getDescription() },Integer.class);
+
+			
+            if(code==0 && desc==0) {
+		    
 			Map<String, Object> rankgroup = new HashMap<String, Object>();
 			
 				rankgroup.put("userName", userDetails.getUsername());
@@ -104,19 +127,21 @@ public class RankGroupDaoImpl implements RankGroupDao {
 				rankgroup.put("desc", bean.getDescription());
 				rankgroup.put("remarks", bean.getRemarks());
 
-				int k = jdbcTemplate.queryForObject(RankGroupQueryUtil.checkDelete, new Object[] { bean.getCode() },Integer.class);
-				
-				if(k == 0) {
-				   namedParameterJdbcTemplate.update(RankGroupQueryUtil.SAVE_rank_group,rankgroup);
-				}
-				else {
-					namedParameterJdbcTemplate.update(RankGroupQueryUtil.UPDATE_rank_group,rankgroup);
-				}
-			
+				rankgroup.put("rankgroupid", bean.getRankgroupid());
+
+				namedParameterJdbcTemplate.update(RankGroupQueryUtil.UPDATE_rank_group,rankgroup);
+		
 		   resultBean.setSuccess(true);
+            }
+            else {
+     		   resultBean.setMessage("These datails are already exist");
+
+            }
 		}catch(Exception e) {
 			e.printStackTrace();
 			resultBean.setSuccess(false);
+	 		   resultBean.setMessage("Not Updated");
+
 		}
 		return resultBean;
 	}

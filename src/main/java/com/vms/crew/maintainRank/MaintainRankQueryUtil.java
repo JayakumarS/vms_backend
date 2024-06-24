@@ -25,6 +25,6 @@ public static final String UPDATE_VESSEL_TYPE = "UPDATE rank_master SET "
 	    + "WHERE rank_code = :code";
 public static String getdepartment="select dept_code as id ,dept_name as text  from department_master";
 
-public static String getgrouppage="select rank_group_code as id ,rank_group_name as text  from rank_group";
+public static String getgrouppage="select rank_group_id as id ,rank_group_name as text  from rank_group";
 
 }

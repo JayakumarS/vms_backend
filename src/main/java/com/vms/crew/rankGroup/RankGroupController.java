@@ -39,7 +39,7 @@ public class RankGroupController {
    	}
 	
 	@RequestMapping(value="/edit")
-	public RankGroupResultBean edit(@RequestParam("id") String id) {
+	public RankGroupResultBean edit(@RequestParam("id") Integer id) {
 		RankGroupResultBean rbean = new RankGroupResultBean();
 		try {
 			rbean = RankGroupService.edit(id);
@@ -61,7 +61,7 @@ public class RankGroupController {
 	}
 	
 	@RequestMapping(value="/delete")
-	public RankGroupResultBean delete(@RequestParam("id") String id) {
+	public RankGroupResultBean delete(@RequestParam("id") Integer id) {
 		RankGroupResultBean rbean = new RankGroupResultBean();
 		try {
 			rbean = RankGroupService.delete(id);
