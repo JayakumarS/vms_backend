@@ -13,6 +13,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
+
 @Repository
 public class ExpEngineDaoImpl implements ExpEngineDao {
 	
@@ -28,6 +29,10 @@ public class ExpEngineDaoImpl implements ExpEngineDao {
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		try {
+			int code =  jdbcTemplate.queryForObject(ExpEngineQueryUtil.get_code,new Object[] { bean.getCode() },Integer.class);
+
+		    int desc =  jdbcTemplate.queryForObject(ExpEngineQueryUtil.get_desc,new Object[] { bean.getDescription() },Integer.class);
+		    if(code==0 && desc==0) {
 			Map<String, Object> expEngine = new HashMap<String, Object>();
 			
 				expEngine.put("userName", userDetails.getUsername());
@@ -36,7 +41,12 @@ public class ExpEngineDaoImpl implements ExpEngineDao {
 				namedParameterJdbcTemplate.update(ExpEngineQueryUtil. SAVE_exp_Engine,expEngine);
 			
 			
-		   resultBean.setSuccess(true);
+		    }
+		    else {
+	  	 		   resultBean.setMessage("These details are already existed");
+
+	  	        }
+		    resultBean.setSuccess(true);
 		}catch(Exception e) {
 			e.printStackTrace();
 			resultBean.setSuccess(false);
@@ -59,7 +69,7 @@ public class ExpEngineDaoImpl implements ExpEngineDao {
 	}
 
 	@Override
-	public ExpEngineResultBean edit(String id) {		
+	public ExpEngineResultBean edit(int id) {		
 		ExpEngineResultBean resultBean = new ExpEngineResultBean();
 		resultBean.setSuccess(false);
 		try {
@@ -72,7 +82,7 @@ public class ExpEngineDaoImpl implements ExpEngineDao {
 	}
 
 	@Override
-	public ExpEngineResultBean delete(String id) {
+	public ExpEngineResultBean delete(int id) {
 		ExpEngineResultBean resultBean = new ExpEngineResultBean();
 		try {
 			jdbcTemplate.update(ExpEngineQueryUtil.delete,id);
@@ -91,22 +101,29 @@ public class ExpEngineDaoImpl implements ExpEngineDao {
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		try {
+			String paycode =  jdbcTemplate.queryForObject(ExpEngineQueryUtil.engine_code,new Object[] { bean.getEngineid() },String.class);
+			String paydesc =  jdbcTemplate.queryForObject(ExpEngineQueryUtil.engine_desc,new Object[] { bean.getEngineid() },String.class);
+
+
+			int code =  jdbcTemplate.queryForObject(ExpEngineQueryUtil.get_code_edit,new Object[] { bean.getCode(),paycode },Integer.class);
+
+		    int desc =  jdbcTemplate.queryForObject(ExpEngineQueryUtil.get_desc_edit,new Object[] { bean.getDescription(),paydesc },Integer.class);
+		    if(code==0 && desc==0) {
 			Map<String, Object> expEngine = new HashMap<String, Object>();
 			
 				expEngine.put("userName", userDetails.getUsername());
 				expEngine.put("code", bean.getCode());
 				expEngine.put("desc", bean.getDescription());
 				
-				int k = jdbcTemplate.queryForObject(ExpEngineQueryUtil.checkDelete, new Object[] { bean.getCode() },Integer.class);
-				
-				if(k == 0) {
-				   namedParameterJdbcTemplate.update(ExpEngineQueryUtil. SAVE_exp_Engine,expEngine);
-				}
-				else {
 					namedParameterJdbcTemplate.update(ExpEngineQueryUtil.UPDATE_exp_Engine,expEngine);
-				}
+				
 			
-		   resultBean.setSuccess(true);
+		    }
+		    else {
+	 	 		   resultBean.setMessage("These details are already existed");
+
+	 	        }
+		    resultBean.setSuccess(true);
 		}catch(Exception e) {
 			e.printStackTrace();
 			resultBean.setSuccess(false);

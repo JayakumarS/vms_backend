@@ -8,9 +8,9 @@ public interface ExpEngineDao {
 
 	public ExpEngineResultBean getList();
 
-	public ExpEngineResultBean edit(String id);
+	public ExpEngineResultBean edit(int id);
 
-	public ExpEngineResultBean delete(String id);
+	public ExpEngineResultBean delete(int id);
 
 	public ExpEngineResultBean update(ExpEngineBean bean);
 

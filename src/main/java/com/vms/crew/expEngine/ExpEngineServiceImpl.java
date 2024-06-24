@@ -23,13 +23,13 @@ public class ExpEngineServiceImpl implements ExpEngineService{
 	}
 
 	@Override
-	public ExpEngineResultBean edit(String id) {
+	public ExpEngineResultBean edit(int id) {
 		// TODO Auto-generated method stub
 		return ExpEngineDao.edit(id);
 	}
 
 	@Override
-	public ExpEngineResultBean delete(String id) {
+	public ExpEngineResultBean delete(int id) {
 		// TODO Auto-generated method stub
 		return ExpEngineDao.delete(id);
 	}

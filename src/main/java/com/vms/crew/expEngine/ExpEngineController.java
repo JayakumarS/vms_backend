@@ -38,7 +38,7 @@ public class ExpEngineController {
    	}
 	
 	@RequestMapping(value="/edit")
-	public ExpEngineResultBean edit(@RequestParam("id") String id) {
+	public ExpEngineResultBean edit(@RequestParam("id") int id) {
 		ExpEngineResultBean rbean = new ExpEngineResultBean();
 		try {
 			rbean = ExpEngineService.edit(id);
@@ -60,7 +60,7 @@ public class ExpEngineController {
 	}
 	
 	@RequestMapping(value="/delete")
-	public ExpEngineResultBean delete(@RequestParam("id") String id) {
+	public ExpEngineResultBean delete(@RequestParam("id") int id) {
 		ExpEngineResultBean rbean = new ExpEngineResultBean();
 		try {
 			rbean = ExpEngineService.delete(id);

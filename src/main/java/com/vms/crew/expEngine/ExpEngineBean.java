@@ -7,6 +7,14 @@ public class ExpEngineBean {
 	
 	private String code;
 	private String description;
+	private Integer engineid;
+	
+	public Integer getEngineid() {
+		return engineid;
+	}
+	public void setEngineid(Integer engineid) {
+		this.engineid = engineid;
+	}
 	private List<ExpEngineBean> expEngineBeanBeanDtls;
 	public String getCode() {
 		return code;
