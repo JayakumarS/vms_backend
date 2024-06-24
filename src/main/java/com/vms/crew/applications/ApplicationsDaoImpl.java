@@ -170,6 +170,9 @@ public class ApplicationsDaoImpl implements ApplicationsDao{
 		if(bean.getLicence()=="") {
 			bean.setLicence(null);
 		}
+		if(bean.getEngine()=="") {
+			bean.setEngine(null);
+		}
 		try {
 			Map<String, Object> applications = new HashMap<String, Object>();
 			
