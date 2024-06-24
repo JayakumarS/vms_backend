@@ -1,13 +1,10 @@
 package com.vms.common.Languages;
 
-import java.util.List;
-
 
 public class LanguagesBean {
-
+	private String active;
 	private String code;
 	private String description;
-	private List<LanguagesBean> languageDetails;
 	public String getCode() {
 		return code;
 	}
@@ -20,11 +17,11 @@ public class LanguagesBean {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public List<LanguagesBean> getLanguageDetails() {
-		return languageDetails;
-	}
-	public void setLanguageDetails(List<LanguagesBean> languageDetails) {
-		this.languageDetails = languageDetails;
-	}
 	
+	public String getActive() {
+		return active;
+	}
+	public void setActive(String active) {
+		this.active = active;
+	}
 }

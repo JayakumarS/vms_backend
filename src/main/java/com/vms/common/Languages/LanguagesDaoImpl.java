@@ -39,6 +39,18 @@ public class LanguagesDaoImpl implements LanguagesDao{
 				fleet.put("desc", bean.getDescription());
 				fleet.put("userName", userDetails.getUsername());
 				namedParameterJdbcTemplate.update(LanguagesQueryUtil.SAVE_LANG,fleet);
+			if(bean.getActive()!=null && bean.getActive().equalsIgnoreCase("true")) {
+				bean.setActive("Y");
+			} else {
+				bean.setActive("N");
+			}
+				
+				fleet.put("code", bean.getCode());
+				fleet.put("desc", bean.getDescription());
+				fleet.put("active", bean.getActive());
+				fleet.put("userName", userDetails.getUsername());
+				namedParameterJdbcTemplate.update(LanguagesQueryUtil.SAVE_LANG,fleet);
+			
 			
 		   resultBean.setSuccess(true);
 		}catch(Exception e) {
@@ -67,7 +79,7 @@ public class LanguagesDaoImpl implements LanguagesDao{
 		LanguagesResultBean resultBean = new LanguagesResultBean();
 		resultBean.setSuccess(false);
 		try {
-			resultBean.setList(jdbcTemplate.query(LanguagesQueryUtil.getEdit,new Object[] { id }, new BeanPropertyRowMapper<LanguagesBean>(LanguagesBean.class)));
+			resultBean.setLanguagesBean(jdbcTemplate.queryForObject(LanguagesQueryUtil.getEdit,new Object[] { id }, new BeanPropertyRowMapper<LanguagesBean>(LanguagesBean.class)));
 		}
 		catch(Exception e){
 			e.printStackTrace();
@@ -101,9 +113,20 @@ public class LanguagesDaoImpl implements LanguagesDao{
 				fleet.put("code", bean.getCode());
 				fleet.put("desc", bean.getDescription());
 				fleet.put("userName", userDetails.getUsername());
+		
+			if(bean.getActive()!=null && bean.getActive().equalsIgnoreCase("true")) {
+				bean.setActive("Y");
+			} else {
+				bean.setActive("N");
+			}
+				fleet.put("code", bean.getCode());
+				fleet.put("desc", bean.getDescription());
+				fleet.put("active", bean.getActive());
+				fleet.put("userName", userDetails.getUsername());
+				int k = jdbcTemplate.queryForObject(LanguagesQueryUtil.checkDelete, new Object[] { bean.getCode() },Integer.class);
 				
 					namedParameterJdbcTemplate.update(LanguagesQueryUtil.UPDATE_LANG,fleet);
-				
+
 		   resultBean.setSuccess(true);
 		}catch(Exception e) {
 			e.printStackTrace();
