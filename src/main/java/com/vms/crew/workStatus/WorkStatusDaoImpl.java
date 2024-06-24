@@ -13,6 +13,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
+import com.vms.crew.healthStatus.HealthStatusQueryUtil;
+
 
 
 @Repository
@@ -31,6 +33,12 @@ public class WorkStatusDaoImpl implements WorkStatusDao{
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		try {
+			int code =  jdbcTemplate.queryForObject(WorkStatusQueryUtil.get_code,new Object[] { bean.getCode() },Integer.class);
+
+		    int desc =  jdbcTemplate.queryForObject(WorkStatusQueryUtil.get_desc,new Object[] { bean.getDescription() },Integer.class);
+
+			
+            if(code==0 && desc==0) {
 			Map<String, Object> workStatus = new HashMap<String, Object>();
 			
 			workStatus.put("userName", userDetails.getUsername());
@@ -38,10 +46,16 @@ public class WorkStatusDaoImpl implements WorkStatusDao{
 			workStatus.put("desc", bean.getDescription());
 				namedParameterJdbcTemplate.update(WorkStatusQueryUtil.SAVE_work_status,workStatus);
 			
-		   resultBean.setSuccess(true);
-		}catch(Exception e) {
+				   resultBean.setSuccess(true);
+    		  }
+    		  else {
+    	 		   resultBean.setMessage("These details already exist");
+
+    	        }		}catch(Exception e) {
 			e.printStackTrace();
 			resultBean.setSuccess(false);
+	 		   resultBean.setMessage("Not Updated");
+
 		}
 		return resultBean;
 	}
@@ -61,7 +75,7 @@ public class WorkStatusDaoImpl implements WorkStatusDao{
 	}
 
 	@Override
-	public WorkStatusResultBean edit(String id) {		
+	public WorkStatusResultBean edit(Integer id) {		
 		WorkStatusResultBean resultBean = new WorkStatusResultBean();
 		resultBean.setSuccess(false);
 		try {
@@ -74,7 +88,7 @@ public class WorkStatusDaoImpl implements WorkStatusDao{
 	}
 
 	@Override
-	public WorkStatusResultBean delete(String id) {
+	public WorkStatusResultBean delete(Integer id) {
 		WorkStatusResultBean resultBean = new WorkStatusResultBean();
 		try {
 			jdbcTemplate.update(WorkStatusQueryUtil.delete,id);
@@ -92,26 +106,42 @@ public class WorkStatusDaoImpl implements WorkStatusDao{
 		WorkStatusResultBean resultBean = new WorkStatusResultBean();
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
+
+	
 		try {
+			String workstatuscode =  jdbcTemplate.queryForObject(WorkStatusQueryUtil.workstatus_code,new Object[] { bean.getWorkstatusid() },String.class);
+			String workstatusdesc =  jdbcTemplate.queryForObject(WorkStatusQueryUtil.workstatus_desc,new Object[] { bean.getWorkstatusid() },String.class);
+
+
+			int code =  jdbcTemplate.queryForObject(WorkStatusQueryUtil.get_code_edit,new Object[] { bean.getCode(),workstatuscode },Integer.class);
+
+		    int desc =  jdbcTemplate.queryForObject(WorkStatusQueryUtil.get_desc_edit,new Object[] { bean.getDescription(),workstatusdesc },Integer.class);
+
+			
+	        if(code==0 && desc==0) {
 			Map<String, Object> workStatus = new HashMap<String, Object>();
 			
 				workStatus.put("userName", userDetails.getUsername());
 				workStatus.put("code", bean.getCode());
 				workStatus.put("desc", bean.getDescription());
+				workStatus.put("workstatusid", bean.getWorkstatusid());
+
 				
-				int k = jdbcTemplate.queryForObject(WorkStatusQueryUtil.checkDelete, new Object[] { bean.getCode() },Integer.class);
-				
-				if(k == 0) {
-				   namedParameterJdbcTemplate.update(WorkStatusQueryUtil.SAVE_work_status,workStatus);
-				}
-				else {
+			
 					namedParameterJdbcTemplate.update(WorkStatusQueryUtil.UPDATE_work_status,workStatus);
-				}
+			
 			
 		   resultBean.setSuccess(true);
+		 }
+		  else {
+	 		   resultBean.setMessage("These details already exist");
+
+	        }	
 		}catch(Exception e) {
 			e.printStackTrace();
 			resultBean.setSuccess(false);
+	 		   resultBean.setMessage("Not Updated");
+
 		}
 		return resultBean;
 	}

@@ -5,9 +5,9 @@ public interface WorkStatusService {
 
 	public WorkStatusResultBean getList();
 
-	public WorkStatusResultBean edit(String id);
+	public WorkStatusResultBean edit(Integer id);
 
-	public WorkStatusResultBean delete(String id);
+	public WorkStatusResultBean delete(Integer id);
 
 	public WorkStatusResultBean update(WorkStatusBean bean);
 }

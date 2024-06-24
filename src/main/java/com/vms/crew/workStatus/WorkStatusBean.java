@@ -28,5 +28,11 @@ public class WorkStatusBean {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+	public Integer getWorkstatusid() {
+		return workstatusid;
+	}
+	public void setWorkstatusid(Integer workstatusid) {
+		this.workstatusid = workstatusid;
+	}
+	private Integer workstatusid;
 }

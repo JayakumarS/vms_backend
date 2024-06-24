@@ -23,13 +23,13 @@ public class WorkStatusServiceImpl implements WorkStatusService {
 	}
 
 	@Override
-	public WorkStatusResultBean edit(String id) {
+	public WorkStatusResultBean edit(Integer id) {
 		// TODO Auto-generated method stub
 		return WorkStatusDao.edit(id);
 	}
 
 	@Override
-	public WorkStatusResultBean delete(String id) {
+	public WorkStatusResultBean delete(Integer id) {
 		// TODO Auto-generated method stub
 		return WorkStatusDao.delete(id);
 	}

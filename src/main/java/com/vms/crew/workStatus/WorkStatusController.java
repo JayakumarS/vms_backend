@@ -38,7 +38,7 @@ public class WorkStatusController {
    	}
 	
 	@RequestMapping(value="/edit")
-	public WorkStatusResultBean edit(@RequestParam("id") String id) {
+	public WorkStatusResultBean edit(@RequestParam("id") Integer id) {
 		WorkStatusResultBean rbean = new WorkStatusResultBean();
 		try {
 			rbean = WorkStatusService.edit(id);
@@ -60,7 +60,7 @@ public class WorkStatusController {
 	}
 	
 	@RequestMapping(value="/delete")
-	public WorkStatusResultBean delete(@RequestParam("id") String id) {
+	public WorkStatusResultBean delete(@RequestParam("id") Integer id) {
 		WorkStatusResultBean rbean = new WorkStatusResultBean();
 		try {
 			rbean = WorkStatusService.delete(id);
