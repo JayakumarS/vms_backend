@@ -34,13 +34,11 @@ public class LanguagesDaoImpl implements LanguagesDao{
 		try {
 			Map<String, Object> fleet = new HashMap<String, Object>();
 			
-			for(LanguagesBean listBean : bean.getLanguageDetails()) {
 				
-				fleet.put("code", listBean.getCode());
-				fleet.put("desc", listBean.getDescription());
+				fleet.put("code", bean.getCode());
+				fleet.put("desc", bean.getDescription());
 				fleet.put("userName", userDetails.getUsername());
 				namedParameterJdbcTemplate.update(LanguagesQueryUtil.SAVE_LANG,fleet);
-			}
 			
 		   resultBean.setSuccess(true);
 		}catch(Exception e) {
@@ -99,20 +97,13 @@ public class LanguagesDaoImpl implements LanguagesDao{
 		try {
 			Map<String, Object> fleet = new HashMap<String, Object>();
 			
-			for(LanguagesBean listBean : bean.getLanguageDetails()) {
-				
-				fleet.put("code", listBean.getCode());
-				fleet.put("desc", listBean.getDescription());
+			
+				fleet.put("code", bean.getCode());
+				fleet.put("desc", bean.getDescription());
 				fleet.put("userName", userDetails.getUsername());
-				int k = jdbcTemplate.queryForObject(LanguagesQueryUtil.checkDelete, new Object[] { listBean.getCode() },Integer.class);
 				
-				if(k == 0) {
-				   namedParameterJdbcTemplate.update(LanguagesQueryUtil.SAVE_LANG,fleet);
-				}
-				else {
 					namedParameterJdbcTemplate.update(LanguagesQueryUtil.UPDATE_LANG,fleet);
-				}
-			}
+				
 		   resultBean.setSuccess(true);
 		}catch(Exception e) {
 			e.printStackTrace();

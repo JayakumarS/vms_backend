@@ -33,12 +33,10 @@ public WageScaleResultBean save(WageScaleBean bean) {
 	try {
 		Map<String, Object> wagescale = new HashMap<String, Object>();
 		
-		for(WageScaleBean listBean : bean.getWageScaleDetails()) {
 			wagescale.put("userName", userDetails.getUsername());
-			wagescale.put("code", listBean.getCode());
-			wagescale.put("desc", listBean.getDescription());
+			wagescale.put("code", bean.getCode());
+			wagescale.put("desc", bean.getDescription());
 			namedParameterJdbcTemplate.update(WageScaleQueryUtil.SAVE_WAGE,wagescale);
-		}
 		
 	   resultBean.setSuccess(true);
 	}catch(Exception e) {
@@ -97,20 +95,13 @@ public WageScaleResultBean update(WageScaleBean bean) {
 	try {
 		Map<String, Object> wagescale = new HashMap<String, Object>();
 		
-		for(WageScaleBean listBean : bean.getWageScaleDetails()) {
 			wagescale.put("userName", userDetails.getUsername());
-			wagescale.put("code", listBean.getCode());
-			wagescale.put("desc", listBean.getDescription());
+			wagescale.put("code", bean.getCode());
+			wagescale.put("desc", bean.getDescription());
 			
-			int k = jdbcTemplate.queryForObject(WageScaleQueryUtil.checkDelete, new Object[] { listBean.getCode() },Integer.class);
 			
-			if(k == 0) {
-			   namedParameterJdbcTemplate.update(WageScaleQueryUtil.SAVE_WAGE,wagescale);
-			}
-			else {
 				namedParameterJdbcTemplate.update(WageScaleQueryUtil.UPDATE_WAGE,wagescale);
-			}
-		}
+			
 	   resultBean.setSuccess(true);
 	}catch(Exception e) {
 		e.printStackTrace();

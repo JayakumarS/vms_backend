@@ -15,6 +15,8 @@ import org.springframework.stereotype.Repository;
 
 
 
+
+
 @Repository
 public class ClassDaoImpl implements ClassDao{
 
@@ -32,14 +34,15 @@ public class ClassDaoImpl implements ClassDao{
 		
 		try {
 			Map<String, Object> fleet = new HashMap<String, Object>();
-			
-			for(ClassBean listBean : bean.getClassDetails()) {
+//			String ClassId =  jdbcTemplate.queryForObject(CertificatesQueryutil.get_class_Id,String.class);
+
+		
 				
-				fleet.put("code", listBean.getCode());
-				fleet.put("desc", listBean.getDescription());
+				fleet.put("code", bean.getCode());
+				fleet.put("desc", bean.getDescription());
 				fleet.put("userName", userDetails.getUsername());
 				namedParameterJdbcTemplate.update(ClassQueryUtil.SAVE_CLASS,fleet);
-			}
+		
 			
 		   resultBean.setSuccess(true);
 		}catch(Exception e) {
@@ -98,20 +101,14 @@ public class ClassDaoImpl implements ClassDao{
 		try {
 			Map<String, Object> fleet = new HashMap<String, Object>();
 			
-			for(ClassBean listBean : bean.getClassDetails()) {
 				
-				fleet.put("code", listBean.getCode());
-				fleet.put("desc", listBean.getDescription());
+				fleet.put("code", bean.getCode());
+				fleet.put("desc", bean.getDescription());
 				fleet.put("userName", userDetails.getUsername());
-				int k = jdbcTemplate.queryForObject(ClassQueryUtil.checkDelete, new Object[] { listBean.getCode() },Integer.class);
 				
-				if(k == 0) {
-				   namedParameterJdbcTemplate.update(ClassQueryUtil.SAVE_CLASS,fleet);
-				}
-				else {
 					namedParameterJdbcTemplate.update(ClassQueryUtil.UPDATE_CLASS,fleet);
-				}
-			}
+				
+			
 		   resultBean.setSuccess(true);
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -119,4 +116,5 @@ public class ClassDaoImpl implements ClassDao{
 		}
 		return resultBean;
 	}
+	
 }

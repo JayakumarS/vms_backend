@@ -32,13 +32,12 @@ public class AgentDaoImpl implements AgentDao{
 		try {
 			Map<String, Object> fleet = new HashMap<String, Object>();
 			
-			for(AgentBean listBean : bean.getAgentDetails()) {
 				
-				fleet.put("code", listBean.getCode());
-				fleet.put("desc", listBean.getDescription());
+				fleet.put("code", bean.getCode());
+				fleet.put("desc", bean.getDescription());
 				fleet.put("userName", userDetails.getUsername());
 				namedParameterJdbcTemplate.update(AgentQueryUtil.SAVE_AGENT,fleet);
-			}
+			
 			
 		   resultBean.setSuccess(true);
 		}catch(Exception e) {
@@ -97,20 +96,14 @@ public class AgentDaoImpl implements AgentDao{
 		try {
 			Map<String, Object> fleet = new HashMap<String, Object>();
 			
-			for(AgentBean listBean : bean.getAgentDetails()) {
-				
-				fleet.put("code", listBean.getCode());
-				fleet.put("desc", listBean.getDescription());
+			
+				fleet.put("code", bean.getCode());
+				fleet.put("desc", bean.getDescription());
 				fleet.put("userName", userDetails.getUsername());
-				int k = jdbcTemplate.queryForObject(AgentQueryUtil.checkDelete, new Object[] { listBean.getCode() },Integer.class);
 				
-				if(k == 0) {
-				   namedParameterJdbcTemplate.update(AgentQueryUtil.SAVE_AGENT,fleet);
-				}
-				else {
+				
 					namedParameterJdbcTemplate.update(AgentQueryUtil.UPDATE_AGENT,fleet);
-				}
-			}
+				
 		   resultBean.setSuccess(true);
 		}catch(Exception e) {
 			e.printStackTrace();

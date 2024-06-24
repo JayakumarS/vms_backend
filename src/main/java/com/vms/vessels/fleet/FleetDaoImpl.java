@@ -33,13 +33,11 @@ public class FleetDaoImpl implements FleetDao{
 		try {
 			Map<String, Object> fleet = new HashMap<String, Object>();
 			
-			for(FleetBean listBean : bean.getFleetDtls()) {
 				
-				fleet.put("code", listBean.getCode());
-				fleet.put("desc", listBean.getDescription());
+				fleet.put("code", bean.getCode());
+				fleet.put("desc", bean.getDescription());
 				fleet.put("userName", userDetails.getUsername());
 				namedParameterJdbcTemplate.update(FleetQueryUtil.SAVE_FLEET,fleet);
-			}
 			
 		   resultBean.setSuccess(true);
 		}catch(Exception e) {
@@ -98,20 +96,13 @@ public class FleetDaoImpl implements FleetDao{
 		try {
 			Map<String, Object> fleet = new HashMap<String, Object>();
 			
-			for(FleetBean listBean : bean.getFleetDtls()) {
 				
-				fleet.put("code", listBean.getCode());
-				fleet.put("desc", listBean.getDescription());
+				fleet.put("code", bean.getCode());
+				fleet.put("desc", bean.getDescription());
 				fleet.put("userName", userDetails.getUsername());
-				int k = jdbcTemplate.queryForObject(FleetQueryUtil.checkDelete, new Object[] { listBean.getCode() },Integer.class);
 				
-				if(k == 0) {
-				   namedParameterJdbcTemplate.update(FleetQueryUtil.SAVE_FLEET,fleet);
-				}
-				else {
 					namedParameterJdbcTemplate.update(FleetQueryUtil.UPDATE_FLEET,fleet);
-				}
-			}
+			
 		   resultBean.setSuccess(true);
 		}catch(Exception e) {
 			e.printStackTrace();
