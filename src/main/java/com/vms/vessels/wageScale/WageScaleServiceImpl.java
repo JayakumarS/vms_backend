@@ -24,13 +24,13 @@ public class WageScaleServiceImpl implements WageScaleService {
 	}
 
 	@Override
-	public WageScaleResultBean edit(String id) {
+	public WageScaleResultBean edit(int id) {
 		// TODO Auto-generated method stub
 		return WageScaleDao.edit(id);
 	}
 
 	@Override
-	public WageScaleResultBean delete(String id) {
+	public WageScaleResultBean delete(int id) {
 		// TODO Auto-generated method stub
 		return WageScaleDao.delete(id);
 	}

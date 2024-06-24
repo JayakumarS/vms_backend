@@ -8,9 +8,9 @@ public interface FleetDao {
 
 	public FleetResultBean getList();
 
-	public FleetResultBean edit(String id);
+	public FleetResultBean edit(int id);
 
-	public FleetResultBean delete(String id);
+	public FleetResultBean delete(int id);
 
 	public FleetResultBean update(FleetBean bean);
 

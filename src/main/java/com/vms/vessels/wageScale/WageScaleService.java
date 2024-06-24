@@ -7,9 +7,9 @@ public interface WageScaleService {
 
 	public WageScaleResultBean getList();
 
-	public WageScaleResultBean edit(String id);
+	public WageScaleResultBean edit(int id);
 
-	public WageScaleResultBean delete(String id);
+	public WageScaleResultBean delete(int id);
 
 	public WageScaleResultBean update(WageScaleBean bean);
 }

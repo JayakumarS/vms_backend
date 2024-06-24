@@ -23,13 +23,13 @@ public class AgentServiceImpl implements AgentService {
 	}
 
 	@Override
-	public AgentResultBean edit(String id) {
+	public AgentResultBean edit(int id) {
 		// TODO Auto-generated method stub
 		return AgentDao.edit(id);
 	}
 
 	@Override
-	public AgentResultBean delete(String id) {
+	public AgentResultBean delete(int id) {
 		// TODO Auto-generated method stub
 		return AgentDao.delete(id);
 	}

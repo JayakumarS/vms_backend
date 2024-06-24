@@ -10,6 +10,14 @@ public class WageScaleResultBean {
 
 	public boolean success;
 	private List<WageScaleBean> list;
+	public String message;
+	
+	public String getMessage() {
+		return message;
+	}
+	public void setMessage(String message) {
+		this.message = message;
+	}
 	private WageScaleBean fleetBean;
 	public boolean isSuccess() {
 		return success;

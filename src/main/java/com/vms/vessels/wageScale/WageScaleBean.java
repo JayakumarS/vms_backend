@@ -8,6 +8,7 @@ public class WageScaleBean {
 	
 	private String code;
 	private String description;
+	private int wagescaleid;
 	private List<WageScaleBean> wageScaleDetails;
 	public String getCode() {
 		return code;
@@ -26,5 +27,11 @@ public class WageScaleBean {
 	}
 	public void setWageScaleDetails(List<WageScaleBean> wageScaleDetails) {
 		this.wageScaleDetails = wageScaleDetails;
+	}
+	public int getWagescaleid() {
+		return wagescaleid;
+	}
+	public void setWagescaleid(int wagescaleid) {
+		this.wagescaleid = wagescaleid;
 	}
 }

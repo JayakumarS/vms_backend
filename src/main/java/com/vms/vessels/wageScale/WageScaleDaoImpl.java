@@ -15,6 +15,7 @@ import org.springframework.stereotype.Repository;
 
 
 
+
 @Repository
 public class WageScaleDaoImpl implements WageScaleDao{
 
@@ -31,6 +32,12 @@ public WageScaleResultBean save(WageScaleBean bean) {
 	UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 	
 	try {
+
+		int code =  jdbcTemplate.queryForObject(WageScaleQueryUtil.get_code,new Object[] { bean.getCode() },Integer.class);
+
+	    int desc =  jdbcTemplate.queryForObject(WageScaleQueryUtil.get_desc,new Object[] { bean.getDescription() },Integer.class);
+
+	    if(code==0 && desc==0) {
 		Map<String, Object> wagescale = new HashMap<String, Object>();
 		
 			wagescale.put("userName", userDetails.getUsername());
@@ -39,6 +46,11 @@ public WageScaleResultBean save(WageScaleBean bean) {
 			namedParameterJdbcTemplate.update(WageScaleQueryUtil.SAVE_WAGE,wagescale);
 		
 	   resultBean.setSuccess(true);
+	    }
+		  else {
+	 		   resultBean.setMessage("These datails are already exist");
+
+	        }
 	}catch(Exception e) {
 		e.printStackTrace();
 		resultBean.setSuccess(false);
@@ -61,7 +73,7 @@ public WageScaleResultBean getList() {
 }
 
 @Override
-public WageScaleResultBean edit(String id) {		
+public WageScaleResultBean edit(int id) {		
 	WageScaleResultBean resultBean = new WageScaleResultBean();
 	resultBean.setSuccess(false);
 	try {
@@ -74,7 +86,7 @@ public WageScaleResultBean edit(String id) {
 }
 
 @Override
-public WageScaleResultBean delete(String id) {
+public WageScaleResultBean delete(int id) {
 	WageScaleResultBean resultBean = new WageScaleResultBean();
 	try {
 		jdbcTemplate.update(WageScaleQueryUtil.delete,id);
@@ -98,7 +110,7 @@ public WageScaleResultBean update(WageScaleBean bean) {
 			wagescale.put("userName", userDetails.getUsername());
 			wagescale.put("code", bean.getCode());
 			wagescale.put("desc", bean.getDescription());
-			
+			wagescale.put("wagescaleid", bean.getWagescaleid());
 			
 				namedParameterJdbcTemplate.update(WageScaleQueryUtil.UPDATE_WAGE,wagescale);
 			

@@ -8,6 +8,7 @@ public class ClassBean {
 	
 	private String code;
 	private String description;
+	private int classid;
 	private List<ClassBean>classDetails;
 	public String getCode() {
 		return code;
@@ -26,5 +27,11 @@ public class ClassBean {
 	}
 	public void setClassDetails(List<ClassBean> classDetails) {
 		this.classDetails = classDetails;
+	}
+	public int getClassid() {
+		return classid;
+	}
+	public void setClassid(int classid) {
+		this.classid = classid;
 	}
 }

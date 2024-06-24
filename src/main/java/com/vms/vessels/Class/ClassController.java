@@ -39,7 +39,7 @@ public class ClassController {
    	}
 	
 	@RequestMapping(value="/editclass")
-	public ClassResultBean edit(@RequestParam("id") String id) {
+	public ClassResultBean edit(@RequestParam("id") int id) {
 		ClassResultBean rbean = new ClassResultBean();
 		try {
 			rbean = ClassService.edit(id);
@@ -61,7 +61,7 @@ public class ClassController {
 	}
 	
 	@RequestMapping(value="/delete")
-	public ClassResultBean delete(@RequestParam("id") String id) {
+	public ClassResultBean delete(@RequestParam("id") int id) {
 		ClassResultBean rbean = new ClassResultBean();
 		try {
 			rbean = ClassService.delete(id);

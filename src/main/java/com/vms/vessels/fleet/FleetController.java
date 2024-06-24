@@ -38,7 +38,7 @@ public class FleetController {
    	}
 	
 	@RequestMapping(value="/edit")
-	public FleetResultBean edit(@RequestParam("id") String id) {
+	public FleetResultBean edit(@RequestParam("id") int id) {
 		FleetResultBean rbean = new FleetResultBean();
 		try {
 			rbean = FleetService.edit(id);
@@ -60,7 +60,7 @@ public class FleetController {
 	}
 	
 	@RequestMapping(value="/delete")
-	public FleetResultBean delete(@RequestParam("id") String id) {
+	public FleetResultBean delete(@RequestParam("id") int id) {
 		FleetResultBean rbean = new FleetResultBean();
 		try {
 			rbean = FleetService.delete(id);

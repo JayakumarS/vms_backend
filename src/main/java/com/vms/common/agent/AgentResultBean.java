@@ -8,6 +8,14 @@ public class AgentResultBean {
 	
 	public boolean success;
 	private List<AgentBean> list;
+	public String message;
+	
+	public String getMessage() {
+		return message;
+	}
+	public void setMessage(String message) {
+		this.message = message;
+	}
 	private AgentBean agentsBean;
 	public boolean isSuccess() {
 		return success;

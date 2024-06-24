@@ -38,7 +38,7 @@ public class WageScaleController {
    	}
 	
 	@RequestMapping(value="/edit")
-	public WageScaleResultBean edit(@RequestParam("id") String id) {
+	public WageScaleResultBean edit(@RequestParam("id") int id) {
 		WageScaleResultBean rbean = new WageScaleResultBean();
 		try {
 			rbean = WageScaleService.edit(id);
@@ -60,7 +60,7 @@ public class WageScaleController {
 	}
 	
 	@RequestMapping(value="/delete")
-	public WageScaleResultBean delete(@RequestParam("id") String id) {
+	public WageScaleResultBean delete(@RequestParam("id") int id) {
 		WageScaleResultBean rbean = new WageScaleResultBean();
 		try {
 			rbean = WageScaleService.delete(id);

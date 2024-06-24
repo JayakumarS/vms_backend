@@ -6,9 +6,9 @@ public interface AgentService {
 
 	public AgentResultBean getList();
 
-	public AgentResultBean edit(String id);
+	public AgentResultBean edit(int id);
 
-	public AgentResultBean delete(String id);
+	public AgentResultBean delete(int id);
 
 	public AgentResultBean update(AgentBean bean);
 }

@@ -24,13 +24,13 @@ public class FleetServiceImpl implements FleetService{
 	}
 
 	@Override
-	public FleetResultBean edit(String id) {
+	public FleetResultBean edit(int id) {
 		// TODO Auto-generated method stub
 		return FleetDao.edit(id);
 	}
 
 	@Override
-	public FleetResultBean delete(String id) {
+	public FleetResultBean delete(int id) {
 		// TODO Auto-generated method stub
 		return FleetDao.delete(id);
 	}

@@ -8,6 +8,14 @@ public class ClassResultBean {
 	public boolean success;
 	private List<ClassBean> list;
 	private ClassBean classBean;
+	public String message;
+	
+	public String getMessage() {
+		return message;
+	}
+	public void setMessage(String message) {
+		this.message = message;
+	}
 	public boolean isSuccess() {
 		return success;
 	}

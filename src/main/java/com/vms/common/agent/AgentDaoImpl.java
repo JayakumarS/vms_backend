@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
 
+
 @Repository
 public class AgentDaoImpl implements AgentDao{
 
@@ -30,6 +31,12 @@ public class AgentDaoImpl implements AgentDao{
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		try {
+			
+			int code =  jdbcTemplate.queryForObject(AgentQueryUtil.get_code,new Object[] { bean.getCode() },Integer.class);
+
+		    int desc =  jdbcTemplate.queryForObject(AgentQueryUtil.get_desc,new Object[] { bean.getDescription() },Integer.class);
+
+		    if(code==0 && desc==0) {
 			Map<String, Object> fleet = new HashMap<String, Object>();
 			
 				
@@ -40,6 +47,12 @@ public class AgentDaoImpl implements AgentDao{
 			
 			
 		   resultBean.setSuccess(true);
+		   
+		    }
+			  else {
+		 		   resultBean.setMessage("These datails are already exist");
+
+		        }
 		}catch(Exception e) {
 			e.printStackTrace();
 			resultBean.setSuccess(false);
@@ -62,7 +75,7 @@ public class AgentDaoImpl implements AgentDao{
 	}
 
 	@Override
-	public AgentResultBean edit(String id) {		
+	public AgentResultBean edit(int id) {		
 		AgentResultBean resultBean = new AgentResultBean();
 		resultBean.setSuccess(false);
 		try {
@@ -75,7 +88,7 @@ public class AgentDaoImpl implements AgentDao{
 	}
 
 	@Override
-	public AgentResultBean delete(String id) {
+	public AgentResultBean delete(int id) {
 		AgentResultBean resultBean = new AgentResultBean();
 		try {
 			jdbcTemplate.update(AgentQueryUtil.delete,id);
@@ -96,7 +109,7 @@ public class AgentDaoImpl implements AgentDao{
 		try {
 			Map<String, Object> fleet = new HashMap<String, Object>();
 			
-			
+			    fleet.put("agentid", bean.getAgentid());
 				fleet.put("code", bean.getCode());
 				fleet.put("desc", bean.getDescription());
 				fleet.put("userName", userDetails.getUsername());

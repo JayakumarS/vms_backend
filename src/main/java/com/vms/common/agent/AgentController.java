@@ -37,7 +37,7 @@ public class AgentController {
    	}
 	
 	@RequestMapping(value="/edit")
-	public AgentResultBean edit(@RequestParam("id") String id) {
+	public AgentResultBean edit(@RequestParam("id") int id) {
 		AgentResultBean rbean = new AgentResultBean();
 		try {
 			rbean = AgentService.edit(id);
@@ -59,7 +59,7 @@ public class AgentController {
 	}
 	
 	@RequestMapping(value="/delete")
-	public AgentResultBean delete(@RequestParam("id") String id) {
+	public AgentResultBean delete(@RequestParam("id") int id) {
 		AgentResultBean rbean = new AgentResultBean();
 		try {
 			rbean = AgentService.delete(id);

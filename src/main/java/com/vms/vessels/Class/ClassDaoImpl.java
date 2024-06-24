@@ -17,6 +17,7 @@ import org.springframework.stereotype.Repository;
 
 
 
+
 @Repository
 public class ClassDaoImpl implements ClassDao{
 
@@ -33,6 +34,14 @@ public class ClassDaoImpl implements ClassDao{
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		try {
+			
+			
+			int code =  jdbcTemplate.queryForObject(ClassQueryUtil.get_code,new Object[] { bean.getCode() },Integer.class);
+
+		    int desc =  jdbcTemplate.queryForObject(ClassQueryUtil.get_desc,new Object[] { bean.getDescription() },Integer.class);
+
+		    if(code==0 && desc==0) {
+		    	
 			Map<String, Object> fleet = new HashMap<String, Object>();
 //			String ClassId =  jdbcTemplate.queryForObject(CertificatesQueryutil.get_class_Id,String.class);
 
@@ -45,6 +54,11 @@ public class ClassDaoImpl implements ClassDao{
 		
 			
 		   resultBean.setSuccess(true);
+		 }
+		  else {
+	 		   resultBean.setMessage("These datails are already exist");
+
+	        }
 		}catch(Exception e) {
 			e.printStackTrace();
 			resultBean.setSuccess(false);
@@ -67,7 +81,7 @@ public class ClassDaoImpl implements ClassDao{
 	}
 
 	@Override
-	public ClassResultBean edit(String id) {		
+	public ClassResultBean edit(int id) {		
 		ClassResultBean resultBean = new ClassResultBean();
 		resultBean.setSuccess(false);
 		try {
@@ -80,7 +94,7 @@ public class ClassDaoImpl implements ClassDao{
 	}
 
 	@Override
-	public ClassResultBean delete(String id) {
+	public ClassResultBean delete(int id) {
 		ClassResultBean resultBean = new ClassResultBean();
 		try {
 			jdbcTemplate.update(ClassQueryUtil.delete,id);
@@ -101,7 +115,7 @@ public class ClassDaoImpl implements ClassDao{
 		try {
 			Map<String, Object> fleet = new HashMap<String, Object>();
 			
-				
+			    fleet.put("classid", bean.getClassid());
 				fleet.put("code", bean.getCode());
 				fleet.put("desc", bean.getDescription());
 				fleet.put("userName", userDetails.getUsername());

@@ -15,6 +15,7 @@ import org.springframework.stereotype.Repository;
 
 
 
+
 @Repository
 public class FleetDaoImpl implements FleetDao{
 
@@ -31,6 +32,12 @@ public class FleetDaoImpl implements FleetDao{
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		try {
+			
+			int code =  jdbcTemplate.queryForObject(FleetQueryUtil.get_code,new Object[] { bean.getCode() },Integer.class);
+
+		    int desc =  jdbcTemplate.queryForObject(FleetQueryUtil.get_desc,new Object[] { bean.getDescription() },Integer.class);
+
+		    if(code==0 && desc==0) {
 			Map<String, Object> fleet = new HashMap<String, Object>();
 			
 				
@@ -40,6 +47,11 @@ public class FleetDaoImpl implements FleetDao{
 				namedParameterJdbcTemplate.update(FleetQueryUtil.SAVE_FLEET,fleet);
 			
 		   resultBean.setSuccess(true);
+		    }
+			  else {
+		 		   resultBean.setMessage("These datails are already exist");
+
+		        }
 		}catch(Exception e) {
 			e.printStackTrace();
 			resultBean.setSuccess(false);
@@ -62,7 +74,7 @@ public class FleetDaoImpl implements FleetDao{
 	}
 
 	@Override
-	public FleetResultBean edit(String id) {		
+	public FleetResultBean edit(int id) {		
 		FleetResultBean resultBean = new FleetResultBean();
 		resultBean.setSuccess(false);
 		try {
@@ -75,7 +87,7 @@ public class FleetDaoImpl implements FleetDao{
 	}
 
 	@Override
-	public FleetResultBean delete(String id) {
+	public FleetResultBean delete(int id) {
 		FleetResultBean resultBean = new FleetResultBean();
 		try {
 			jdbcTemplate.update(FleetQueryUtil.delete,id);
@@ -96,7 +108,7 @@ public class FleetDaoImpl implements FleetDao{
 		try {
 			Map<String, Object> fleet = new HashMap<String, Object>();
 			
-				
+			fleet.put("fleetid", bean.getFleetid());
 				fleet.put("code", bean.getCode());
 				fleet.put("desc", bean.getDescription());
 				fleet.put("userName", userDetails.getUsername());

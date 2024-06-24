@@ -24,13 +24,13 @@ public class ClassServiceImpl implements ClassService{
 	}
 
 	@Override
-	public ClassResultBean edit(String id) {
+	public ClassResultBean edit(int id) {
 		// TODO Auto-generated method stub
 		return ClassDao.edit(id);
 	}
 
 	@Override
-	public ClassResultBean delete(String id) {
+	public ClassResultBean delete(int id) {
 		// TODO Auto-generated method stub
 		return ClassDao.delete(id);
 	}
