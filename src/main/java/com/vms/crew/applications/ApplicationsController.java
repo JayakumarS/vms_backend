@@ -168,4 +168,30 @@ public class ApplicationsController {
 		return resultBean;
 	}
 	
+	///Load Certificate
+	
+		@RequestMapping(value="/certificateList")
+		public ApplicationsResultBean certificateList() {
+			ApplicationsResultBean rbean = new ApplicationsResultBean();
+			try {
+				rbean = ApplicationsService.certificateList();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+	   		return rbean;
+	   	}
+		
+	///Save Certificate
+		
+		@RequestMapping(value="/saveCertificate")
+		public ApplicationsResultBean saveCertificate(@RequestBody ApplicationsBean bean) {
+			ApplicationsResultBean rbean = new ApplicationsResultBean();
+			try {
+				rbean = ApplicationsService.saveCertificate(bean);
+			}catch(Exception e){
+				e.printStackTrace();	
+			}
+			return rbean;
+		}
+	
 }

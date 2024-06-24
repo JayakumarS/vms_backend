@@ -78,5 +78,19 @@ public class ApplicationsServiceImpl implements ApplicationsService{
 		// TODO Auto-generated method stub
 		return ApplicationsDao.update(bean);
 	}
+
+
+	@Override
+	public ApplicationsResultBean certificateList() {
+		// TODO Auto-generated method stub
+		return ApplicationsDao.certificateList();
+	}
+
+
+	@Override
+	public ApplicationsResultBean saveCertificate(ApplicationsBean bean) {
+		// TODO Auto-generated method stub
+		return ApplicationsDao.saveCertificate(bean);
+	}
 	
 }

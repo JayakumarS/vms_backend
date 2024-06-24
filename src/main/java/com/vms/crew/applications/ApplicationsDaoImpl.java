@@ -16,6 +16,8 @@ import org.springframework.stereotype.Repository;
 import com.vms.crew.maintainRank.MaintainRankBean;
 import com.vms.crew.maintainRank.MaintainRankQueryUtil;
 import com.vms.crew.maintainRank.MaintainRankResultBean;
+import com.vms.crew.utilities.MultiSeamen.MultiSeamenQueryUtil;
+import com.vms.crew.utilities.MultiSeamen.MultiSeamenResultBean;
 
 
 
@@ -334,6 +336,50 @@ public class ApplicationsDaoImpl implements ApplicationsDao{
 					namedParameterJdbcTemplate.update(ApplicationsQueryUtil.UPDATE_APPLICATION,applications);
 			
 			
+		   resultBean.setSuccess(true);
+		}catch(Exception e) {
+			e.printStackTrace();
+			resultBean.setSuccess(false);
+		}
+		return resultBean;
+	}
+
+
+
+	@Override
+	public ApplicationsResultBean certificateList() {
+		ApplicationsResultBean resultBean = new ApplicationsResultBean();
+		List<ApplicationsBean> listBean = new ArrayList<ApplicationsBean>();
+		
+		try {
+			listBean = jdbcTemplate.query(ApplicationsQueryUtil.get_certificate_List,new BeanPropertyRowMapper<ApplicationsBean>(ApplicationsBean.class));
+			resultBean.setList(listBean);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return resultBean;
+	}
+
+
+
+	@Override
+	public ApplicationsResultBean saveCertificate(ApplicationsBean bean) {
+		ApplicationsResultBean resultBean = new ApplicationsResultBean();
+		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		
+		try {
+			Map<String, Object> certificate = new HashMap<String, Object>();
+			
+			certificate.put("userName", userDetails.getUsername());
+			certificate.put("rankCode", bean.getRankCode());
+			certificate.put("certificateCode", bean.getCertificateCode());
+			certificate.put("mandatoryValid", bean.isMandatoryValid());
+			certificate.put("mandatoryInvalid", bean.isMandatoryInvalid());
+			certificate.put("optionalInvalid", bean.isOptionalInvalid());
+
+				
+			namedParameterJdbcTemplate.update(MultiSeamenQueryUtil.SAVE_CERTIFICATE,certificate);
+						
 		   resultBean.setSuccess(true);
 		}catch(Exception e) {
 			e.printStackTrace();

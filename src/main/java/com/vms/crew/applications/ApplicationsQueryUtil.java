@@ -53,6 +53,8 @@ public class ApplicationsQueryUtil {
 			+ "applicant_image_file_name=:applicantimageFileName,modified_by = :userName,modified_dt = NOW() WHERE crew_applicant_code = :code";
 
 	public static final String getenginelist = "select engine_master_code as id , engine_master_name as text from engine_master";
+
+	public static final String get_certificate_List = "select certificate_code as certificateCode,certificate_name as certificateName from certificate_master";
 	
 	
 

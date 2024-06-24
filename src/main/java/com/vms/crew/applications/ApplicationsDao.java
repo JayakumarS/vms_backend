@@ -36,4 +36,8 @@ public interface ApplicationsDao {
 
 	public ApplicationsResultBean update(ApplicationsBean bean);
 
+	public  ApplicationsResultBean certificateList();
+
+	public ApplicationsResultBean saveCertificate(ApplicationsBean bean);
+
 }
