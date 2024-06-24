@@ -30,12 +30,11 @@ public class ExpEngineDaoImpl implements ExpEngineDao {
 		try {
 			Map<String, Object> expEngine = new HashMap<String, Object>();
 			
-			for(ExpEngineBean listBean : bean.getExpEngineBeanBeanDtls()) {
 				expEngine.put("userName", userDetails.getUsername());
-				expEngine.put("code", listBean.getCode());
-				expEngine.put("desc", listBean.getDescription());
+				expEngine.put("code", bean.getCode());
+				expEngine.put("desc", bean.getDescription());
 				namedParameterJdbcTemplate.update(ExpEngineQueryUtil. SAVE_exp_Engine,expEngine);
-			}
+			
 			
 		   resultBean.setSuccess(true);
 		}catch(Exception e) {
@@ -94,12 +93,11 @@ public class ExpEngineDaoImpl implements ExpEngineDao {
 		try {
 			Map<String, Object> expEngine = new HashMap<String, Object>();
 			
-			for(ExpEngineBean listBean : bean.getExpEngineBeanBeanDtls()) {
 				expEngine.put("userName", userDetails.getUsername());
-				expEngine.put("code", listBean.getCode());
-				expEngine.put("desc", listBean.getDescription());
+				expEngine.put("code", bean.getCode());
+				expEngine.put("desc", bean.getDescription());
 				
-				int k = jdbcTemplate.queryForObject(ExpEngineQueryUtil.checkDelete, new Object[] { listBean.getCode() },Integer.class);
+				int k = jdbcTemplate.queryForObject(ExpEngineQueryUtil.checkDelete, new Object[] { bean.getCode() },Integer.class);
 				
 				if(k == 0) {
 				   namedParameterJdbcTemplate.update(ExpEngineQueryUtil. SAVE_exp_Engine,expEngine);
@@ -107,7 +105,7 @@ public class ExpEngineDaoImpl implements ExpEngineDao {
 				else {
 					namedParameterJdbcTemplate.update(ExpEngineQueryUtil.UPDATE_exp_Engine,expEngine);
 				}
-			}
+			
 		   resultBean.setSuccess(true);
 		}catch(Exception e) {
 			e.printStackTrace();
