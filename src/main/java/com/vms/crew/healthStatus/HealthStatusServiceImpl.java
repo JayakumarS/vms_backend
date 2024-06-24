@@ -21,13 +21,13 @@ public class HealthStatusServiceImpl implements HealthStatusService {
 	}
 
 	@Override
-	public HealthStatusResultBean edit(String id) {
+	public HealthStatusResultBean edit(Integer id) {
 		// TODO Auto-generated method stub
 		return HealthStatusDao.edit(id);
 	}
 
 	@Override
-	public HealthStatusResultBean delete(String id) {
+	public HealthStatusResultBean delete(Integer id) {
 		// TODO Auto-generated method stub
 		return HealthStatusDao.delete(id);
 	}

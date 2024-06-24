@@ -39,7 +39,7 @@ public class HealthStatusController {
    	}
 	
 	@RequestMapping(value="/edit")
-	public HealthStatusResultBean edit(@RequestParam("id") String id) {
+	public HealthStatusResultBean edit(@RequestParam("id") Integer id) {
 		HealthStatusResultBean rbean = new HealthStatusResultBean();
 		try {
 			rbean = HealthStatusService.edit(id);
@@ -61,7 +61,7 @@ public class HealthStatusController {
 	}
 	
 	@RequestMapping(value="/delete")
-	public HealthStatusResultBean delete(@RequestParam("id") String id) {
+	public HealthStatusResultBean delete(@RequestParam("id") Integer id) {
 		HealthStatusResultBean rbean = new HealthStatusResultBean();
 		try {
 			rbean = HealthStatusService.delete(id);

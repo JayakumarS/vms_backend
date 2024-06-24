@@ -5,9 +5,9 @@ public interface HealthStatusService {
 
 	public HealthStatusResultBean getList();
 
-	public HealthStatusResultBean edit(String id);
+	public HealthStatusResultBean edit(Integer id);
 
-	public HealthStatusResultBean delete(String id);
+	public HealthStatusResultBean delete(Integer id);
 
 	public HealthStatusResultBean update(HealthStatusBean bean);
 }

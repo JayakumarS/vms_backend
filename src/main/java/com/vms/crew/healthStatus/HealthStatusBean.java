@@ -8,7 +8,13 @@ public class HealthStatusBean {
 	private String description;
 	private List<HealthStatusBean> healthStatusBeanDtls;
 
-
+	public Integer getHealthstatusid() {
+		return healthstatusid;
+	}
+	public void setHealthstatusid(Integer healthstatusid) {
+		this.healthstatusid = healthstatusid;
+	}
+	private Integer healthstatusid;
 	
 	
 	public List<HealthStatusBean> getHealthStatusBeanDtls() {

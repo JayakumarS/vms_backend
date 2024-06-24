@@ -13,6 +13,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
+import com.vms.vessel.vesselOwner.VesselOwnerQueryUtil;
+
 
 
 @Repository
@@ -33,6 +35,13 @@ public class HealthStatusDaoImpl implements HealthStatusDao{
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		try {
+			int code =  jdbcTemplate.queryForObject(HealthStatusQueryUtil.get_code,new Object[] { bean.getCode() },Integer.class);
+
+		    int desc =  jdbcTemplate.queryForObject(HealthStatusQueryUtil.get_desc,new Object[] { bean.getDescription() },Integer.class);
+
+			
+            if(code==0 && desc==0) {
+            	
 			Map<String, Object> healthStatus = new HashMap<String, Object>();
 			
 				healthStatus.put("userName", userDetails.getUsername());
@@ -41,10 +50,16 @@ public class HealthStatusDaoImpl implements HealthStatusDao{
 				namedParameterJdbcTemplate.update(HealthStatusQueryUtil.SAVE_health_status,healthStatus);
 			
 			
-		   resultBean.setSuccess(true);
-		}catch(Exception e) {
+				   resultBean.setSuccess(true);
+  		  }
+  		  else {
+  	 		   resultBean.setMessage("These datails are already exist");
+
+  	        }		}catch(Exception e) {
 			e.printStackTrace();
 			resultBean.setSuccess(false);
+	 		   resultBean.setMessage("Not Updated");
+
 		}
 		return resultBean;
 	}
@@ -64,7 +79,7 @@ public class HealthStatusDaoImpl implements HealthStatusDao{
 	}
 
 	@Override
-	public HealthStatusResultBean edit(String id) {		
+	public HealthStatusResultBean edit(Integer id) {		
 		HealthStatusResultBean resultBean = new HealthStatusResultBean();
 		resultBean.setSuccess(false);
 		try {
@@ -77,7 +92,7 @@ public class HealthStatusDaoImpl implements HealthStatusDao{
 	}
 
 	@Override
-	public HealthStatusResultBean delete(String id) {
+	public HealthStatusResultBean delete(Integer id) {
 		HealthStatusResultBean resultBean = new HealthStatusResultBean();
 		try {
 			jdbcTemplate.update(HealthStatusQueryUtil.delete,id);
@@ -96,25 +111,39 @@ public class HealthStatusDaoImpl implements HealthStatusDao{
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		try {
+			
+
+
+			String healthcode =  jdbcTemplate.queryForObject(HealthStatusQueryUtil.health_code,new Object[] { bean.getHealthstatusid() },String.class);
+			String healthdesc =  jdbcTemplate.queryForObject(HealthStatusQueryUtil.health_desc,new Object[] { bean.getHealthstatusid() },String.class);
+
+
+			int code =  jdbcTemplate.queryForObject(HealthStatusQueryUtil.get_code_edit,new Object[] { bean.getCode(),healthcode },Integer.class);
+
+		    int desc =  jdbcTemplate.queryForObject(HealthStatusQueryUtil.get_desc_edit,new Object[] { bean.getDescription(),healthdesc },Integer.class);
+
+			
+            if(code==0 && desc==0) {
 			Map<String, Object> healthStatus = new HashMap<String, Object>();
 			
 				healthStatus.put("userName", userDetails.getUsername());
 				healthStatus.put("code", bean.getCode());
 				healthStatus.put("desc", bean.getDescription());
-				
-				int k = jdbcTemplate.queryForObject(HealthStatusQueryUtil.checkDelete, new Object[] { bean.getCode() },Integer.class);
-				
-				if(k == 0) {
-				   namedParameterJdbcTemplate.update(HealthStatusQueryUtil.SAVE_health_status,healthStatus);
-				}
-				else {
-					namedParameterJdbcTemplate.update(HealthStatusQueryUtil.UPDATE_health_status,healthStatus);
-				}
+				healthStatus.put("healthstatusid", bean.getHealthstatusid());
+
 			
-		   resultBean.setSuccess(true);
-		}catch(Exception e) {
+					namedParameterJdbcTemplate.update(HealthStatusQueryUtil.UPDATE_health_status,healthStatus);
+				
+					   resultBean.setSuccess(true);
+    		  }
+    		  else {
+    	 		   resultBean.setMessage("These datails are already exist");
+
+    	        }			}catch(Exception e) {
 			e.printStackTrace();
 			resultBean.setSuccess(false);
+	 		   resultBean.setMessage("Not Updated");
+
 		}
 		return resultBean;
 	}
