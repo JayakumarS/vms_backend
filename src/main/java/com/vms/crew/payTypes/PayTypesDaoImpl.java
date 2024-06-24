@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
 
+
 @Repository
 public class PayTypesDaoImpl implements PayTypesDao {
 	
@@ -29,16 +30,27 @@ public class PayTypesDaoImpl implements PayTypesDao {
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		try {
+			int code =  jdbcTemplate.queryForObject(PayTypesQueryUtil.get_code,new Object[] { bean.getCode() },Integer.class);
+
+		    int desc =  jdbcTemplate.queryForObject(PayTypesQueryUtil.get_desc,new Object[] { bean.getDescription() },Integer.class);
+		    
+		    if(code==0 && desc==0) {
+		    
 			Map<String, Object> paytypes = new HashMap<String, Object>();
 			
-			for(PayTypesBean listBean : bean.getPayTypesBeanDtls()) {
 				paytypes.put("userName", userDetails.getUsername());
-				paytypes.put("code", listBean.getCode());
-				paytypes.put("desc", listBean.getDescription());
+				paytypes.put("code", bean.getCode());
+				paytypes.put("desc", bean.getDescription());
 				namedParameterJdbcTemplate.update(PayTypesQueryUtil.SAVE_pay_types,paytypes);
-			}
+			
 			
 		   resultBean.setSuccess(true);
+		    }
+		    
+		    else {
+	  	 		   resultBean.setMessage("These details are already existed");
+
+	  	        }
 		}catch(Exception e) {
 			e.printStackTrace();
 			resultBean.setSuccess(false);
@@ -61,7 +73,7 @@ public class PayTypesDaoImpl implements PayTypesDao {
 	}
 
 	@Override
-	public PayTypesResultBean edit(String id) {		
+	public PayTypesResultBean edit(int id) {		
 		PayTypesResultBean resultBean = new PayTypesResultBean();
 		resultBean.setSuccess(false);
 		try {
@@ -74,7 +86,7 @@ public class PayTypesDaoImpl implements PayTypesDao {
 	}
 
 	@Override
-	public PayTypesResultBean delete(String id) {
+	public PayTypesResultBean delete(int id) {
 		PayTypesResultBean resultBean = new PayTypesResultBean();
 		try {
 			jdbcTemplate.update(PayTypesQueryUtil.delete,id);
@@ -93,23 +105,32 @@ public class PayTypesDaoImpl implements PayTypesDao {
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		try {
+			String paycode =  jdbcTemplate.queryForObject(PayTypesQueryUtil.paytype_code,new Object[] { bean.getPaytypeid() },String.class);
+			String paydesc =  jdbcTemplate.queryForObject(PayTypesQueryUtil.paytype_desc,new Object[] { bean.getPaytypeid() },String.class);
+
+
+			int code =  jdbcTemplate.queryForObject(PayTypesQueryUtil.get_code_edit,new Object[] { bean.getCode(),paycode },Integer.class);
+
+		    int desc =  jdbcTemplate.queryForObject(PayTypesQueryUtil.get_desc_edit,new Object[] { bean.getDescription(),paydesc },Integer.class);
+		    if(code==0 && desc==0) {
 			Map<String, Object> paytypes = new HashMap<String, Object>();
 			
-			for(PayTypesBean listBean : bean.getPayTypesBeanDtls()) {
+		
 				paytypes.put("userName", userDetails.getUsername());
-				paytypes.put("code", listBean.getCode());
-				paytypes.put("desc", listBean.getDescription());
+				paytypes.put("code", bean.getCode());
+				paytypes.put("desc", bean.getDescription());
+				paytypes.put("paytypeid", bean.getPaytypeid());
 				
-				int k = jdbcTemplate.queryForObject(PayTypesQueryUtil.checkDelete, new Object[] { listBean.getCode() },Integer.class);
-				
-				if(k == 0) {
-				   namedParameterJdbcTemplate.update(PayTypesQueryUtil.SAVE_pay_types,paytypes);
-				}
-				else {
-					namedParameterJdbcTemplate.update(PayTypesQueryUtil.UPDATE_pay_types,paytypes);
-				}
-			}
+			
+				namedParameterJdbcTemplate.update(PayTypesQueryUtil.UPDATE_pay_types,paytypes);
+			
+		
 		   resultBean.setSuccess(true);
+		    }
+		    else {
+ 	 		   resultBean.setMessage("These details are already existed");
+
+ 	        }
 		}catch(Exception e) {
 			e.printStackTrace();
 			resultBean.setSuccess(false);

@@ -38,7 +38,7 @@ public class PayTypesController {
    	}
 	
 	@RequestMapping(value="/edit")
-	public PayTypesResultBean edit(@RequestParam("id") String id) {
+	public PayTypesResultBean edit(@RequestParam("id") int id) {
 		PayTypesResultBean rbean = new PayTypesResultBean();
 		try {
 			rbean = PayTypesService.edit(id);
@@ -60,7 +60,7 @@ public class PayTypesController {
 	}
 	
 	@RequestMapping(value="/delete")
-	public PayTypesResultBean delete(@RequestParam("id") String id) {
+	public PayTypesResultBean delete(@RequestParam("id") int id) {
 		PayTypesResultBean rbean = new PayTypesResultBean();
 		try {
 			rbean = PayTypesService.delete(id);

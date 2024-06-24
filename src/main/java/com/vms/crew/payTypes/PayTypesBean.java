@@ -4,7 +4,7 @@ import java.util.List;
 
 
 public class PayTypesBean {
-	
+	private Integer paytypeid;
 	private String code;
 	private String description;
 	private List<PayTypesBean> payTypesBeanDtls;
@@ -16,6 +16,12 @@ public class PayTypesBean {
 	}
 	public String getDescription() {
 		return description;
+	}
+	public Integer getPaytypeid() {
+		return paytypeid;
+	}
+	public void setPaytypeid(Integer paytypeid) {
+		this.paytypeid = paytypeid;
 	}
 	public void setDescription(String description) {
 		this.description = description;

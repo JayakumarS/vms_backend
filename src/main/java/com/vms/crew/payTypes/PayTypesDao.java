@@ -8,9 +8,9 @@ public interface PayTypesDao {
 
 	public PayTypesResultBean getList();
 
-	public PayTypesResultBean edit(String id);
+	public PayTypesResultBean edit(int id);
 
-	public PayTypesResultBean delete(String id);
+	public PayTypesResultBean delete(int id);
 
 	public PayTypesResultBean update(PayTypesBean bean);
 

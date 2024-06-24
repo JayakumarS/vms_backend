@@ -24,13 +24,13 @@ public class PayTypesServiceImpl implements PayTypesService {
 	}
 
 	@Override
-	public PayTypesResultBean edit(String id) {
+	public PayTypesResultBean edit(int id) {
 		// TODO Auto-generated method stub
 		return PayTypesDao.edit(id);
 	}
 
 	@Override
-	public PayTypesResultBean delete(String id) {
+	public PayTypesResultBean delete(int id) {
 		// TODO Auto-generated method stub
 		return PayTypesDao.delete(id);
 	}
