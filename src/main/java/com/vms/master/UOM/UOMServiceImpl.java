@@ -24,7 +24,7 @@ public class UOMServiceImpl implements UOMService{
 	}
 	
 	@Override
-	public UOMResultBean editUom(String id) {
+	public UOMResultBean editUom(Integer id) {
 		// TODO Auto-generated method stub
 		return uomDao.editUom(id);
 	}

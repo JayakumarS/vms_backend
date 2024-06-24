@@ -35,7 +35,7 @@ public class UOMController {
    	}
 	
 	@RequestMapping(value="/editUom")
-	public UOMResultBean editUom(@RequestParam("id") String id) {
+	public UOMResultBean editUom(@RequestParam("id") Integer id) {
 		UOMResultBean rbean = new UOMResultBean();
 		try {
 			rbean = uomService.editUom(id);

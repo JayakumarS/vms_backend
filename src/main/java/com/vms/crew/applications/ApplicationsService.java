@@ -29,7 +29,7 @@ public interface ApplicationsService {
 	
 	public ApplicationsResultBean update(ApplicationsBean bean);
 
-	public ApplicationsResultBean certificateList();
+	public ApplicationsResultBean certificateList(String rankCode);
 
 	public ApplicationsResultBean saveCertificate(ApplicationsBean bean);
 

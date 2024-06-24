@@ -34,9 +34,9 @@ public class MultiSeamenDaoImpl implements MultiSeamenDao{
 			multiSeamen.put("startdate", bean.getStartdate());
 			multiSeamen.put("joinPort", bean.getJoinPort());
 				
-			namedParameterJdbcTemplate.update(MultiSeamenQueryUtil.SAVE_MULTI_SEAMEN_HDR,multiSeamen);
+			Integer code = namedParameterJdbcTemplate.queryForObject(MultiSeamenQueryUtil.SAVE_MULTI_SEAMEN_HDR,multiSeamen,Integer.class);
 			
-			savedetail(bean);
+			savedetail(bean,code);
 			
 		   resultBean.setSuccess(true);
 		}catch(Exception e) {
@@ -47,7 +47,7 @@ public class MultiSeamenDaoImpl implements MultiSeamenDao{
 	}
 	
 	@Override
-	public MultiSeamenResultBean savedetail(MultiSeamenBean bean) {
+	public MultiSeamenResultBean savedetail(MultiSeamenBean bean,Integer code) {
 		MultiSeamenResultBean resultBean = new MultiSeamenResultBean();
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
@@ -56,7 +56,7 @@ public class MultiSeamenDaoImpl implements MultiSeamenDao{
 			
 			for(MultiSeamenBean listBean : bean.getMultiseamendetail()) {
 				multiSeamenDtl.put("userName", userDetails.getUsername());
-				multiSeamenDtl.put("code", listBean.getCode());
+				multiSeamenDtl.put("code", code);
 				multiSeamenDtl.put("name", listBean.getName());
 				multiSeamenDtl.put("rank", listBean.getRank());
 				multiSeamenDtl.put("pay", listBean.getPay());

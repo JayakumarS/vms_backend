@@ -54,8 +54,23 @@ public class ApplicationsQueryUtil {
 
 	public static final String getenginelist = "select engine_master_code as id , engine_master_name as text from engine_master";
 
-	public static final String get_certificate_List = "select certificate_code as certificateCode,certificate_name as certificateName from certificate_master";
-	
-	
+	public static final String get_certificate_List = "select rc.certificate_code as certificateCode,cm.certificate_name as certificateName from rank_certificate rc\r\n"
+			+ "left join certificate_master cm on rc.certificate_code = cm.certificate_code\r\n"
+			+ "where rank_code=?";
+
+
+	public static String bulkMailDesignList(String currentUserId) {
+		
+		String query = "select DISTINCT designation as designation from new.experience_info where organisation_id=('" + currentUserId +"')";
+
+		return query;
+	 }
+
+	public static String get_certificate_List(String rankCode) {
+		String query = "select rc.certificate_code as certificateCode,cm.certificate_name as certificateName from rank_certificate rc \r\n"
+				+ "	left join certificate_master cm on rc.certificate_code = cm.certificate_code \r\n"
+				+ "	where rank_code=('" + rankCode +"')";
+		return query;
+	}
 
 }

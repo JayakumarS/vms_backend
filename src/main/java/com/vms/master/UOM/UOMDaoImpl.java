@@ -60,7 +60,7 @@ public class UOMDaoImpl implements UOMDao{
 	}
 	
 	@Override
-	public UOMResultBean editUom(String id) {		
+	public UOMResultBean editUom(Integer id) {		
 		UOMResultBean resultBean = new UOMResultBean();
 		resultBean.setSuccess(false);
 		try {
@@ -98,6 +98,8 @@ public class UOMDaoImpl implements UOMDao{
 			Country.put("userName", userDetails.getUsername());
 			Country.put("uomCode", bean.getUomCode());
 			Country.put("uomName", bean.getUomName());
+			Country.put("uomId", bean.getUomId());
+
 								
 				namedParameterJdbcTemplate.update(UOMQueryUtil.UPDATE_UOM,Country);
 				

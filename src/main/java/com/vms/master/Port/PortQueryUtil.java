@@ -10,6 +10,6 @@ public class PortQueryUtil {
 	
 	public static final String DELETE_PORT = "delete from port_master where port_code = ?";
 	
-	public static final String UPDATE_PORT = "UPDATE port_master SET port_code = :portCode,port_name = :portName,port_type = :portType,isactive = :active,modified_by = :userName,modified_date = NOW() WHERE port_code = :portCode";
+	public static final String UPDATE_PORT = "UPDATE port_master SET port_code = :portCode,port_name = : ,port_type = :portType,isactive = :active,modified_by = :userName,modified_date = NOW() WHERE port_code = :portCode";
 
 }

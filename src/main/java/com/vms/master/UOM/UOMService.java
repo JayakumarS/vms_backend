@@ -6,7 +6,7 @@ public interface UOMService {
 
 	public UOMResultBean listUom();
 
-	public UOMResultBean editUom(String id);
+	public UOMResultBean editUom(Integer id);
 
 	public UOMResultBean deleteUom(String id);
 

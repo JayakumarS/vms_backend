@@ -350,7 +350,7 @@ public class ApplicationsDaoImpl implements ApplicationsDao{
 
 
 	@Override
-	public ApplicationsResultBean certificateList() {
+	public ApplicationsResultBean certificateList(String rankCode) {
 		ApplicationsResultBean resultBean = new ApplicationsResultBean();
 		List<ApplicationsBean> listBean = new ArrayList<ApplicationsBean>();
 		

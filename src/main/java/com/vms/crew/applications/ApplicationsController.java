@@ -171,10 +171,10 @@ public class ApplicationsController {
 	///Load Certificate
 	
 		@RequestMapping(value="/certificateList")
-		public ApplicationsResultBean certificateList() {
+		public ApplicationsResultBean certificateList(@RequestParam("rankCode") String rankCode) {
 			ApplicationsResultBean rbean = new ApplicationsResultBean();
 			try {
-				rbean = ApplicationsService.certificateList();
+				rbean = ApplicationsService.certificateList(rankCode);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
