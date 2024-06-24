@@ -9,7 +9,7 @@ public class MaintainRankBean {
 	
 	private String code;
 	private String description;
-	private String groupage;
+	private Integer groupage;
 	private Boolean oAndt;
 	private String department;
 	private Integer sno;
@@ -45,10 +45,10 @@ public class MaintainRankBean {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public String getGroupage() {
+	public Integer getGroupage() {
 		return groupage;
 	}
-	public void setGroupage(String groupage) {
+	public void setGroupage(Integer groupage) {
 		this.groupage = groupage;
 	}
 

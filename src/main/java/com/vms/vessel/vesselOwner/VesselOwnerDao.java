@@ -6,9 +6,9 @@ public interface VesselOwnerDao {
 
 	public VesselOwnerResultBean getList();
 
-	public VesselOwnerResultBean edit(String id);
+	public VesselOwnerResultBean edit(Integer id);
 
-	public VesselOwnerResultBean delete(String id);
+	public VesselOwnerResultBean delete(Integer id);
 
 	public VesselOwnerResultBean update(VesselOwnerBean bean);
 }

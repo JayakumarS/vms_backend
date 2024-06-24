@@ -39,7 +39,7 @@ public class VesselOwnerController {
    	}
 	
 	@RequestMapping(value="/edit")
-	public VesselOwnerResultBean edit(@RequestParam("id") String id) {
+	public VesselOwnerResultBean edit(@RequestParam("id") Integer id) {
 		VesselOwnerResultBean rbean = new VesselOwnerResultBean();
 		try {
 			rbean = VesselOwnerService.edit(id);
@@ -61,7 +61,7 @@ public class VesselOwnerController {
 	}
 	
 	@RequestMapping(value="/delete")
-	public VesselOwnerResultBean delete(@RequestParam("id") String id) {
+	public VesselOwnerResultBean delete(@RequestParam("id") Integer id) {
 		VesselOwnerResultBean rbean = new VesselOwnerResultBean();
 		try {
 			rbean = VesselOwnerService.delete(id);

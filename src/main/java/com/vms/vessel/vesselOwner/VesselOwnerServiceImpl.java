@@ -23,13 +23,13 @@ public class VesselOwnerServiceImpl implements VesselOwnerService{
 	}
 
 	@Override
-	public VesselOwnerResultBean edit(String id) {
+	public VesselOwnerResultBean edit(Integer id) {
 		// TODO Auto-generated method stub
 		return VesselOwnerDao.edit(id);
 	}
 
 	@Override
-	public VesselOwnerResultBean delete(String id) {
+	public VesselOwnerResultBean delete(Integer id) {
 		// TODO Auto-generated method stub
 		return VesselOwnerDao.delete(id);
 	}

@@ -8,7 +8,7 @@ public class RankGroupQueryUtil {
 
 public static final String getList = "select rank_group_code as code,rank_group_name as description,rank_group_remarks as remarks,rank_group_id as rankgroupid from rank_group order by created_dt desc";
 
-public static final String getEdit = "select rank_group_code as code,rank_group_name as description, rank_group_remarks as remarks from rank_group where rank_group_id = ?";
+public static final String getEdit = "select rank_group_code as code,rank_group_name as description, rank_group_remarks as remarks,rank_group_id as rankgroupid from rank_group where rank_group_id = ?";
 
 public static final String delete = "delete from rank_group where rank_group_id = ? ";
 

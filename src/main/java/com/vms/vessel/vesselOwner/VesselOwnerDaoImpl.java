@@ -13,6 +13,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
+import com.vms.crew.rankGroup.RankGroupQueryUtil;
+
 
 
 @Repository
@@ -31,6 +33,15 @@ public class VesselOwnerDaoImpl implements VesselOwnerDao{
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		try {
+
+			int code =  jdbcTemplate.queryForObject(VesselOwnerQueryUtil.get_code,new Object[] { bean.getCode() },Integer.class);
+
+		    int desc =  jdbcTemplate.queryForObject(VesselOwnerQueryUtil.get_desc,new Object[] { bean.getDescription() },Integer.class);
+
+			
+            if(code==0 && desc==0) {
+            	
+            
 			Map<String, Object> vesselowner = new HashMap<String, Object>();
 			
 				vesselowner.put("userName", userDetails.getUsername());
@@ -40,9 +51,16 @@ public class VesselOwnerDaoImpl implements VesselOwnerDao{
 			
 			
 		   resultBean.setSuccess(true);
+		  }
+		  else {
+	 		   resultBean.setMessage("These datails are already exist");
+
+	        }
 		}catch(Exception e) {
 			e.printStackTrace();
 			resultBean.setSuccess(false);
+	 		   resultBean.setMessage("Not Updated");
+
 		}
 		return resultBean;
 	}
@@ -62,7 +80,7 @@ public class VesselOwnerDaoImpl implements VesselOwnerDao{
 	}
 
 	@Override
-	public VesselOwnerResultBean edit(String id) {		
+	public VesselOwnerResultBean edit(Integer id) {		
 		VesselOwnerResultBean resultBean = new VesselOwnerResultBean();
 		resultBean.setSuccess(false);
 		try {
@@ -75,7 +93,7 @@ public class VesselOwnerDaoImpl implements VesselOwnerDao{
 	}
 
 	@Override
-	public VesselOwnerResultBean delete(String id) {
+	public VesselOwnerResultBean delete(Integer id) {
 		VesselOwnerResultBean resultBean = new VesselOwnerResultBean();
 		try {
 			jdbcTemplate.update(VesselOwnerQueryUtil.delete,id);
@@ -94,25 +112,38 @@ public class VesselOwnerDaoImpl implements VesselOwnerDao{
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		try {
+
+			int code =  jdbcTemplate.queryForObject(VesselOwnerQueryUtil.get_code,new Object[] { bean.getCode() },Integer.class);
+
+		    int desc =  jdbcTemplate.queryForObject(VesselOwnerQueryUtil.get_desc,new Object[] { bean.getDescription() },Integer.class);
+
+			
+            if(code==0 && desc==0) {
+            	
 			Map<String, Object> vesselowner = new HashMap<String, Object>();
 			
 				vesselowner.put("userName", userDetails.getUsername());
 				vesselowner.put("code", bean.getCode());
 				vesselowner.put("desc", bean.getDescription());
+				vesselowner.put("vesselownerid", bean.getVesselownerid());
+
 				
-				int k = jdbcTemplate.queryForObject(VesselOwnerQueryUtil.checkDelete, new Object[] { bean.getCode() },Integer.class);
 				
-				if(k == 0) {
-				   namedParameterJdbcTemplate.update(VesselOwnerQueryUtil.SAVE_vessel_owner,vesselowner);
-				}
-				else {
-					namedParameterJdbcTemplate.update(VesselOwnerQueryUtil.UPDATE_vessel_owner,vesselowner);
-				}
 			
-		   resultBean.setSuccess(true);
-		}catch(Exception e) {
+					namedParameterJdbcTemplate.update(VesselOwnerQueryUtil.UPDATE_vessel_owner,vesselowner);
+				
+			
+					   resultBean.setSuccess(true);
+  		  }
+  		  else {
+  	 		   resultBean.setMessage("These datails are already exist");
+
+  	        }
+            }catch(Exception e) {
 			e.printStackTrace();
 			resultBean.setSuccess(false);
+	 		   resultBean.setMessage("Not Updated");
+
 		}
 		return resultBean;
 	}

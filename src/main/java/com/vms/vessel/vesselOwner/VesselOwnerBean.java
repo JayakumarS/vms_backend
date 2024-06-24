@@ -8,7 +8,13 @@ public class VesselOwnerBean {
 	private String description;
 	private List<VesselOwnerBean> vesselOwnerBeanDtls;
 
-
+	public Integer getVesselownerid() {
+		return vesselownerid;
+	}
+	public void setVesselownerid(Integer vesselownerid) {
+		this.vesselownerid = vesselownerid;
+	}
+	private Integer vesselownerid;
 
 	public List<VesselOwnerBean> getVesselOwnerBeanDtls() {
 		return vesselOwnerBeanDtls;
