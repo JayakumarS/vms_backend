@@ -26,7 +26,7 @@ public class CountryServiceImpl implements CountryService{
 	}
 	
 	@Override
-	public CountryResultBean editCountry(String id) {
+	public CountryResultBean editCountry(Integer id) {
 		// TODO Auto-generated method stub
 		return countryDao.editCountry(id);
 	}

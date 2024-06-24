@@ -13,6 +13,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
+import com.vms.crew.healthStatus.HealthStatusQueryUtil;
+
 @Repository
 public class CountryDaoImpl implements CountryDao{
 
@@ -28,6 +30,13 @@ public class CountryDaoImpl implements CountryDao{
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		try {
+			
+			int code =  jdbcTemplate.queryForObject(CountryQueryUtil.get_code,new Object[] { bean.getCountryCode() },Integer.class);
+
+		    int desc =  jdbcTemplate.queryForObject(CountryQueryUtil.get_name,new Object[] { bean.getCountryName() },Integer.class);
+
+			
+            if(code==0 && desc==0) {
 			Map<String, Object> Country = new HashMap<String, Object>();
 			
 			Country.put("userName", userDetails.getUsername());
@@ -39,7 +48,10 @@ public class CountryDaoImpl implements CountryDao{
 			Country.put("active", bean.isActive());
 			
 			namedParameterJdbcTemplate.update(CountryQueryUtil.SAVE_COUNTRY,Country);
-			
+            }else {
+   	 		   resultBean.setMessage("These datails are already exist");
+
+            }
 			
 		   resultBean.setSuccess(true);
 		}catch(Exception e) {
@@ -64,7 +76,7 @@ public class CountryDaoImpl implements CountryDao{
 	}
 	
 	@Override
-	public CountryResultBean editCountry(String id) {		
+	public CountryResultBean editCountry(Integer id) {		
 		CountryResultBean resultBean = new CountryResultBean();
 		resultBean.setSuccess(false);
 		try {

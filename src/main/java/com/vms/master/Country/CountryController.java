@@ -36,7 +36,7 @@ public class CountryController {
    	}
 	
 	@RequestMapping(value="/editCountry")
-	public CountryResultBean editCountry(@RequestParam("id") String id) {
+	public CountryResultBean editCountry(@RequestParam("id") Integer id) {
 		CountryResultBean rbean = new CountryResultBean();
 		try {
 			rbean = countryService.editCountry(id);

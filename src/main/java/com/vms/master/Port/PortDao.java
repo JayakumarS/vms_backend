@@ -6,7 +6,7 @@ public interface PortDao {
 
 	public PortResultBean listPort();
 
-	public PortResultBean editPort(String id);
+	public PortResultBean editPort(Integer id);
 
 	public PortResultBean deletePort(String id);
 

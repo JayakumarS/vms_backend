@@ -13,6 +13,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
+import com.vms.crew.healthStatus.HealthStatusQueryUtil;
+
 @Repository
 public class PortDaoImpl implements PortDao{
 	
@@ -28,6 +30,13 @@ public class PortDaoImpl implements PortDao{
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		try {
+			
+			int code =  jdbcTemplate.queryForObject(PortQueryUtil.get_code,new Object[] { bean.getPortCode() },Integer.class);
+
+		    int desc =  jdbcTemplate.queryForObject(PortQueryUtil.get_name,new Object[] { bean.getPortName() },Integer.class);
+		    
+            if(code==0 && desc==0) {
+
 			Map<String, Object> Country = new HashMap<String, Object>();
 			
 			Country.put("userName", userDetails.getUsername());
@@ -40,6 +49,10 @@ public class PortDaoImpl implements PortDao{
 			
 			
 		   resultBean.setSuccess(true);
+            }else {
+   	 		   resultBean.setMessage("These details are already exist");
+
+            }
 		}catch(Exception e) {
 			e.printStackTrace();
 			resultBean.setSuccess(false);
@@ -62,7 +75,7 @@ public class PortDaoImpl implements PortDao{
 	}
 	
 	@Override
-	public PortResultBean editPort(String id) {		
+	public PortResultBean editPort(Integer id) {		
 		PortResultBean resultBean = new PortResultBean();
 		resultBean.setSuccess(false);
 		try {
@@ -102,6 +115,7 @@ public class PortDaoImpl implements PortDao{
 			Country.put("portName", bean.getPortName());
 			Country.put("portType", bean.getPortType());
 			Country.put("active", bean.isActive());
+			Country.put("portId", bean.getPortId());
 								
 				namedParameterJdbcTemplate.update(PortQueryUtil.UPDATE_PORT,Country);
 				

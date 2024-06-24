@@ -37,7 +37,7 @@ public class PortController {
    	}
 	
 	@RequestMapping(value="/editPort")
-	public PortResultBean editPort(@RequestParam("id") String id) {
+	public PortResultBean editPort(@RequestParam("id") Integer id) {
 		PortResultBean rbean = new PortResultBean();
 		try {
 			rbean = portService.editPort(id);

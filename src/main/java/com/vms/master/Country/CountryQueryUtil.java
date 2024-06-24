@@ -15,4 +15,8 @@ public class CountryQueryUtil {
 
 	public static final String DELETE_COUNTRY = "delete from country_master where country_code = ?";
 
+	public static final String get_code = "select count(country_code) from country_master where country_code=?";
+
+	public static final String get_name = "select count(country_name) from country_master where country_name=?";
+
 }

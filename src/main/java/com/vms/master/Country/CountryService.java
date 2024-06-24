@@ -6,7 +6,7 @@ public interface CountryService {
 
 	public CountryResultBean listCountry();
 
-	public CountryResultBean editCountry(String id);
+	public CountryResultBean editCountry(Integer id);
 
 	public CountryResultBean updateCountry(CountryBean bean);
 

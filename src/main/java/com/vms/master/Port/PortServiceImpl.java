@@ -23,7 +23,7 @@ public class PortServiceImpl implements PortService{
 	}
 	
 	@Override
-	public PortResultBean editPort(String id) {
+	public PortResultBean editPort(Integer id) {
 		// TODO Auto-generated method stub
 		return PortDao.editPort(id);
 	}

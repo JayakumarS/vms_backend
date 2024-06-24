@@ -6,6 +6,14 @@ public class PortBean {
 	public String portName;
 	public String portType;
 	public boolean isActive;
+	public Integer portId;
+	
+	public Integer getPortId() {
+		return portId;
+	}
+	public void setPortId(Integer portId) {
+		this.portId = portId;
+	}
 	public String getPortCode() {
 		return portCode;
 	}
