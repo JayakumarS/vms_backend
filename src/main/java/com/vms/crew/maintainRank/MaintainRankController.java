@@ -42,7 +42,7 @@ public class MaintainRankController {
    	}
 	
 	@RequestMapping(value="/edit")
-	public MaintainRankResultBean edit(@RequestParam("id") String id) {
+	public MaintainRankResultBean edit(@RequestParam("id") Integer id) {
 		MaintainRankResultBean rbean = new MaintainRankResultBean();
 		try {
 			rbean = maintainRankService.edit(id);
@@ -64,7 +64,7 @@ public class MaintainRankController {
 	}
 	
 	@RequestMapping(value="/delete")
-	public MaintainRankResultBean delete(@RequestParam("id") String id) {
+	public MaintainRankResultBean delete(@RequestParam("id") Integer id) {
 		MaintainRankResultBean rbean = new MaintainRankResultBean();
 		try {
 			rbean = maintainRankService.delete(id);

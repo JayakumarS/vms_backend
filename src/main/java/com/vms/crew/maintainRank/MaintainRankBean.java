@@ -11,7 +11,7 @@ public class MaintainRankBean {
 	private String description;
 	private Integer groupage;
 	private Boolean oAndt;
-	private String department;
+	private Integer department;
 	private Integer sno;
 	private String remarks;
 	
@@ -58,10 +58,10 @@ public class MaintainRankBean {
 	public void setoAndt(Boolean oAndt) {
 		this.oAndt = oAndt;
 	}
-	public String getDepartment() {
+	public Integer getDepartment() {
 		return department;
 	}
-	public void setDepartment(String department) {
+	public void setDepartment(Integer department) {
 		this.department = department;
 	}
 
@@ -81,5 +81,23 @@ public class MaintainRankBean {
 	}
 	public void setText(String text) {
 		this.text = text;
+	}
+	
+	private Boolean isActive;
+
+	public Boolean getIsActive() {
+		return isActive;
+	}
+	public void setIsActive(Boolean isActive) {
+		this.isActive = isActive;
+	}
+	
+	private Integer rankid;
+
+	public Integer getRankid() {
+		return rankid;
+	}
+	public void setRankid(Integer rankid) {
+		this.rankid = rankid;
 	}
 }

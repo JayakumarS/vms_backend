@@ -26,13 +26,13 @@ public class MaintainRankServiceImpl implements MaintainRankService{
 	}
 
 	@Override
-	public MaintainRankResultBean edit(String id) {
+	public MaintainRankResultBean edit(Integer id) {
 		// TODO Auto-generated method stub
 		return MaintainRankDao.edit(id);
 	}
 
 	@Override
-	public MaintainRankResultBean delete(String id) {
+	public MaintainRankResultBean delete(Integer id) {
 		// TODO Auto-generated method stub
 		return MaintainRankDao.delete(id);
 	}

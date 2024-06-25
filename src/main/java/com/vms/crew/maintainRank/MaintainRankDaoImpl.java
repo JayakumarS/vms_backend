@@ -13,6 +13,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
+import com.vms.crew.healthStatus.HealthStatusQueryUtil;
+
 
 
 @Repository
@@ -33,6 +35,16 @@ public class MaintainRankDaoImpl implements MaintainRankDao{
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		try {
+			
+			int code =  jdbcTemplate.queryForObject(MaintainRankQueryUtil.get_code,new Object[] { bean.getCode() },Integer.class);
+
+		    int desc =  jdbcTemplate.queryForObject(MaintainRankQueryUtil.get_desc,new Object[] { bean.getDescription() },Integer.class);
+
+			
+            if(code==0 && desc==0) {
+            	
+            	
+            	
 			Map<String, Object> maintainRank = new HashMap<String, Object>();
 			
 				maintainRank.put("userName", userDetails.getUsername());
@@ -43,13 +55,23 @@ public class MaintainRankDaoImpl implements MaintainRankDao{
 				maintainRank.put("department", bean.getDepartment());
 				maintainRank.put("sno", bean.getSno());
 				maintainRank.put("remarks", bean.getRemarks());
+				maintainRank.put("isActive", bean.getIsActive());
+
 				namedParameterJdbcTemplate.update(MaintainRankQueryUtil.SAVE_VESSEL_TYPE,maintainRank);
 			
 			
 		   resultBean.setSuccess(true);
+		   
+            }
+    		  else {
+    	 		   resultBean.setMessage("These details already exist");
+
+    	        }
 		}catch(Exception e) {
 			e.printStackTrace();
 			resultBean.setSuccess(false);
+	 		resultBean.setMessage("Not Updated");
+
 		}
 		return resultBean;
 	}
@@ -69,7 +91,7 @@ public class MaintainRankDaoImpl implements MaintainRankDao{
 	}
 
 	@Override
-	public MaintainRankResultBean edit(String id) {		
+	public MaintainRankResultBean edit(Integer id) {		
 		MaintainRankResultBean resultBean = new MaintainRankResultBean();
 		resultBean.setSuccess(false);
 		try {
@@ -82,7 +104,7 @@ public class MaintainRankDaoImpl implements MaintainRankDao{
 	}
 
 	@Override
-	public MaintainRankResultBean delete(String id) {
+	public MaintainRankResultBean delete(Integer id) {
 		MaintainRankResultBean resultBean = new MaintainRankResultBean();
 		try {
 			jdbcTemplate.update(MaintainRankQueryUtil.delete,id);
@@ -101,6 +123,18 @@ public class MaintainRankDaoImpl implements MaintainRankDao{
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		try {
+			
+			String maintainRankcode =  jdbcTemplate.queryForObject(MaintainRankQueryUtil.maintainRank_code,new Object[] { bean.getRankid() },String.class);
+			String maintainRankdesc =  jdbcTemplate.queryForObject(MaintainRankQueryUtil.maintainRank_desc,new Object[] { bean.getRankid() },String.class);
+
+
+			int code =  jdbcTemplate.queryForObject(MaintainRankQueryUtil.get_code_edit,new Object[] { bean.getCode(),maintainRankcode },Integer.class);
+
+		    int desc =  jdbcTemplate.queryForObject(MaintainRankQueryUtil.get_desc_edit,new Object[] { bean.getDescription(),maintainRankdesc },Integer.class);
+
+			
+            if(code==0 && desc==0) {
+			
 			Map<String, Object> maintainRank = new HashMap<String, Object>();
 			
 				maintainRank.put("userName", userDetails.getUsername());
@@ -111,20 +145,27 @@ public class MaintainRankDaoImpl implements MaintainRankDao{
 				maintainRank.put("department", bean.getDepartment());
 				maintainRank.put("sno", bean.getSno());
 				maintainRank.put("remarks", bean.getRemarks());
-				
-				int k = jdbcTemplate.queryForObject(MaintainRankQueryUtil.checkDelete, new Object[] { bean.getCode() },Integer.class);
-				
-				if(k == 0) {
-				   namedParameterJdbcTemplate.update(MaintainRankQueryUtil.SAVE_VESSEL_TYPE,maintainRank);
-				}
-				else {
+				maintainRank.put("isActive", bean.getIsActive());
+				maintainRank.put("rankid", bean.getRankid());
+
+			
 					namedParameterJdbcTemplate.update(MaintainRankQueryUtil.UPDATE_VESSEL_TYPE,maintainRank);
-				}
+				
 			
 		   resultBean.setSuccess(true);
+		   
+      	  }
+  		  else {
+  	 		   resultBean.setMessage("These details already exist");
+
+  	        }	
+            
+            
 		}catch(Exception e) {
 			e.printStackTrace();
 			resultBean.setSuccess(false);
+	 	    resultBean.setMessage("Not Updated");
+
 		}
 		return resultBean;
 	}

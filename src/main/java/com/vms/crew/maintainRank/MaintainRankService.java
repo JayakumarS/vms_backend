@@ -8,9 +8,9 @@ public interface MaintainRankService {
 
 	public MaintainRankResultBean getList();
 
-	public MaintainRankResultBean edit(String id);
+	public MaintainRankResultBean edit(Integer id);
 
-	public MaintainRankResultBean delete(String id);
+	public MaintainRankResultBean delete(Integer id);
 
 	public MaintainRankResultBean update(MaintainRankBean bean);
 
