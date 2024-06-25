@@ -95,8 +95,15 @@ public class WorkStatusDaoImpl implements WorkStatusDao{
 			resultBean.setSuccess(true);
 		}
 		catch(Exception e) {
-			e.printStackTrace();
-			resultBean.setSuccess(false);
+			  String errorMessage = e.getMessage();
+		        if (errorMessage.contains("violates foreign key constraint")) {
+		            resultBean.setSuccess(false);
+		            resultBean.setMessage("Cannot delete this work status because it is referenced in another");
+		        } else {
+		            e.printStackTrace();
+		            resultBean.setSuccess(false);
+		            resultBean.setMessage("Error in Delete");
+		        }
 		}	
 		return resultBean;
 	}

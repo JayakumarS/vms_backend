@@ -101,8 +101,15 @@ public class VesselOwnerDaoImpl implements VesselOwnerDao{
 			resultBean.setSuccess(true);
 		}
 		catch(Exception e) {
-			e.printStackTrace();
-			resultBean.setSuccess(false);
+			 String errorMessage = e.getMessage();
+		        if (errorMessage.contains("violates foreign key constraint")) {
+		            resultBean.setSuccess(false);
+		            resultBean.setMessage("Cannot delete this vessel owner because it is referenced in another");
+		        } else {
+		            e.printStackTrace();
+		            resultBean.setSuccess(false);
+		            resultBean.setMessage("Error in Delete");
+		        }
 		}	
 		return resultBean;
 	}

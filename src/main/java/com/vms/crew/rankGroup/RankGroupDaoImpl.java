@@ -102,8 +102,15 @@ public class RankGroupDaoImpl implements RankGroupDao {
 			resultBean.setSuccess(true);
 		}
 		catch(Exception e) {
-			e.printStackTrace();
-			resultBean.setSuccess(false);
+			   String errorMessage = e.getMessage();
+		        if (errorMessage.contains("violates foreign key constraint")) {
+		            resultBean.setSuccess(false);
+		            resultBean.setMessage("Cannot delete this rank group because it is referenced in another");
+		        } else {
+		            e.printStackTrace();
+		            resultBean.setSuccess(false);
+		            resultBean.setMessage("Error in Delete");
+		        }
 		}	
 		return resultBean;
 	}
