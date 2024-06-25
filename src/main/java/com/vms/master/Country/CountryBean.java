@@ -5,6 +5,13 @@ public class CountryBean {
 	public String countryCode;
 	public String countryName;
 	public String currencyCode;
+	public String currencyCodeNew;
+	public String getCurrencyCodeNew() {
+		return currencyCodeNew;
+	}
+	public void setCurrencyCodeNew(String currencyCodeNew) {
+		this.currencyCodeNew = currencyCodeNew;
+	}
 	public String phoneCode;
 	public String nationality;
     public boolean isActive;
@@ -28,6 +35,7 @@ public class CountryBean {
 	public void setCountryName(String countryName) {
 		this.countryName = countryName;
 	}
+
 	public String getCurrencyCode() {
 		return currencyCode;
 	}

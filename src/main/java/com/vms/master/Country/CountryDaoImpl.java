@@ -98,8 +98,15 @@ public class CountryDaoImpl implements CountryDao{
 			resultBean.setSuccess(true);
 		}
 		catch(Exception e) {
-			e.printStackTrace();
-			resultBean.setSuccess(false);
+			  String errorMessage = e.getMessage();
+		        if (errorMessage.contains("violates foreign key constraint")) {
+		            resultBean.setSuccess(false);
+		            resultBean.setMessage("Cannot delete this fleetid because it is referenced in another table");
+		        } else {
+		            e.printStackTrace();
+		            resultBean.setSuccess(false);
+		            resultBean.setMessage(errorMessage);
+		        }
 		}	
 		return resultBean;
 	}
@@ -110,14 +117,14 @@ public class CountryDaoImpl implements CountryDao{
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		try {
-			String countrycode =  jdbcTemplate.queryForObject(PortQueryUtil.country_code,new Object[] { bean.getCountryId() },String.class);
-			String countryName =  jdbcTemplate.queryForObject(PortQueryUtil.country_name,new Object[] { bean.getCountryId() },String.class);
+			String countrycode =  jdbcTemplate.queryForObject(CountryQueryUtil.country_code,new Object[] { bean.getCountryId() },String.class);
+			String countryName =  jdbcTemplate.queryForObject(CountryQueryUtil.country_name,new Object[] { bean.getCountryId() },String.class);
 
 			
 			
-			int code =  jdbcTemplate.queryForObject(PortQueryUtil.get_country_code_edit,new Object[] { bean.getCountryCode(),countrycode },Integer.class);
+			int code =  jdbcTemplate.queryForObject(CountryQueryUtil.get_country_code_edit,new Object[] { bean.getCountryCode(),countrycode },Integer.class);
 
-		    int name =  jdbcTemplate.queryForObject(PortQueryUtil.get_country_name_edit,new Object[] { bean.getCountryName(),countryName },Integer.class);
+		    int name =  jdbcTemplate.queryForObject(CountryQueryUtil.get_country_name_edit,new Object[] { bean.getCountryName(),countryName },Integer.class);
 
             if(code==0 && name==0) {
 			Map<String, Object> Country = new HashMap<String, Object>();
@@ -128,6 +135,7 @@ public class CountryDaoImpl implements CountryDao{
 			Country.put("currencyCode", bean.getCurrencyCode());
 			Country.put("phoneCode", bean.getPhoneCode());
 			Country.put("nationality", bean.getNationality());
+			Country.put("countryId", bean.getCountryId());
 			Country.put("active", bean.isActive());
 								
 					namedParameterJdbcTemplate.update(CountryQueryUtil.UPDATE_COUNTRY,Country);

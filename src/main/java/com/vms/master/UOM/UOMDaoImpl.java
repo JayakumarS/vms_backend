@@ -83,8 +83,15 @@ public class UOMDaoImpl implements UOMDao{
 			resultBean.setSuccess(true);
 		}
 		catch(Exception e) {
-			e.printStackTrace();
-			resultBean.setSuccess(false);
+			  String errorMessage = e.getMessage();
+		        if (errorMessage.contains("violates foreign key constraint")) {
+		            resultBean.setSuccess(false);
+		            resultBean.setMessage("Cannot delete this fleetid because it is referenced in another table");
+		        } else {
+		            e.printStackTrace();
+		            resultBean.setSuccess(false);
+		            resultBean.setMessage(errorMessage);
+		        }
 		}	
 		return resultBean;
 	}

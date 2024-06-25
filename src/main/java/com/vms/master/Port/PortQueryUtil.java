@@ -24,14 +24,6 @@ public class PortQueryUtil {
 
 	public static final String get_name_edit = "SELECT COUNT(port_name) FROM port_master WHERE port_name = ?  AND port_name != ?";
 
-	public static final String country_code = "select country_code from country_master where country_id = ?";
-
-	public static final String country_name = "select country_name from country_master where country_id = ?";
-
-	public static final String get_country_code_edit = "SELECT COUNT(country_code) FROM country_master WHERE country_code = ?  AND country_code != ?";
-
-	public static final String get_country_name_edit = "SELECT COUNT(country_name) FROM country_master WHERE country_name = ?  AND country_name != ?";
-
 	public static final String uom_code = "select uom_code from unit_of_measurement where uom_id = ?";
 
 	public static final String uom_name = "select uom_name  from unit_of_measurement where uom_id = ?";
