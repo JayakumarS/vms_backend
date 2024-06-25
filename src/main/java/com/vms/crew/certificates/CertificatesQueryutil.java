@@ -18,7 +18,7 @@ public class CertificatesQueryutil {
 
 	public static final String checkDelete = "select count(*) from certificate_master where certificate_code = ?";
 
-	public static final String UPDATE_certificates = "update certificate_master set certificate_code=:code,certificate_name=:desc,modified_by=:userName,modified_dt=now() where certificate_id = :code";
+	public static final String UPDATE_certificates = "update certificate_master set certificate_code=:code,certificate_name=:desc,modified_by=:userName,modified_dt=now() where certificate_id = :certificateId";
 
 	public static final String get_certificate_Id = "SELECT CONCAT('C', LPAD(CAST(COALESCE(MAX(CAST(SUBSTRING(certificate_code, 2) AS INTEGER)), 0) + 1 AS TEXT), 4, '0')) AS next_certificate_code FROM certificate_master";
 

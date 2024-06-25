@@ -6,7 +6,23 @@ import com.vms.master.vesselType.VesselTypeBean;
 
 public class MaintainRankBean {
 	private List<MaintainRankBean> maintainRankBeanDtls;
-	
+	private String groupagename;
+	public String getGroupagename() {
+		return groupagename;
+	}
+	public void setGroupagename(String groupagename) {
+		this.groupagename = groupagename;
+	}
+	public String getDepartmentname() {
+		return departmentname;
+	}
+	public void setDepartmentname(String departmentname) {
+		this.departmentname = departmentname;
+	}
+
+
+
+	private String departmentname;
 	private String code;
 	private String description;
 	private Integer groupage;
