@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -89,16 +90,22 @@ public class FleetDaoImpl implements FleetDao{
 
 	@Override
 	public FleetResultBean delete(int id) {
-		FleetResultBean resultBean = new FleetResultBean();
-		try {
-			jdbcTemplate.update(FleetQueryUtil.delete,id);
-			resultBean.setSuccess(true);
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-			resultBean.setSuccess(false);
-		}	
-		return resultBean;
+	    FleetResultBean resultBean = new FleetResultBean();
+	    try {
+	        jdbcTemplate.update(FleetQueryUtil.delete, id);
+	        resultBean.setSuccess(true);
+	    } catch (DataAccessException e) {
+	        String errorMessage = e.getMessage();
+	        if (errorMessage.contains("violates foreign key constraint")) {
+	            resultBean.setSuccess(false);
+	            resultBean.setMessage("Cannot delete this fleet because it is referenced in another");
+	        } else {
+	            e.printStackTrace();
+	            resultBean.setSuccess(false);
+	            resultBean.setMessage(errorMessage);
+	        }
+	    }
+	    return resultBean;
 	}
 
 	@Override
