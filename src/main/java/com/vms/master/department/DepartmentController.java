@@ -38,7 +38,7 @@ public class DepartmentController {
 	
 
 	@RequestMapping(value="/edit")
-	public DepartmentResultBean edit(@RequestParam("id") String id) {
+	public DepartmentResultBean edit(@RequestParam("id") Integer id) {
 		DepartmentResultBean rbean = new DepartmentResultBean();
 		try {
 			rbean = departmentService.edit(id);
@@ -60,7 +60,7 @@ public class DepartmentController {
 	}
 	
 	@RequestMapping(value="/delete")
-	public DepartmentResultBean delete(@RequestParam("id") String id) {
+	public DepartmentResultBean delete(@RequestParam("id") Integer id) {
 		DepartmentResultBean rbean = new DepartmentResultBean();
 		try {
 			rbean = departmentService.delete(id);

@@ -6,6 +6,7 @@ public class DepartmentBean {
 	private String code;
 	private String name;
 	private String head;
+	private Integer deptId;
 	
 	public String getCode() {
 		return code;
@@ -37,6 +38,13 @@ public class DepartmentBean {
 	}
 	public void setDepartmentdtls(List<DepartmentBean> departmentdtls) {
 		this.departmentdtls = departmentdtls;
+	}
+
+	public Integer getDeptId() {
+		return deptId;
+	}
+	public void setDeptId(Integer deptId) {
+		this.deptId = deptId;
 	}
 	private List<DepartmentBean> departmentdtls;
 	

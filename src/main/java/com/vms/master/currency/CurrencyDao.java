@@ -6,9 +6,9 @@ public interface CurrencyDao {
 	
 	public CurrencyResultBean getList();
 	
-	public CurrencyResultBean edit(String id);
+	public CurrencyResultBean edit(Integer id);
 	
-	public CurrencyResultBean delete(String id);
+	public CurrencyResultBean delete(Integer id);
 	
 	public CurrencyResultBean update(CurrencyBean bean);
 	

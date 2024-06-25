@@ -38,7 +38,7 @@ public class CurrencyController {
    	}
 	
 	@RequestMapping(value="/edit")
-	public CurrencyResultBean edit(@RequestParam("id") String id) {
+	public CurrencyResultBean edit(@RequestParam("id") Integer id) {
 		CurrencyResultBean rbean = new CurrencyResultBean();
 		try {
 			rbean = currencyService.edit(id);
@@ -60,7 +60,7 @@ public class CurrencyController {
 	}
 	
 	@RequestMapping(value="/delete")
-	public CurrencyResultBean delete(@RequestParam("id") String id) {
+	public CurrencyResultBean delete(@RequestParam("id") Integer id) {
 		CurrencyResultBean rbean = new CurrencyResultBean();
 		try {
 			rbean = currencyService.delete(id);
