@@ -13,6 +13,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
+import com.vms.crew.workStatus.WorkStatusQueryUtil;
+
 
 
 @Repository
@@ -31,6 +33,13 @@ public class WorkLicenseDaoImpl implements WorkLicenseDao{
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		try {
+			
+			int code =  jdbcTemplate.queryForObject(WorkLicenseQueryUtil.get_code,new Object[] { bean.getCode() },Integer.class);
+
+		    int desc =  jdbcTemplate.queryForObject(WorkLicenseQueryUtil.get_desc,new Object[] { bean.getDescription() },Integer.class);
+
+			
+            if(code==0 && desc==0) {
 			Map<String, Object> workLicense = new HashMap<String, Object>();
 			
 				workLicense.put("userName", userDetails.getUsername());
@@ -40,9 +49,19 @@ public class WorkLicenseDaoImpl implements WorkLicenseDao{
 			
 			
 		   resultBean.setSuccess(true);
+		   
+            }
+  		  else {
+  	 		   resultBean.setMessage("These details already exist");
+
+  	        }
+            
+            
 		}catch(Exception e) {
 			e.printStackTrace();
 			resultBean.setSuccess(false);
+	 		resultBean.setMessage("Not Updated");
+
 		}
 		return resultBean;
 	}
@@ -62,7 +81,7 @@ public class WorkLicenseDaoImpl implements WorkLicenseDao{
 	}
 
 	@Override
-	public WorkLicenseResultBean edit(String id) {		
+	public WorkLicenseResultBean edit(Integer id) {		
 		WorkLicenseResultBean resultBean = new WorkLicenseResultBean();
 		resultBean.setSuccess(false);
 		try {
@@ -75,7 +94,7 @@ public class WorkLicenseDaoImpl implements WorkLicenseDao{
 	}
 
 	@Override
-	public WorkLicenseResultBean delete(String id) {
+	public WorkLicenseResultBean delete(Integer id) {
 		WorkLicenseResultBean resultBean = new WorkLicenseResultBean();
 		try {
 			jdbcTemplate.update(WorkLicenseQueryUtil.delete,id);
@@ -94,25 +113,43 @@ public class WorkLicenseDaoImpl implements WorkLicenseDao{
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		try {
+			
+			String workLicensecode =  jdbcTemplate.queryForObject(WorkLicenseQueryUtil.workLicense_code,new Object[] { bean.getWorklicenseid() },String.class);
+			String workLicensedesc =  jdbcTemplate.queryForObject(WorkLicenseQueryUtil.workLicense_desc,new Object[] { bean.getWorklicenseid() },String.class);
+
+
+			int code =  jdbcTemplate.queryForObject(WorkLicenseQueryUtil.get_code_edit,new Object[] { bean.getCode(),workLicensecode },Integer.class);
+
+		    int desc =  jdbcTemplate.queryForObject(WorkLicenseQueryUtil.get_desc_edit,new Object[] { bean.getDescription(),workLicensedesc },Integer.class);
+
+			
+	        if(code==0 && desc==0) {
+	        	        	
+	        
 			Map<String, Object> workLicense = new HashMap<String, Object>();
 			
 				workLicense.put("userName", userDetails.getUsername());
 				workLicense.put("code", bean.getCode());
 				workLicense.put("desc", bean.getDescription());
+				workLicense.put("worklicenseid", bean.getWorklicenseid());
+
 				
-				int k = jdbcTemplate.queryForObject(WorkLicenseQueryUtil.checkDelete, new Object[] { bean.getCode() },Integer.class);
 				
-				if(k == 0) {
-				   namedParameterJdbcTemplate.update(WorkLicenseQueryUtil.SAVE_work_license,workLicense);
-				}
-				else {
 					namedParameterJdbcTemplate.update(WorkLicenseQueryUtil.UPDATE_work_license,workLicense);
-				}
+				
 			
-		   resultBean.setSuccess(true);
+					
+					   resultBean.setSuccess(true);
+					 }
+					  else {
+				 		   resultBean.setMessage("These details already exist");
+
+				        }	
 		}catch(Exception e) {
 			e.printStackTrace();
 			resultBean.setSuccess(false);
+	 		   resultBean.setMessage("Not Updated");
+
 		}
 		return resultBean;
 	}

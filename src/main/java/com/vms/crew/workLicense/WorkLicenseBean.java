@@ -4,6 +4,13 @@ import java.util.List;
 
 
 public class WorkLicenseBean {
+	private Integer worklicenseid;
+	public Integer getWorklicenseid() {
+		return worklicenseid;
+	}
+	public void setWorklicenseid(Integer worklicenseid) {
+		this.worklicenseid = worklicenseid;
+	}
 	private String code;
 	private String description;
 	private List<WorkLicenseBean> workLicenseBeanDtls;
@@ -28,5 +35,5 @@ public class WorkLicenseBean {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+
 }

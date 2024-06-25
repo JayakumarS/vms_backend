@@ -5,13 +5,13 @@ import java.util.List;
 
 public class CertificatesBean {
 
-	public String getCertificateId() {
+	public Integer getCertificateId() {
 		return certificateId;
 	}
-	public void setCertificateId(String certificateId) {
+	public void setCertificateId(Integer certificateId) {
 		this.certificateId = certificateId;
 	}
-	private String certificateId;
+	private Integer certificateId;
 	private String code;
 	private String description;
 	private List<CertificatesBean> certificatesBeanDtls;

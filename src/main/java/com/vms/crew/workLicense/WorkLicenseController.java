@@ -40,7 +40,7 @@ public class WorkLicenseController {
    	}
 	
 	@RequestMapping(value="/edit")
-	public WorkLicenseResultBean edit(@RequestParam("id") String id) {
+	public WorkLicenseResultBean edit(@RequestParam("id") Integer id) {
 		WorkLicenseResultBean rbean = new WorkLicenseResultBean();
 		try {
 			rbean = WorkLicenseService.edit(id);
@@ -62,7 +62,7 @@ public class WorkLicenseController {
 	}
 	
 	@RequestMapping(value="/delete")
-	public WorkLicenseResultBean delete(@RequestParam("id") String id) {
+	public WorkLicenseResultBean delete(@RequestParam("id") Integer id) {
 		WorkLicenseResultBean rbean = new WorkLicenseResultBean();
 		try {
 			rbean = WorkLicenseService.delete(id);

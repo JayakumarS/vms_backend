@@ -22,13 +22,13 @@ public class VesselinsuranceServiceImpl implements VesselinsuranceService{
 	}
 
 	@Override
-	public VesselinsuranceResultBean edit(String id) {
+	public VesselinsuranceResultBean edit(Integer id) {
 		// TODO Auto-generated method stub
 		return VesselinsuranceDao.edit(id);
 	}
 
 	@Override
-	public VesselinsuranceResultBean delete(String id) {
+	public VesselinsuranceResultBean delete(Integer id) {
 		// TODO Auto-generated method stub
 		return VesselinsuranceDao.delete(id);
 	}

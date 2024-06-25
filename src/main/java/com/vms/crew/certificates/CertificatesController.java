@@ -1,10 +1,15 @@
 package com.vms.crew.certificates;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.vms.crew.maintainRank.MaintainRankBean;
 
 
 
@@ -39,7 +44,7 @@ public class CertificatesController {
    	}
 	
 	@RequestMapping(value="/edit")
-	public CertificatesResultBean edit(@RequestParam("id") String id) {
+	public CertificatesResultBean edit(@RequestParam("id") Integer id) {
 		CertificatesResultBean rbean = new CertificatesResultBean();
 		try {
 			rbean = CertificatesService.edit(id);
@@ -61,7 +66,7 @@ public class CertificatesController {
 	}
 	
 	@RequestMapping(value="/delete")
-	public CertificatesResultBean delete(@RequestParam("id") String id) {
+	public CertificatesResultBean delete(@RequestParam("id") Integer id) {
 		CertificatesResultBean rbean = new CertificatesResultBean();
 		try {
 			rbean = CertificatesService.delete(id);
@@ -71,4 +76,15 @@ public class CertificatesController {
 		return rbean;
 		
 	}
+	
+	@RequestMapping("/getSequenceCode")
+	public @ResponseBody CertificatesBean getSequenceCode() {
+		CertificatesBean getSequenceCode = null;
+
+	   getSequenceCode = CertificatesService.getSequenceCode();
+
+		return getSequenceCode;
+	}
+	
+	
 }

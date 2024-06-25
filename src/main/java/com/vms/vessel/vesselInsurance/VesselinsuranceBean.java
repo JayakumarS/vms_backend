@@ -4,6 +4,13 @@ import java.util.List;
 
 
 public class VesselinsuranceBean {
+	private String remarks;
+	public String getRemarks() {
+		return remarks;
+	}
+	public void setRemarks(String remarks) {
+		this.remarks = remarks;
+	}
 	private String code;
 	private String description;
 	private List<VesselinsuranceBean> vesselInsuranceDtls;
@@ -27,5 +34,13 @@ public class VesselinsuranceBean {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+	private Integer vesselinsuranceid;
+
+
+	public Integer getVesselinsuranceid() {
+		return vesselinsuranceid;
+	}
+	public void setVesselinsuranceid(Integer vesselinsuranceid) {
+		this.vesselinsuranceid = vesselinsuranceid;
+	}
 }

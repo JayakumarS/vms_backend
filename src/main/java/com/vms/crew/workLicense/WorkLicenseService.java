@@ -6,9 +6,9 @@ public interface WorkLicenseService {
 
 	public WorkLicenseResultBean getList();
 
-	public WorkLicenseResultBean edit(String id);
+	public WorkLicenseResultBean edit(Integer id);
 
-	public WorkLicenseResultBean delete(String id);
+	public WorkLicenseResultBean delete(Integer id);
 
 	public WorkLicenseResultBean update(WorkLicenseBean bean);
 

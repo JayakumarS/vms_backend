@@ -39,7 +39,7 @@ public class VesselinsuranceController {
    	}
 	
 	@RequestMapping(value="/edit")
-	public VesselinsuranceResultBean edit(@RequestParam("id") String id) {
+	public VesselinsuranceResultBean edit(@RequestParam("id") Integer id) {
 		VesselinsuranceResultBean rbean = new VesselinsuranceResultBean();
 		try {
 			rbean = VesselinsuranceService.edit(id);
@@ -61,7 +61,7 @@ public class VesselinsuranceController {
 	}
 	
 	@RequestMapping(value="/delete")
-	public VesselinsuranceResultBean delete(@RequestParam("id") String id) {
+	public VesselinsuranceResultBean delete(@RequestParam("id") Integer id) {
 		VesselinsuranceResultBean rbean = new VesselinsuranceResultBean();
 		try {
 			rbean = VesselinsuranceService.delete(id);

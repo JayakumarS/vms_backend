@@ -8,9 +8,9 @@ public interface VesselinsuranceDao {
 
 	public VesselinsuranceResultBean getList();
 
-	public VesselinsuranceResultBean edit(String id);
+	public VesselinsuranceResultBean edit(Integer id);
 
-	public VesselinsuranceResultBean delete(String id);
+	public VesselinsuranceResultBean delete(Integer id);
 
 	public VesselinsuranceResultBean update(VesselinsuranceBean bean);
 	

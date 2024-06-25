@@ -23,13 +23,13 @@ public class WorkLicenseServiceImpl implements WorkLicenseService{
 	}
 
 	@Override
-	public WorkLicenseResultBean edit(String id) {
+	public WorkLicenseResultBean edit(Integer id) {
 		// TODO Auto-generated method stub
 		return WorkLicenseDao.edit(id);
 	}
 
 	@Override
-	public WorkLicenseResultBean delete(String id) {
+	public WorkLicenseResultBean delete(Integer id) {
 		// TODO Auto-generated method stub
 		return WorkLicenseDao.delete(id);
 	}

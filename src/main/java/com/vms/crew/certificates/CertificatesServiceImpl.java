@@ -1,7 +1,11 @@
 package com.vms.crew.certificates;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.vms.crew.maintainRank.MaintainRankBean;
 
 
 @Service
@@ -22,13 +26,13 @@ public class CertificatesServiceImpl implements CertificatesService {
 	}
 
 	@Override
-	public CertificatesResultBean edit(String id) {
+	public CertificatesResultBean edit(Integer id) {
 		// TODO Auto-generated method stub
 		return CertificatesDao.edit(id);
 	}
 
 	@Override
-	public CertificatesResultBean delete(String id) {
+	public CertificatesResultBean delete(Integer id) {
 		// TODO Auto-generated method stub
 		return CertificatesDao.delete(id);
 	}
@@ -38,4 +42,11 @@ public class CertificatesServiceImpl implements CertificatesService {
 		// TODO Auto-generated method stub
 		return CertificatesDao.update(bean);
 	}
+	
+	
+	@Override
+	public CertificatesBean getSequenceCode() {
+		return CertificatesDao.getSequenceCode();
+	}
+	
 }

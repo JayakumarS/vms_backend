@@ -13,6 +13,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
+import com.vms.crew.workLicense.WorkLicenseQueryUtil;
+
 
 
 @Repository
@@ -33,17 +35,40 @@ public class VesselinsuranceDaoImpl implements VesselinsuranceDao{
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		try {
+			
+			int code =  jdbcTemplate.queryForObject(VesselinsuranceQueryUtil.get_code,new Object[] { bean.getCode() },Integer.class);
+
+		    int desc =  jdbcTemplate.queryForObject(VesselinsuranceQueryUtil.get_desc,new Object[] { bean.getDescription() },Integer.class);
+
+			
+            if(code==0 && desc==0) {
+            	
+            
 			Map<String, Object> vesselinsurance = new HashMap<String, Object>();
 			
 				vesselinsurance.put("userName", userDetails.getUsername());
 				vesselinsurance.put("code", bean.getCode());
 				vesselinsurance.put("desc", bean.getDescription());
+				vesselinsurance.put("remarks", bean.getRemarks());
+
 				namedParameterJdbcTemplate.update(VesselinsuranceQueryUtil.SAVE_vsl_insurance,vesselinsurance);
 			
 		   resultBean.setSuccess(true);
+		   
+		   
+            }
+  		  else {
+  	 		   resultBean.setMessage("These details already exist");
+
+  	        }
+            
+            
+            
 		}catch(Exception e) {
 			e.printStackTrace();
 			resultBean.setSuccess(false);
+	 		resultBean.setMessage("Not Updated");
+
 		}
 		return resultBean;
 	}
@@ -63,7 +88,7 @@ public class VesselinsuranceDaoImpl implements VesselinsuranceDao{
 	}
 
 	@Override
-	public VesselinsuranceResultBean edit(String id) {		
+	public VesselinsuranceResultBean edit(Integer id) {		
 		VesselinsuranceResultBean resultBean = new VesselinsuranceResultBean();
 		resultBean.setSuccess(false);
 		try {
@@ -76,7 +101,7 @@ public class VesselinsuranceDaoImpl implements VesselinsuranceDao{
 	}
 
 	@Override
-	public VesselinsuranceResultBean delete(String id) {
+	public VesselinsuranceResultBean delete(Integer id) {
 		VesselinsuranceResultBean resultBean = new VesselinsuranceResultBean();
 		try {
 			jdbcTemplate.update(VesselinsuranceQueryUtil.delete,id);
@@ -95,25 +120,44 @@ public class VesselinsuranceDaoImpl implements VesselinsuranceDao{
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		try {
+			
+			String vesselinsurancecode =  jdbcTemplate.queryForObject(VesselinsuranceQueryUtil.vesselinsurance_code,new Object[] { bean.getVesselinsuranceid() },String.class);
+			String vesselinsurancedesc =  jdbcTemplate.queryForObject(VesselinsuranceQueryUtil.vesselinsurance_desc,new Object[] { bean.getVesselinsuranceid() },String.class);
+
+
+			int code =  jdbcTemplate.queryForObject(VesselinsuranceQueryUtil.get_code_edit,new Object[] { bean.getCode(),vesselinsurancecode },Integer.class);
+
+		    int desc =  jdbcTemplate.queryForObject(VesselinsuranceQueryUtil.get_desc_edit,new Object[] { bean.getDescription(),vesselinsurancedesc },Integer.class);
+
+			
+	        if(code==0 && desc==0) {
+	        	
+	        	
+	        
 			Map<String, Object> vesselinsurance = new HashMap<String, Object>();
 			
 				vesselinsurance.put("userName", userDetails.getUsername());
 				vesselinsurance.put("code", bean.getCode());
 				vesselinsurance.put("desc", bean.getDescription());
-				
-				int k = jdbcTemplate.queryForObject(VesselinsuranceQueryUtil.checkDelete, new Object[] { bean.getCode() },Integer.class);
-				
-				if(k == 0) {
-				   namedParameterJdbcTemplate.update(VesselinsuranceQueryUtil.SAVE_vsl_insurance,vesselinsurance);
-				}
-				else {
+				vesselinsurance.put("remarks", bean.getRemarks());
+				vesselinsurance.put("vesselinsuranceid", bean.getVesselinsuranceid());
+
+			
 					namedParameterJdbcTemplate.update(VesselinsuranceQueryUtil.UPDATE_vsl_insurance,vesselinsurance);
-				}
+				
 			
 		   resultBean.setSuccess(true);
+	   	 }
+			  else {
+		 		   resultBean.setMessage("These details already exist");
+
+		        }	
+	        
 		}catch(Exception e) {
 			e.printStackTrace();
 			resultBean.setSuccess(false);
+	 		   resultBean.setMessage("Not Updated");
+
 		}
 		return resultBean;
 	}
