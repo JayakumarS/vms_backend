@@ -8,9 +8,9 @@ public interface OfficialManagersDao {
 
 	public OfficialManagersResultBean getList();
 
-	public OfficialManagersResultBean edit(String id);
+	public OfficialManagersResultBean edit(Integer id);
 
-	public OfficialManagersResultBean delete(String id);
+	public OfficialManagersResultBean delete(Integer id);
 
 	public OfficialManagersResultBean update(OfficialManagersBean bean);
 

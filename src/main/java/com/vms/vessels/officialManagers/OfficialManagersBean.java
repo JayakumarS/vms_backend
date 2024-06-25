@@ -5,6 +5,13 @@ import java.util.List;
 
 
 public class OfficialManagersBean {
+	private Integer offmanagerid;
+	public Integer getOffmanagerid() {
+		return offmanagerid;
+	}
+	public void setOffmanagerid(Integer offmanagerid) {
+		this.offmanagerid = offmanagerid;
+	}
 	private String code;
 	private String description;
 	private String city;

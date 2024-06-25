@@ -23,13 +23,13 @@ public class OfficialManagersServiceImpl implements OfficialManagersService {
 	}
 
 	@Override
-	public OfficialManagersResultBean edit(String id) {
+	public OfficialManagersResultBean edit(Integer id) {
 		// TODO Auto-generated method stub
 		return OfficialManagersDao.edit(id);
 	}
 
 	@Override
-	public OfficialManagersResultBean delete(String id) {
+	public OfficialManagersResultBean delete(Integer id) {
 		// TODO Auto-generated method stub
 		return OfficialManagersDao.delete(id);
 	}

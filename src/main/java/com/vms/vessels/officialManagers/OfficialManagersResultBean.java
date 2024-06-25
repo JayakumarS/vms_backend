@@ -8,6 +8,13 @@ import com.vms.vessels.shipManagers.ShipManagersBean;
 public class OfficialManagersResultBean {
 	
 	public boolean success;
+	public String message;
+	public String getMessage() {
+		return message;
+	}
+	public void setMessage(String message) {
+		this.message = message;
+	}
 	private List<OfficialManagersBean> list;
 	private OfficialManagersBean OfficialManagersBean;
 	private String path;

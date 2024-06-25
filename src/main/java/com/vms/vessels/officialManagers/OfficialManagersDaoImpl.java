@@ -13,6 +13,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
+
 @Repository
 public class OfficialManagersDaoImpl implements OfficialManagersDao{
 	
@@ -31,22 +32,22 @@ public class OfficialManagersDaoImpl implements OfficialManagersDao{
 		try {
 			Map<String, Object> officialManagers = new HashMap<String, Object>();
 			
-			for(OfficialManagersBean listBean : bean.getOfficialManagersBeanDtls()) {
-				officialManagers.put("code", listBean.getCode());
-				officialManagers.put("description", listBean.getDescription());
-				officialManagers.put("city", listBean.getCity());
-				officialManagers.put("address", listBean.getAddress());
-				officialManagers.put("poscode", listBean.getPoscode());
-				officialManagers.put("phone", listBean.getPhone());
-				officialManagers.put("remarks", listBean.getRemarks());
-				officialManagers.put("blogofileName", listBean.getBlogofileName());
-				officialManagers.put("blogofilePath", listBean.getBlogofilePath());
-				officialManagers.put("plogofileName", listBean.getPlogofileName());
-				officialManagers.put("plogofilePath", listBean.getPlogofilePath());
+		
+				officialManagers.put("code", bean.getCode());
+				officialManagers.put("description", bean.getDescription());
+				officialManagers.put("city", bean.getCity());
+				officialManagers.put("address", bean.getAddress());
+				officialManagers.put("poscode", bean.getPoscode());
+				officialManagers.put("phone", bean.getPhone());
+				officialManagers.put("remarks", bean.getRemarks());
+				officialManagers.put("blogofileName", bean.getBlogofileName());
+				officialManagers.put("blogofilePath", bean.getBlogofilePath());
+				officialManagers.put("plogofileName", bean.getPlogofileName());
+				officialManagers.put("plogofilePath", bean.getPlogofilePath());
 				officialManagers.put("userName", userDetails.getUsername());
 				
 				namedParameterJdbcTemplate.update(OfficialManagersQueryUtil.SAVE_OFFICIAL_MANAGERS,officialManagers);
-			}
+			
 			
 		   resultBean.setSuccess(true);
 		}catch(Exception e) {
@@ -71,7 +72,7 @@ public class OfficialManagersDaoImpl implements OfficialManagersDao{
 	}
 
 	@Override
-	public OfficialManagersResultBean edit(String id) {		
+	public OfficialManagersResultBean edit(Integer id) {		
 		OfficialManagersResultBean resultBean = new OfficialManagersResultBean();
 		resultBean.setSuccess(false);
 		try {
@@ -84,7 +85,7 @@ public class OfficialManagersDaoImpl implements OfficialManagersDao{
 	}
 
 	@Override
-	public OfficialManagersResultBean delete(String id) {
+	public OfficialManagersResultBean delete(Integer id) {
 		OfficialManagersResultBean resultBean = new OfficialManagersResultBean();
 		try {
 			jdbcTemplate.update(OfficialManagersQueryUtil.delete,id);
@@ -103,37 +104,42 @@ public class OfficialManagersDaoImpl implements OfficialManagersDao{
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		try {
+			String offmanagercode =  jdbcTemplate.queryForObject(OfficialManagersQueryUtil.offmanager_code,new Object[] { bean.getOffmanagerid() },String.class);
+			String offmanagername =  jdbcTemplate.queryForObject(OfficialManagersQueryUtil.name_desc,new Object[] { bean.getOffmanagerid() },String.class);
+
+			
+			int code =  jdbcTemplate.queryForObject(OfficialManagersQueryUtil.get_code_edit,new Object[] { bean.getCode(),offmanagercode },int.class);
+
+		    int description =  jdbcTemplate.queryForObject(OfficialManagersQueryUtil.get_name_edit,new Object[] { bean.getDescription(),offmanagername },int.class);
+		    if(code == 0 && description == 0) {
+			
 			Map<String, Object> officialManagers = new HashMap<String, Object>();
 			
-			for(OfficialManagersBean listBean : bean.getOfficialManagersBeanDtls()) {
-				officialManagers.put("code", listBean.getCode());
-				officialManagers.put("description", listBean.getDescription());
-				officialManagers.put("city", listBean.getCity());
-				officialManagers.put("address", listBean.getAddress());
-				officialManagers.put("poscode", listBean.getPoscode());
-				officialManagers.put("phone", listBean.getPhone());
-				officialManagers.put("remarks", listBean.getRemarks());
-				officialManagers.put("remarks", listBean.getRemarks());
-				officialManagers.put("blogofileName", listBean.getBlogofileName());
-				officialManagers.put("blogofilePath", listBean.getBlogofilePath());
-				officialManagers.put("plogofileName", listBean.getPlogofileName());
-				officialManagers.put("plogofilePath", listBean.getPlogofilePath());
-				
-				
+		     	officialManagers.put("offmanagerid", bean.getOffmanagerid());
+				officialManagers.put("code", bean.getCode());
+				officialManagers.put("description", bean.getDescription());
+				officialManagers.put("city", bean.getCity());
+				officialManagers.put("address", bean.getAddress());
+				officialManagers.put("poscode", bean.getPoscode());
+				officialManagers.put("phone", bean.getPhone());
+				officialManagers.put("remarks", bean.getRemarks());
+				officialManagers.put("remarks", bean.getRemarks());
+				officialManagers.put("blogofileName", bean.getBlogofileName());
+				officialManagers.put("blogofilePath", bean.getBlogofilePath());
+				officialManagers.put("plogofileName", bean.getPlogofileName());
+				officialManagers.put("plogofilePath", bean.getPlogofilePath());
 				officialManagers.put("userName", userDetails.getUsername());
 
-				
-				
-				int k = jdbcTemplate.queryForObject(OfficialManagersQueryUtil.checkDelete, new Object[] { listBean.getCode() },Integer.class);
-				
-				if(k == 0) {
-				   namedParameterJdbcTemplate.update(OfficialManagersQueryUtil.SAVE_OFFICIAL_MANAGERS,officialManagers);
-				}
-				else {
-					namedParameterJdbcTemplate.update(OfficialManagersQueryUtil.UPDATE_OFFICIAL_MANAGERS,officialManagers);
-				}
-			}
-		   resultBean.setSuccess(true);
+				namedParameterJdbcTemplate.update(OfficialManagersQueryUtil.UPDATE_OFFICIAL_MANAGERS,officialManagers);
+		
+			
+		  
+		    resultBean.setSuccess(true);
+		    }
+		    else {
+	 	 		   resultBean.setMessage("These details are already existed");
+
+	 	        }
 		}catch(Exception e) {
 			e.printStackTrace();
 			resultBean.setSuccess(false);

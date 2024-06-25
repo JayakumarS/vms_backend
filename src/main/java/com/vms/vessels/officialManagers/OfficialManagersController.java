@@ -48,7 +48,7 @@ public class OfficialManagersController {
    	}
 	
 	@RequestMapping(value="/edit")
-	public OfficialManagersResultBean edit(@RequestParam("id") String id) {
+	public OfficialManagersResultBean edit(@RequestParam("id") Integer id) {
 		OfficialManagersResultBean rbean = new OfficialManagersResultBean();
 		try {
 			rbean = officialManagersService.edit(id);
@@ -70,7 +70,7 @@ public class OfficialManagersController {
 	}
 	
 	@RequestMapping(value="/delete")
-	public OfficialManagersResultBean delete(@RequestParam("id") String id) {
+	public OfficialManagersResultBean delete(@RequestParam("id") Integer id) {
 		OfficialManagersResultBean rbean = new OfficialManagersResultBean();
 		try {
 			rbean = officialManagersService.delete(id);
