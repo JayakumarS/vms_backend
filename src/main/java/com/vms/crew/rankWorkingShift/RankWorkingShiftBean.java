@@ -4,8 +4,32 @@ import java.util.List;
 
 
 public class RankWorkingShiftBean {
+	private Integer rankshiftid;
+	public Integer getRankshiftid() {
+		return rankshiftid;
+	}
+
+
+	public void setRankshiftid(Integer rankshiftid) {
+		this.rankshiftid = rankshiftid;
+	}
+
+
 	private String vessel;
-	private String rank;
+	private Integer rankcode;
+
+
+
+	public Integer getRankcode() {
+		return rankcode;
+	}
+
+
+	public void setRankcode(Integer rankcode) {
+		this.rankcode = rankcode;
+	}
+
+
 	private String sDate;
 	private int code;
 	public int getCode() {
@@ -45,15 +69,6 @@ public class RankWorkingShiftBean {
 		this.vessel = vessel;
 	}
 
-
-	public String getRank() {
-		return rank;
-	}
-
-
-	public void setRank(String rank) {
-		this.rank = rank;
-	}
 
 
 	public String getsDate() {

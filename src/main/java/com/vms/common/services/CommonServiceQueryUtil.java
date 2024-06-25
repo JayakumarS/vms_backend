@@ -43,19 +43,19 @@ public class CommonServiceQueryUtil {
 	public static final String GET_JOINPORT = "select port_name as id,country_name as name from country_master cm\r\n"
 			+ "left join port_master pm on cm.country_code = pm.country_code";
 	
-	public static final String GET_RANK_MASTERS = "select rank_code as id,rank_name as text from rank_master";
+	public static final String GET_RANK_MASTERS = "select rank_id as id,rank_name as text from rank_master";
 	
-	public static final String GET_AGENTS = "select agent_code as id,agent_code_name as text from agent_master";
+	public static final String GET_AGENTS = "select agent_id as id,agent_code_name as text from agent_master";
 	
 	public static final String GET_RELIGION = "select religion_code as id,religion_name as text from religion_master";
 	
-	public static final String GET_WORK_LICENSE = "select work_license_code as id,work_license_name as text from work_license";
+	public static final String GET_WORK_LICENSE = "select work_license_id as id,work_license_name as text from work_license";
 	
-	public static final String GET_WORK_STATUS = "select work_status_code as id,work_status_name as text from work_status";
+	public static final String GET_WORK_STATUS = "select work_status_id as id,work_status_name as text from work_status";
 	
-	public static final String GET_HEALTH_STATUS = "select health_status_code as id,health_status_name as text from health_status";
+	public static final String GET_HEALTH_STATUS = "select health_status_id as id,health_status_name as text from health_status";
 
 	public static final String GET_SEAMEN_NAME = "select crew_master_code as id,crew_master_name as text from crew_master ";
 	
-	public static final String GET_EXP_ENGINE = "select engine_master_code as id,engine_master_name as text from engine_master";
+	public static final String GET_EXP_ENGINE = "select engine_master_id as id,engine_master_name as text from engine_master";
 }

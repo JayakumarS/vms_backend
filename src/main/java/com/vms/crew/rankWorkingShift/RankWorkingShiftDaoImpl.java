@@ -38,7 +38,7 @@ public class RankWorkingShiftDaoImpl implements RankWorkingShiftDao{
 			
 				rankWorkingShift.put("userName", userDetails.getUsername());
 				rankWorkingShift.put("vessel", bean.getVessel());
-				rankWorkingShift.put("rank", bean.getRank());
+				rankWorkingShift.put("rank", bean.getRankcode());
 				rankWorkingShift.put("sDate", bean.getsDate());
 				rankWorkingShift.put("eDate", bean.geteDate());
 				rankWorkingShift.put("remarks", bean.getRemarks());
@@ -154,7 +154,7 @@ public class RankWorkingShiftDaoImpl implements RankWorkingShiftDao{
 		
 				rankWorkingShift.put("userName", userDetails.getUsername());
 				rankWorkingShift.put("vessel", bean.getVessel());
-				rankWorkingShift.put("rank", bean.getRank());
+				rankWorkingShift.put("rank", bean.getRankcode());
 				rankWorkingShift.put("sDate", bean.getsDate());
 				rankWorkingShift.put("eDate", bean.geteDate());
 				rankWorkingShift.put("remarks", bean.getRemarks());

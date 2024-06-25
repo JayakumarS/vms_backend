@@ -1,7 +1,7 @@
 package com.vms.crew.applications;
 
 public class ApplicationsQueryUtil {
-	public static final String getvessel = "select vessel_id as id ,vessel_name as text  from vessel_hdr";
+	public static final String getvessel = "select vessel_code as id ,vessel_name as text  from vessel_hdr";
 	
 	public static final String getrank = "select rank_id as id ,rank_name as text  from rank_master";
 	
