@@ -15,9 +15,5 @@ public interface MaintainRankDao {
 
 	public MaintainRankResultBean update(MaintainRankBean bean);
 	
-	List<MaintainRankBean> getdepartment();
-	
-	List<MaintainRankBean> getgrouppage();
-
 
 }

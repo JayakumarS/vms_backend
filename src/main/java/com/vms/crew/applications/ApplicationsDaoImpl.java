@@ -36,95 +36,6 @@ public class ApplicationsDaoImpl implements ApplicationsDao{
 	
 	
 	@Override
-	public List<ApplicationsBean> getenginelist() {
-		List<ApplicationsBean> getenginelist = new ArrayList<>();
-
-		try {
-			getenginelist = jdbcTemplate.query(ApplicationsQueryUtil.getenginelist, new Object[] {},new BeanPropertyRowMapper<>(ApplicationsBean.class));
-
-				
-
-		} catch (Exception e) {
-		}
-		return getenginelist;
-	}
-	
-	
-	
-	@Override
-	public List<ApplicationsBean> getlicence() {
-		List<ApplicationsBean> getlicence = new ArrayList<>();
-
-		try {
-			getlicence = jdbcTemplate.query(ApplicationsQueryUtil.getlicence, new Object[] {},new BeanPropertyRowMapper<>(ApplicationsBean.class));
-
-				
-
-		} catch (Exception e) {
-		}
-		return getlicence;
-	}
-	
-	
-	@Override
-	public List<ApplicationsBean> getvessel() {
-		List<ApplicationsBean> getvessel = new ArrayList<>();
-
-		try {
-			getvessel = jdbcTemplate.query(ApplicationsQueryUtil.getvessel, new Object[] {},new BeanPropertyRowMapper<>(ApplicationsBean.class));
-
-				
-
-		} catch (Exception e) {
-		}
-		return getvessel;
-	}
-	
-	@Override
-	public List<ApplicationsBean> getrank() {
-		List<ApplicationsBean> getrank = new ArrayList<>();
-
-		try {
-			getrank = jdbcTemplate.query(ApplicationsQueryUtil.getrank, new Object[] {},new BeanPropertyRowMapper<>(ApplicationsBean.class));
-
-				
-
-		} catch (Exception e) {
-		}
-		return getrank;
-	}
-	
-	@Override
-	public List<ApplicationsBean> getnationality() {
-		List<ApplicationsBean> getrank = new ArrayList<>();
-
-		try {
-			getrank = jdbcTemplate.query(ApplicationsQueryUtil.getnationality, new Object[] {},new BeanPropertyRowMapper<>(ApplicationsBean.class));
-
-				
-
-		} catch (Exception e) {
-		}
-		return getrank;
-	}
-
-
-	@Override
-	public List<ApplicationsBean> getagent() {
-		List<ApplicationsBean> getrank = new ArrayList<>();
-
-		try {
-			getrank = jdbcTemplate.query(ApplicationsQueryUtil.getagent, new Object[] {},new BeanPropertyRowMapper<>(ApplicationsBean.class));
-
-				
-
-		} catch (Exception e) {
-		}
-		return getrank;
-	}
-	
-	
-	@Override
 	public ApplicationsResultBean save(ApplicationsBean bean) {
 		ApplicationsResultBean resultBean = new ApplicationsResultBean();
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -158,9 +69,9 @@ public class ApplicationsDaoImpl implements ApplicationsDao{
 //		if(bean.getRank()=="") {
 //			bean.setRank(null);
 //		}
-//		if(bean.getVessel()=="") {
-//			bean.setVessel(null);
-//		}
+		if(bean.getVessel()=="") {
+			bean.setVessel(null);
+		}
 //		if(bean.getEngine()=="") {
 //			bean.setEngine(null);
 //		}

@@ -63,10 +63,10 @@ public class ApplicationsBean {
 	public void setBirthplace(String birthplace) {
 		this.birthplace = birthplace;
 	}
-	public Integer getVessel() {
+	public String getVessel() {
 		return vessel;
 	}
-	public void setVessel(Integer vessel) {
+	public void setVessel(String vessel) {
 		this.vessel = vessel;
 	}
 	public String getPriormonth() {
@@ -269,7 +269,7 @@ public class ApplicationsBean {
     private String father; 
     private String mother; 
     private String birthplace;
-    private Integer vessel; 
+    private String vessel; 
     private String priormonth; 
     private String decisioncode; 
     private Integer engine; 

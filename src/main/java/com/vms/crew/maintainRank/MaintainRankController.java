@@ -74,31 +74,6 @@ public class MaintainRankController {
 		return rbean;
 		
 	}
-	
-	
-	
 
-	@RequestMapping("/getdepartment")
-	public @ResponseBody List<MaintainRankBean> getdepartment() {
-		List<MaintainRankBean> getdepartment = null;
-
-		getdepartment = maintainRankService.getdepartment();
-
-		return getdepartment;
-	}
-
-	
-	
-	@RequestMapping("/getgrouppage")
-	public @ResponseBody List<MaintainRankBean> getgrouppage() {
-		List<MaintainRankBean> lBankAcctList = null;
-
-		lBankAcctList = maintainRankService.getgrouppage();
-
-		return lBankAcctList;
-	}
-
-	
-	
 	
 }

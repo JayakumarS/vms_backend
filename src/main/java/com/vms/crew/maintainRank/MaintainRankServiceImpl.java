@@ -43,15 +43,5 @@ public class MaintainRankServiceImpl implements MaintainRankService{
 		return MaintainRankDao.update(bean);
 	}
 	
-	@Override
-	public List<MaintainRankBean> getdepartment() {
-		return MaintainRankDao.getdepartment();
-	}
-	
-	@Override
-	public List<MaintainRankBean> getgrouppage() {
-		return MaintainRankDao.getgrouppage();
-	}
-	
 
 }

@@ -17,7 +17,6 @@ public static final String getEdit = "select rm.rank_code as code,rm.rank_name a
 
 public static final String delete = "delete from rank_master where rank_id = ? ";
 
-public static final String checkDelete = "select count(*) from rank_master where rank_code = ?";
 
 public static final String UPDATE_VESSEL_TYPE = "UPDATE rank_master SET "
 	    + "rank_code = :code, "
@@ -43,8 +42,5 @@ public static final String get_code_edit = "SELECT COUNT(rank_code) FROM rank_ma
 
 public static final String get_desc_edit = "SELECT COUNT(rank_name) FROM rank_master WHERE rank_name = ?  AND rank_name != ?";
 
-public static String getdepartment="select dept_id as id ,dept_name as text  from department_master";
-
-public static String getgrouppage="select rank_group_id as id ,rank_group_name as text  from rank_group";
 
 }

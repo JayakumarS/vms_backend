@@ -1,15 +1,6 @@
 package com.vms.crew.applications;
 
 public class ApplicationsQueryUtil {
-	public static final String getvessel = "select vessel_code as id ,vessel_name as text  from vessel_hdr";
-	
-	public static final String getrank = "select rank_id as id ,rank_name as text  from rank_master";
-	
-	public static final String getnationality = "select country_id as id ,nationality as text from country_master";
-	
-	public static final String getagent = "select agent_id as id , agent_code_name as text from agent_master";
-	
-	public static final String getlicence = "select work_license_id as id , work_license_name as text from work_license";
 
 	
 	public static final String SAVE_APPLICATION = "Insert into crew_applicant (appl_sur_name,appl_name,appl_nationality,appl_middle_name,appl_rank,appl_birth_date,appl_father,\r\n"
@@ -52,7 +43,6 @@ public class ApplicationsQueryUtil {
 			+ "sbook_file_path=:sBookfilePath,sbook_file_name=:sBookfileName,applicant_image_path=:applicantimagePath,\r\n"
 			+ "applicant_image_file_name=:applicantimageFileName,modified_by = :userName,modified_dt = NOW() WHERE crew_applicant_code = :code";
 
-	public static final String getenginelist = "select engine_type_id as id , engine_type_name as text from engine_type";
 
 	public static final String get_certificate_List = "select rc.certificate_code as certificateCode,cm.certificate_name as certificateName from rank_certificate rc\r\n"
 			+ "left join certificate_master cm on rc.certificate_code = cm.certificate_code\r\n"

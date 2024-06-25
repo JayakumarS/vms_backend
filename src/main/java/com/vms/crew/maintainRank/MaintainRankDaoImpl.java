@@ -178,33 +178,4 @@ public class MaintainRankDaoImpl implements MaintainRankDao{
 	}
 	
 	
-
-	@Override
-	public List<MaintainRankBean> getdepartment() {
-		List<MaintainRankBean> department = new ArrayList<>();
-
-		try {
-			department = jdbcTemplate.query(MaintainRankQueryUtil.getdepartment, new Object[] {},new BeanPropertyRowMapper<>(MaintainRankBean.class));
-
-				
-
-		} catch (Exception e) {
-		}
-		return department;
-	}
-	
-	@Override
-	public List<MaintainRankBean> getgrouppage() {
-		List<MaintainRankBean> getgrouppage = new ArrayList<>();
-
-		try {
-			getgrouppage = jdbcTemplate.query(MaintainRankQueryUtil.getgrouppage, new Object[] {},new BeanPropertyRowMapper<>(MaintainRankBean.class));
-
-				
-
-		} catch (Exception e) {
-		}
-		return getgrouppage;
-	}
-	
 }

@@ -28,62 +28,6 @@ public class ApplicationsController {
 	ApplicationsService ApplicationsService;
 	
 	
-	@RequestMapping("/getenginelist")
-	public @ResponseBody List<ApplicationsBean> getenginelist() {
-		List<ApplicationsBean> getenginelist = null;
-
-		getenginelist = ApplicationsService.getenginelist();
-
-		return getenginelist;
-	}
-	
-	
-	@RequestMapping("/getlicence")
-	public @ResponseBody List<ApplicationsBean> getlicence() {
-		List<ApplicationsBean> getlicence = null;
-
-		getlicence = ApplicationsService.getlicence();
-
-		return getlicence;
-	}
-	
-	@RequestMapping("/getvessel")
-	public @ResponseBody List<ApplicationsBean> getdepartment() {
-		List<ApplicationsBean> getvessel = null;
-
-		getvessel = ApplicationsService.getvessel();
-
-		return getvessel;
-	}
-
-	@RequestMapping("/getrank")
-	public @ResponseBody List<ApplicationsBean> getrank() {
-		List<ApplicationsBean> getrank = null;
-
-		getrank = ApplicationsService.getrank();
-
-		return getrank;
-	}
-	
-	
-	@RequestMapping("/getnationality")
-	public @ResponseBody List<ApplicationsBean> getnationality() {
-		List<ApplicationsBean> getnationality = null;
-
-		getnationality = ApplicationsService.getnationality();
-
-		return getnationality;
-	}
-	
-	@RequestMapping("/getagent")
-	public @ResponseBody List<ApplicationsBean> getagent() {
-		List<ApplicationsBean> getagent = null;
-
-		getagent = ApplicationsService.getagent();
-
-		return getagent;
-	}
-	
 	
 	
 	@RequestMapping(value="/save")

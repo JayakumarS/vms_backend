@@ -14,10 +14,6 @@ public interface MaintainRankService {
 
 	public MaintainRankResultBean update(MaintainRankBean bean);
 
-	List<MaintainRankBean> getdepartment();
-	
-	List<MaintainRankBean> getgrouppage();
-
 	
 
 }

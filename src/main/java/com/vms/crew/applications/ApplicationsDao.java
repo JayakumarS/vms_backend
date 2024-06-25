@@ -12,19 +12,6 @@ import com.vms.crew.maintainRank.MaintainRankResultBean;
 
 public interface ApplicationsDao {
 	
-	List<ApplicationsBean> getenginelist();
-
-	
-	List<ApplicationsBean> getlicence();
-
-	List<ApplicationsBean> getvessel();
-
-	
-	List<ApplicationsBean> getrank();
-	
-	List<ApplicationsBean> getnationality();
-	
-	List<ApplicationsBean> getagent();
 	
 	public ApplicationsResultBean save(ApplicationsBean bean);
 

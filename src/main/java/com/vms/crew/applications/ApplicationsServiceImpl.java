@@ -15,38 +15,6 @@ public class ApplicationsServiceImpl implements ApplicationsService{
 	@Autowired
 	ApplicationsDao ApplicationsDao;
 	
-	@Override
-	public List<ApplicationsBean> getenginelist() {
-		return ApplicationsDao.getenginelist();
-	}
-	
-	
-	@Override
-	public List<ApplicationsBean> getlicence() {
-		return ApplicationsDao.getlicence();
-	}
-	
-	
-	@Override
-	public List<ApplicationsBean> getvessel() {
-		return ApplicationsDao.getvessel();
-	}
-	
-	
-	@Override
-	public List<ApplicationsBean> getrank() {
-		return ApplicationsDao.getrank();
-	}
-	
-	@Override
-	public List<ApplicationsBean> getnationality() {
-		return ApplicationsDao.getnationality();
-	}
-	
-	@Override
-	public List<ApplicationsBean> getagent() {
-		return ApplicationsDao.getagent();
-	}
 	
 	@Override
 	public ApplicationsResultBean save(ApplicationsBean bean) {
