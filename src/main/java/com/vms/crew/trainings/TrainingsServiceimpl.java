@@ -24,13 +24,13 @@ public class TrainingsServiceimpl implements TrainingsService {
 	}
 
 	@Override
-	public TrainingsResultBean edit(String id) {
+	public TrainingsResultBean edit(Integer id) {
 		// TODO Auto-generated method stub
 		return TrainingsDao.edit(id);
 	}
 
 	@Override
-	public TrainingsResultBean delete(String id) {
+	public TrainingsResultBean delete(Integer id) {
 		// TODO Auto-generated method stub
 		return TrainingsDao.delete(id);
 	}

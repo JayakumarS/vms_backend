@@ -4,8 +4,16 @@ import java.util.List;
 
 
 public class TrainingsBean {
+	private Integer trainingid;
+	public Integer getTrainingid() {
+		return trainingid;
+	}
+	public void setTrainingid(Integer trainingid) {
+		this.trainingid = trainingid;
+	}
 	private String code;
 	private String description;
+	
 	private List<TrainingsBean> trainingsBeanDtls;
 	public List<TrainingsBean> getTrainingsBeanDtls() {
 		return trainingsBeanDtls;

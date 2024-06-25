@@ -7,9 +7,9 @@ public interface TrainingsDao {
 
 	public TrainingsResultBean getList();
 
-	public TrainingsResultBean edit(String id);
+	public TrainingsResultBean edit(Integer id);
 
-	public TrainingsResultBean delete(String id);
+	public TrainingsResultBean delete(Integer id);
 
 	public TrainingsResultBean update(TrainingsBean bean);
 
