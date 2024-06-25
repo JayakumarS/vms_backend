@@ -18,6 +18,7 @@ import org.springframework.stereotype.Repository;
 
 
 
+
 @Repository
 public class ClassDaoImpl implements ClassDao{
 
@@ -113,6 +114,18 @@ public class ClassDaoImpl implements ClassDao{
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		try {
+			
+			
+			String classcode =  jdbcTemplate.queryForObject(ClassQueryUtil.class_code,new Object[] { bean.getClassid() },String.class);
+			String classdesc =  jdbcTemplate.queryForObject(ClassQueryUtil.class_desc,new Object[] { bean.getClassid() },String.class);
+
+
+			int code =  jdbcTemplate.queryForObject(ClassQueryUtil.get_code_edit,new Object[] { bean.getCode(),classcode },Integer.class);
+
+		    int desc =  jdbcTemplate.queryForObject(ClassQueryUtil.get_desc_edit,new Object[] { bean.getDescription(),classdesc },Integer.class);
+
+			
+	        if(code==0 && desc==0) {
 			Map<String, Object> fleet = new HashMap<String, Object>();
 			
 			    fleet.put("classid", bean.getClassid());
@@ -123,7 +136,12 @@ public class ClassDaoImpl implements ClassDao{
 					namedParameterJdbcTemplate.update(ClassQueryUtil.UPDATE_CLASS,fleet);
 				
 			
-		   resultBean.setSuccess(true);
+		   resultBean.setSuccess(true);   
+		 }
+		  else {
+	 		   resultBean.setMessage("These details already exist");
+
+	        }
 		}catch(Exception e) {
 			e.printStackTrace();
 			resultBean.setSuccess(false);

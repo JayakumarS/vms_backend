@@ -16,6 +16,7 @@ import org.springframework.stereotype.Repository;
 
 
 
+
 @Repository
 public class FleetDaoImpl implements FleetDao{
 
@@ -106,6 +107,18 @@ public class FleetDaoImpl implements FleetDao{
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		try {
+			
+
+			String fleetcode =  jdbcTemplate.queryForObject(FleetQueryUtil.fleet_code,new Object[] { bean.getFleetid() },String.class);
+			String fleetdesc =  jdbcTemplate.queryForObject(FleetQueryUtil.fleet_desc,new Object[] { bean.getFleetid() },String.class);
+
+
+			int code =  jdbcTemplate.queryForObject(FleetQueryUtil.get_code_edit,new Object[] { bean.getCode(),fleetcode },Integer.class);
+
+		    int desc =  jdbcTemplate.queryForObject(FleetQueryUtil.get_desc_edit,new Object[] { bean.getDescription(),fleetdesc },Integer.class);
+
+			
+	        if(code==0 && desc==0) {
 			Map<String, Object> fleet = new HashMap<String, Object>();
 			
 			fleet.put("fleetid", bean.getFleetid());
@@ -116,6 +129,11 @@ public class FleetDaoImpl implements FleetDao{
 					namedParameterJdbcTemplate.update(FleetQueryUtil.UPDATE_FLEET,fleet);
 			
 		   resultBean.setSuccess(true);
+	        }
+			  else {
+		 		   resultBean.setMessage("These details already exist");
+
+		        }	 
 		}catch(Exception e) {
 			e.printStackTrace();
 			resultBean.setSuccess(false);

@@ -19,5 +19,13 @@ public static final String get_code = "select count(fleet_code) from fleet_maste
 
 public static final String get_desc = "select count(fleet_name) from fleet_master where fleet_name=?";
 
+public static final String fleet_code = "select fleet_code from fleet_master where fleet_id= ?";
+
+public static final String fleet_desc = "select fleet_name from fleet_master where fleet_id= ?";
+
+public static final String get_code_edit = "SELECT COUNT(fleet_code) FROM fleet_master WHERE fleet_code = ?  AND fleet_code != ?";
+
+public static final String get_desc_edit = "SELECT COUNT(fleet_name) FROM fleet_master WHERE fleet_name = ?  AND fleet_name != ?";
+
 
 }

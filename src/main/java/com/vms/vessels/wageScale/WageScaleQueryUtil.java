@@ -21,4 +21,13 @@ public static final String get_code = "select count(wage_scale_code) from wage_s
 public static final String get_desc = "select count(wage_scale_name) from wage_scales where wage_scale_name=?";
 
 
+public static final String scale_code = "select wage_scale_code from wage_scales where wage_scale_id= ?";
+
+public static final String scale_desc = "select wage_scale_name from wage_scales where wage_scale_id= ?";
+
+public static final String get_code_edit = "SELECT COUNT(wage_scale_code) FROM wage_scales WHERE wage_scale_code = ?  AND wage_scale_code != ?";
+
+public static final String get_desc_edit = "SELECT COUNT(wage_scale_name) FROM wage_scales WHERE wage_scale_name = ?  AND wage_scale_name != ?";
+
+
 }

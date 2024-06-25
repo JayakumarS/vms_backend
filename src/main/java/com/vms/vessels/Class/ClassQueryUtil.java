@@ -20,4 +20,12 @@ public static final String get_code = "select count(vessel_class_code) from vess
 
 public static final String get_desc = "select count(vessel_class_name) from vessel_class where vessel_class_name=?";
 
+public static final String class_code = "select vessel_class_code from vessel_class where vessel_class_id= ?";
+
+public static final String class_desc = "select vessel_class_name from vessel_class where vessel_class_id= ?";
+
+public static final String get_code_edit = "SELECT COUNT(vessel_class_code) FROM vessel_class WHERE vessel_class_code = ?  AND vessel_class_code != ?";
+
+public static final String get_desc_edit = "SELECT COUNT(vessel_class_name) FROM vessel_class WHERE vessel_class_name = ?  AND vessel_class_name != ?";
+
 }

@@ -16,6 +16,7 @@ import org.springframework.stereotype.Repository;
 
 
 
+
 @Repository
 public class WageScaleDaoImpl implements WageScaleDao{
 
@@ -105,6 +106,16 @@ public WageScaleResultBean update(WageScaleBean bean) {
 	UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 	
 	try {
+		String scalecode =  jdbcTemplate.queryForObject(WageScaleQueryUtil.scale_code,new Object[] { bean.getWagescaleid() },String.class);
+		String scaledesc =  jdbcTemplate.queryForObject(WageScaleQueryUtil.scale_desc,new Object[] { bean.getWagescaleid() },String.class);
+
+
+		int code =  jdbcTemplate.queryForObject(WageScaleQueryUtil.get_code_edit,new Object[] { bean.getCode(),scalecode },Integer.class);
+
+	    int desc =  jdbcTemplate.queryForObject(WageScaleQueryUtil.get_desc_edit,new Object[] { bean.getDescription(),scaledesc },Integer.class);
+
+		
+        if(code==0 && desc==0) {
 		Map<String, Object> wagescale = new HashMap<String, Object>();
 		
 			wagescale.put("userName", userDetails.getUsername());
@@ -115,6 +126,11 @@ public WageScaleResultBean update(WageScaleBean bean) {
 				namedParameterJdbcTemplate.update(WageScaleQueryUtil.UPDATE_WAGE,wagescale);
 			
 	   resultBean.setSuccess(true);
+        }
+		  else {
+	 		   resultBean.setMessage("These details already exist");
+
+	        }	 
 	}catch(Exception e) {
 		e.printStackTrace();
 		resultBean.setSuccess(false);

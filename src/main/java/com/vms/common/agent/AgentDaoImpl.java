@@ -15,6 +15,7 @@ import org.springframework.stereotype.Repository;
 
 
 
+
 @Repository
 public class AgentDaoImpl implements AgentDao{
 
@@ -107,6 +108,17 @@ public class AgentDaoImpl implements AgentDao{
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		try {
+			
+			String agentcode =  jdbcTemplate.queryForObject(AgentQueryUtil.agent_code,new Object[] { bean.getAgentid() },String.class);
+			String agentdesc =  jdbcTemplate.queryForObject(AgentQueryUtil.agent_desc,new Object[] { bean.getAgentid() },String.class);
+
+
+			int code =  jdbcTemplate.queryForObject(AgentQueryUtil.get_code_edit,new Object[] { bean.getCode(),agentcode },Integer.class);
+
+		    int desc =  jdbcTemplate.queryForObject(AgentQueryUtil.get_desc_edit,new Object[] { bean.getDescription(),agentdesc },Integer.class);
+
+			
+	        if(code==0 && desc==0) {
 			Map<String, Object> fleet = new HashMap<String, Object>();
 			
 			    fleet.put("agentid", bean.getAgentid());
@@ -118,6 +130,11 @@ public class AgentDaoImpl implements AgentDao{
 					namedParameterJdbcTemplate.update(AgentQueryUtil.UPDATE_AGENT,fleet);
 				
 		   resultBean.setSuccess(true);
+	       }
+				  else {
+			 		   resultBean.setMessage("These details already exist");
+
+			        }
 		}catch(Exception e) {
 			e.printStackTrace();
 			resultBean.setSuccess(false);

@@ -20,5 +20,12 @@ public static final String get_code = "select count(agent_code) from agent_maste
 
 public static final String get_desc = "select count(agent_code_name) from agent_master where agent_code_name=?";
 
+public static final String agent_code = "select agent_code from agent_master where agent_id= ?";
+
+public static final String agent_desc = "select agent_code_name from agent_master where agent_id= ?";
+
+public static final String get_code_edit = "SELECT COUNT(agent_code) FROM agent_master WHERE agent_code = ?  AND agent_code != ?";
+
+public static final String get_desc_edit = "SELECT COUNT(agent_code_name) FROM agent_master WHERE agent_code_name = ?  AND agent_code_name != ?";
 
 }
