@@ -21,16 +21,16 @@ public class ApplicationsBean {
 	public void setMidname(String midname) {
 		this.midname = midname;
 	}
-	public String getNation() {
+	public Integer getNation() {
 		return nation;
 	}
-	public void setNation(String nation) {
+	public void setNation(Integer nation) {
 		this.nation = nation;
 	}
-	public String getRank() {
+	public Integer getRank() {
 		return rank;
 	}
-	public void setRank(String rank) {
+	public void setRank(Integer rank) {
 		this.rank = rank;
 	}
 	public String getDobObj() {
@@ -63,10 +63,10 @@ public class ApplicationsBean {
 	public void setBirthplace(String birthplace) {
 		this.birthplace = birthplace;
 	}
-	public String getVessel() {
+	public Integer getVessel() {
 		return vessel;
 	}
-	public void setVessel(String vessel) {
+	public void setVessel(Integer vessel) {
 		this.vessel = vessel;
 	}
 	public String getPriormonth() {
@@ -81,10 +81,10 @@ public class ApplicationsBean {
 	public void setDecisioncode(String decisioncode) {
 		this.decisioncode = decisioncode;
 	}
-	public String getEngine() {
+	public Integer getEngine() {
 		return engine;
 	}
-	public void setEngine(String engine) {
+	public void setEngine(Integer engine) {
 		this.engine = engine;
 	}
 	public String getSignOffDate() {
@@ -99,10 +99,10 @@ public class ApplicationsBean {
 	public void setSignOffDateObj(String signOffDateObj) {
 		this.signOffDateObj = signOffDateObj;
 	}
-	public String getAgent() {
+	public Integer getAgent() {
 		return agent;
 	}
-	public void setAgent(String agent) {
+	public void setAgent(Integer agent) {
 		this.agent = agent;
 	}
 	public String getRemarks() {
@@ -189,10 +189,10 @@ public class ApplicationsBean {
 	public void setPassportExpiryDate(String passportExpiryDate) {
 		this.passportExpiryDate = passportExpiryDate;
 	}
-	public String getLicence() {
+	public Integer getLicence() {
 		return licence;
 	}
-	public void setLicence(String licence) {
+	public void setLicence(Integer licence) {
 		this.licence = licence;
 	}
 	public String getLicenceissue() {
@@ -262,20 +262,20 @@ public class ApplicationsBean {
 	private String surname; 
     private String name; 
     private String midname;
-    private String nation; 
-    private String rank; 
+    private Integer nation; 
+    private Integer rank; 
     private String dobObj; 
     private String dob; 
     private String father; 
     private String mother; 
     private String birthplace;
-    private String vessel; 
+    private Integer vessel; 
     private String priormonth; 
     private String decisioncode; 
-    private String engine; 
+    private Integer engine; 
     private String signOffDate; 
     private String signOffDateObj;
-    private String agent; 
+    private Integer agent; 
     private String remarks; 
     private String appDate; 
     private String appDateObj;
@@ -290,7 +290,7 @@ public class ApplicationsBean {
     private String passportissue; 
     private String passportExpiryDateObj; 
     private String passportExpiryDate; 
-    private String licence; 
+    private Integer licence; 
     private String licenceissue; 
     private String licenceExpiryDate; 
     private String licenceExpiryDateObj;

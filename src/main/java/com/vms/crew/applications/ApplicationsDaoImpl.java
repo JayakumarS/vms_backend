@@ -152,27 +152,27 @@ public class ApplicationsDaoImpl implements ApplicationsDao{
 		}
 		
 		
-		if(bean.getNation()=="") {
-			bean.setNation(null);
-		}
-		if(bean.getRank()=="") {
-			bean.setRank(null);
-		}
-		if(bean.getVessel()=="") {
-			bean.setVessel(null);
-		}
-		if(bean.getEngine()=="") {
-			bean.setEngine(null);
-		}
-		if(bean.getAgent()=="") {
-			bean.setAgent(null);
-		}
-		if(bean.getLicence()=="") {
-			bean.setLicence(null);
-		}
-		if(bean.getEngine()=="") {
-			bean.setEngine(null);
-		}
+//		if(bean.getNation()=="") {
+//			bean.setNation(null);
+//		}
+//		if(bean.getRank()=="") {
+//			bean.setRank(null);
+//		}
+//		if(bean.getVessel()=="") {
+//			bean.setVessel(null);
+//		}
+//		if(bean.getEngine()=="") {
+//			bean.setEngine(null);
+//		}
+//		if(bean.getAgent()=="") {
+//			bean.setAgent(null);
+//		}
+//		if(bean.getLicence()=="") {
+//			bean.setLicence(null);
+//		}
+//		if(bean.getEngine()=="") {
+//			bean.setEngine(null);
+//		}
 		try {
 			Map<String, Object> applications = new HashMap<String, Object>();
 			
