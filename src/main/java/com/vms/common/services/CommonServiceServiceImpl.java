@@ -153,7 +153,18 @@ public class CommonServiceServiceImpl implements CommonServiceService{
 	@Override
 	public List<CommonServiceBean> getExpEngine() {
 		// TODO Auto-generated method stub
-		return commonServicesDao. getExpEngine();
+		return commonServicesDao.getExpEngine();
 	}
 
+	@Override
+	public List<CommonServiceBean> getgrouppage() {
+		// TODO Auto-generated method stub
+		return commonServicesDao.getgrouppage();
+	}
+
+	@Override
+	public List<CommonServiceBean> getdepartment() {
+		// TODO Auto-generated method stub
+		return commonServicesDao.getdepartment();
+	}
 }

@@ -52,5 +52,9 @@ public interface CommonServiceDao {
 	public List<CommonServiceBean> getSeamenName();
 	
 	public List<CommonServiceBean> getExpEngine();
+	
+	public List<CommonServiceBean> getgrouppage();
+
+	public List<CommonServiceBean> getdepartment();
 
 }

@@ -315,5 +315,33 @@ public class CommonServiceController {
 				}
 				return commonUtilityResultBean;
 			}
+			
+			
+	//RankGroup
+			@RequestMapping("/getgrouppage")
+			public @ResponseBody CommonServicesResultBean getgrouppage() throws CustomException {
+				CommonServicesResultBean commonUtilityResultBean = new CommonServicesResultBean();
+				try {
+					commonUtilityResultBean.setlCommonUtilityBean(commonServicesService.getgrouppage());
+					commonUtilityResultBean.setSuccess(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				return commonUtilityResultBean;
+			}
+			
+	//RankGroup
+			@RequestMapping("/getdepartment")
+			public @ResponseBody CommonServicesResultBean getdepartment() throws CustomException {
+				CommonServicesResultBean commonUtilityResultBean = new CommonServicesResultBean();
+				try {
+					commonUtilityResultBean.setlCommonUtilityBean(commonServicesService.getdepartment());
+					commonUtilityResultBean.setSuccess(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				return commonUtilityResultBean;
+			}
+
 
 }
