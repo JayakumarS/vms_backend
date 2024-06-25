@@ -13,6 +13,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
+import com.vms.master.Port.PortQueryUtil;
+
 @Repository
 public class UOMDaoImpl implements UOMDao{
 
@@ -93,6 +95,17 @@ public class UOMDaoImpl implements UOMDao{
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		try {
+			
+			String uomcode =  jdbcTemplate.queryForObject(PortQueryUtil.uom_code,new Object[] { bean.getUomId() },String.class);
+			String uomName =  jdbcTemplate.queryForObject(PortQueryUtil.uom_name,new Object[] { bean.getUomId() },String.class);
+
+			
+			
+			int code =  jdbcTemplate.queryForObject(PortQueryUtil.get_uom_code_edit,new Object[] { bean.getUomCode(),uomcode },Integer.class);
+
+		    int name =  jdbcTemplate.queryForObject(PortQueryUtil.get_uom_name_edit,new Object[] { bean.getUomName(),uomName },Integer.class);
+
+            if(code==0 && name==0) {
 			Map<String, Object> Country = new HashMap<String, Object>();
 			
 			Country.put("userName", userDetails.getUsername());
@@ -104,6 +117,10 @@ public class UOMDaoImpl implements UOMDao{
 				namedParameterJdbcTemplate.update(UOMQueryUtil.UPDATE_UOM,Country);
 				
 		   resultBean.setSuccess(true);
+            }else {
+        		   resultBean.setMessage("These details already exist");
+
+            }
 		}catch(Exception e) {
 			e.printStackTrace();
 			resultBean.setSuccess(false);

@@ -8,7 +8,14 @@ public class CountryBean {
 	public String phoneCode;
 	public String nationality;
     public boolean isActive;
+    public Integer countryId;
     
+	public Integer getCountryId() {
+		return countryId;
+	}
+	public void setCountryId(Integer countryId) {
+		this.countryId = countryId;
+	}
 	public String getCountryCode() {
 		return countryCode;
 	}

@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
 import com.vms.crew.healthStatus.HealthStatusQueryUtil;
+import com.vms.crew.rankGroup.RankGroupQueryUtil;
 
 @Repository
 public class PortDaoImpl implements PortDao{
@@ -108,6 +109,18 @@ public class PortDaoImpl implements PortDao{
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		try {
+			
+			String portcode =  jdbcTemplate.queryForObject(PortQueryUtil.port_code,new Object[] { bean.getPortId() },String.class);
+			String portName =  jdbcTemplate.queryForObject(PortQueryUtil.port_name,new Object[] { bean.getPortId() },String.class);
+
+			
+			
+			int code =  jdbcTemplate.queryForObject(PortQueryUtil.get_code_edit,new Object[] { bean.getPortCode(),portcode },Integer.class);
+
+		    int name =  jdbcTemplate.queryForObject(PortQueryUtil.get_name_edit,new Object[] { bean.getPortName(),portName },Integer.class);
+
+            if(code==0 && name==0) {
+
 			Map<String, Object> Country = new HashMap<String, Object>();
 			
 			Country.put("userName", userDetails.getUsername());
@@ -120,6 +133,10 @@ public class PortDaoImpl implements PortDao{
 				namedParameterJdbcTemplate.update(PortQueryUtil.UPDATE_PORT,Country);
 				
 		   resultBean.setSuccess(true);
+            }else {
+      		   resultBean.setMessage("These details already exist");
+
+            }
 		}catch(Exception e) {
 			e.printStackTrace();
 			resultBean.setSuccess(false);

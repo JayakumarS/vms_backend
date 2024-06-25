@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
 import com.vms.crew.healthStatus.HealthStatusQueryUtil;
+import com.vms.master.Port.PortQueryUtil;
 
 @Repository
 public class CountryDaoImpl implements CountryDao{
@@ -109,6 +110,16 @@ public class CountryDaoImpl implements CountryDao{
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		try {
+			String countrycode =  jdbcTemplate.queryForObject(PortQueryUtil.country_code,new Object[] { bean.getCountryId() },String.class);
+			String countryName =  jdbcTemplate.queryForObject(PortQueryUtil.country_name,new Object[] { bean.getCountryId() },String.class);
+
+			
+			
+			int code =  jdbcTemplate.queryForObject(PortQueryUtil.get_country_code_edit,new Object[] { bean.getCountryCode(),countrycode },Integer.class);
+
+		    int name =  jdbcTemplate.queryForObject(PortQueryUtil.get_country_name_edit,new Object[] { bean.getCountryName(),countryName },Integer.class);
+
+            if(code==0 && name==0) {
 			Map<String, Object> Country = new HashMap<String, Object>();
 			
 			Country.put("userName", userDetails.getUsername());
@@ -122,6 +133,10 @@ public class CountryDaoImpl implements CountryDao{
 					namedParameterJdbcTemplate.update(CountryQueryUtil.UPDATE_COUNTRY,Country);
 				
 		   resultBean.setSuccess(true);
+            }else {
+       		   resultBean.setMessage("These details already exist");
+
+            }
 		}catch(Exception e) {
 			e.printStackTrace();
 			resultBean.setSuccess(false);
