@@ -39,7 +39,7 @@ public class ShipManagersController {
    	}
 	
 	@RequestMapping(value="/edit")
-	public ShipManagersResultBean edit(@RequestParam("id") String id) {
+	public ShipManagersResultBean edit(@RequestParam("id") int id) {
 		ShipManagersResultBean rbean = new ShipManagersResultBean();
 		try {
 			rbean = shipManagersService.edit(id);
@@ -61,7 +61,7 @@ public class ShipManagersController {
 	}
 	
 	@RequestMapping(value="/delete")
-	public ShipManagersResultBean delete(@RequestParam("id") String id) {
+	public ShipManagersResultBean delete(@RequestParam("id") int id) {
 		ShipManagersResultBean rbean = new ShipManagersResultBean();
 		try {
 			rbean = shipManagersService.delete(id);

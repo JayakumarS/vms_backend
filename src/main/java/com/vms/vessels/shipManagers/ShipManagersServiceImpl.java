@@ -23,13 +23,13 @@ public class ShipManagersServiceImpl implements ShipManagersService {
 	}
 
 	@Override
-	public ShipManagersResultBean edit(String id) {
+	public ShipManagersResultBean edit(int id) {
 		// TODO Auto-generated method stub
 		return shipManagersDao.edit(id);
 	}
 
 	@Override
-	public ShipManagersResultBean delete(String id) {
+	public ShipManagersResultBean delete(int id) {
 		// TODO Auto-generated method stub
 		return shipManagersDao.delete(id);
 	}

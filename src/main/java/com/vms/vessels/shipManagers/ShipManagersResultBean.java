@@ -7,6 +7,14 @@ import java.util.List;
 public class ShipManagersResultBean {
 	
 	public boolean success;
+	public String message;
+
+	public String getMessage() {
+		return message;
+	}
+	public void setMessage(String message) {
+		this.message = message;
+	}
 	private List<ShipManagersBean> list;
 	public boolean isSuccess() {
 		return success;

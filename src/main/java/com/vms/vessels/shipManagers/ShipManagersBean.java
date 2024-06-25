@@ -7,8 +7,19 @@ import java.util.List;
 public class ShipManagersBean {
 	
 	private String shipman;
+	private Integer shipmanid;
+
+
 	public String getShipman() {
 		return shipman;
+	}
+
+	public Integer getShipmanid() {
+		return shipmanid;
+	}
+
+	public void setShipmanid(Integer shipmanid) {
+		this.shipmanid = shipmanid;
 	}
 
 	public void setShipman(String shipman) {

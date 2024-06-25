@@ -8,9 +8,9 @@ public interface ShipManagersService {
 
 	public ShipManagersResultBean getList();
 
-	public ShipManagersResultBean edit(String id);
+	public ShipManagersResultBean edit(int id);
 
-	public ShipManagersResultBean delete(String id);
+	public ShipManagersResultBean delete(int id);
 
 	public ShipManagersResultBean update(ShipManagersBean bean);
 

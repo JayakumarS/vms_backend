@@ -15,6 +15,8 @@ import org.springframework.stereotype.Repository;
 
 
 
+
+
 @Repository
 
 public class ShipManagersDaoImpl implements ShipManagersDao {
@@ -31,18 +33,18 @@ public class ShipManagersDaoImpl implements ShipManagersDao {
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		try {
+			
 			Map<String, Object> shipManagers = new HashMap<String, Object>();
 			
-			for(ShipManagersBean listBean : bean.getShipManagersBeanDtls()) {
-				shipManagers.put("shipman", listBean.getShipman());
-				shipManagers.put("name", listBean.getName());
-				shipManagers.put("remarks", listBean.getRemarks());
-				shipManagers.put("vatreg", listBean.getVatreg());
+                shipManagers.put("shipman", bean.getShipman());
+				shipManagers.put("name", bean.getName());
+				shipManagers.put("remarks", bean.getRemarks());
+				shipManagers.put("vatreg", bean.getVatreg());
 				shipManagers.put("userName", userDetails.getUsername());
 
 				
 				namedParameterJdbcTemplate.update(ShipManagersQueryUtil.SAVE_SHIP_MANAGERS,shipManagers);
-			}
+			
 			
 		   resultBean.setSuccess(true);
 		}catch(Exception e) {
@@ -67,7 +69,7 @@ public class ShipManagersDaoImpl implements ShipManagersDao {
 	}
 
 	@Override
-	public ShipManagersResultBean edit(String id) {		
+	public ShipManagersResultBean edit(int id) {		
 		ShipManagersResultBean resultBean = new ShipManagersResultBean();
 		resultBean.setSuccess(false);
 		try {
@@ -80,7 +82,7 @@ public class ShipManagersDaoImpl implements ShipManagersDao {
 	}
 
 	@Override
-	public ShipManagersResultBean delete(String id) {
+	public ShipManagersResultBean delete(int id) {
 		ShipManagersResultBean resultBean = new ShipManagersResultBean();
 		try {
 			jdbcTemplate.update(ShipManagersQueryUtil.delete,id);
@@ -99,25 +101,33 @@ public class ShipManagersDaoImpl implements ShipManagersDao {
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		try {
-			Map<String, Object> shipManagers = new HashMap<String, Object>();
 			
-			for(ShipManagersBean listBean : bean.getShipManagersBeanDtls()) {
-				shipManagers.put("shipman", listBean.getShipman());
-				shipManagers.put("name", listBean.getName());
-				shipManagers.put("remarks", listBean.getRemarks());
-				shipManagers.put("vatreg", listBean.getVatreg());
+			String shipmancode =  jdbcTemplate.queryForObject(ShipManagersQueryUtil.shipman_code,new Object[] { bean.getShipmanid() },String.class);
+			String shipmanname =  jdbcTemplate.queryForObject(ShipManagersQueryUtil.name_desc,new Object[] { bean.getShipmanid() },String.class);
+
+			
+			int shipman =  jdbcTemplate.queryForObject(ShipManagersQueryUtil.get_shipman_edit,new Object[] { bean.getShipman(),shipmancode },int.class);
+
+		    int name =  jdbcTemplate.queryForObject(ShipManagersQueryUtil.get_name_edit,new Object[] { bean.getName(),shipmanname },int.class);
+			if(shipman == 0 && name == 0) {
+			Map<String, Object> shipManagers = new HashMap<String, Object>();
+		    	shipManagers.put("shipmanid", bean.getShipmanid());
+				shipManagers.put("shipman", bean.getShipman());
+				shipManagers.put("name", bean.getName());
+				shipManagers.put("remarks", bean.getRemarks());
+				shipManagers.put("vatreg", bean.getVatreg());
 				shipManagers.put("userName", userDetails.getUsername());
 				
-				int k = jdbcTemplate.queryForObject(ShipManagersQueryUtil.checkDelete, new Object[] { listBean.getShipman() },Integer.class);
+				namedParameterJdbcTemplate.update(ShipManagersQueryUtil.UPDATE_SHIP_MANAGERS,shipManagers);
 				
-				if(k == 0) {
-				   namedParameterJdbcTemplate.update(ShipManagersQueryUtil.SAVE_SHIP_MANAGERS,shipManagers);
-				}
-				else {
-					namedParameterJdbcTemplate.update(ShipManagersQueryUtil.UPDATE_VESSEL_TYPE,shipManagers);
-				}
-			}
+			
 		   resultBean.setSuccess(true);
+		}
+		   else {
+ 	 		   resultBean.setMessage("These details are already existed");
+
+ 	        }
+		   
 		}catch(Exception e) {
 			e.printStackTrace();
 			resultBean.setSuccess(false);
