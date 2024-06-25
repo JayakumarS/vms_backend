@@ -38,7 +38,7 @@ public class TrainingsController {
    	}
 	
 	@RequestMapping(value="/edit")
-	public TrainingsResultBean edit(@RequestParam("id") String id) {
+	public TrainingsResultBean edit(@RequestParam("id") Integer id) {
 		TrainingsResultBean rbean = new TrainingsResultBean();
 		try {
 			rbean = TrainingsService.edit(id);
@@ -60,7 +60,7 @@ public class TrainingsController {
 	}
 	
 	@RequestMapping(value="/delete")
-	public TrainingsResultBean delete(@RequestParam("id") String id) {
+	public TrainingsResultBean delete(@RequestParam("id") Integer id) {
 		TrainingsResultBean rbean = new TrainingsResultBean();
 		try {
 			rbean = TrainingsService.delete(id);

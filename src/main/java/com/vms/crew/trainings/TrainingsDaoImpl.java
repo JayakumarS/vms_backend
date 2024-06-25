@@ -6,12 +6,15 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
+
+import com.vms.crew.payTypes.PayTypesQueryUtil;
 
 
 
@@ -30,16 +33,28 @@ public class TrainingsDaoImpl implements TrainingsDao {
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		try {
+			
+			int code =  jdbcTemplate.queryForObject(TrainingsQueryUtil.get_code,new Object[] { bean.getCode() },Integer.class);
+
+		    int desc =  jdbcTemplate.queryForObject(TrainingsQueryUtil.get_desc,new Object[] { bean.getDescription() },Integer.class);
+		    if(code==0 && desc==0) {
+		    	
+		   
 			Map<String, Object> trainings = new HashMap<String, Object>();
 			
-			for(TrainingsBean listBean : bean.getTrainingsBeanDtls()) {
+			
 				trainings.put("userName", userDetails.getUsername());
-				trainings.put("code", listBean.getCode());
-				trainings.put("desc", listBean.getDescription());
+				trainings.put("code", bean.getCode());
+				trainings.put("desc", bean.getDescription());
 				namedParameterJdbcTemplate.update(TrainingsQueryUtil.SAVE_trainings,trainings);
-			}
+			
 			
 		   resultBean.setSuccess(true);
+		    }
+		    else {
+	  	 		   resultBean.setMessage("These details are already exist");
+
+	  	        }
 		}catch(Exception e) {
 			e.printStackTrace();
 			resultBean.setSuccess(false);
@@ -62,7 +77,7 @@ public class TrainingsDaoImpl implements TrainingsDao {
 	}
 
 	@Override
-	public TrainingsResultBean edit(String id) {		
+	public TrainingsResultBean edit(Integer id) {		
 		TrainingsResultBean resultBean = new TrainingsResultBean();
 		resultBean.setSuccess(false);
 		try {
@@ -75,16 +90,23 @@ public class TrainingsDaoImpl implements TrainingsDao {
 	}
 
 	@Override
-	public TrainingsResultBean delete(String id) {
+	public TrainingsResultBean delete(Integer id) {
 		TrainingsResultBean resultBean = new TrainingsResultBean();
 		try {
 			jdbcTemplate.update(TrainingsQueryUtil.delete,id);
 			resultBean.setSuccess(true);
 		}
-		catch(Exception e) {
-			e.printStackTrace();
-			resultBean.setSuccess(false);
-		}	
+		  catch (DataAccessException e) {
+		        String errorMessage = e.getMessage();
+		        if (errorMessage.contains("violates foreign key constraint")) {
+		            resultBean.setSuccess(false);
+		            resultBean.setMessage("Cannot delete this paytypeId because it is referenced in another table");
+		        } else {
+		            e.printStackTrace();
+		            resultBean.setSuccess(false);
+		            resultBean.setMessage(errorMessage);
+		        }
+		    }	
 		return resultBean;
 	}
 
@@ -94,23 +116,31 @@ public class TrainingsDaoImpl implements TrainingsDao {
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		try {
+			
+			String trainingcode =  jdbcTemplate.queryForObject(TrainingsQueryUtil.training_code,new Object[] { bean.getTrainingid() },String.class);
+			String trainingdesc =  jdbcTemplate.queryForObject(TrainingsQueryUtil.training_desc,new Object[] { bean.getTrainingid() },String.class);
+
+
+			int code =  jdbcTemplate.queryForObject(TrainingsQueryUtil.get_code_edit,new Object[] { bean.getCode(),trainingcode },Integer.class);
+
+		    int desc =  jdbcTemplate.queryForObject(TrainingsQueryUtil.get_desc_edit,new Object[] { bean.getDescription(),trainingdesc },Integer.class);
+		    if(code==0 && desc==0) {
 			Map<String, Object> trainings = new HashMap<String, Object>();
 			
-			for(TrainingsBean listBean : bean.getTrainingsBeanDtls()) {
 				trainings.put("userName", userDetails.getUsername());
-				trainings.put("code", listBean.getCode());
-				trainings.put("desc", listBean.getDescription());
+				trainings.put("code", bean.getCode());
+				trainings.put("desc", bean.getDescription());
+				trainings.put("trainingid", bean.getTrainingid());
 				
-				int k = jdbcTemplate.queryForObject(TrainingsQueryUtil.checkDelete, new Object[] { listBean.getCode() },Integer.class);
+				namedParameterJdbcTemplate.update(TrainingsQueryUtil.UPDATE_trainings,trainings);
 				
-				if(k == 0) {
-				   namedParameterJdbcTemplate.update(TrainingsQueryUtil.SAVE_trainings,trainings);
-				}
-				else {
-					namedParameterJdbcTemplate.update(TrainingsQueryUtil.UPDATE_trainings,trainings);
-				}
-			}
+			
 		   resultBean.setSuccess(true);
+		    } 
+		    else {
+ 	 		   resultBean.setMessage("These details are already exist");
+
+ 	        }
 		}catch(Exception e) {
 			e.printStackTrace();
 			resultBean.setSuccess(false);

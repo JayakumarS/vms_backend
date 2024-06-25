@@ -7,8 +7,14 @@ import java.util.List;
 public class TrainingsResultBean {
 	
 	public boolean success;
+	public String message;
 
-
+	public String getMessage() {
+		return message;
+	}
+	public void setMessage(String message) {
+		this.message = message;
+	}
 	private List<TrainingsBean> list;
 	private TrainingsBean trainingsBean;
 	public boolean isSuccess() {
