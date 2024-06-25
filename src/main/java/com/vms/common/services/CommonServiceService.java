@@ -56,6 +56,9 @@ public interface CommonServiceService {
 	public List<CommonServiceBean> getgrouppage();
 
 	public List<CommonServiceBean> getdepartment();
+	
+	public List<CommonServiceBean> getNationality();
+
 
 
 }

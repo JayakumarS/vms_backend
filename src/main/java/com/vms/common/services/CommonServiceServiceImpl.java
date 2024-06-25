@@ -167,4 +167,10 @@ public class CommonServiceServiceImpl implements CommonServiceService{
 		// TODO Auto-generated method stub
 		return commonServicesDao.getdepartment();
 	}
+	
+	@Override
+	public List<CommonServiceBean> getNationality() {
+		// TODO Auto-generated method stub
+		return commonServicesDao.getNationality();
+	}
 }

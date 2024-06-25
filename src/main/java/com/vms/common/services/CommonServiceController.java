@@ -343,5 +343,17 @@ public class CommonServiceController {
 				return commonUtilityResultBean;
 			}
 
+	//Nationality
+			@RequestMapping("/getNationality")
+			public @ResponseBody CommonServicesResultBean getNationality() throws CustomException {
+				CommonServicesResultBean commonUtilityResultBean = new CommonServicesResultBean();
+				try {
+					commonUtilityResultBean.setlCommonUtilityBean(commonServicesService.getNationality());
+					commonUtilityResultBean.setSuccess(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				return commonUtilityResultBean;
+			}
 
 }

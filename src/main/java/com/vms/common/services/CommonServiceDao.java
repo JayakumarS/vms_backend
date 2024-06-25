@@ -56,5 +56,8 @@ public interface CommonServiceDao {
 	public List<CommonServiceBean> getgrouppage();
 
 	public List<CommonServiceBean> getdepartment();
+	
+	public List<CommonServiceBean> getNationality();
+
 
 }

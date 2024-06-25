@@ -57,9 +57,11 @@ public class CommonServiceQueryUtil {
 
 	public static final String GET_SEAMEN_NAME = "select crew_master_code as id,crew_master_name as text from crew_master ";
 	
-	public static final String GET_EXP_ENGINE = "select engine_master_id as id,engine_master_name as text from engine_master";
+	public static final String GET_EXP_ENGINE = "select engine_type_id as id,engine_type_name as text from engine_type";
 
 	public static final String GET_RANK_GROUP = "select rank_group_id as id ,rank_group_name as text  from rank_group";
 
 	public static final String GET_DEPARTMENT = "select dept_id as id ,dept_name as text  from department_master";
+
+	public static final String GET_NATIONALITY = "select country_id as id ,nationality as text from country_master";
 }
