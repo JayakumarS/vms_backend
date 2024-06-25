@@ -51,7 +51,7 @@ public class FleetDaoImpl implements FleetDao{
 		   resultBean.setSuccess(true);
 		    }
 			  else {
-		 		   resultBean.setMessage("These datails are already exist");
+		 		   resultBean.setMessage("These details are already exist");
 
 		        }
 		}catch(Exception e) {
@@ -98,7 +98,7 @@ public class FleetDaoImpl implements FleetDao{
 	        String errorMessage = e.getMessage();
 	        if (errorMessage.contains("violates foreign key constraint")) {
 	            resultBean.setSuccess(false);
-	            resultBean.setMessage("Cannot delete this fleet because it is referenced in another");
+	            resultBean.setMessage("Cannot delete this fleetid because it is referenced in another table");
 	        } else {
 	            e.printStackTrace();
 	            resultBean.setSuccess(false);

@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -49,7 +50,7 @@ public WageScaleResultBean save(WageScaleBean bean) {
 	   resultBean.setSuccess(true);
 	    }
 		  else {
-	 		   resultBean.setMessage("These datails are already exist");
+	 		   resultBean.setMessage("These details are already exist");
 
 	        }
 	}catch(Exception e) {
@@ -93,9 +94,16 @@ public WageScaleResultBean delete(int id) {
 		jdbcTemplate.update(WageScaleQueryUtil.delete,id);
 		resultBean.setSuccess(true);
 	}
-	catch(Exception e) {
-		e.printStackTrace();
-		resultBean.setSuccess(false);
+	catch(DataAccessException e) {
+		String errorMessage = e.getMessage();
+        if (errorMessage.contains("violates foreign key constraint")) {
+            resultBean.setSuccess(false);
+            resultBean.setMessage("Cannot delete this wagescaleid because it is referenced in another table");
+        } else {
+            e.printStackTrace();
+            resultBean.setSuccess(false);
+            resultBean.setMessage(errorMessage);
+        }
 	}	
 	return resultBean;
 }
