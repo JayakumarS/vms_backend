@@ -17,6 +17,7 @@ import org.springframework.stereotype.Repository;
 
 
 
+
 @Repository
 public class LanguagesDaoImpl implements LanguagesDao{
 
@@ -115,6 +116,18 @@ public class LanguagesDaoImpl implements LanguagesDao{
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		try {
+			
+			
+			String languagecode =  jdbcTemplate.queryForObject(LanguagesQueryUtil.language_code,new Object[] { bean.getLanguageid() },String.class);
+			String languagedesc =  jdbcTemplate.queryForObject(LanguagesQueryUtil.language_desc,new Object[] { bean.getLanguageid() },String.class);
+
+
+			int code =  jdbcTemplate.queryForObject(LanguagesQueryUtil.get_code_edit,new Object[] { bean.getCode(),languagecode },Integer.class);
+
+		    int desc =  jdbcTemplate.queryForObject(LanguagesQueryUtil.get_desc_edit,new Object[] { bean.getDescription(),languagedesc },Integer.class);
+
+			
+	        if(code==0 && desc==0) {
 			Map<String, Object> fleet = new HashMap<String, Object>();
 			
 			if(bean.getActive()!=null && bean.getActive().equalsIgnoreCase("true")) {
@@ -131,7 +144,12 @@ public class LanguagesDaoImpl implements LanguagesDao{
 				
 					namedParameterJdbcTemplate.update(LanguagesQueryUtil.UPDATE_LANG,fleet);
 
-		   resultBean.setSuccess(true);
+		    resultBean.setSuccess(true);
+	        }
+			  else {
+		 		   resultBean.setMessage("These details already exist");
+
+		        }	 
 		}catch(Exception e) {
 			e.printStackTrace();
 			resultBean.setSuccess(false);

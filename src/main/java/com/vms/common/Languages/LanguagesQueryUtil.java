@@ -13,10 +13,18 @@ public static final String delete = "delete from language_master where language_
 
 public static final String checkDelete = "select count(*) from language_master where language_id = ?";
 
-public static final String UPDATE_LANG = "update language_master set language_id=:languageid,language_code=:code,language_name=:desc,modified_by=:userName,modified_dt=now(),is_active=:active where language_code = :code";
+public static final String UPDATE_LANG = "update language_master set language_id=:languageid,language_code=:code,language_name=:desc,modified_by=:userName,modified_dt=now(),is_active=:active where language_id = :languageid";
 
 public static final String get_code = "select count(language_code) from language_master where language_code=?";
 
 public static final String get_desc = "select count(language_name) from language_master where language_name=?";
+
+public static final String language_code = "select language_code from language_master where language_id= ?";
+
+public static final String language_desc = "select language_name from language_master where language_id= ?";
+
+public static final String get_code_edit = "SELECT COUNT(language_code) FROM language_master WHERE language_code = ?  AND language_code != ?";
+
+public static final String get_desc_edit = "SELECT COUNT(language_name) FROM language_master WHERE language_name = ?  AND language_name != ?";
 
 }
