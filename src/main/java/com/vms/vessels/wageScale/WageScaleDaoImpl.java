@@ -56,6 +56,7 @@ public WageScaleResultBean save(WageScaleBean bean) {
 	}catch(Exception e) {
 		e.printStackTrace();
 		resultBean.setSuccess(false);
+		 resultBean.setMessage("Not Updated");
 	}
 	return resultBean;
 }
@@ -142,6 +143,7 @@ public WageScaleResultBean update(WageScaleBean bean) {
 	}catch(Exception e) {
 		e.printStackTrace();
 		resultBean.setSuccess(false);
+		 resultBean.setMessage("Not Updated");
 	}
 	return resultBean;
 }

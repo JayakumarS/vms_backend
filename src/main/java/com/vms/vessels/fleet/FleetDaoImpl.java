@@ -57,6 +57,7 @@ public class FleetDaoImpl implements FleetDao{
 		}catch(Exception e) {
 			e.printStackTrace();
 			resultBean.setSuccess(false);
+			resultBean.setMessage("Not Updated");
 		}
 		return resultBean;
 	}
@@ -144,6 +145,7 @@ public class FleetDaoImpl implements FleetDao{
 		}catch(Exception e) {
 			e.printStackTrace();
 			resultBean.setSuccess(false);
+			resultBean.setMessage("Not Updated");
 		}
 		return resultBean;
 	}

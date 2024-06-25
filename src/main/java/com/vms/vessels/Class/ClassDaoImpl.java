@@ -64,6 +64,7 @@ public class ClassDaoImpl implements ClassDao{
 		}catch(Exception e) {
 			e.printStackTrace();
 			resultBean.setSuccess(false);
+			resultBean.setMessage("Not Updated");
 		}
 		return resultBean;
 	}
@@ -153,6 +154,7 @@ public class ClassDaoImpl implements ClassDao{
 		}catch(Exception e) {
 			e.printStackTrace();
 			resultBean.setSuccess(false);
+			resultBean.setMessage("Not Updated");
 		}
 		return resultBean;
 	}

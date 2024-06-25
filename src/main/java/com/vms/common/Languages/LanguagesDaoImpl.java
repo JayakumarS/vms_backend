@@ -66,6 +66,7 @@ public class LanguagesDaoImpl implements LanguagesDao{
 		}catch(Exception e) {
 			e.printStackTrace();
 			resultBean.setSuccess(false);
+			resultBean.setMessage("Not Updated");
 		}
 		return resultBean;
 	}
@@ -161,6 +162,7 @@ public class LanguagesDaoImpl implements LanguagesDao{
 		}catch(Exception e) {
 			e.printStackTrace();
 			resultBean.setSuccess(false);
+			resultBean.setMessage("Not Updated");
 		}
 		return resultBean;
 	}

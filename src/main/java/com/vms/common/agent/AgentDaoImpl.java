@@ -58,6 +58,7 @@ public class AgentDaoImpl implements AgentDao{
 		}catch(Exception e) {
 			e.printStackTrace();
 			resultBean.setSuccess(false);
+			resultBean.setMessage("Not Updated");
 		}
 		return resultBean;
 	}
@@ -146,6 +147,7 @@ public class AgentDaoImpl implements AgentDao{
 		}catch(Exception e) {
 			e.printStackTrace();
 			resultBean.setSuccess(false);
+			resultBean.setMessage("Not Updated");
 		}
 		return resultBean;
 	}

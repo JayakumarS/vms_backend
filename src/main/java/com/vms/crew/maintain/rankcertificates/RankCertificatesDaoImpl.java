@@ -87,7 +87,7 @@ public class RankCertificatesDaoImpl implements RankCertificatesDao{
 
 	        resultBean.setSuccess(true);
 	    } catch (DataAccessException e) {
-	        e.printStackTrace(); // Log the error instead of just printing stack trace
+	        e.printStackTrace(); 
 	        resultBean.setSuccess(false);
 	    }
 	    return resultBean;
