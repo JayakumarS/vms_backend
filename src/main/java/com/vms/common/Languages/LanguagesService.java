@@ -7,9 +7,9 @@ public interface LanguagesService {
 
 	public LanguagesResultBean getList();
 
-	public LanguagesResultBean edit(String id);
+	public LanguagesResultBean edit(int id);
 
-	public LanguagesResultBean delete(String id);
+	public LanguagesResultBean delete(int id);
 
 	public LanguagesResultBean update(LanguagesBean bean);
 }

@@ -40,7 +40,7 @@ public class LanguagesController {
    	}
 	
 	@RequestMapping(value="/edit")
-	public LanguagesResultBean edit(@RequestParam("id") String id) {
+	public LanguagesResultBean edit(@RequestParam("id") int id) {
 		LanguagesResultBean rbean = new LanguagesResultBean();
 		try {
 			rbean = LanguagesService.edit(id);
@@ -62,7 +62,7 @@ public class LanguagesController {
 	}
 	
 	@RequestMapping(value="/delete")
-	public LanguagesResultBean delete(@RequestParam("id") String id) {
+	public LanguagesResultBean delete(@RequestParam("id") int id) {
 		LanguagesResultBean rbean = new LanguagesResultBean();
 		try {
 			rbean = LanguagesService.delete(id);

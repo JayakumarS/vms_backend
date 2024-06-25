@@ -23,13 +23,13 @@ public class LanguagesServiceImpl implements LanguagesService{
 	}
 
 	@Override
-	public LanguagesResultBean edit(String id) {
+	public LanguagesResultBean edit(int id) {
 		// TODO Auto-generated method stub
 		return LanguagesDao.edit(id);
 	}
 
 	@Override
-	public LanguagesResultBean delete(String id) {
+	public LanguagesResultBean delete(int id) {
 		// TODO Auto-generated method stub
 		return LanguagesDao.delete(id);
 	}

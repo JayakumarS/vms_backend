@@ -16,6 +16,7 @@ import org.springframework.stereotype.Repository;
 
 
 
+
 @Repository
 public class LanguagesDaoImpl implements LanguagesDao{
 
@@ -32,14 +33,16 @@ public class LanguagesDaoImpl implements LanguagesDao{
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		try {
+			
+
+			int code =  jdbcTemplate.queryForObject(LanguagesQueryUtil.get_code,new Object[] { bean.getCode() },Integer.class);
+
+		    int desc =  jdbcTemplate.queryForObject(LanguagesQueryUtil.get_desc,new Object[] { bean.getDescription() },Integer.class);
+
+		    if(code==0 && desc==0) {
 			Map<String, Object> fleet = new HashMap<String, Object>();
 			
-				
-				fleet.put("code", bean.getCode());
-				fleet.put("desc", bean.getDescription());
-				fleet.put("userName", userDetails.getUsername());
-				namedParameterJdbcTemplate.update(LanguagesQueryUtil.SAVE_LANG,fleet);
-			if(bean.getActive()!=null && bean.getActive().equalsIgnoreCase("true")) {
+				if(bean.getActive()!=null && bean.getActive().equalsIgnoreCase("true")) {
 				bean.setActive("Y");
 			} else {
 				bean.setActive("N");
@@ -53,6 +56,11 @@ public class LanguagesDaoImpl implements LanguagesDao{
 			
 			
 		   resultBean.setSuccess(true);
+		    }
+			  else {
+		 		   resultBean.setMessage("These datails are already exist");
+
+		        }
 		}catch(Exception e) {
 			e.printStackTrace();
 			resultBean.setSuccess(false);
@@ -75,7 +83,7 @@ public class LanguagesDaoImpl implements LanguagesDao{
 	}
 
 	@Override
-	public LanguagesResultBean edit(String id) {		
+	public LanguagesResultBean edit(int id) {		
 		LanguagesResultBean resultBean = new LanguagesResultBean();
 		resultBean.setSuccess(false);
 		try {
@@ -88,7 +96,7 @@ public class LanguagesDaoImpl implements LanguagesDao{
 	}
 
 	@Override
-	public LanguagesResultBean delete(String id) {
+	public LanguagesResultBean delete(int id) {
 		LanguagesResultBean resultBean = new LanguagesResultBean();
 		try {
 			jdbcTemplate.update(LanguagesQueryUtil.delete,id);
@@ -109,21 +117,17 @@ public class LanguagesDaoImpl implements LanguagesDao{
 		try {
 			Map<String, Object> fleet = new HashMap<String, Object>();
 			
-			
-				fleet.put("code", bean.getCode());
-				fleet.put("desc", bean.getDescription());
-				fleet.put("userName", userDetails.getUsername());
-		
 			if(bean.getActive()!=null && bean.getActive().equalsIgnoreCase("true")) {
 				bean.setActive("Y");
 			} else {
 				bean.setActive("N");
 			}
+			  fleet.put("languageid", bean.getLanguageid());
 				fleet.put("code", bean.getCode());
 				fleet.put("desc", bean.getDescription());
 				fleet.put("active", bean.getActive());
 				fleet.put("userName", userDetails.getUsername());
-				int k = jdbcTemplate.queryForObject(LanguagesQueryUtil.checkDelete, new Object[] { bean.getCode() },Integer.class);
+//				int k = jdbcTemplate.queryForObject(LanguagesQueryUtil.checkDelete, new Object[] { bean.getCode() },Integer.class);
 				
 					namedParameterJdbcTemplate.update(LanguagesQueryUtil.UPDATE_LANG,fleet);
 

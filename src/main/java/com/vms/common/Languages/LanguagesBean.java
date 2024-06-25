@@ -5,6 +5,7 @@ public class LanguagesBean {
 	private String active;
 	private String code;
 	private String description;
+	private int languageid;
 	public String getCode() {
 		return code;
 	}
@@ -23,5 +24,11 @@ public class LanguagesBean {
 	}
 	public void setActive(String active) {
 		this.active = active;
+	}
+	public int getLanguageid() {
+		return languageid;
+	}
+	public void setLanguageid(int languageid) {
+		this.languageid = languageid;
 	}
 }
