@@ -22,13 +22,13 @@ public class DepartmentServiceImpl implements DepartmentService {
 	}
 
 	@Override
-	public DepartmentResultBean edit(String id) {
+	public DepartmentResultBean edit(Integer id) {
 		// TODO Auto-generated method stub
 		return departmentDao.edit(id);
 	}
 
 	@Override
-	public DepartmentResultBean delete(String id) {
+	public DepartmentResultBean delete(Integer id) {
 		// TODO Auto-generated method stub
 		return departmentDao.delete(id);
 	}

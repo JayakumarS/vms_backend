@@ -22,13 +22,13 @@ public class CurrencyServiceImpl implements CurrencyService {
 	}
 
 	@Override
-	public CurrencyResultBean edit(String id) {
+	public CurrencyResultBean edit(Integer id) {
 		// TODO Auto-generated method stub
 		return currencyDao.edit(id);
 	}
 
 	@Override
-	public CurrencyResultBean delete(String id) {
+	public CurrencyResultBean delete(Integer id) {
 		// TODO Auto-generated method stub
 		return currencyDao.delete(id);
 	}

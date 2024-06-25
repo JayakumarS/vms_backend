@@ -14,6 +14,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
+import com.vms.crew.rankGroup.RankGroupQueryUtil;
 import com.vms.master.vesselType.VesselTypeBean;
 import com.vms.master.vesselType.VesselTypeQueryUtil;
 import com.vms.master.vesselType.VesselTypeResultBean;
@@ -35,23 +36,26 @@ public class CurrencyDaoImpl implements CurrencyDao{
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		try {
-			Map<String, Object> currency = new HashMap<String, Object>();
 			
-
-				
-				if(bean.getActive()!=null && bean.getActive().equalsIgnoreCase("true")) {
-					bean.setActive("Y");
-				} else {
-					bean.setActive("N");
-				}
-				
-				if(bean.getCurrency()!=null && bean.getCurrency().equalsIgnoreCase("true")) {
-					bean.setCurrency("Y");
-				} else {
-					bean.setCurrency("N");
-				}
-				
-				currency.put("userName", userDetails.getUsername());
+		Integer i =  jdbcTemplate.queryForObject(CurrencyQueryUtil.get_code,new Object[] { bean.getCode() },Integer.class);
+		Integer j =  jdbcTemplate.queryForObject(CurrencyQueryUtil.get_name,new Object[] { bean.getName() },Integer.class);
+		    
+		    if(i==0 && j==0) {
+            	Map<String, Object> currency = new HashMap<String, Object>();
+            	
+            	   if(bean.getActive()!=null && bean.getActive().equalsIgnoreCase("true")) {
+						bean.setActive("Y");
+					} else {
+						bean.setActive("N");
+					}
+					
+					if(bean.getCurrency()!=null && bean.getCurrency().equalsIgnoreCase("true")) {
+						bean.setCurrency("Y");
+					} else {
+						bean.setCurrency("N");
+					}
+    			
+			    currency.put("userName", userDetails.getUsername());
 				currency.put("code", bean.getCode());
 				currency.put("name", bean.getName());
 				currency.put("fromcurren", bean.getFromcurren());
@@ -65,9 +69,17 @@ public class CurrencyDaoImpl implements CurrencyDao{
 
 			
 		   resultBean.setSuccess(true);
+            	
+            }
+            else {
+      		   resultBean.setMsg("These details already exist");
+
+             }
+			
 		}catch(Exception e) {
 			e.printStackTrace();
 			resultBean.setSuccess(false);
+	 		resultBean.setMsg("Not Updated");
 		}
 		return resultBean;
 	}
@@ -89,7 +101,7 @@ public class CurrencyDaoImpl implements CurrencyDao{
 	}
 
 	@Override
-	public CurrencyResultBean edit(String id) {
+	public CurrencyResultBean edit(Integer id) {
 		// TODO Auto-generated method stub
 		CurrencyResultBean resultBean = new CurrencyResultBean();
 		resultBean.setSuccess(false);
@@ -103,7 +115,7 @@ public class CurrencyDaoImpl implements CurrencyDao{
 	}
 
 	@Override
-	public CurrencyResultBean delete(String id) {
+	public CurrencyResultBean delete(Integer id) {
 		// TODO Auto-generated method stub
 		CurrencyResultBean resultBean = new CurrencyResultBean();
 		try {
@@ -123,45 +135,58 @@ public class CurrencyDaoImpl implements CurrencyDao{
 		CurrencyResultBean resultBean = new CurrencyResultBean();
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
-		try {
+try {
+			
+			String currcode =  jdbcTemplate.queryForObject(CurrencyQueryUtil.cur_code,new Object[] { bean.getCurrencyId() },String.class);
+			String currname =  jdbcTemplate.queryForObject(CurrencyQueryUtil.cur_name,new Object[] { bean.getCurrencyId() },String.class);
+
+			
+			
+			int code =  jdbcTemplate.queryForObject(CurrencyQueryUtil.get_cur_edit,new Object[] { bean.getCode(),currcode },Integer.class);
+
+		    int name =  jdbcTemplate.queryForObject(CurrencyQueryUtil.get_name_edit,new Object[] { bean.getName(),currname },Integer.class);
+
+			
+            if(code==0 && name==0) {
+		    
 			Map<String, Object> currency = new HashMap<String, Object>();
 			
-				
-				if(bean.getActive()!=null && bean.getActive().equalsIgnoreCase("true")) {
-					bean.setActive("Y");
-				} else {
-					bean.setActive("N");
-				}
-				
-				if(bean.getCurrency()!=null && bean.getCurrency().equalsIgnoreCase("true")) {
-					bean.setCurrency("Y");
-				} else {
-					bean.setCurrency("N");
-				}
-				
-				currency.put("userName", userDetails.getUsername());
-				currency.put("code", bean.getCode());
-				currency.put("name", bean.getName());
-				currency.put("fromcurren", bean.getFromcurren());
-				currency.put("tocurren",bean.getTocurren());
-				currency.put("dvalue", bean.getDvalue());
-				currency.put("fractpart", bean.getFractpart());
-				currency.put("active", bean.getActive());
-				currency.put("currency", bean.getCurrency());
-				
-				int k = jdbcTemplate.queryForObject(CurrencyQueryUtil.checkDelete, new Object[] { bean.getCode() },Integer.class);
-				
-				if(k == 0) {
-				   namedParameterJdbcTemplate.update(CurrencyQueryUtil.currency_save,currency);
-				}
-				else {
-					namedParameterJdbcTemplate.update(CurrencyQueryUtil.currency_update,currency);
-				}
-
+			if(bean.getActive()!=null && bean.getActive().equalsIgnoreCase("true")) {
+				bean.setActive("Y");
+			} else {
+				bean.setActive("N");
+			}
+			
+			if(bean.getCurrency()!=null && bean.getCurrency().equalsIgnoreCase("true")) {
+				bean.setCurrency("Y");
+			} else {
+				bean.setCurrency("N");
+			}
+			
+			currency.put("userName", userDetails.getUsername());
+			currency.put("currencyId", bean.getCurrencyId());
+			currency.put("code", bean.getCode());
+			currency.put("name", bean.getName());
+			currency.put("fromcurren", bean.getFromcurren());
+			currency.put("tocurren",bean.getTocurren());
+			currency.put("dvalue", bean.getDvalue());
+			currency.put("fractpart", bean.getFractpart());
+			currency.put("active", bean.getActive());
+			currency.put("currency", bean.getCurrency());
+			
+				namedParameterJdbcTemplate.update(CurrencyQueryUtil.currency_update,currency);
+		
 		   resultBean.setSuccess(true);
+            }
+            else {
+     		   resultBean.setMsg("These details already exist");
+
+            }
 		}catch(Exception e) {
 			e.printStackTrace();
 			resultBean.setSuccess(false);
+	 		   resultBean.setMsg("Not Updated");
+
 		}
 		return resultBean;
 	}

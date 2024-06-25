@@ -5,9 +5,9 @@ public interface DepartmentService {
 
 	public DepartmentResultBean getList();
 
-	public DepartmentResultBean edit(String id);
+	public DepartmentResultBean edit(Integer id);
 
-	public DepartmentResultBean delete(String id);
+	public DepartmentResultBean delete(Integer id);
 
 	public DepartmentResultBean update(DepartmentBean bean);
 

@@ -69,4 +69,14 @@ public class CurrencyBean {
 		this.currencydtls = currencydtls;
 	}
 	
+	private Integer currencyId;
+	public Integer getCurrencyId() {
+		return currencyId;
+	}
+	public void setCurrencyId(Integer currencyId) {
+		this.currencyId = currencyId;
+	}
+
+	
+	
 }
