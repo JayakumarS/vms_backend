@@ -1,4 +1,5 @@
-package com.vms.crew.maintain.bloodgroup;
+package com.vms.master.bloodgroup;
+
 
 public interface BloodGroupDao {
 
@@ -11,6 +12,8 @@ public interface BloodGroupDao {
 	public BloodGroupResultBean edit(String id);
 
 	public BloodGroupResultBean update(BloodGroupBean bean);
+
+	public BloodGroupBean getSequenceCode();
 
 	
 

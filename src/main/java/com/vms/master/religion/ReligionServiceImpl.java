@@ -1,4 +1,4 @@
-package com.vms.crew.maintain.religion;
+package com.vms.master.religion;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,6 +40,12 @@ public class ReligionServiceImpl implements ReligionService {
 	public ReligionResultBean delete(String id) {
 		
 		return religionDao. delete(id);
+	}
+
+	@Override
+	public ReligionBean getSequenceCode() {
+		// TODO Auto-generated method stub
+		return religionDao.getSequenceCode();
 	}
 
 	

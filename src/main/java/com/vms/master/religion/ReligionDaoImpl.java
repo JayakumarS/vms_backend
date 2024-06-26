@@ -1,6 +1,8 @@
-package com.vms.crew.maintain.religion;
+package com.vms.master.religion;
 
 import java.util.ArrayList;
+
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +13,8 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
+
+
 
 @Repository
 public class ReligionDaoImpl implements ReligionDao {
@@ -37,7 +41,13 @@ public class ReligionDaoImpl implements ReligionDao {
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		try {
-			Map<String, Object> vesselType = new HashMap<String, Object>();
+			
+			 int name =  jdbcTemplate.queryForObject(ReligionQueryUtil.get_name,new Object[] { bean.getName() },Integer.class);
+
+				
+	            if(name==0) {
+	        	
+			Map<String, Object> religion = new HashMap<String, Object>();
 			
 			if(bean.getActive()!=null && bean.getActive().equalsIgnoreCase("true")) {
 				bean.setActive("Y");
@@ -45,17 +55,23 @@ public class ReligionDaoImpl implements ReligionDao {
 				bean.setActive("N");
 			}
 		
-				vesselType.put("userName", userDetails.getUsername());
-				vesselType.put("code", bean.getCode());
-				vesselType.put("name", bean.getName());
-				vesselType.put("active", bean.getActive());
-				namedParameterJdbcTemplate.update(ReligionQueryUtil.SAVE_RELIGION_TYPE,vesselType);
+			religion.put("userName", userDetails.getUsername());
+			religion.put("code", bean.getCode());
+			religion.put("name", bean.getName());
+			religion.put("active", bean.getActive());
+				namedParameterJdbcTemplate.update(ReligionQueryUtil.SAVE_RELIGION,religion);
 			
 			
 		   resultBean.setSuccess(true);
+	        }
+			  else {
+		 		   resultBean.setMessage("These details already exist");
+
+		        }	
 		}catch(Exception e) {
 			e.printStackTrace();
 			resultBean.setSuccess(false);
+			 resultBean.setMessage("Not Updated");
 		}
 		return resultBean;
 	}
@@ -81,7 +97,7 @@ public class ReligionDaoImpl implements ReligionDao {
 		ReligionResultBean resultBean = new ReligionResultBean();
 		resultBean.setSuccess(false);
 		try {
-			resultBean.setReligionBean(jdbcTemplate.queryForObject(ReligionQueryUtil.getEdit,new Object[] { id }, new BeanPropertyRowMapper<ReligionBean>(ReligionBean.class)));
+			resultBean.setList(jdbcTemplate.query(ReligionQueryUtil.getEdit,new Object[] { id }, new BeanPropertyRowMapper<ReligionBean>(ReligionBean.class)));
 		}
 		catch(Exception e){
 			e.printStackTrace();
@@ -95,7 +111,18 @@ public class ReligionDaoImpl implements ReligionDao {
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		try {
-			Map<String, Object> vesselType = new HashMap<String, Object>();
+			
+			
+			String religionname =  jdbcTemplate.queryForObject(ReligionQueryUtil.religion_name,new Object[] { bean.getReligionId() },String.class);
+
+
+
+		    int name =  jdbcTemplate.queryForObject(ReligionQueryUtil.get_religion_edit,new Object[] { bean.getName(),religionname },Integer.class);
+
+			
+	        if(name==0) {
+	        	
+			Map<String, Object> religion = new HashMap<String, Object>();
 			
 			if(bean.getActive()!=null && bean.getActive().equalsIgnoreCase("true")) {
 				bean.setActive("Y");
@@ -103,24 +130,24 @@ public class ReligionDaoImpl implements ReligionDao {
 				bean.setActive("N");
 			}
 
-				vesselType.put("userName", userDetails.getUsername());
-				vesselType.put("code", bean.getCode());
-				vesselType.put("name", bean.getName());
-				vesselType.put("active", bean.getActive());
+			religion.put("userName", userDetails.getUsername());
+			religion.put("code", bean.getCode());
+			religion.put("name", bean.getName());
+			religion.put("active", bean.getActive());
+			religion.put("religionId", bean.getReligionId());
+			namedParameterJdbcTemplate.update(ReligionQueryUtil.UPDATE_RELIGION,religion);
 				
-				int k = jdbcTemplate.queryForObject(ReligionQueryUtil.checkDelete, new Object[] { bean.getCode() },Integer.class);
-				
-				if(k == 0) {
-				   namedParameterJdbcTemplate.update(ReligionQueryUtil.SAVE_RELIGION_TYPE,vesselType);
-				}
-				else {
-					namedParameterJdbcTemplate.update(ReligionQueryUtil.UPDATE_RELIGION_TYPE,vesselType);
-				}
 			
 		   resultBean.setSuccess(true);
+	   	 }
+			  else {
+		 		   resultBean.setMessage("These details already exist");
+
+		        }	
 		}catch(Exception e) {
 			e.printStackTrace();
 			resultBean.setSuccess(false);
+			 resultBean.setMessage("Not Updated");
 		}
 		return resultBean;
 	}
@@ -138,6 +165,21 @@ public class ReligionDaoImpl implements ReligionDao {
 			resultBean.setSuccess(false);
 		}	
 		return resultBean;
+	}
+
+	@Override
+	public ReligionBean getSequenceCode() {
+		ReligionBean religionBean = new ReligionBean();
+
+		    try {
+		        String religionId = jdbcTemplate.queryForObject(ReligionQueryUtil.get_RELIGION_Id, String.class);
+		        religionBean.setCode(religionId);
+		    } catch (Exception e) {
+		        // Log the exception
+		        e.printStackTrace();
+		    }
+
+		    return religionBean;
 	}
 
 	

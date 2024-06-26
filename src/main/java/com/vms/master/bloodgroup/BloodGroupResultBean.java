@@ -1,13 +1,26 @@
-package com.vms.crew.maintain.bloodgroup;
+package com.vms.master.bloodgroup;
 
 import java.util.List;
-
 
 public class BloodGroupResultBean {
 
 	public boolean success;
 	private List<BloodGroupBean> list;
 	private BloodGroupBean bloodGroupBean;
+	public String message;
+	
+	public String getMessage() {
+		return message;
+	}
+	public void setMessage(String message) {
+		this.message = message;
+	}
+	public BloodGroupBean getBloodGroupBean() {
+		return bloodGroupBean;
+	}
+	public void setBloodGroupBean(BloodGroupBean bloodGroupBean) {
+		this.bloodGroupBean = bloodGroupBean;
+	}
 	public boolean isSuccess() {
 		return success;
 	}
@@ -20,18 +33,6 @@ public class BloodGroupResultBean {
 	public void setList(List<BloodGroupBean> list) {
 		this.list = list;
 	}
-	public BloodGroupBean getBloodGroupBean() {
-		return bloodGroupBean;
-	}
-	public void setBloodGroupBean(BloodGroupBean bloodGroupBean) {
-		this.bloodGroupBean = bloodGroupBean;
-	}
-	
-	
-	
-	
-	
-	
 	
 	
 	

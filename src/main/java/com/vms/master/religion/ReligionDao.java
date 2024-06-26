@@ -1,4 +1,4 @@
-package com.vms.crew.maintain.religion;
+package com.vms.master.religion;
 
 public interface ReligionDao {
 
@@ -11,6 +11,8 @@ public interface ReligionDao {
 	public ReligionResultBean update(ReligionBean bean);
 
 	public ReligionResultBean delete(String id);
+
+	public ReligionBean getSequenceCode();
 
 	
 }

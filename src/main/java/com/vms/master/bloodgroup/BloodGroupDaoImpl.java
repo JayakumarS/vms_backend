@@ -1,10 +1,11 @@
-package com.vms.crew.maintain.bloodgroup;
+package com.vms.master.bloodgroup;
 
 import java.util.ArrayList;
+
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -13,8 +14,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
-import com.vms.master.department.DepartmentBean;
-import com.vms.master.department.DepartmentQueryUtil;
 
 
 
@@ -39,7 +38,14 @@ public class BloodGroupDaoImpl implements BloodGroupDao {
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		try {
-			Map<String, Object> vesselType = new HashMap<String, Object>();
+			
+			
+			
+			  int name =  jdbcTemplate.queryForObject(BloodGroupQueryUtil.get_name,new Object[] { bean.getName() },Integer.class);
+
+				
+	            if(name==0) {
+			Map<String, Object> bloodGroup = new HashMap<String, Object>();
 			
 			if(bean.getActive()!=null && bean.getActive().equalsIgnoreCase("true")) {
 				bean.setActive("Y");
@@ -47,17 +53,23 @@ public class BloodGroupDaoImpl implements BloodGroupDao {
 				bean.setActive("N");
 			}
 		
-				vesselType.put("userName", userDetails.getUsername());
-				vesselType.put("bloodGroupCode", bean.getBloodGroupCode());
-				vesselType.put("name", bean.getName());
-				vesselType.put("active", bean.getActive());
-				namedParameterJdbcTemplate.update(BloodGroupQueryUtil.SAVE_RELIGION_TYPE,vesselType);
+			bloodGroup.put("userName", userDetails.getUsername());
+			bloodGroup.put("bloodGroupCode", bean.getBloodGroupCode());
+			bloodGroup.put("name", bean.getName());
+			bloodGroup.put("active", bean.getActive());
+				namedParameterJdbcTemplate.update(BloodGroupQueryUtil.SAVE_BLOODGROUP,bloodGroup);
 			
 			
 		   resultBean.setSuccess(true);
+	            }
+	    		  else {
+	    	 		   resultBean.setMessage("These details already exist");
+
+	    	        }	
 		}catch(Exception e) {
 			e.printStackTrace();
 			resultBean.setSuccess(false);
+			 resultBean.setMessage("Not Updated");
 		}
 		return resultBean;
 	}
@@ -81,20 +93,33 @@ public class BloodGroupDaoImpl implements BloodGroupDao {
 		BloodGroupResultBean resultBean = new BloodGroupResultBean();
 		resultBean.setSuccess(false);
 		try {
-			resultBean.setBloodGroupBean(jdbcTemplate.queryForObject(BloodGroupQueryUtil.getEdit,new Object[] { id }, new BeanPropertyRowMapper<BloodGroupBean>(BloodGroupBean.class)));
+			resultBean.setList(jdbcTemplate.query(BloodGroupQueryUtil.getEdit,new Object[] { id }, new BeanPropertyRowMapper<BloodGroupBean>(BloodGroupBean.class)));
 		}
 		catch(Exception e){
 			e.printStackTrace();
 		}
 		return resultBean; 
 	}
+	
+	
 	@Override
 	public BloodGroupResultBean update(BloodGroupBean bean) {
 		BloodGroupResultBean resultBean = new BloodGroupResultBean();
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		try {
-			Map<String, Object> vesselType = new HashMap<String, Object>();
+			
+			String bloodGroupname =  jdbcTemplate.queryForObject(BloodGroupQueryUtil.bloodGroup_name,new Object[] { bean.getBloodGroupId() },String.class);
+
+
+
+		    int name =  jdbcTemplate.queryForObject(BloodGroupQueryUtil.get_bloodGroup_edit,new Object[] { bean.getName(),bloodGroupname },Integer.class);
+
+			
+	        if(name==0) {
+	        	
+	        
+			Map<String, Object> bloodGroup = new HashMap<String, Object>();
 			
 			if(bean.getActive()!=null && bean.getActive().equalsIgnoreCase("true")) {
 				bean.setActive("Y");
@@ -102,24 +127,25 @@ public class BloodGroupDaoImpl implements BloodGroupDao {
 				bean.setActive("N");
 			}
 
-				vesselType.put("userName", userDetails.getUsername());
-				vesselType.put("bloodGroupCode", bean.getBloodGroupCode());
-				vesselType.put("name", bean.getName());
-				vesselType.put("active", bean.getActive());
+			bloodGroup.put("userName", userDetails.getUsername());
+			bloodGroup.put("bloodGroupCode", bean.getBloodGroupCode());
+			bloodGroup.put("name", bean.getName());
+			bloodGroup.put("active", bean.getActive());
+			bloodGroup.put("bloodGroupId", bean.getBloodGroupId());
+			namedParameterJdbcTemplate.update(BloodGroupQueryUtil.UPDATE_BLOODGROUP,bloodGroup);
 				
-				int k = jdbcTemplate.queryForObject(BloodGroupQueryUtil.checkDelete, new Object[] { bean.getBloodGroupCode() },Integer.class);
-				
-				if(k == 0) {
-				   namedParameterJdbcTemplate.update(BloodGroupQueryUtil.SAVE_RELIGION_TYPE,vesselType);
-				}
-				else {
-					namedParameterJdbcTemplate.update(BloodGroupQueryUtil.UPDATE_RELIGION_TYPE,vesselType);
-				}
 			
 		   resultBean.setSuccess(true);
+		   
+		 }
+		  else {
+	 		   resultBean.setMessage("These details already exist");
+
+	        }	
 		}catch(Exception e) {
 			e.printStackTrace();
 			resultBean.setSuccess(false);
+			 resultBean.setMessage("Not Updated");
 		}
 		return resultBean;
 	}
@@ -139,4 +165,30 @@ public class BloodGroupDaoImpl implements BloodGroupDao {
 		return resultBean;
 	}
 
+	@Override
+	public BloodGroupBean getSequenceCode() {
+		BloodGroupBean bloodGroupBean = new BloodGroupBean();
+
+	    try {
+	        String bloodGroupId = jdbcTemplate.queryForObject(BloodGroupQueryUtil.get_BLOODGROUP_Id, String.class);
+	        bloodGroupBean.setBloodGroupCode(bloodGroupId);
+	    } catch (Exception e) {
+	        // Log the exception
+	        e.printStackTrace();
+	    }
+
+	    return bloodGroupBean;
+	}
+
+	
+	
+	
+	
+	
+	
+	
 }
+
+
+
+

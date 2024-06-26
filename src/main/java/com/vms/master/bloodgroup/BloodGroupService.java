@@ -1,4 +1,4 @@
-package com.vms.crew.maintain.bloodgroup;
+package com.vms.master.bloodgroup;
 
 public interface BloodGroupService {
 
@@ -11,6 +11,8 @@ public interface BloodGroupService {
 	public	BloodGroupResultBean getList();
 
 	public	BloodGroupResultBean save(BloodGroupBean bean);
+
+	public BloodGroupBean getSequenceCode();
 
 
 

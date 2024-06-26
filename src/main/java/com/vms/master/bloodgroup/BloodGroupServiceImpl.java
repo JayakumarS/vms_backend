@@ -1,4 +1,4 @@
-package com.vms.crew.maintain.bloodgroup;
+package com.vms.master.bloodgroup;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,6 +39,13 @@ public class BloodGroupServiceImpl implements BloodGroupService {
 		return bloodGroupDao.save(bean);
 	}
 
+	@Override
+	public BloodGroupBean getSequenceCode() {
+		// TODO Auto-generated method stub
+		return bloodGroupDao.getSequenceCode();
+	}
+
 	
 
 }
+

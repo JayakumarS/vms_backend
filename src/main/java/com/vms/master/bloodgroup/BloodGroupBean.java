@@ -1,12 +1,11 @@
-package com.vms.crew.maintain.bloodgroup;
-
-
+package com.vms.master.bloodgroup;
 
 public class BloodGroupBean {
-
 	private String bloodGroupCode;
 	private String name;
 	private String active;
+	private Integer bloodGroupId;
+	
 	public String getBloodGroupCode() {
 		return bloodGroupCode;
 	}
@@ -15,6 +14,12 @@ public class BloodGroupBean {
 	}
 	public String getName() {
 		return name;
+	}
+	public Integer getBloodGroupId() {
+		return bloodGroupId;
+	}
+	public void setBloodGroupId(Integer bloodGroupId) {
+		this.bloodGroupId = bloodGroupId;
 	}
 	public void setName(String name) {
 		this.name = name;
@@ -25,20 +30,5 @@ public class BloodGroupBean {
 	public void setActive(String active) {
 		this.active = active;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 }

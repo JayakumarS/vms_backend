@@ -1,4 +1,4 @@
-package com.vms.crew.maintain.religion;
+package com.vms.master.religion;
 
 
 public class ReligionBean {
@@ -6,8 +6,16 @@ public class ReligionBean {
 	private String code;
 	private String name;
 	private String active;
+	private Integer religionId;
+	
 	public String getCode() {
 		return code;
+	}
+	public Integer getReligionId() {
+		return religionId;
+	}
+	public void setReligionId(Integer religionId) {
+		this.religionId = religionId;
 	}
 	public void setCode(String code) {
 		this.code = code;
