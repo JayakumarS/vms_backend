@@ -17,11 +17,7 @@ public class RankWorkingShiftServiceImpl implements RankWorkingShiftService{
 		return RankWorkingShiftDao.save(bean);
 	}
 	
-	@Override
-	public RankWorkingShiftResultBean savedetail(RankWorkingShiftBean bean) {
-		// TODO Auto-generated method stub
-		return RankWorkingShiftDao.save(bean);
-	}
+
 
 	@Override
 	public RankWorkingShiftResultBean getList() {

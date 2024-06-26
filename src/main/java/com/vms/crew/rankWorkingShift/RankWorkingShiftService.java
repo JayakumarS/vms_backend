@@ -4,7 +4,6 @@ public interface RankWorkingShiftService {
 	
 	public RankWorkingShiftResultBean save(RankWorkingShiftBean bean);
 	
-	public RankWorkingShiftResultBean savedetail(RankWorkingShiftBean bean);
 
 
 	public RankWorkingShiftResultBean getList();

@@ -43,14 +43,9 @@ public class RankWorkingShiftDaoImpl implements RankWorkingShiftDao{
 				rankWorkingShift.put("eDate", bean.geteDate());
 				rankWorkingShift.put("remarks", bean.getRemarks());
 				rankWorkingShift.put("watchkeepers", bean.getWatchkeepers());
+				Integer headerId=namedParameterJdbcTemplate.queryForObject(RankWorkingShiftQueryUtil.SAVE_rank_shift_master,rankWorkingShift,Integer.class);
 				
-				
-
-				
-				
-				namedParameterJdbcTemplate.update(RankWorkingShiftQueryUtil.SAVE_rank_shift_master,rankWorkingShift);
-				
-				savedetail(bean);
+				savedetail(bean,headerId);
 			
 		
 		   resultBean.setSuccess(true);
@@ -62,7 +57,7 @@ public class RankWorkingShiftDaoImpl implements RankWorkingShiftDao{
 	}
 	
 	@Override
-	public RankWorkingShiftResultBean savedetail(RankWorkingShiftBean bean) {
+	public RankWorkingShiftResultBean savedetail(RankWorkingShiftBean bean, Integer headerId) {
 		RankWorkingShiftResultBean resultBean = new RankWorkingShiftResultBean();
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
@@ -89,6 +84,7 @@ public class RankWorkingShiftDaoImpl implements RankWorkingShiftDao{
 
                 rankWorkingShift.put("place", listBean.getPlace());
                 rankWorkingShift.put("watchKeeping", listBean.getWatchKeeping());
+                rankWorkingShift.put("rankshiftiddtl", headerId);
 
                 namedParameterJdbcTemplate.update(RankWorkingShiftQueryUtil.SAVE_rank_shift_dtl, rankWorkingShift);
             }
@@ -122,11 +118,14 @@ public class RankWorkingShiftDaoImpl implements RankWorkingShiftDao{
 		resultBean.setSuccess(false);
 		try {
 			resultBean.setList(jdbcTemplate.query(RankWorkingShiftQueryUtil.getEdit,new Object[] { id }, new BeanPropertyRowMapper<RankWorkingShiftBean>(RankWorkingShiftBean.class)));
+			
+			List<RankWorkingShiftBean> sampleDtl = jdbcTemplate.query(RankWorkingShiftQueryUtil.getEditDtl,new Object[] { id },new BeanPropertyRowMapper<RankWorkingShiftBean>(RankWorkingShiftBean.class));	
+			resultBean.setSecondDetailRow(sampleDtl);
 		}
 		catch(Exception e){
 			e.printStackTrace();
 		}
-		return resultBean; 
+		return resultBean;
 	}
 
 	@Override
@@ -159,16 +158,24 @@ public class RankWorkingShiftDaoImpl implements RankWorkingShiftDao{
 				rankWorkingShift.put("eDate", bean.geteDate());
 				rankWorkingShift.put("remarks", bean.getRemarks());
 				rankWorkingShift.put("watchkeepers", bean.getWatchkeepers());
-				
-				
-				int k = jdbcTemplate.queryForObject(RankWorkingShiftQueryUtil.checkDelete, new Object[] {bean.getCode() },Integer.class);
-				
-				if(k == 0) {
-				   namedParameterJdbcTemplate.update(RankWorkingShiftQueryUtil.SAVE_rank_shift_master,rankWorkingShift);
-				}
-				else {
-					namedParameterJdbcTemplate.update(RankWorkingShiftQueryUtil.UPDATE_rank_Shift_dtl,rankWorkingShift);
-				}
+				rankWorkingShift.put("rankshiftid", bean.getRankshiftid());
+
+				Integer headerId= namedParameterJdbcTemplate.queryForObject(RankWorkingShiftQueryUtil.UPDATE_rank_Shift_dtl,rankWorkingShift,Integer.class);
+				if(headerId !=null) {
+					jdbcTemplate.update(RankWorkingShiftQueryUtil.DELETE_RANK_SHIFT_DTL, headerId);
+					for(int i=0;i<bean. getSecondDetailRow().size();i++) {			
+						
+						rankWorkingShift.put("rankshiftiddtl",headerId);
+						rankWorkingShift.put("shiftStart", bean.getShiftStart());
+						rankWorkingShift.put("shiftEnd", bean.getShiftEnd());
+						rankWorkingShift.put("place", bean.getPlace());
+						rankWorkingShift.put("watchKeeping", bean.getWatchKeeping());
+						
+						
+						
+						namedParameterJdbcTemplate.update(RankWorkingShiftQueryUtil.SAVE_rank_shift_dtl,rankWorkingShift);
+					}
+				  }
 		
 		   resultBean.setSuccess(true);
 		}catch(Exception e) {

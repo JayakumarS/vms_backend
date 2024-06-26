@@ -8,7 +8,7 @@ public class OfficialManagersQueryUtil {
 public static final String getList = "select official_managers_id as offmanagerid, official_manager_code as code, official_manager_name as description,city as city,address as address ,phoneno as phone from official_managers order by created_dt desc";
 		
 
-public static final String getEdit = " select official_managers_id as offmanagerid, official_manager_code as code,official_manager_name as description ,city as city,address as address,postal_code as poscode,phoneno as phone, official_manager_remarks as remarks from official_managers where  official_managers_id = ?";
+public static final String getEdit = " select official_managers_id as offmanagerid, official_manager_code as code,official_manager_name as description ,city as city,address as address,postal_code as poscode,phoneno as phone, official_manager_remarks as remarks ,blogo_file_Name as blogofileName,plogo_file_Name as plogofileName from official_managers where  official_managers_id = ?";
 		
 
 public static final String delete = "delete from official_managers where  official_managers_id = ? ";

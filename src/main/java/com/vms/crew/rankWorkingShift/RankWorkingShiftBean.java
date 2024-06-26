@@ -5,6 +5,17 @@ import java.util.List;
 
 public class RankWorkingShiftBean {
 	private Integer rankshiftid;
+	private Integer rankshiftiddtl;
+	public Integer getRankshiftiddtl() {
+		return rankshiftiddtl;
+	}
+
+
+	public void setRankshiftiddtl(Integer rankshiftiddtl) {
+		this.rankshiftiddtl = rankshiftiddtl;
+	}
+
+
 	public Integer getRankshiftid() {
 		return rankshiftid;
 	}

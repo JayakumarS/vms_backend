@@ -7,10 +7,24 @@ import java.util.List;
 public class RankWorkingShiftResultBean {
 	
 	public boolean success;
-
-
+	public String message;
+	public String getMessage() {
+		return message;
+	}
+	public void setMessage(String message) {
+		this.message = message;
+	}
 	private List<RankWorkingShiftBean> list;
 	private RankWorkingShiftBean RankWorkingShiftBean;
+    private List<RankWorkingShiftBean> secondDetailRow;
+
+	
+	public List<RankWorkingShiftBean> getSecondDetailRow() {
+		return secondDetailRow;
+	}
+	public void setSecondDetailRow(List<RankWorkingShiftBean> secondDetailRow) {
+		this.secondDetailRow = secondDetailRow;
+	}
 	public boolean isSuccess() {
 		return success;
 	}

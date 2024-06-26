@@ -6,7 +6,7 @@ public interface RankWorkingShiftDao {
 	
 	public RankWorkingShiftResultBean save(RankWorkingShiftBean bean);
 	
-	public RankWorkingShiftResultBean savedetail(RankWorkingShiftBean bean);
+	public RankWorkingShiftResultBean savedetail(RankWorkingShiftBean bean,Integer headerId);
 
 	public RankWorkingShiftResultBean getList();
 
