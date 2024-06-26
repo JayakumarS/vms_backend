@@ -36,10 +36,8 @@ public class WorkLicenseDaoImpl implements WorkLicenseDao{
 			
 			int code =  jdbcTemplate.queryForObject(WorkLicenseQueryUtil.get_code,new Object[] { bean.getCode() },Integer.class);
 
-		    int desc =  jdbcTemplate.queryForObject(WorkLicenseQueryUtil.get_desc,new Object[] { bean.getDescription() },Integer.class);
-
 			
-            if(code==0 && desc==0) {
+            if(code==0) {
 			Map<String, Object> workLicense = new HashMap<String, Object>();
 			
 				workLicense.put("userName", userDetails.getUsername());
@@ -52,8 +50,9 @@ public class WorkLicenseDaoImpl implements WorkLicenseDao{
 		   
             }
   		  else {
-  	 		   resultBean.setMessage("These details already exist");
-
+  			
+  		
+    	 		   resultBean.setMessage(  bean.getCode() +" already exists,please enter a different Work License Code");
   	        }
             
             
@@ -122,15 +121,13 @@ public class WorkLicenseDaoImpl implements WorkLicenseDao{
 		try {
 			
 			String workLicensecode =  jdbcTemplate.queryForObject(WorkLicenseQueryUtil.workLicense_code,new Object[] { bean.getWorklicenseid() },String.class);
-			String workLicensedesc =  jdbcTemplate.queryForObject(WorkLicenseQueryUtil.workLicense_desc,new Object[] { bean.getWorklicenseid() },String.class);
 
 
 			int code =  jdbcTemplate.queryForObject(WorkLicenseQueryUtil.get_code_edit,new Object[] { bean.getCode(),workLicensecode },Integer.class);
 
-		    int desc =  jdbcTemplate.queryForObject(WorkLicenseQueryUtil.get_desc_edit,new Object[] { bean.getDescription(),workLicensedesc },Integer.class);
 
 			
-	        if(code==0 && desc==0) {
+	        if(code==0) {
 	        	        	
 	        
 			Map<String, Object> workLicense = new HashMap<String, Object>();
@@ -149,7 +146,7 @@ public class WorkLicenseDaoImpl implements WorkLicenseDao{
 					   resultBean.setSuccess(true);
 					 }
 					  else {
-				 		   resultBean.setMessage("These details already exist");
+		    	 		   resultBean.setMessage(  bean.getCode() +" already exists,please enter a different Work License Code");
 
 				        }	
 		}catch(Exception e) {
