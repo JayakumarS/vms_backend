@@ -39,14 +39,16 @@ public class ExpEngineDaoImpl implements ExpEngineDao {
 				expEngine.put("code", bean.getCode());
 				expEngine.put("desc", bean.getDescription());
 				namedParameterJdbcTemplate.update(ExpEngineQueryUtil. SAVE_exp_Engine,expEngine);
-			
+				
+				
+				resultBean.setSuccess(true);
 			
 		    }
 		    else {
-	  	 		   resultBean.setMessage("These details are already existed");
+		    	 resultBean.setMessage(  bean.getCode() +" already exists,please enter a different Engine Type Code");
 
 	  	        }
-		    resultBean.setSuccess(true);
+		    
 		}catch(Exception e) {
 			e.printStackTrace();
 			resultBean.setSuccess(false);

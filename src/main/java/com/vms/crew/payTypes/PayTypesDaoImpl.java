@@ -49,7 +49,7 @@ public class PayTypesDaoImpl implements PayTypesDao {
 		    }
 		    
 		    else {
-	  	 		   resultBean.setMessage("These details are already exist");
+ 	 		   resultBean.setMessage(  bean.getCode() +" already exists,please enter a different Pay Type Code");
 
 	  	        }
 		}catch(Exception e) {

@@ -52,7 +52,7 @@ public class TrainingsDaoImpl implements TrainingsDao {
 		   resultBean.setSuccess(true);
 		    }
 		    else {
-	  	 		   resultBean.setMessage("These details are already exist");
+		    	 resultBean.setMessage(  bean.getCode() +" already exists,please enter a different Training Code");
 
 	  	        }
 		}catch(Exception e) {
