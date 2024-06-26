@@ -276,24 +276,25 @@ public class ApplicationsDaoImpl implements ApplicationsDao{
 
 
 
-	@Override
 	public ApplicationsResultBean saveCertificate(ApplicationsBean bean) {
 		ApplicationsResultBean resultBean = new ApplicationsResultBean();
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		try {
+			
+			
 			Map<String, Object> certificate = new HashMap<String, Object>();
 			
 			certificate.put("userName", userDetails.getUsername());
 			certificate.put("rankCode", bean.getRankCode());
-			certificate.put("certificateCode", bean.getCertificateCode());
+			certificate.put("certifiCode", bean.getCertifiCode());
 			certificate.put("mandatoryValid", bean.isMandatoryValid());
 			certificate.put("mandatoryInvalid", bean.isMandatoryInvalid());
 			certificate.put("optionalInvalid", bean.isOptionalInvalid());
 
 				
-			namedParameterJdbcTemplate.update(MultiSeamenQueryUtil.SAVE_CERTIFICATE,certificate);
-						
+			namedParameterJdbcTemplate.update(ApplicationsQueryUtil.SAVE_CERTIFICATE,certificate);
+					
 		   resultBean.setSuccess(true);
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -301,5 +302,9 @@ public class ApplicationsDaoImpl implements ApplicationsDao{
 		}
 		return resultBean;
 	}
+
+
+
+	
 	
 }

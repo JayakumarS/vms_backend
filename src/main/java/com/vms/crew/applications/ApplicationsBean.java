@@ -1,5 +1,8 @@
 package com.vms.crew.applications;
 
+import java.util.List;
+
+
 public class ApplicationsBean {
 
 	
@@ -301,12 +304,19 @@ public class ApplicationsBean {
     private String address1; 
     private Integer tel1; 
     public int certificateCode;
-
+    public int CertifiCode;
 	public int getCertificateCode() {
 		return certificateCode;
 	}
 	public void setCertificateCode(int certificateCode) {
 		this.certificateCode = certificateCode;
+	}
+
+	public int getCertifiCode() {
+		return CertifiCode;
+	}
+	public void setCertifiCode(int certifiCode) {
+		CertifiCode = certifiCode;
 	}
 	public String getCertificateName() {
 		return certificateName;
@@ -351,9 +361,17 @@ public class ApplicationsBean {
 	public boolean mandatoryValid;
     public boolean mandatoryInvalid;
     public boolean optionalInvalid;
+    public List<ApplicationsBean> certificates;
 
-    
-    public Integer getTel1() {
+     
+
+	public List<ApplicationsBean> getCertificates() {
+		return certificates;
+	}
+	public void setCertificates(List<ApplicationsBean> certificates) {
+		this.certificates = certificates;
+	}
+	public Integer getTel1() {
 		return tel1;
 	}
 	public void setTel1(Integer tel1) {

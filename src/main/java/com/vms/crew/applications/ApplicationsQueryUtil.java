@@ -57,11 +57,16 @@ public class ApplicationsQueryUtil {
 	 }
 
 	public static String get_certificate_List(int rankCode) {
-		String query = "SELECT rc.rank_code as rankCode, STRING_AGG(cm.certificate_name, ', ') as certificateName FROM rank_certificate rc "
+		String query = "SELECT rc.rank_code as rankCode, cm.certificate_id as CertifiCode, STRING_AGG(cm.certificate_name, ', ') as certificateName FROM rank_certificate rc "
 	               + "LEFT JOIN certificate_master cm ON rc.certificate_code = cm.certificate_id "
 	               + "WHERE rc.rank_code =('" + rankCode +"')"
-	               + "GROUP BY rc.rank_code";
+	               + "GROUP BY rc.rank_code,cm.certificate_id";
 		return query;
 	}
+	
+	
+	public static final String SAVE_CERTIFICATE = "Insert into appl_checklist(appl_code,appl_rank_code,appl_certificate_code,appl_mandatory_valid,appl_mandatory_invalid,appl_optional_invalid,created_by,created_dt)"
+			+ "values (1,:rankCode,:certifiCode,:mandatoryValid,:mandatoryInvalid,:optionalInvalid,:userName,now())";
+
 
 }
