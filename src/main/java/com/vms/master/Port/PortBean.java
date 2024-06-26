@@ -7,7 +7,14 @@ public class PortBean {
 	public String portType;
 	public boolean isActive;
 	public Integer portId;
+	public String countryCode;
 	
+	public String getCountryCode() {
+		return countryCode;
+	}
+	public void setCountryCode(String countryCode) {
+		this.countryCode = countryCode;
+	}
 	public Integer getPortId() {
 		return portId;
 	}

@@ -45,6 +45,7 @@ public class PortDaoImpl implements PortDao{
 			Country.put("portName", bean.getPortName());
 			Country.put("portType", bean.getPortType());
 			Country.put("active", bean.isActive());
+			Country.put("countryCode", bean.getCountryCode());
 			
 			namedParameterJdbcTemplate.update(PortQueryUtil.SAVE_COUNTRY,Country);
 			
@@ -136,6 +137,7 @@ public class PortDaoImpl implements PortDao{
 			Country.put("portType", bean.getPortType());
 			Country.put("active", bean.isActive());
 			Country.put("portId", bean.getPortId());
+			Country.put("countryCode", bean.getCountryCode());
 								
 				namedParameterJdbcTemplate.update(PortQueryUtil.UPDATE_PORT,Country);
 				

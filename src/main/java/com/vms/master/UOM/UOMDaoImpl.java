@@ -13,6 +13,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
+import com.vms.master.Country.CountryQueryUtil;
 import com.vms.master.Port.PortQueryUtil;
 
 @Repository
@@ -30,6 +31,12 @@ public class UOMDaoImpl implements UOMDao{
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		try {
+			int code =  jdbcTemplate.queryForObject(UOMQueryUtil.get_code,new Object[] { bean.getUomCode() },Integer.class);
+
+		    int desc =  jdbcTemplate.queryForObject(UOMQueryUtil.get_name,new Object[] { bean.getUomName() },Integer.class);
+
+			
+            if(code==0 && desc==0) {
 			Map<String, Object> Country = new HashMap<String, Object>();
 			
 			Country.put("userName", userDetails.getUsername());
@@ -40,6 +47,10 @@ public class UOMDaoImpl implements UOMDao{
 			
 			
 		   resultBean.setSuccess(true);
+            }else {
+       		   resultBean.setMessage("These details already exist");
+
+            }
 		}catch(Exception e) {
 			e.printStackTrace();
 			resultBean.setSuccess(false);

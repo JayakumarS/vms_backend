@@ -12,4 +12,7 @@ public class UOMQueryUtil {
 	
 	public static final String UPDATE_UOM = "UPDATE unit_of_measurement SET uom_code = :uomCode,uom_name = :uomName,modified_by = :userName,modified_dt = NOW() WHERE uom_id = :uomId;";
 
+	public static final String get_code = "select count(uom_code) from unit_of_measurement where uom_code=?";
+
+	public static final String get_name = "select count(uom_name) from unit_of_measurement where uom_name=?";
 }
