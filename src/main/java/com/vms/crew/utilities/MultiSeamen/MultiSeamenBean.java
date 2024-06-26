@@ -15,11 +15,12 @@ public class MultiSeamenBean {
 	}
 
 
-	public String joinPort;
-	public String getJoinPort() {
+	public Integer joinPort;
+
+	public Integer getJoinPort() {
 		return joinPort;
 	}
-	public void setJoinPort(String joinPort) {
+	public void setJoinPort(Integer joinPort) {
 		this.joinPort = joinPort;
 	}
 
@@ -47,7 +48,7 @@ public class MultiSeamenBean {
 	
 	public String code;
 	public String name;
-	public String rank;
+	public Integer rank;
 	public String pay;
 	public String currency;
 	public String joiningDate;
@@ -66,10 +67,11 @@ public class MultiSeamenBean {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getRank() {
+
+	public Integer getRank() {
 		return rank;
 	}
-	public void setRank(String rank) {
+	public void setRank(Integer rank) {
 		this.rank = rank;
 	}
 	public String getPay() {

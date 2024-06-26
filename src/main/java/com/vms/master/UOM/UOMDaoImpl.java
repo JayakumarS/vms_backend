@@ -32,11 +32,8 @@ public class UOMDaoImpl implements UOMDao{
 		
 		try {
 			int code =  jdbcTemplate.queryForObject(UOMQueryUtil.get_code,new Object[] { bean.getUomCode() },Integer.class);
-
-		    int desc =  jdbcTemplate.queryForObject(UOMQueryUtil.get_name,new Object[] { bean.getUomName() },Integer.class);
-
 			
-            if(code==0 && desc==0) {
+            if(code==0) {
 			Map<String, Object> Country = new HashMap<String, Object>();
 			
 			Country.put("userName", userDetails.getUsername());
@@ -48,7 +45,7 @@ public class UOMDaoImpl implements UOMDao{
 			
 		   resultBean.setSuccess(true);
             }else {
-       		   resultBean.setMessage("These details already exist");
+       		   resultBean.setMessage(bean.getUomCode() +" already exists,please enter a different UOM Code");
 
             }
 		}catch(Exception e) {
@@ -97,7 +94,7 @@ public class UOMDaoImpl implements UOMDao{
 			  String errorMessage = e.getMessage();
 		        if (errorMessage.contains("violates foreign key constraint")) {
 		            resultBean.setSuccess(false);
-		            resultBean.setMessage("Cannot delete this fleetid because it is referenced in another table");
+		            resultBean.setMessage("Cannot delete this UOM Id because it is referenced in another table");
 		        } else {
 		            e.printStackTrace();
 		            resultBean.setSuccess(false);
@@ -115,15 +112,10 @@ public class UOMDaoImpl implements UOMDao{
 		try {
 			
 			String uomcode =  jdbcTemplate.queryForObject(PortQueryUtil.uom_code,new Object[] { bean.getUomId() },String.class);
-			String uomName =  jdbcTemplate.queryForObject(PortQueryUtil.uom_name,new Object[] { bean.getUomId() },String.class);
 
-			
-			
 			int code =  jdbcTemplate.queryForObject(PortQueryUtil.get_uom_code_edit,new Object[] { bean.getUomCode(),uomcode },Integer.class);
 
-		    int name =  jdbcTemplate.queryForObject(PortQueryUtil.get_uom_name_edit,new Object[] { bean.getUomName(),uomName },Integer.class);
-
-            if(code==0 && name==0) {
+            if(code==0) {
 			Map<String, Object> Country = new HashMap<String, Object>();
 			
 			Country.put("userName", userDetails.getUsername());
@@ -136,7 +128,7 @@ public class UOMDaoImpl implements UOMDao{
 				
 		   resultBean.setSuccess(true);
             }else {
-        		   resultBean.setMessage("These details already exist");
+        		   resultBean.setMessage(bean.getUomCode() +" already exists,please enter a different UOM Code");
 
             }
 		}catch(Exception e) {

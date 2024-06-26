@@ -33,10 +33,8 @@ public class PortDaoImpl implements PortDao{
 		try {
 			
 			int code =  jdbcTemplate.queryForObject(PortQueryUtil.get_code,new Object[] { bean.getPortCode() },Integer.class);
-
-		    int desc =  jdbcTemplate.queryForObject(PortQueryUtil.get_name,new Object[] { bean.getPortName() },Integer.class);
 		    
-            if(code==0 && desc==0) {
+            if(code==0) {
 
 			Map<String, Object> Country = new HashMap<String, Object>();
 			
@@ -52,7 +50,7 @@ public class PortDaoImpl implements PortDao{
 			
 		   resultBean.setSuccess(true);
             }else {
-   	 		   resultBean.setMessage("These details are already exist");
+   	 		   resultBean.setMessage(bean.getPortCode() +" already exists,please enter a different Port Code");
 
             }
 		}catch(Exception e) {
@@ -101,7 +99,7 @@ public class PortDaoImpl implements PortDao{
 			  String errorMessage = e.getMessage();
 		        if (errorMessage.contains("violates foreign key constraint")) {
 		            resultBean.setSuccess(false);
-		            resultBean.setMessage("Cannot delete this fleetid because it is referenced in another table");
+		            resultBean.setMessage("Cannot delete this Port Id because it is referenced in another table");
 		        } else {
 		            e.printStackTrace();
 		            resultBean.setSuccess(false);
@@ -118,16 +116,11 @@ public class PortDaoImpl implements PortDao{
 		
 		try {
 			
-			String portcode =  jdbcTemplate.queryForObject(PortQueryUtil.port_code,new Object[] { bean.getPortId() },String.class);
-			String portName =  jdbcTemplate.queryForObject(PortQueryUtil.port_name,new Object[] { bean.getPortId() },String.class);
-
-			
+			String portcode =  jdbcTemplate.queryForObject(PortQueryUtil.port_code,new Object[] { bean.getPortId() },String.class);			
 			
 			int code =  jdbcTemplate.queryForObject(PortQueryUtil.get_code_edit,new Object[] { bean.getPortCode(),portcode },Integer.class);
 
-		    int name =  jdbcTemplate.queryForObject(PortQueryUtil.get_name_edit,new Object[] { bean.getPortName(),portName },Integer.class);
-
-            if(code==0 && name==0) {
+            if(code==0) {
 
 			Map<String, Object> Country = new HashMap<String, Object>();
 			
@@ -143,7 +136,7 @@ public class PortDaoImpl implements PortDao{
 				
 		   resultBean.setSuccess(true);
             }else {
-      		   resultBean.setMessage("These details already exist");
+      		   resultBean.setMessage(bean.getPortCode() +" already exists,please enter a different Port Code");
 
             }
 		}catch(Exception e) {

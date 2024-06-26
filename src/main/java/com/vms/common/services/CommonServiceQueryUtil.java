@@ -55,7 +55,7 @@ public class CommonServiceQueryUtil {
 	
 	public static final String GET_HEALTH_STATUS = "select health_status_id as id,health_status_name as text from health_status";
 
-	public static final String GET_SEAMEN_NAME = "select crew_master_code as id,crew_master_name as text from crew_master ";
+	public static final String GET_SEAMEN_NAME = "select crew_master_code as id,crew_master_name as text,crew_master_rank as rankId from crew_master";
 	
 	public static final String GET_EXP_ENGINE = "select engine_type_id as id,engine_type_name as text from engine_type";
 

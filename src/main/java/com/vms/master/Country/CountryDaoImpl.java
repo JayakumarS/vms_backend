@@ -33,11 +33,8 @@ public class CountryDaoImpl implements CountryDao{
 		try {
 			
 			int code =  jdbcTemplate.queryForObject(CountryQueryUtil.get_code,new Object[] { bean.getCountryCode() },Integer.class);
-
-		    int desc =  jdbcTemplate.queryForObject(CountryQueryUtil.get_name,new Object[] { bean.getCountryName() },Integer.class);
-
 			
-            if(code==0 && desc==0) {
+            if(code==0) {
 			Map<String, Object> Country = new HashMap<String, Object>();
 			
 			Country.put("userName", userDetails.getUsername());
@@ -50,7 +47,7 @@ public class CountryDaoImpl implements CountryDao{
 			
 			namedParameterJdbcTemplate.update(CountryQueryUtil.SAVE_COUNTRY,Country);
             }else {
-   	 		   resultBean.setMessage("These datails are already exist");
+   	 		   resultBean.setMessage(bean.getCountryCode() +" already exists,please enter a different Country Code");
 
             }
 			
@@ -101,7 +98,7 @@ public class CountryDaoImpl implements CountryDao{
 			  String errorMessage = e.getMessage();
 		        if (errorMessage.contains("violates foreign key constraint")) {
 		            resultBean.setSuccess(false);
-		            resultBean.setMessage("Cannot delete this fleetid because it is referenced in another table");
+		            resultBean.setMessage("Cannot delete this country id because it is referenced in another table");
 		        } else {
 		            e.printStackTrace();
 		            resultBean.setSuccess(false);
@@ -118,15 +115,11 @@ public class CountryDaoImpl implements CountryDao{
 		
 		try {
 			String countrycode =  jdbcTemplate.queryForObject(CountryQueryUtil.country_code,new Object[] { bean.getCountryId() },String.class);
-			String countryName =  jdbcTemplate.queryForObject(CountryQueryUtil.country_name,new Object[] { bean.getCountryId() },String.class);
 
-			
-			
+					
 			int code =  jdbcTemplate.queryForObject(CountryQueryUtil.get_country_code_edit,new Object[] { bean.getCountryCode(),countrycode },Integer.class);
 
-		    int name =  jdbcTemplate.queryForObject(CountryQueryUtil.get_country_name_edit,new Object[] { bean.getCountryName(),countryName },Integer.class);
-
-            if(code==0 && name==0) {
+            if(code==0) {
 			Map<String, Object> Country = new HashMap<String, Object>();
 			
 			Country.put("userName", userDetails.getUsername());
@@ -142,7 +135,7 @@ public class CountryDaoImpl implements CountryDao{
 				
 		   resultBean.setSuccess(true);
             }else {
-       		   resultBean.setMessage("These details already exist");
+       		   resultBean.setMessage(bean.getCountryCode() +" already exists,please enter a different Country Code");
 
             }
 		}catch(Exception e) {
