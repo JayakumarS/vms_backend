@@ -28,4 +28,6 @@ public static final String get_code_edit = "SELECT COUNT(agent_code) FROM agent_
 
 public static final String get_desc_edit = "SELECT COUNT(agent_code_name) FROM agent_master WHERE agent_code_name = ?  AND agent_code_name != ?";
 
+public static final String getCodeById = "SELECT agent_code FROM agent_master WHERE agent_id = ?";
+
 }

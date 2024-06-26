@@ -28,4 +28,6 @@ public static final String get_code_edit = "SELECT COUNT(vessel_class_code) FROM
 
 public static final String get_desc_edit = "SELECT COUNT(vessel_class_name) FROM vessel_class WHERE vessel_class_name = ?  AND vessel_class_name != ?";
 
+public static final String getCodeById = "SELECT vessel_class_code FROM vessel_class WHERE vessel_class_id = ?";
+
 }

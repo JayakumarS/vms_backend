@@ -37,9 +37,8 @@ public WageScaleResultBean save(WageScaleBean bean) {
 
 		int code =  jdbcTemplate.queryForObject(WageScaleQueryUtil.get_code,new Object[] { bean.getCode() },Integer.class);
 
-	    int desc =  jdbcTemplate.queryForObject(WageScaleQueryUtil.get_desc,new Object[] { bean.getDescription() },Integer.class);
 
-	    if(code==0 && desc==0) {
+	    if(code==0) {
 		Map<String, Object> wagescale = new HashMap<String, Object>();
 		
 			wagescale.put("userName", userDetails.getUsername());
@@ -91,7 +90,10 @@ public WageScaleResultBean edit(int id) {
 @Override
 public WageScaleResultBean delete(int id) {
 	WageScaleResultBean resultBean = new WageScaleResultBean();
+	 String code = null;
 	try {
+		code = jdbcTemplate.queryForObject(WageScaleQueryUtil.getCodeById, new Object[]{id}, String.class);
+
 		jdbcTemplate.update(WageScaleQueryUtil.delete,id);
 		resultBean.setSuccess(true);
 	}
@@ -99,7 +101,7 @@ public WageScaleResultBean delete(int id) {
 		String errorMessage = e.getMessage();
         if (errorMessage.contains("violates foreign key constraint")) {
             resultBean.setSuccess(false);
-            resultBean.setMessage("Cannot delete this wagescaleid because it is referenced in another table");
+            resultBean.setMessage(code + " code cannot be deleted as it is already used in system.");
         } else {
             e.printStackTrace();
             resultBean.setSuccess(false);
@@ -121,10 +123,9 @@ public WageScaleResultBean update(WageScaleBean bean) {
 
 		int code =  jdbcTemplate.queryForObject(WageScaleQueryUtil.get_code_edit,new Object[] { bean.getCode(),scalecode },Integer.class);
 
-	    int desc =  jdbcTemplate.queryForObject(WageScaleQueryUtil.get_desc_edit,new Object[] { bean.getDescription(),scaledesc },Integer.class);
 
 		
-        if(code==0 && desc==0) {
+        if(code==0) {
 		Map<String, Object> wagescale = new HashMap<String, Object>();
 		
 			wagescale.put("userName", userDetails.getUsername());
@@ -137,7 +138,7 @@ public WageScaleResultBean update(WageScaleBean bean) {
 	   resultBean.setSuccess(true);
         }
 		  else {
-	 		   resultBean.setMessage("These details already exist");
+	 		   resultBean.setMessage(bean.getCode() + " already exists,please enter a different wage Scale Code");
 
 	        }	 
 	}catch(Exception e) {

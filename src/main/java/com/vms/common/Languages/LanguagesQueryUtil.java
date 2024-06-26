@@ -27,4 +27,6 @@ public static final String get_code_edit = "SELECT COUNT(language_code) FROM lan
 
 public static final String get_desc_edit = "SELECT COUNT(language_name) FROM language_master WHERE language_name = ?  AND language_name != ?";
 
+public static final String getCodeById = "SELECT language_code FROM languages WHERE language_id = ?";
+
 }

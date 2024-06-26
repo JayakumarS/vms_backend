@@ -20,6 +20,7 @@ import org.springframework.stereotype.Repository;
 
 
 
+
 @Repository
 public class ClassDaoImpl implements ClassDao{
 
@@ -40,9 +41,8 @@ public class ClassDaoImpl implements ClassDao{
 			
 			int code =  jdbcTemplate.queryForObject(ClassQueryUtil.get_code,new Object[] { bean.getCode() },Integer.class);
 
-		    int desc =  jdbcTemplate.queryForObject(ClassQueryUtil.get_desc,new Object[] { bean.getDescription() },Integer.class);
 
-		    if(code==0 && desc==0) {
+		    if(code==0) {
 		    	
 			Map<String, Object> fleet = new HashMap<String, Object>();
 //			String ClassId =  jdbcTemplate.queryForObject(CertificatesQueryutil.get_class_Id,String.class);
@@ -99,7 +99,10 @@ public class ClassDaoImpl implements ClassDao{
 	@Override
 	public ClassResultBean delete(int id) {
 		ClassResultBean resultBean = new ClassResultBean();
+		 String code = null; 
 		try {
+			code = jdbcTemplate.queryForObject(ClassQueryUtil.getCodeById, new Object[]{id}, String.class);
+
 			jdbcTemplate.update(ClassQueryUtil.delete,id);
 			resultBean.setSuccess(true);
 		}
@@ -107,7 +110,7 @@ public class ClassDaoImpl implements ClassDao{
 	        String errorMessage = e.getMessage();
 	        if (errorMessage.contains("violates foreign key constraint")) {
 	            resultBean.setSuccess(false);
-	            resultBean.setMessage("Cannot delete this classid because it is referenced in another table");
+	            resultBean.setMessage(code + " code cannot be deleted as it is already used in system.");
 	        } else {
 	            e.printStackTrace();
 	            resultBean.setSuccess(false);
@@ -131,10 +134,9 @@ public class ClassDaoImpl implements ClassDao{
 
 			int code =  jdbcTemplate.queryForObject(ClassQueryUtil.get_code_edit,new Object[] { bean.getCode(),classcode },Integer.class);
 
-		    int desc =  jdbcTemplate.queryForObject(ClassQueryUtil.get_desc_edit,new Object[] { bean.getDescription(),classdesc },Integer.class);
 
 			
-	        if(code==0 && desc==0) {
+	        if(code==0) {
 			Map<String, Object> fleet = new HashMap<String, Object>();
 			
 			    fleet.put("classid", bean.getClassid());
@@ -148,7 +150,7 @@ public class ClassDaoImpl implements ClassDao{
 		   resultBean.setSuccess(true);   
 		 }
 		  else {
-	 		   resultBean.setMessage("These details already exist");
+			  resultBean.setMessage(bean.getCode() + " already exists,please enter a different class Code");
 
 	        }
 		}catch(Exception e) {

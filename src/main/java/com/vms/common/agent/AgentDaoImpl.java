@@ -36,9 +36,8 @@ public class AgentDaoImpl implements AgentDao{
 			
 			int code =  jdbcTemplate.queryForObject(AgentQueryUtil.get_code,new Object[] { bean.getCode() },Integer.class);
 
-		    int desc =  jdbcTemplate.queryForObject(AgentQueryUtil.get_desc,new Object[] { bean.getDescription() },Integer.class);
 
-		    if(code==0 && desc==0) {
+		    if(code==0) {
 			Map<String, Object> fleet = new HashMap<String, Object>();
 			
 				
@@ -92,7 +91,10 @@ public class AgentDaoImpl implements AgentDao{
 	@Override
 	public AgentResultBean delete(int id) {
 		AgentResultBean resultBean = new AgentResultBean();
+		String code = null;
 		try {
+			code = jdbcTemplate.queryForObject(AgentQueryUtil.getCodeById, new Object[]{id}, String.class);
+
 			jdbcTemplate.update(AgentQueryUtil.delete,id);
 			resultBean.setSuccess(true);
 		}
@@ -100,7 +102,7 @@ public class AgentDaoImpl implements AgentDao{
 	        String errorMessage = e.getMessage();
 	        if (errorMessage.contains("violates foreign key constraint")) {
 	            resultBean.setSuccess(false);
-	            resultBean.setMessage("Cannot delete this agentid because it is referenced in another table");
+	            resultBean.setMessage(code + " code cannot be deleted as it is already used in system.");
 	        } else {
 	            e.printStackTrace();
 	            resultBean.setSuccess(false);
@@ -123,10 +125,9 @@ public class AgentDaoImpl implements AgentDao{
 
 			int code =  jdbcTemplate.queryForObject(AgentQueryUtil.get_code_edit,new Object[] { bean.getCode(),agentcode },Integer.class);
 
-		    int desc =  jdbcTemplate.queryForObject(AgentQueryUtil.get_desc_edit,new Object[] { bean.getDescription(),agentdesc },Integer.class);
 
 			
-	        if(code==0 && desc==0) {
+	        if(code==0) {
 			Map<String, Object> fleet = new HashMap<String, Object>();
 			
 			    fleet.put("agentid", bean.getAgentid());
@@ -140,7 +141,7 @@ public class AgentDaoImpl implements AgentDao{
 		   resultBean.setSuccess(true);
 	       }
 				  else {
-			 		   resultBean.setMessage("These details already exist");
+					  resultBean.setMessage(bean.getCode() + " already exists,please enter a different agent Code");
 
 			        }
 		}catch(Exception e) {

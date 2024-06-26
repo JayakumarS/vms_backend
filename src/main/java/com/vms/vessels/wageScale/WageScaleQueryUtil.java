@@ -29,5 +29,6 @@ public static final String get_code_edit = "SELECT COUNT(wage_scale_code) FROM w
 
 public static final String get_desc_edit = "SELECT COUNT(wage_scale_name) FROM wage_scales WHERE wage_scale_name = ?  AND wage_scale_name != ?";
 
+public static final String getCodeById = "SELECT wage_scale_code FROM wage_scales WHERE wage_scale_id = ?";
 
 }

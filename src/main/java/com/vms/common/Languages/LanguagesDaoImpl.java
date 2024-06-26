@@ -39,9 +39,8 @@ public class LanguagesDaoImpl implements LanguagesDao{
 
 			int code =  jdbcTemplate.queryForObject(LanguagesQueryUtil.get_code,new Object[] { bean.getCode() },Integer.class);
 
-		    int desc =  jdbcTemplate.queryForObject(LanguagesQueryUtil.get_desc,new Object[] { bean.getDescription() },Integer.class);
 
-		    if(code==0 && desc==0) {
+		    if(code==0) {
 			Map<String, Object> fleet = new HashMap<String, Object>();
 			
 				if(bean.getActive()!=null && bean.getActive().equalsIgnoreCase("true")) {
@@ -99,24 +98,31 @@ public class LanguagesDaoImpl implements LanguagesDao{
 
 	@Override
 	public LanguagesResultBean delete(int id) {
-		LanguagesResultBean resultBean = new LanguagesResultBean();
-		try {
-			jdbcTemplate.update(LanguagesQueryUtil.delete,id);
-			resultBean.setSuccess(true);
-		}
-		catch (DataAccessException e) {
+	    LanguagesResultBean resultBean = new LanguagesResultBean();
+	    String code = null; 
+
+	    try {
+	        code = jdbcTemplate.queryForObject(LanguagesQueryUtil.getCodeById, new Object[]{id}, String.class);
+
+	        
+	        jdbcTemplate.update(LanguagesQueryUtil.delete, id);
+	        resultBean.setSuccess(true);
+	    } catch (DataAccessException e) {
 	        String errorMessage = e.getMessage();
 	        if (errorMessage.contains("violates foreign key constraint")) {
 	            resultBean.setSuccess(false);
-	            resultBean.setMessage("Cannot delete this languageid because it is referenced in another table");
+	            
+	            resultBean.setMessage(code + " code cannot be deleted as it is already used in system.");
 	        } else {
 	            e.printStackTrace();
 	            resultBean.setSuccess(false);
 	            resultBean.setMessage(errorMessage);
 	        }
 	    }
-		return resultBean;
+	    return resultBean;
 	}
+
+
 
 	@Override
 	public LanguagesResultBean update(LanguagesBean bean) {
@@ -132,10 +138,9 @@ public class LanguagesDaoImpl implements LanguagesDao{
 
 			int code =  jdbcTemplate.queryForObject(LanguagesQueryUtil.get_code_edit,new Object[] { bean.getCode(),languagecode },Integer.class);
 
-		    int desc =  jdbcTemplate.queryForObject(LanguagesQueryUtil.get_desc_edit,new Object[] { bean.getDescription(),languagedesc },Integer.class);
 
 			
-	        if(code==0 && desc==0) {
+	        if(code==0) {
 			Map<String, Object> fleet = new HashMap<String, Object>();
 			
 			if(bean.getActive()!=null && bean.getActive().equalsIgnoreCase("true")) {
@@ -155,7 +160,7 @@ public class LanguagesDaoImpl implements LanguagesDao{
 		    resultBean.setSuccess(true);
 	        }
 			  else {
-		 		   resultBean.setMessage("These details already exist");
+				  resultBean.setMessage(bean.getCode() + " already exists,please enter a different Language Code");
 
 		        }	 
 		}catch(Exception e) {

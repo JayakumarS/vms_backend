@@ -18,6 +18,7 @@ import org.springframework.stereotype.Repository;
 
 
 
+
 @Repository
 public class FleetDaoImpl implements FleetDao{
 
@@ -37,9 +38,8 @@ public class FleetDaoImpl implements FleetDao{
 			
 			int code =  jdbcTemplate.queryForObject(FleetQueryUtil.get_code,new Object[] { bean.getCode() },Integer.class);
 
-		    int desc =  jdbcTemplate.queryForObject(FleetQueryUtil.get_desc,new Object[] { bean.getDescription() },Integer.class);
 
-		    if(code==0 && desc==0) {
+		    if(code==0) {
 			Map<String, Object> fleet = new HashMap<String, Object>();
 			
 				
@@ -91,14 +91,19 @@ public class FleetDaoImpl implements FleetDao{
 	@Override
 	public FleetResultBean delete(int id) {
 	    FleetResultBean resultBean = new FleetResultBean();
+	    String code = null; 
 	    try {
+	    	
+	    	code = jdbcTemplate.queryForObject(FleetQueryUtil.getCodeById, new Object[]{id}, String.class);
+	    	
+	    	
 	        jdbcTemplate.update(FleetQueryUtil.delete, id);
 	        resultBean.setSuccess(true);
 	    } catch (DataAccessException e) {
 	        String errorMessage = e.getMessage();
 	        if (errorMessage.contains("violates foreign key constraint")) {
 	            resultBean.setSuccess(false);
-	            resultBean.setMessage("Cannot delete this fleetid because it is referenced in another table");
+	            resultBean.setMessage(code + " code cannot be deleted as it is already used in system.");
 	        } else {
 	            e.printStackTrace();
 	            resultBean.setSuccess(false);
@@ -107,6 +112,7 @@ public class FleetDaoImpl implements FleetDao{
 	    }
 	    return resultBean;
 	}
+	
 
 	@Override
 	public FleetResultBean update(FleetBean bean) {
@@ -122,10 +128,9 @@ public class FleetDaoImpl implements FleetDao{
 
 			int code =  jdbcTemplate.queryForObject(FleetQueryUtil.get_code_edit,new Object[] { bean.getCode(),fleetcode },Integer.class);
 
-		    int desc =  jdbcTemplate.queryForObject(FleetQueryUtil.get_desc_edit,new Object[] { bean.getDescription(),fleetdesc },Integer.class);
 
 			
-	        if(code==0 && desc==0) {
+	        if(code==0) {
 			Map<String, Object> fleet = new HashMap<String, Object>();
 			
 			fleet.put("fleetid", bean.getFleetid());
@@ -138,7 +143,7 @@ public class FleetDaoImpl implements FleetDao{
 		   resultBean.setSuccess(true);
 	        }
 			  else {
-		 		   resultBean.setMessage("These details already exist");
+		 		   resultBean.setMessage( bean.getCode() +" already exists,please enter a different fleet Code");
 
 		        }	 
 		}catch(Exception e) {

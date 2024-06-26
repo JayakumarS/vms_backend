@@ -27,5 +27,7 @@ public static final String get_code_edit = "SELECT COUNT(fleet_code) FROM fleet_
 
 public static final String get_desc_edit = "SELECT COUNT(fleet_name) FROM fleet_master WHERE fleet_name = ?  AND fleet_name != ?";
 
+public static final String getCodeById = "SELECT fleet_code FROM fleet_master WHERE fleet_id = ?";
+
 
 }
