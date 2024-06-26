@@ -52,8 +52,7 @@ public class AgentDaoImpl implements AgentDao{
 		   
 		    }
 			  else {
-		 		   resultBean.setMessage("These details are already exist");
-
+				  resultBean.setMessage(bean.getCode() + " already exists,please enter a different agent Code");
 		        }
 		}catch(Exception e) {
 			e.printStackTrace();

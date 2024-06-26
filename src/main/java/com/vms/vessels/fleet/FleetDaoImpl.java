@@ -51,8 +51,7 @@ public class FleetDaoImpl implements FleetDao{
 		   resultBean.setSuccess(true);
 		    }
 			  else {
-		 		   resultBean.setMessage("These details are already exist");
-
+				  resultBean.setMessage(bean.getCode() + " already exists,please enter a different fleet Code");
 		        }
 		}catch(Exception e) {
 			e.printStackTrace();
