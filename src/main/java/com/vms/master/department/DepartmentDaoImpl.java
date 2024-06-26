@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -103,10 +104,17 @@ public class DepartmentDaoImpl implements DepartmentDao {
 			jdbcTemplate.update(DepartmentQueryUtil.department_delete,id);
 			resultBean.setSuccess(true);
 		}
-		catch(Exception e) {
-			e.printStackTrace();
-			resultBean.setSuccess(false);
-		}	
+		catch (DataAccessException e) {
+	        String errorMessage = e.getMessage();
+	        if (errorMessage.contains("violates foreign key constraint")) {
+	            resultBean.setSuccess(false);
+	            resultBean.setMsg("Cannot delete this Department Id because it is referenced in another table");
+	        } else {
+	            e.printStackTrace();
+	            resultBean.setSuccess(false);
+	            resultBean.setMsg(errorMessage);
+	        }
+	    }
 		return resultBean;
 	}
 
