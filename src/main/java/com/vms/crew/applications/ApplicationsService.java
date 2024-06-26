@@ -14,7 +14,7 @@ public interface ApplicationsService {
 	
 	public ApplicationsResultBean update(ApplicationsBean bean);
 
-	public ApplicationsResultBean certificateList(String rankCode);
+	public ApplicationsResultBean certificateList(int rankCode);
 
 	public ApplicationsResultBean saveCertificate(ApplicationsBean bean);
 

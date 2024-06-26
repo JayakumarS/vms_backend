@@ -49,7 +49,7 @@ public class ApplicationsServiceImpl implements ApplicationsService{
 
 
 	@Override
-	public ApplicationsResultBean certificateList(String rankCode) {
+	public ApplicationsResultBean certificateList(int rankCode) {
 		// TODO Auto-generated method stub
 		return ApplicationsDao.certificateList(rankCode);
 	}

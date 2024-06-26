@@ -300,11 +300,12 @@ public class ApplicationsBean {
     private String city;
     private String address1; 
     private Integer tel1; 
-    public String certificateCode;
-    public String getCertificateCode() {
+    public int certificateCode;
+
+	public int getCertificateCode() {
 		return certificateCode;
 	}
-	public void setCertificateCode(String certificateCode) {
+	public void setCertificateCode(int certificateCode) {
 		this.certificateCode = certificateCode;
 	}
 	public String getCertificateName() {
@@ -313,12 +314,12 @@ public class ApplicationsBean {
 	public void setCertificateName(String certificateName) {
 		this.certificateName = certificateName;
 	}
-	public String getRankCode() {
-		return rankCode;
-	}
-	public void setRankCode(String rankCode) {
-		this.rankCode = rankCode;
-	}
+//	public String getRankCode() {
+//		return rankCode;
+//	}
+//	public void setRankCode(String rankCode) {
+//		this.rankCode = rankCode;
+//	}
 	public boolean isMandatoryValid() {
 		return mandatoryValid;
 	}
@@ -339,8 +340,15 @@ public class ApplicationsBean {
 	}
 
 	public String certificateName;
-    public String rankCode;
-    public boolean mandatoryValid;
+    public int rankCode;
+    public int getRankCode() {
+		return rankCode;
+	}
+	public void setRankCode(int rankCode) {
+		this.rankCode = rankCode;
+	}
+
+	public boolean mandatoryValid;
     public boolean mandatoryInvalid;
     public boolean optionalInvalid;
 

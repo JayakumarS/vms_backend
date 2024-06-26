@@ -44,8 +44,8 @@ public class ApplicationsQueryUtil {
 			+ "applicant_image_file_name=:applicantimageFileName,modified_by = :userName,modified_dt = NOW() WHERE crew_applicant_code = :code";
 
 
-	public static final String get_certificate_List = "select rc.certificate_code as certificateCode,cm.certificate_name as certificateName from rank_certificate rc\r\n"
-			+ "left join certificate_master cm on rc.certificate_code = cm.certificate_code\r\n"
+	public static final String get_certificate_List = "select rc.certificate_code as certificateCode,cm.certificate_name as certificateName from rank_certificate rc"
+			+ "left join certificate_master cm on rc.certificate_code = cm.certificate_code"
 			+ "where rank_code=?";
 
 
@@ -56,10 +56,11 @@ public class ApplicationsQueryUtil {
 		return query;
 	 }
 
-	public static String get_certificate_List(String rankCode) {
-		String query = "select rc.certificate_code as certificateCode,cm.certificate_name as certificateName from rank_certificate rc \r\n"
-				+ "	left join certificate_master cm on rc.certificate_code = cm.certificate_code \r\n"
-				+ "	where rank_code=('" + rankCode +"')";
+	public static String get_certificate_List(int rankCode) {
+		String query = "SELECT rc.rank_code as rankCode, STRING_AGG(cm.certificate_name, ', ') as certificateName FROM rank_certificate rc "
+	               + "LEFT JOIN certificate_master cm ON rc.certificate_code = cm.certificate_id "
+	               + "WHERE rc.rank_code =('" + rankCode +"')"
+	               + "GROUP BY rc.rank_code";
 		return query;
 	}
 

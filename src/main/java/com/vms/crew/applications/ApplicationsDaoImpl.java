@@ -261,12 +261,12 @@ public class ApplicationsDaoImpl implements ApplicationsDao{
 
 
 	@Override
-	public ApplicationsResultBean certificateList(String rankCode) {
+	public ApplicationsResultBean certificateList(int rankCode) {
 		ApplicationsResultBean resultBean = new ApplicationsResultBean();
 		List<ApplicationsBean> listBean = new ArrayList<ApplicationsBean>();
 		
 		try {
-			listBean = jdbcTemplate.query(ApplicationsQueryUtil.get_certificate_List,new BeanPropertyRowMapper<ApplicationsBean>(ApplicationsBean.class));
+			listBean = jdbcTemplate.query(ApplicationsQueryUtil.get_certificate_List(rankCode),new BeanPropertyRowMapper<ApplicationsBean>(ApplicationsBean.class));
 			resultBean.setList(listBean);
 		} catch (Exception e) {
 			e.printStackTrace();

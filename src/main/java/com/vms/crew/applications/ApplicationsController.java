@@ -115,7 +115,7 @@ public class ApplicationsController {
 	///Load Certificate
 	
 		@RequestMapping(value="/certificateList")
-		public ApplicationsResultBean certificateList(@RequestParam("rankCode") String rankCode) {
+		public ApplicationsResultBean certificateList(@RequestParam("rankCode") int rankCode) {
 			ApplicationsResultBean rbean = new ApplicationsResultBean();
 			try {
 				rbean = ApplicationsService.certificateList(rankCode);
