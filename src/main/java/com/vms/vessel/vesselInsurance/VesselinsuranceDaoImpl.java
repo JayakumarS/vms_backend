@@ -38,10 +38,9 @@ public class VesselinsuranceDaoImpl implements VesselinsuranceDao{
 			
 			int code =  jdbcTemplate.queryForObject(VesselinsuranceQueryUtil.get_code,new Object[] { bean.getCode() },Integer.class);
 
-		    int desc =  jdbcTemplate.queryForObject(VesselinsuranceQueryUtil.get_desc,new Object[] { bean.getDescription() },Integer.class);
 
 			
-            if(code==0 && desc==0) {
+            if(code==0) {
             	
             
 			Map<String, Object> vesselinsurance = new HashMap<String, Object>();
@@ -58,7 +57,7 @@ public class VesselinsuranceDaoImpl implements VesselinsuranceDao{
 		   
             }
   		  else {
-  	 		   resultBean.setMessage("These details already exist");
+  	 		   resultBean.setMessage(  bean.getCode() +" already exists,please enter a different Vessel Insurance Code");
 
   	        }
             
@@ -129,15 +128,13 @@ public class VesselinsuranceDaoImpl implements VesselinsuranceDao{
 		try {
 			
 			String vesselinsurancecode =  jdbcTemplate.queryForObject(VesselinsuranceQueryUtil.vesselinsurance_code,new Object[] { bean.getVesselinsuranceid() },String.class);
-			String vesselinsurancedesc =  jdbcTemplate.queryForObject(VesselinsuranceQueryUtil.vesselinsurance_desc,new Object[] { bean.getVesselinsuranceid() },String.class);
 
 
 			int code =  jdbcTemplate.queryForObject(VesselinsuranceQueryUtil.get_code_edit,new Object[] { bean.getCode(),vesselinsurancecode },Integer.class);
 
-		    int desc =  jdbcTemplate.queryForObject(VesselinsuranceQueryUtil.get_desc_edit,new Object[] { bean.getDescription(),vesselinsurancedesc },Integer.class);
 
 			
-	        if(code==0 && desc==0) {
+	        if(code==0) {
 	        	
 	        	
 	        
@@ -156,7 +153,7 @@ public class VesselinsuranceDaoImpl implements VesselinsuranceDao{
 		   resultBean.setSuccess(true);
 	   	 }
 			  else {
-		 		   resultBean.setMessage("These details already exist");
+	  	 		   resultBean.setMessage(  bean.getCode() +" already exists,please enter a different Vessel Insurance Code");
 
 		        }	
 	        

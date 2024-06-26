@@ -37,10 +37,9 @@ public class RankGroupDaoImpl implements RankGroupDao {
 			
 			int code =  jdbcTemplate.queryForObject(RankGroupQueryUtil.get_code,new Object[] { bean.getCode() },Integer.class);
 
-		    int desc =  jdbcTemplate.queryForObject(RankGroupQueryUtil.get_desc,new Object[] { bean.getDescription() },Integer.class);
 
 			
-            if(code==0 && desc==0) {
+            if(code==0) {
 			Map<String, Object> rankgroup = new HashMap<String, Object>();
 			
 				rankgroup.put("userName", userDetails.getUsername());
@@ -55,7 +54,7 @@ public class RankGroupDaoImpl implements RankGroupDao {
 		   resultBean.setSuccess(true);
              }
         else {
- 		   resultBean.setMessage("These details already exist");
+	 		   resultBean.setMessage(  bean.getCode() +" already exists,please enter a different Rank Group Code");
 
         }
 		}catch(Exception e) {
@@ -123,16 +122,13 @@ public class RankGroupDaoImpl implements RankGroupDao {
 		try {
 			
 			String rankGroupcode =  jdbcTemplate.queryForObject(RankGroupQueryUtil.rankGroup_code,new Object[] { bean.getRankgroupid() },String.class);
-			String rankGroupdesc =  jdbcTemplate.queryForObject(RankGroupQueryUtil.rankGroup_desc,new Object[] { bean.getRankgroupid() },String.class);
-
 			
 			
 			int code =  jdbcTemplate.queryForObject(RankGroupQueryUtil.get_code_edit,new Object[] { bean.getCode(),rankGroupcode },Integer.class);
 
-		    int desc =  jdbcTemplate.queryForObject(RankGroupQueryUtil.get_desc_edit,new Object[] { bean.getDescription(),rankGroupdesc },Integer.class);
 
 			
-            if(code==0 && desc==0) {
+            if(code==0) {
 		    
 			Map<String, Object> rankgroup = new HashMap<String, Object>();
 			
@@ -148,7 +144,7 @@ public class RankGroupDaoImpl implements RankGroupDao {
 		   resultBean.setSuccess(true);
             }
             else {
-     		   resultBean.setMessage("These details already exist");
+ 	 		   resultBean.setMessage(  bean.getCode() +" already exists,please enter a different Rank Group Code");
 
             }
 		}catch(Exception e) {

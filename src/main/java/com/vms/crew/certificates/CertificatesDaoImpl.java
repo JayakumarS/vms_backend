@@ -55,10 +55,9 @@ public class CertificatesDaoImpl implements CertificatesDao{
 		try {
 			
 
-		    int desc =  jdbcTemplate.queryForObject(CertificatesQueryutil.get_desc,new Object[] { bean.getDescription() },Integer.class);
 
 			
-            if(desc==0) {
+           
 			Map<String, Object> certificate = new HashMap<String, Object>();
 
 			certificate.put("userName", userDetails.getUsername());
@@ -70,11 +69,7 @@ public class CertificatesDaoImpl implements CertificatesDao{
 			
 		   resultBean.setSuccess(true);
 		   
-            }
-  		  else {
-  	 		   resultBean.setMessage("These details already exist");
-
-  	        }	
+         
 		}catch(Exception e) {
 			e.printStackTrace();
 			resultBean.setSuccess(false);
@@ -136,16 +131,9 @@ public class CertificatesDaoImpl implements CertificatesDao{
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		try {
-			String certificatesdesc =  jdbcTemplate.queryForObject(CertificatesQueryutil.certificates_desc,new Object[] { bean.getCertificateId() },String.class);
 
 
 
-		    int desc =  jdbcTemplate.queryForObject(CertificatesQueryutil.get_certificates_edit,new Object[] { bean.getDescription(),certificatesdesc },Integer.class);
-
-			
-	        if(desc==0) {
-	        	
-	        }
 			Map<String, Object> certificate = new HashMap<String, Object>();
 			
 				certificate.put("userName", userDetails.getUsername());

@@ -35,10 +35,9 @@ public class WorkStatusDaoImpl implements WorkStatusDao{
 		try {
 			int code =  jdbcTemplate.queryForObject(WorkStatusQueryUtil.get_code,new Object[] { bean.getCode() },Integer.class);
 
-		    int desc =  jdbcTemplate.queryForObject(WorkStatusQueryUtil.get_desc,new Object[] { bean.getDescription() },Integer.class);
 
 			
-            if(code==0 && desc==0) {
+            if(code==0) {
 			Map<String, Object> workStatus = new HashMap<String, Object>();
 			
 			workStatus.put("userName", userDetails.getUsername());
@@ -49,7 +48,7 @@ public class WorkStatusDaoImpl implements WorkStatusDao{
 				   resultBean.setSuccess(true);
     		  }
     		  else {
-    	 		   resultBean.setMessage("These details already exist");
+   	 		   resultBean.setMessage(  bean.getCode() +" already exists,please enter a different Work Status Code");
 
     	        }		}catch(Exception e) {
 			e.printStackTrace();
@@ -117,15 +116,13 @@ public class WorkStatusDaoImpl implements WorkStatusDao{
 	
 		try {
 			String workstatuscode =  jdbcTemplate.queryForObject(WorkStatusQueryUtil.workstatus_code,new Object[] { bean.getWorkstatusid() },String.class);
-			String workstatusdesc =  jdbcTemplate.queryForObject(WorkStatusQueryUtil.workstatus_desc,new Object[] { bean.getWorkstatusid() },String.class);
 
 
 			int code =  jdbcTemplate.queryForObject(WorkStatusQueryUtil.get_code_edit,new Object[] { bean.getCode(),workstatuscode },Integer.class);
 
-		    int desc =  jdbcTemplate.queryForObject(WorkStatusQueryUtil.get_desc_edit,new Object[] { bean.getDescription(),workstatusdesc },Integer.class);
 
 			
-	        if(code==0 && desc==0) {
+	        if(code==0) {
 			Map<String, Object> workStatus = new HashMap<String, Object>();
 			
 				workStatus.put("userName", userDetails.getUsername());
@@ -141,7 +138,7 @@ public class WorkStatusDaoImpl implements WorkStatusDao{
 		   resultBean.setSuccess(true);
 		 }
 		  else {
-	 		   resultBean.setMessage("These details already exist");
+	 		   resultBean.setMessage(  bean.getCode() +" already exists,please enter a different Work Status Code");
 
 	        }	
 		}catch(Exception e) {

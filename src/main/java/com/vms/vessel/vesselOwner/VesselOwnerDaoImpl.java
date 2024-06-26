@@ -54,7 +54,7 @@ public class VesselOwnerDaoImpl implements VesselOwnerDao{
 		   resultBean.setSuccess(true);
 		  }
 		  else {
-	 		   resultBean.setMessage("These details already exist");
+ 	 		   resultBean.setMessage(  bean.getCode() +" already exists,please enter a different Vessel Owner Code");
 
 	        }
 		}catch(Exception e) {
@@ -121,16 +121,14 @@ public class VesselOwnerDaoImpl implements VesselOwnerDao{
 		
 		try {
 			String vesselcode =  jdbcTemplate.queryForObject(VesselOwnerQueryUtil.vessel_code,new Object[] { bean.getVesselownerid() },String.class);
-			String vesseldesc =  jdbcTemplate.queryForObject(VesselOwnerQueryUtil.vessel_desc,new Object[] { bean.getVesselownerid() },String.class);
 
 
 
 			int code =  jdbcTemplate.queryForObject(VesselOwnerQueryUtil.get_code_edit,new Object[] { bean.getCode(),vesselcode },Integer.class);
 
-		    int desc =  jdbcTemplate.queryForObject(VesselOwnerQueryUtil.get_desc_edit,new Object[] { bean.getDescription(),vesseldesc },Integer.class);
 
 			
-            if(code==0 && desc==0) {
+            if(code==0) {
             	
 			Map<String, Object> vesselowner = new HashMap<String, Object>();
 			
@@ -148,7 +146,7 @@ public class VesselOwnerDaoImpl implements VesselOwnerDao{
 					   resultBean.setSuccess(true);
   		  }
   		  else {
-  	 		   resultBean.setMessage("These details already exist");
+	 		   resultBean.setMessage(  bean.getCode() +" already exists,please enter a different Vessel Owner Code");
 
   	        }
             }catch(Exception e) {

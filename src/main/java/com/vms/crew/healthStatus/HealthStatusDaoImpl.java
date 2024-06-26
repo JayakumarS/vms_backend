@@ -37,10 +37,9 @@ public class HealthStatusDaoImpl implements HealthStatusDao{
 		try {
 			int code =  jdbcTemplate.queryForObject(HealthStatusQueryUtil.get_code,new Object[] { bean.getCode() },Integer.class);
 
-		    int desc =  jdbcTemplate.queryForObject(HealthStatusQueryUtil.get_desc,new Object[] { bean.getDescription() },Integer.class);
 
 			
-            if(code==0 && desc==0) {
+            if(code==0) {
             	
 			Map<String, Object> healthStatus = new HashMap<String, Object>();
 			
@@ -53,7 +52,7 @@ public class HealthStatusDaoImpl implements HealthStatusDao{
 				   resultBean.setSuccess(true);
   		  }
   		  else {
-  	 		   resultBean.setMessage("These details already exist");
+	 		   resultBean.setMessage(  bean.getCode() +" already exists,please enter a different Health Status Code");
 
   	        }		}catch(Exception e) {
 			e.printStackTrace();
@@ -127,10 +126,9 @@ public class HealthStatusDaoImpl implements HealthStatusDao{
 
 			int code =  jdbcTemplate.queryForObject(HealthStatusQueryUtil.get_code_edit,new Object[] { bean.getCode(),healthcode },Integer.class);
 
-		    int desc =  jdbcTemplate.queryForObject(HealthStatusQueryUtil.get_desc_edit,new Object[] { bean.getDescription(),healthdesc },Integer.class);
 
 			
-            if(code==0 && desc==0) {
+            if(code==0) {
 			Map<String, Object> healthStatus = new HashMap<String, Object>();
 			
 				healthStatus.put("userName", userDetails.getUsername());
@@ -144,7 +142,7 @@ public class HealthStatusDaoImpl implements HealthStatusDao{
 					   resultBean.setSuccess(true);
     		  }
     		  else {
-    	 		   resultBean.setMessage("These details already exist");
+   	 		   resultBean.setMessage(  bean.getCode() +" already exists,please enter a different Health Status Code");
 
     	        }			}catch(Exception e) {
 			e.printStackTrace();

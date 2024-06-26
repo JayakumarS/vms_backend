@@ -38,10 +38,8 @@ public class MaintainRankDaoImpl implements MaintainRankDao{
 			
 			int code =  jdbcTemplate.queryForObject(MaintainRankQueryUtil.get_code,new Object[] { bean.getCode() },Integer.class);
 
-		    int desc =  jdbcTemplate.queryForObject(MaintainRankQueryUtil.get_desc,new Object[] { bean.getDescription() },Integer.class);
-
 			
-            if(code==0 && desc==0) {
+            if(code==0) {
             	
             	
             	
@@ -64,7 +62,7 @@ public class MaintainRankDaoImpl implements MaintainRankDao{
 		   
             }
     		  else {
-    	 		   resultBean.setMessage("These details already exist");
+      	 		   resultBean.setMessage(  bean.getCode() +" already exists,please enter a different Rank Code");
 
     	        }
 		}catch(Exception e) {
@@ -132,15 +130,13 @@ public class MaintainRankDaoImpl implements MaintainRankDao{
 		try {
 			
 			String maintainRankcode =  jdbcTemplate.queryForObject(MaintainRankQueryUtil.maintainRank_code,new Object[] { bean.getRankid() },String.class);
-			String maintainRankdesc =  jdbcTemplate.queryForObject(MaintainRankQueryUtil.maintainRank_desc,new Object[] { bean.getRankid() },String.class);
 
 
 			int code =  jdbcTemplate.queryForObject(MaintainRankQueryUtil.get_code_edit,new Object[] { bean.getCode(),maintainRankcode },Integer.class);
 
-		    int desc =  jdbcTemplate.queryForObject(MaintainRankQueryUtil.get_desc_edit,new Object[] { bean.getDescription(),maintainRankdesc },Integer.class);
 
 			
-            if(code==0 && desc==0) {
+            if(code==0) {
 			
 			Map<String, Object> maintainRank = new HashMap<String, Object>();
 			
@@ -163,7 +159,7 @@ public class MaintainRankDaoImpl implements MaintainRankDao{
 		   
       	  }
   		  else {
-  	 		   resultBean.setMessage("These details already exist");
+ 	 		   resultBean.setMessage(  bean.getCode() +" already exists,please enter a different Rank Code");
 
   	        }	
             

@@ -463,5 +463,49 @@ public class ApplicationsBean {
 	}
 
 	private String  applicantimagePath;
+	
+	
+	public String getNationalityname() {
+		return nationalityname;
+	}
+	public void setNationalityname(String nationalityname) {
+		this.nationalityname = nationalityname;
+	}
+	public String getRankname() {
+		return rankname;
+	}
+	public void setRankname(String rankname) {
+		this.rankname = rankname;
+	}
+	public String getVesselname() {
+		return vesselname;
+	}
+	public void setVesselname(String vesselname) {
+		this.vesselname = vesselname;
+	}
+	public String getAgentname() {
+		return agentname;
+	}
+	public void setAgentname(String agentname) {
+		this.agentname = agentname;
+	}
+	public String getEnginename() {
+		return enginename;
+	}
+	public void setEnginename(String enginename) {
+		this.enginename = enginename;
+	}
+	public String getLicensename() {
+		return licensename;
+	}
+	public void setLicensename(String licensename) {
+		this.licensename = licensename;
+	}
+	private String nationalityname;
+	private String rankname;
+	private String vesselname;
+	private String agentname;
+	private String enginename;
+	private String licensename;
 
 }
