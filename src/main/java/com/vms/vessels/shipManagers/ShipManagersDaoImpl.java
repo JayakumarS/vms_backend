@@ -13,6 +13,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
+import com.vms.crew.payTypes.PayTypesQueryUtil;
+
 
 
 
@@ -33,6 +35,10 @@ public class ShipManagersDaoImpl implements ShipManagersDao {
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		try {
+			int shipman =  jdbcTemplate.queryForObject(ShipManagersQueryUtil.get_code,new Object[] { bean.getShipman() },Integer.class);
+
+		    int name =  jdbcTemplate.queryForObject(ShipManagersQueryUtil.get_desc,new Object[] { bean.getName() },Integer.class);
+		    if(shipman==0 && name==0) {
 			
 			Map<String, Object> shipManagers = new HashMap<String, Object>();
 			
@@ -47,6 +53,11 @@ public class ShipManagersDaoImpl implements ShipManagersDao {
 			
 			
 		   resultBean.setSuccess(true);
+		    }
+		    else {
+	 	 		   resultBean.setMessage(  bean.getShipman() +" already exists,please enter a different Shipman");
+
+		  	        }
 		}catch(Exception e) {
 			e.printStackTrace();
 			resultBean.setSuccess(false);
