@@ -15,6 +15,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
 import com.vms.crew.payTypes.PayTypesQueryUtil;
+import com.vms.vessels.fleet.FleetQueryUtil;
 
 
 
@@ -92,7 +93,11 @@ public class TrainingsDaoImpl implements TrainingsDao {
 	@Override
 	public TrainingsResultBean delete(Integer id) {
 		TrainingsResultBean resultBean = new TrainingsResultBean();
+		String code = null; 
 		try {
+			
+	    	code = jdbcTemplate.queryForObject(TrainingsQueryUtil.getCodeById, new Object[]{id}, String.class);
+
 			jdbcTemplate.update(TrainingsQueryUtil.delete,id);
 			resultBean.setSuccess(true);
 		}
@@ -100,7 +105,7 @@ public class TrainingsDaoImpl implements TrainingsDao {
 		        String errorMessage = e.getMessage();
 		        if (errorMessage.contains("violates foreign key constraint")) {
 		            resultBean.setSuccess(false);
-		            resultBean.setMessage("Cannot delete this paytypeId because it is referenced in another table");
+		            resultBean.setMessage(code + " code cannot be deleted as it is already used in system.");
 		        } else {
 		            e.printStackTrace();
 		            resultBean.setSuccess(false);
@@ -138,9 +143,9 @@ public class TrainingsDaoImpl implements TrainingsDao {
 		   resultBean.setSuccess(true);
 		    } 
 		    else {
- 	 		   resultBean.setMessage("These details are already exist");
+		 		   resultBean.setMessage( bean.getCode() +" already exists,please enter a different Training Code");
 
- 	        }
+		        }
 		}catch(Exception e) {
 			e.printStackTrace();
 			resultBean.setSuccess(false);

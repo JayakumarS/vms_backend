@@ -16,6 +16,8 @@ import org.springframework.stereotype.Repository;
 
 
 
+
+
 @Repository
 
 public class CrewPayrollCurrencyDaoImpl implements CrewPayrollCurrencyDao{
@@ -31,8 +33,13 @@ public class CrewPayrollCurrencyDaoImpl implements CrewPayrollCurrencyDao{
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		try {
+		Integer countryname = jdbcTemplate.queryForObject(CrewPayrollCurrencyQueryUtil.get_country_name,new Object[] { bean.getCountryname() },Integer.class);
 		
-		    
+		Integer currencycode = jdbcTemplate.queryForObject(CrewPayrollCurrencyQueryUtil.get_country_code,new Object[] { bean.getCountryname() },Integer.class);
+
+		
+	    if(countryname==0 && currencycode==0) {
+		    	
 			Map<String, Object> crewpayroll = new HashMap<String, Object>();
 			
 			crewpayroll.put("userName", userDetails.getUsername());
@@ -44,7 +51,11 @@ public class CrewPayrollCurrencyDaoImpl implements CrewPayrollCurrencyDao{
 			
 			
 		   resultBean.setSuccess(true);
-		  
+		    }
+		    else {
+	 	 		   resultBean.setMessage(  bean.getCountryname() +" already exists,please enter a different Country Name");
+
+		  	 }
 		
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -97,7 +108,11 @@ public class CrewPayrollCurrencyDaoImpl implements CrewPayrollCurrencyDao{
 	@Override
 	public CrewPayrollCurrencyResultBean delete(int id) {
 		CrewPayrollCurrencyResultBean resultBean = new CrewPayrollCurrencyResultBean();
+		
+		String countryname = null; 
 		try {
+			
+			countryname = jdbcTemplate.queryForObject(CrewPayrollCurrencyQueryUtil.getCodeById, new Object[]{id}, String.class);
 			jdbcTemplate.update(CrewPayrollCurrencyQueryUtil.delete,id);
 			resultBean.setSuccess(true);
 		}
@@ -105,7 +120,7 @@ public class CrewPayrollCurrencyDaoImpl implements CrewPayrollCurrencyDao{
 	        String errorMessage = e.getMessage();
 	        if (errorMessage.contains("violates foreign key constraint")) {
 	            resultBean.setSuccess(false);
-	            resultBean.setMessage("Cannot delete this paytypeId because it is referenced in another table");
+	            resultBean.setMessage(countryname + " country name cannot be deleted as it is already used in system.");
 	        } else {
 	            e.printStackTrace();
 	            resultBean.setSuccess(false);
@@ -121,6 +136,9 @@ public class CrewPayrollCurrencyDaoImpl implements CrewPayrollCurrencyDao{
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		try {
+			
+			String countryname = jdbcTemplate.queryForObject(CrewPayrollCurrencyQueryUtil.get_country_name,new Object[] { bean.getCountryname() },String.class);
+			   if(countryname==null) {
 		
 			Map<String, Object> crewpayroll = new HashMap<String, Object>();
 			
@@ -139,7 +157,12 @@ public class CrewPayrollCurrencyDaoImpl implements CrewPayrollCurrencyDao{
 		
 		   resultBean.setSuccess(true);
 		    
-		
+			   }
+			   else {
+	 	 		   resultBean.setMessage(  bean.getCountryname() +" already exists,please enter a different Country Name");
+
+		  	        }
+			   
 		}catch(Exception e) {
 			e.printStackTrace();
 			resultBean.setSuccess(false);

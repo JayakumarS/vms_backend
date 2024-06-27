@@ -26,6 +26,9 @@ public class PayTypesQueryUtil {
 	public static String get_code_edit="SELECT COUNT(pay_type_code) FROM pay_type WHERE pay_type_code = ?  AND pay_type_code != ?";
 
 	public static String get_desc_edit="SELECT COUNT(pay_type_name) FROM pay_type WHERE pay_type_name = ?  AND pay_type_name != ?";
+	
+	public static final String getCodeById = "SELECT pay_type_code FROM pay_type WHERE pay_type_id = ?";
+
 
 
 }

@@ -23,6 +23,9 @@ public class ExpEngineQueryUtil {
 	public static final String engine_code = "select engine_type_code from engine_type where engine_type_id= ?";
 
 	public static final String engine_desc = "select engine_type_name from engine_type where engine_type_id= ?";
+	
+	public static final String getCodeById = "SELECT engine_type_code FROM engine_type WHERE engine_type_id = ?";
+
 
 	public static String get_code_edit="SELECT COUNT(engine_type_code) FROM engine_type WHERE engine_type_code = ?  AND engine_type_code != ?";
 

@@ -14,6 +14,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
+import com.vms.vessels.fleet.FleetQueryUtil;
+
 
 
 @Repository
@@ -55,6 +57,7 @@ public class PayTypesDaoImpl implements PayTypesDao {
 		}catch(Exception e) {
 			e.printStackTrace();
 			resultBean.setSuccess(false);
+			resultBean.setMessage("Not Updated");
 		}
 		return resultBean;
 	}
@@ -89,7 +92,11 @@ public class PayTypesDaoImpl implements PayTypesDao {
 	@Override
 	public PayTypesResultBean delete(int id) {
 		PayTypesResultBean resultBean = new PayTypesResultBean();
+		String code = null; 
 		try {
+	    	code = jdbcTemplate.queryForObject(FleetQueryUtil.getCodeById, new Object[]{id}, String.class);
+
+			
 			jdbcTemplate.update(PayTypesQueryUtil.delete,id);
 			resultBean.setSuccess(true);
 		}
@@ -97,7 +104,7 @@ public class PayTypesDaoImpl implements PayTypesDao {
 	        String errorMessage = e.getMessage();
 	        if (errorMessage.contains("violates foreign key constraint")) {
 	            resultBean.setSuccess(false);
-	            resultBean.setMessage("Cannot delete this paytypeId because it is referenced in another table");
+	            resultBean.setMessage(code + " code cannot be deleted as it is already used in system.");
 	        } else {
 	            e.printStackTrace();
 	            resultBean.setSuccess(false);
@@ -136,12 +143,13 @@ public class PayTypesDaoImpl implements PayTypesDao {
 		   resultBean.setSuccess(true);
 		    }
 		    else {
- 	 		   resultBean.setMessage("These details are already exist");
+		 		   resultBean.setMessage( bean.getCode() +" already exists,please enter a different Pay Type Code");
 
- 	        }
+		        }
 		}catch(Exception e) {
 			e.printStackTrace();
 			resultBean.setSuccess(false);
+			resultBean.setMessage("Not Updated");
 		}
 		return resultBean;
 	}

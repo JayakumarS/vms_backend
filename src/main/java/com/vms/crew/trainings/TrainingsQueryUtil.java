@@ -22,6 +22,9 @@ public class TrainingsQueryUtil {
 	public static final String training_code = "select training_code from training_master where training_id= ?";
 
 	public static final String training_desc = "select training_name from training_master where training_id= ?";
+	
+	public static final String getCodeById = "SELECT training_code FROM training_master WHERE training_id = ?";
+
 
 	public static String get_code_edit="SELECT COUNT(training_code) FROM training_master WHERE training_code = ?  AND training_code != ?";
 
