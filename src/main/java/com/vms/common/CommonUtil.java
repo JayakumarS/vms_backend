@@ -16,8 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
 
-import sun.misc.BASE64Encoder;
 
+import java.util.Base64;
 /**
 * @author paragon
 *
@@ -57,8 +57,9 @@ public class CommonUtil {
 		MessageDigest md = MessageDigest.getInstance("SHA"); // step 2
 		md.update(plainText.getBytes("UTF-8")); // step 3
 		byte raw[] = md.digest(); // step 4
-		String encryptedText = (new BASE64Encoder()).encode(raw); // step 5
-		return encryptedText; // step 6
+		//String encryptedText = (new BASE64Encoder()).encode(raw); // step 5
+		//return encryptedText; // step 6
+		return Base64.getEncoder().encodeToString(raw);
 	}
 
 	/**
