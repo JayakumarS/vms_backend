@@ -7,6 +7,14 @@ public class MultiSeamenBean {
 	
 	public String vessel;
 	public String startdate;
+	public Integer nationality;
+	
+	public Integer getNationality() {
+		return nationality;
+	}
+	public void setNationality(Integer nationality) {
+		this.nationality = nationality;
+	}
 	public String getStartdate() {
 		return startdate;
 	}

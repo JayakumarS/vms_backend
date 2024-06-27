@@ -63,6 +63,7 @@ public class MultiSeamenDaoImpl implements MultiSeamenDao{
 				multiSeamenDtl.put("currency", listBean.getCurrency());
 				multiSeamenDtl.put("joiningDate", listBean.getJoiningDate());
 				multiSeamenDtl.put("estSignOff", listBean.getEstSignOff());
+				multiSeamenDtl.put("nationality", listBean.getNationality());
 			
 				
 				namedParameterJdbcTemplate.update(MultiSeamenQueryUtil.SAVE_MULTI_SEAMEN_DTL,multiSeamenDtl);

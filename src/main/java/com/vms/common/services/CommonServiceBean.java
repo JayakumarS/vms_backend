@@ -5,7 +5,14 @@ public class CommonServiceBean {
 	private String id;
 	private String text;
 	private Integer RankId;
+	private Integer nationalityId;
 	
+	public Integer getNationalityId() {
+		return nationalityId;
+	}
+	public void setNationalityId(Integer nationalityId) {
+		this.nationalityId = nationalityId;
+	}
 	public Integer getRankId() {
 		return RankId;
 	}
