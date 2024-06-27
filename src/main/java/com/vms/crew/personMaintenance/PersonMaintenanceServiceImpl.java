@@ -53,4 +53,16 @@ public class PersonMaintenanceServiceImpl implements PersonMaintenanceService{
 		return personMaintenanceDao.getDetails(id);
 	}
 
+	@Override
+	public String generateCode() {
+		// TODO Auto-generated method stub
+		return personMaintenanceDao.generateCode();
+	}
+
+	@Override
+	public PersonMaintenanceResultBean getCheckListDtl(Integer id) {
+		// TODO Auto-generated method stub
+		return personMaintenanceDao.getCheckListDtl(id);
+	}
+
 }

@@ -106,13 +106,38 @@ public class PersonMaintenanceController {
    		return rbean;
    	}
 	
+	@RequestMapping(value="/generateCode")
+	public PersonMaintenanceResultBean generateCode() throws Exception{
+		String code = "";
+		PersonMaintenanceResultBean rbean = new PersonMaintenanceResultBean();
+		try {
+			code = personMaintenanceService.generateCode();
+			rbean.setCode(code);
+		}catch(Exception e){
+			e.printStackTrace();	
+		}
+		return rbean;
+		
+	}
+	
+	@RequestMapping(value="/checkListDtl")
+	public PersonMaintenanceResultBean getCheckListDtl(@RequestParam("id") Integer id) {
+		PersonMaintenanceResultBean rbean = new PersonMaintenanceResultBean();
+		try {
+			rbean = personMaintenanceService.getCheckListDtl(id);
+		}catch(Exception e){
+			e.printStackTrace();	
+		}
+		return rbean;
+	}
+	
 	@RequestMapping("/uploadfile")
 	public @ResponseBody PersonMaintenanceResultBean saveuploadfile(@RequestBody MultipartFile file, HttpServletRequest request) throws CustomException {
 		PersonMaintenanceResultBean resultBean= new PersonMaintenanceResultBean();
 		try {
  
 			String filepath =  ConfigurationProps.exportFilesPath;
-			String path = filepath+"/"+ file.getOriginalFilename();
+			String path = filepath + file.getOriginalFilename();
 
 			File checkfile = new File(filepath);
 			if (!checkfile.exists())

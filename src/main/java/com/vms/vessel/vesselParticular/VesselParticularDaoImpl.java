@@ -43,15 +43,15 @@ public class VesselParticularDaoImpl implements VesselParticularDao{
 			vesselParticular.put("name", bean.getName());
 			vesselParticular.put("sName", bean.getShortname());
 			vesselParticular.put("type", bean.getType());
-			vesselParticular.put("fleet", bean.getFleet());
+			vesselParticular.put("fleet", (bean.getFleet() == null || bean.getFleet().isEmpty()) ? null : Integer.parseInt(bean.getFleet()));
 			vesselParticular.put("vesselType", bean.getVesseltype());
-			vesselParticular.put("pI", (bean.getPandi() == null || bean.getPandi().isEmpty()) ? null : bean.getPandi());
-			vesselParticular.put("hM", (bean.getHullandmachinery() == null || bean.getHullandmachinery().isEmpty()) ? null : bean.getHullandmachinery());
+			vesselParticular.put("pI", (bean.getPandi() == null || bean.getPandi().isEmpty()) ? null : Integer.parseInt(bean.getPandi()));
+			vesselParticular.put("hM", (bean.getHullandmachinery() == null || bean.getHullandmachinery().isEmpty()) ? null : Integer.parseInt(bean.getHullandmachinery()));
 			vesselParticular.put("vesselGroup", bean.getVesselgroup());
-			vesselParticular.put("fD", (bean.getFdandd() == null || bean.getFdandd().isEmpty()) ? null : bean.getFdandd());
-			vesselParticular.put("wageScale", (bean.getWagescale() == null || bean.getWagescale().isEmpty()) ? null : bean.getWagescale());
+			vesselParticular.put("fD", (bean.getFdandd() == null || bean.getFdandd().isEmpty()) ? null : Integer.parseInt(bean.getFdandd()));
+			vesselParticular.put("wageScale", (bean.getWagescale() == null || bean.getWagescale().isEmpty()) ? null : Integer.parseInt(bean.getWagescale()));
 			vesselParticular.put("reason", bean.getReason());
-			vesselParticular.put("vesselClass", (bean.getVesselClass() == null || bean.getVesselClass().isEmpty()) ? null : bean.getVesselClass());
+			vesselParticular.put("vesselClass", (bean.getVesselClass() == null || bean.getVesselClass().isEmpty()) ? null : Integer.parseInt(bean.getVesselClass()));
 			vesselParticular.put("validUnit", (bean.getValiedUntil() == null || bean.getValiedUntil().isEmpty()) ? null : bean.getValiedUntil());
 			vesselParticular.put("leadVessel", bean.getLeadvesselid());
 			vesselParticular.put("fleetVessel", bean.getFleetvessel());
@@ -61,9 +61,9 @@ public class VesselParticularDaoImpl implements VesselParticularDao{
 			namedParameterJdbcTemplate.update(VesselParticularQueryUtil.SAVE_HDR_VESSEL_PARTICULAR,vesselParticular);
 			
 			//Main Details
-			vesselParticular.put("flag", (bean.getFlag() == null || bean.getFlag().isEmpty()) ? null : bean.getFlag());
+			vesselParticular.put("flag", (bean.getFlag() == null || bean.getFlag().isEmpty()) ? null : Integer.parseInt(bean.getFlag()));
 			vesselParticular.put("greek", bean.isGreek());
-			vesselParticular.put("port", (bean.getRegistryport() == null || bean.getRegistryport().isEmpty()) ? null : bean.getRegistryport());
+			vesselParticular.put("port", (bean.getRegistryport() == null || bean.getRegistryport().isEmpty()) ? null : Integer.parseInt(bean.getRegistryport()));
 			vesselParticular.put("rNo", bean.getRegistryno());
 			vesselParticular.put("bDate", (bean.getBuiltdate() == null || bean.getBuiltdate().isEmpty()) ? null : bean.getBuiltdate());
 			vesselParticular.put("pBuild", bean.getPlaceBuild());
@@ -79,7 +79,7 @@ public class VesselParticularDaoImpl implements VesselParticularDao{
 			namedParameterJdbcTemplate.update(VesselParticularQueryUtil.SAVE_MAIN_VESSEL_PARTICULAR,vesselParticular);
 			
 			//Commercial Details
-			vesselParticular.put("sOwner", (bean.getShipowner() == null || bean.getShipowner().isEmpty()) ? null : bean.getShipowner());
+			vesselParticular.put("sOwner", (bean.getShipowner() == null || bean.getShipowner().isEmpty()) ? null : Integer.parseInt(bean.getShipowner()));
 			vesselParticular.put("sOwnerPlat", bean.getShipownerplatform());
 			vesselParticular.put("operator", bean.getOperator());
 			vesselParticular.put("sNo", bean.getSafteyno());
@@ -87,8 +87,8 @@ public class VesselParticularDaoImpl implements VesselParticularDao{
 			namedParameterJdbcTemplate.update(VesselParticularQueryUtil.SAVE_COMM_VESSEL_PARTICULAR,vesselParticular);
 			
 			//Crew Details
-			vesselParticular.put("vslOffManager", (bean.getOfficialManager() == null || bean.getOfficialManager().isEmpty()) ? null : bean.getOfficialManager());
-			vesselParticular.put("vslShipManager", (bean.getShipmanager() == null || bean.getShipmanager().isEmpty()) ? null : bean.getShipmanager());
+			vesselParticular.put("vslOffManager", (bean.getOfficialManager() == null || bean.getOfficialManager().isEmpty()) ? null : Integer.parseInt(bean.getOfficialManager()));
+			vesselParticular.put("vslShipManager", (bean.getShipmanager() == null || bean.getShipmanager().isEmpty()) ? null : Integer.parseInt(bean.getShipmanager()));
 			vesselParticular.put("vslCrewManager", bean.getCrewmanager());
 			vesselParticular.put("vslGroupManager", bean.getGroupmanager());
 			
@@ -163,27 +163,27 @@ public class VesselParticularDaoImpl implements VesselParticularDao{
 			vesselParticular.put("name", bean.getName());
 			vesselParticular.put("sName", bean.getShortname());
 			vesselParticular.put("type", bean.getType());
-			vesselParticular.put("fleet", bean.getFleet());
+			vesselParticular.put("fleet", (bean.getFleet() == null || bean.getFleet().isEmpty()) ? null : Integer.parseInt(bean.getFleet()));
 			vesselParticular.put("vesselType", bean.getVesseltype());
-			vesselParticular.put("pI", (bean.getPandi() == null || bean.getPandi().isEmpty()) ? null : bean.getPandi());
-			vesselParticular.put("hM", (bean.getHullandmachinery() == null || bean.getHullandmachinery().isEmpty()) ? null : bean.getHullandmachinery());
+			vesselParticular.put("pI", (bean.getPandi() == null || bean.getPandi().isEmpty()) ? null : Integer.parseInt(bean.getPandi()));
+			vesselParticular.put("hM", (bean.getHullandmachinery() == null || bean.getHullandmachinery().isEmpty()) ? null : Integer.parseInt(bean.getHullandmachinery()));
 			vesselParticular.put("vesselGroup", bean.getVesselgroup());
-			vesselParticular.put("fD", (bean.getFdandd() == null || bean.getFdandd().isEmpty()) ? null : bean.getFdandd());
-			vesselParticular.put("wageScale", (bean.getWagescale() == null || bean.getWagescale().isEmpty()) ? null : bean.getWagescale());
+			vesselParticular.put("fD", (bean.getFdandd() == null || bean.getFdandd().isEmpty()) ? null : Integer.parseInt(bean.getFdandd()));
+			vesselParticular.put("wageScale", (bean.getWagescale() == null || bean.getWagescale().isEmpty()) ? null : Integer.parseInt(bean.getWagescale()));
 			vesselParticular.put("reason", bean.getReason());
-			vesselParticular.put("vesselClass", (bean.getVesselClass() == null || bean.getVesselClass().isEmpty()) ? null : bean.getVesselClass());
+			vesselParticular.put("vesselClass", (bean.getVesselClass() == null || bean.getVesselClass().isEmpty()) ? null : Integer.parseInt(bean.getVesselClass()));
 			vesselParticular.put("validUnit", (bean.getValiedUntil() == null || bean.getValiedUntil().isEmpty()) ? null : bean.getValiedUntil());
 			vesselParticular.put("leadVessel", bean.getLeadvesselid());
 			vesselParticular.put("fleetVessel", bean.getFleetvessel());
 			vesselParticular.put("fleetDate", (bean.getDateinfleettype() == null || bean.getDateinfleettype().isEmpty()) ? null : bean.getDateinfleettype());
-			vesselParticular.put("active", bean.isVesselStatus());
+			vesselParticular.put("status", bean.isVesselStatus());
 			
 			namedParameterJdbcTemplate.update(VesselParticularQueryUtil.UPDATE_HDR_VESSEL_PARTICULAR,vesselParticular);
 			
 			//Main Details
-			vesselParticular.put("flag", (bean.getFlag() == null || bean.getFlag().isEmpty()) ? null : bean.getFlag());
+			vesselParticular.put("flag", (bean.getFlag() == null || bean.getFlag().isEmpty()) ? null : Integer.parseInt(bean.getFlag()));
 			vesselParticular.put("greek", bean.isGreek());
-			vesselParticular.put("port", (bean.getRegistryport() == null || bean.getRegistryport().isEmpty()) ? null : bean.getRegistryport());
+			vesselParticular.put("port", (bean.getRegistryport() == null || bean.getRegistryport().isEmpty()) ? null : Integer.parseInt(bean.getRegistryport()));
 			vesselParticular.put("rNo", bean.getRegistryno());
 			vesselParticular.put("bDate", (bean.getBuiltdate() == null || bean.getBuiltdate().isEmpty()) ? null : bean.getBuiltdate());
 			vesselParticular.put("pBuild", bean.getPlaceBuild());
@@ -199,7 +199,7 @@ public class VesselParticularDaoImpl implements VesselParticularDao{
 			namedParameterJdbcTemplate.update(VesselParticularQueryUtil.UPDATE_MAIN_VESSEL_PARTICULAR,vesselParticular);
 			
 			//Commercial Details
-			vesselParticular.put("sOwner", (bean.getShipowner() == null || bean.getShipowner().isEmpty()) ? null : bean.getShipowner());
+			vesselParticular.put("sOwner", (bean.getShipowner() == null || bean.getShipowner().isEmpty()) ? null : Integer.parseInt(bean.getShipowner()));
 			vesselParticular.put("sOwnerPlat", bean.getShipownerplatform());
 			vesselParticular.put("operator", bean.getOperator());
 			vesselParticular.put("sNo", bean.getSafteyno());
@@ -207,8 +207,8 @@ public class VesselParticularDaoImpl implements VesselParticularDao{
 			namedParameterJdbcTemplate.update(VesselParticularQueryUtil.UPDATE_COMM_VESSEL_PARTICULAR,vesselParticular);
 			
 			//Crew Details
-			vesselParticular.put("vslOffManager", (bean.getOfficialManager() == null || bean.getOfficialManager().isEmpty()) ? null : bean.getOfficialManager());
-			vesselParticular.put("vslShipManager", (bean.getShipmanager() == null || bean.getShipmanager().isEmpty()) ? null : bean.getShipmanager());
+			vesselParticular.put("vslOffManager", (bean.getOfficialManager() == null || bean.getOfficialManager().isEmpty()) ? null : Integer.parseInt(bean.getOfficialManager()));
+			vesselParticular.put("vslShipManager", (bean.getShipmanager() == null || bean.getShipmanager().isEmpty()) ? null : Integer.parseInt(bean.getShipmanager()));
 			vesselParticular.put("vslCrewManager", bean.getCrewmanager());
 			vesselParticular.put("vslGroupManager", bean.getGroupmanager());
 			

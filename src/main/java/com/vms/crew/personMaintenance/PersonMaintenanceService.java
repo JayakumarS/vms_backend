@@ -16,4 +16,8 @@ public interface PersonMaintenanceService {
 
 	public PersonMaintenanceResultBean getApplicantList();
 
+	public String generateCode();
+
+	public PersonMaintenanceResultBean getCheckListDtl(Integer id);
+
 }

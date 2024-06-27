@@ -16,5 +16,9 @@ public interface PersonMaintenanceDao {
 
 	public PersonMaintenanceResultBean getApplicantList();
 
+	public String generateCode();
+
+	public PersonMaintenanceResultBean getCheckListDtl(Integer id);
+
 
 }

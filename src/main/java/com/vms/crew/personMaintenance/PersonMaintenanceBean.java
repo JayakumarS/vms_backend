@@ -33,7 +33,57 @@ public class PersonMaintenanceBean {
 	private String code;
 	private String rankName;
 	private String select;
+	private String cvFileName;
+	private String cvFilePath;
+	private String rankDate;
+	private String applCode;
+	private boolean valid;
+	private boolean inValid;
+	private boolean optional;
 	
+	
+	public boolean isValid() {
+		return valid;
+	}
+	public void setValid(boolean valid) {
+		this.valid = valid;
+	}
+	public boolean isInValid() {
+		return inValid;
+	}
+	public void setInValid(boolean inValid) {
+		this.inValid = inValid;
+	}
+	public boolean isOptional() {
+		return optional;
+	}
+	public void setOptional(boolean optional) {
+		this.optional = optional;
+	}
+	public String getApplCode() {
+		return applCode;
+	}
+	public void setApplCode(String applCode) {
+		this.applCode = applCode;
+	}
+	public String getRankDate() {
+		return rankDate;
+	}
+	public void setRankDate(String rankDate) {
+		this.rankDate = rankDate;
+	}
+	public String getCvFileName() {
+		return cvFileName;
+	}
+	public void setCvFileName(String cvFileName) {
+		this.cvFileName = cvFileName;
+	}
+	public String getCvFilePath() {
+		return cvFilePath;
+	}
+	public void setCvFilePath(String cvFilePath) {
+		this.cvFilePath = cvFilePath;
+	}
 	public String getSelect() {
 		return select;
 	}
@@ -228,7 +278,77 @@ public class PersonMaintenanceBean {
 	private String indos;
 	private String usVisaNo;
 	private String usExpiry;
+	private String sidFilePath;
+	private String sidFileName;
+	private String imgPath;
+	private String imgName;
+	private Integer age;
+	private double compService;
+	private double seaService;
+	private double yearsInRank;
+	private String crewMasterImg;
+	private String crewMasterFilePath;
 	
+	public String getCrewMasterImg() {
+		return crewMasterImg;
+	}
+	public void setCrewMasterImg(String crewMasterImg) {
+		this.crewMasterImg = crewMasterImg;
+	}
+	public String getCrewMasterFilePath() {
+		return crewMasterFilePath;
+	}
+	public void setCrewMasterFilePath(String crewMasterFilePath) {
+		this.crewMasterFilePath = crewMasterFilePath;
+	}
+	public Integer getAge() {
+		return age;
+	}
+	public void setAge(Integer age) {
+		this.age = age;
+	}
+	public double getCompService() {
+		return compService;
+	}
+	public void setCompService(double compService) {
+		this.compService = compService;
+	}
+	public double getSeaService() {
+		return seaService;
+	}
+	public void setSeaService(double seaService) {
+		this.seaService = seaService;
+	}
+	public double getYearsInRank() {
+		return yearsInRank;
+	}
+	public void setYearsInRank(double yearsInRank) {
+		this.yearsInRank = yearsInRank;
+	}
+	public String getImgPath() {
+		return imgPath;
+	}
+	public void setImgPath(String imgPath) {
+		this.imgPath = imgPath;
+	}
+	public String getImgName() {
+		return imgName;
+	}
+	public void setImgName(String imgName) {
+		this.imgName = imgName;
+	}
+	public String getSidFilePath() {
+		return sidFilePath;
+	}
+	public void setSidFilePath(String sidFilePath) {
+		this.sidFilePath = sidFilePath;
+	}
+	public String getSidFileName() {
+		return sidFileName;
+	}
+	public void setSidFileName(String sidFileName) {
+		this.sidFileName = sidFileName;
+	}
 	public boolean isUsVisa() {
 		return usVisa;
 	}

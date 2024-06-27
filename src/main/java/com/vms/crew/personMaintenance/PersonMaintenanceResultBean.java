@@ -11,7 +11,14 @@ public class PersonMaintenanceResultBean {
 	private PersonMaintenanceBean crewMasterDocDtls;
 	private String filePath;
 	private String fileName;
+	private String code;
 
+	public String getCode() {
+		return code;
+	}
+	public void setCode(String code) {
+		this.code = code;
+	}
 	public String getFilePath() {
 		return filePath;
 	}

@@ -17,7 +17,7 @@ public class VesselParticularQueryUtil {
 	
 	public static final String getList = "select vessel_code as code,vessel_name as name,f.fleet_name as fleet,vt.vessel_type_name as vesseltype "
 			+ "from vessel_hdr vh "
-			+ "left join fleet_master f on vh.fleet_code = f.fleet_code "
+			+ "left join fleet_master f on vh.fleet_code = f.fleet_id "
 			+ "left join vessel_type vt on vh.vessel_type_code = vt.vessel_type_code "
 			+ "order by vh.created_dt desc ";
 	
@@ -25,35 +25,39 @@ public class VesselParticularQueryUtil {
 			+ "hull_ins_code as hullandmachinery,fd_ins_code as fdandd,vessel_group as vesselgroup,vh.wage_scale_code as wagescale,is_active as isActive, "
 			+ "reason as reason,vessel_class as vesselClass,fleet_vsl_id as fleetvessel,to_char(fleet_date,'dd/mm/yyyy') as dateinfleettype,to_char(valid_until,'dd/mm/yyyy') as valiedUntil, "
 			+ "lead_vsl_id as leadvesselid,f.fleet_name as fleetName,vt.vessel_type_name as vesselTypeName,vi.vessel_insurance_code as pandiName, "
-			+ "w.wage_scale_name as wageScaleName,vc.vessel_class_name as vesselClassName from vessel_hdr vh  "
-			+ "left join fleet_master f on f.fleet_code = vh.fleet_code "
+			+ "w.wage_scale_name as wageScaleName,vc.vessel_class_name as vesselClassName,is_active as vesselStatus,"
+			+ "vi.vessel_insurance_name as pandiName,vih.vessel_insurance_name as hullandmachineryName,"
+			+ "vif.vessel_insurance_name as fdanddName from vessel_hdr vh  "
+			+ "left join fleet_master f on f.fleet_id = vh.fleet_code "
 			+ "left join vessel_type vt on vt.vessel_type_code = vh.vessel_type_code "
-			+ "left join vessel_insurance vi on vi.vessel_insurance_code = vh.pandi_ins_code "
-			+ "left join wage_scales w on w.wage_scale_code = vh.wage_scale_code "
-			+ "left join vessel_class vc on vc.vessel_class_code = vh.vessel_class "
+			+ "left join vessel_insurance vi on vi.vessel_insurance_id = vh.pandi_ins_code "
+			+ "left join vessel_insurance vih on vih.vessel_insurance_id = vh.hull_ins_code "
+			+ "left join vessel_insurance vif on vif.vessel_insurance_id = vh.fd_ins_code "
+			+ "left join wage_scales w on w.wage_scale_id = vh.wage_scale_code "
+			+ "left join vessel_class vc on vc.vessel_class_id = vh.vessel_class "
 			+ "where vessel_code = ? ";
 	
 	public static final String GET_MAIN_DTLS = "select vd.flag_code as flag,vd.reg_port as registryport,reg_no as registryno,to_char(build_date,'dd/mm/yyyy')as builtdate,build_place as placeBuild,build_yard as yardbuild, "
 			+ "imo_no as imono,hull_no as hullno,call_sign as callsign,nat_no as natnumber,mmsi as mmis,ice_class as iceclass,class_no as classno, "
 			+ "f.flag_desc as flagName,p.port_name as portName from vessel_dtl vd "
-			+ "left join flag_master f on f.flag_code =  vd.flag_code "
-			+ "left join port_master p on p.port_code = vd.reg_port "
+			+ "left join flag_master f on f.flag_id =  vd.flag_code "
+			+ "left join port_master p on p.port_id = vd.reg_port "
 			+ "where vessel_code = ? ";
 	
 	public static final String GET_COMM_DTLS = "select vc.vessel_ship_owner as shipowner,vessel_operator as operator,safety_no as safteyno, "
 			+ "vo.vessel_owner_name as vesselOwnerName from vessel_dtl_comm vc "
-			+ "left join vessel_owner vo on vo.vessel_owner_code = vc.vessel_ship_owner "
+			+ "left join vessel_owner vo on vo.vessel_owner_id = vc.vessel_ship_owner "
 			+ "where vessel_code = ? ";
 	
 	public static final String GET_CREW_DTLS = "select vc.vessel_off_mngr as officialManager,vc.vessel_ship_mngr as shipmanager,vessel_crew_mngr as crewmanager,vessel_grp_mngr as groupmanager, "
 			+ "om.official_manager_name as offManagerName,sm.ship_manager_name as shipManagerName from vessel_dtl_crew vc "
-			+ "left join official_managers om on om.official_manager_code = vc.vessel_off_mngr "
-			+ "left join ship_managers sm on sm.ship_manager_code = vc.vessel_ship_mngr "
+			+ "left join official_managers om on om.official_managers_id = vc.vessel_off_mngr "
+			+ "left join ship_managers sm on sm.ship_managers_id = vc.vessel_ship_mngr "
 			+ "where vessel_code = ? ";
 	
 	public static final String UPDATE_HDR_VESSEL_PARTICULAR = "Update vessel_hdr "
 			+ "set vessel_name=:name, vessel_short_name=:sName,fleet_code=:fleet, vessel_type_code=:vesselType, pandi_ins_code=:pI, hull_ins_code=:hM, "
-			+ "fd_ins_code=:fD, vessel_group=:vesselGroup, wage_scale_code=:wageScale, is_active=:active, reason=:reason, vessel_class=:vesselClass, "
+			+ "fd_ins_code=:fD, vessel_group=:vesselGroup, wage_scale_code=:wageScale, is_active=:status, reason=:reason, vessel_class=:vesselClass, "
 			+ "fleet_vsl_id=:fleetVessel, fleet_date=to_date(:fleetDate,'dd/mm/yyyy'), valid_until=to_date(:validUnit,'dd/mm/yyyy'), lead_vsl_id=:leadVessel,modified_by=:userName, modified_dt=now() "
 			+ "where vessel_code=:code ";
 	

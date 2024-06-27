@@ -14,9 +14,9 @@ public class CommonServiceQueryUtil {
 	
 	public static final String GET_EMP_NAME="select user_name as userName from user_master where emp_id=?";
 	
-	public static final String FLEET_LIST = "select fleet_code as id,fleet_name as text from fleet_master";
+	public static final String FLEET_LIST = "select fleet_id as id,fleet_name as text from fleet_master";
 	
-	public static final String CLASS_LIST = "select vessel_class_code as id,vessel_class_name as text from vessel_class";
+	public static final String CLASS_LIST = "select vessel_class_id as id,vessel_class_name as text from vessel_class";
 	
 	public static final String VESSEL_TYPE = "select vessel_type_code as id,vessel_type_name as text from vessel_type";
 	
@@ -27,8 +27,9 @@ public class CommonServiceQueryUtil {
 	public static final String GET_PORT = "select port_id as id,port_name as text from port_master";
 	
 	public static final String GET_COUNTRY = "select country_code as id,country_name as text from country_master";
+//	public static final String GET_COUNTRY = "select country_id as id,country_name as text from country_master";
 
-	public static final String GET_CURRENCY = "select currency_code as id,currency_name as text from currency_master";
+	public static final String GET_CURRENCY = "select currency_id as id,currency_name as text from currency_master";
 
 	public static final String GET_PHONECODE = "select distinct phonecode as id,phonecode as text from country_master";
 		
@@ -47,7 +48,7 @@ public class CommonServiceQueryUtil {
 	
 	public static final String GET_AGENTS = "select agent_id as id,agent_code_name as text from agent_master";
 	
-	public static final String GET_RELIGION = "select religion_code as id,religion_name as text from religion_master";
+	public static final String GET_RELIGION = "select religion_id as id,religion_name as text from religion_master";
 	
 	public static final String GET_WORK_LICENSE = "select work_license_id as id,work_license_name as text from work_license";
 	

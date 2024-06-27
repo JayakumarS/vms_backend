@@ -29,7 +29,21 @@ public class VesselParticularBean {
 	private String pandiName;
 	private String wageScaleName;
 	private String vesselClassName;
+	private String hullandmachineryName;
+	private String fdanddName;
 
+	public String getHullandmachineryName() {
+		return hullandmachineryName;
+	}
+	public void setHullandmachineryName(String hullandmachineryName) {
+		this.hullandmachineryName = hullandmachineryName;
+	}
+	public String getFdanddName() {
+		return fdanddName;
+	}
+	public void setFdanddName(String fdanddName) {
+		this.fdanddName = fdanddName;
+	}
 	public boolean isVesselStatus() {
 		return vesselStatus;
 	}
