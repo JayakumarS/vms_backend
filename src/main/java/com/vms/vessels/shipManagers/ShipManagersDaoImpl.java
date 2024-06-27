@@ -135,7 +135,8 @@ public class ShipManagersDaoImpl implements ShipManagersDao {
 		   resultBean.setSuccess(true);
 		}
 		   else {
- 	 		   resultBean.setMessage("These details are already existed");
+ 	 		   resultBean.setMessage(  bean.getShipman() +" already exists,please enter a different Shipman");
+
 
  	        }
 		   

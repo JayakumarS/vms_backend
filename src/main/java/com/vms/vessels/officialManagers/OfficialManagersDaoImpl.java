@@ -13,6 +13,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
+import com.vms.crew.payTypes.PayTypesQueryUtil;
+
 
 @Repository
 public class OfficialManagersDaoImpl implements OfficialManagersDao{
@@ -30,6 +32,10 @@ public class OfficialManagersDaoImpl implements OfficialManagersDao{
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		try {
+			int code =  jdbcTemplate.queryForObject(OfficialManagersQueryUtil.get_code,new Object[] { bean.getCode() },Integer.class);
+
+		    int desc =  jdbcTemplate.queryForObject(OfficialManagersQueryUtil.get_desc,new Object[] { bean.getDescription() },Integer.class);
+		    if(code==0 && desc==0) {
 			Map<String, Object> officialManagers = new HashMap<String, Object>();
 			
 		
@@ -47,9 +53,14 @@ public class OfficialManagersDaoImpl implements OfficialManagersDao{
 				officialManagers.put("userName", userDetails.getUsername());
 				
 				namedParameterJdbcTemplate.update(OfficialManagersQueryUtil.SAVE_OFFICIAL_MANAGERS,officialManagers);
+				 resultBean.setSuccess(true);
+		    }
+		    else {
+	 	 		   resultBean.setMessage(  bean.getCode() +" already exists,please enter a different Official Code");
+
+		  	        }
 			
-			
-		   resultBean.setSuccess(true);
+		  
 		}catch(Exception e) {
 			e.printStackTrace();
 			resultBean.setSuccess(false);
@@ -137,7 +148,7 @@ public class OfficialManagersDaoImpl implements OfficialManagersDao{
 		    resultBean.setSuccess(true);
 		    }
 		    else {
-	 	 		   resultBean.setMessage("These details are already existed");
+		 		   resultBean.setMessage( bean.getCode() +" already exists,please enter a different Official Code");
 
 	 	        }
 		}catch(Exception e) {
