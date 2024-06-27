@@ -11,7 +11,7 @@ public class ApplicationsQueryUtil {
 			+ "values (:surname,:name,:nation,:midname,:rank,to_date(:dob,'dd/mm/yyyy'),:father,:mother,:birthplace,:vessel,:priormonth,:decisioncode,:engine,\r\n"
 			+ "to_date(:signOffDate,'dd/mm/yyyy'),:agent,:remarks,to_date(:appDate,'dd/mm/yyyy'),:recom,to_date(:availfromDate,'dd/mm/yyyy'),:book,:issue,\r\n"
 			+ "to_date(:expiryDate,'dd/mm/yyyy'),:passport,:passportissue,to_date(:passportExpiryDate,'dd/mm/yyyy'),:licence,:licenceissue,to_date(:licenceExpiryDate,'dd/mm/yyyy'),\r\n"
-			+ ":grade,:licenceno,:kin,:city,:address1,:tel1,:address2,:tel2,:cvOperationsfilePath,:cvOperationsfileName,:passBookfilePath,:passBookfileName,:sBookfilePath,:sBookfileName,:applicantimagePath,:applicantimageFileName,:userName,now())";
+			+ ":grade,:licenceno,:kin,:city,:address1,:tel1,:address2,:tel2,:cvOperationsfilePath,:cvOperationsfileName,:passBookfilePath,:passBookfileName,:sBookfilePath,:sBookfileName,:applicantimagePath,:applicantimageFileName,:userName,now()) returning crew_applicant_code";
 	
 	public static final String getList = "select ca.crew_applicant_code as code,ca.appl_sur_name as surname,ca.appl_name as name,ca.appl_nationality as nation,\r\n"
 			+ "ca.appl_middle_name as midname,ca.appl_rank as rank,to_char(ca.appl_birth_date,'dd/mm/yyyy') as dob ,\r\n"
@@ -101,7 +101,7 @@ public class ApplicationsQueryUtil {
 	
 	
 	public static final String SAVE_CERTIFICATE = "Insert into appl_checklist(appl_code,appl_rank_code,appl_certificate_code,appl_mandatory_valid,appl_mandatory_invalid,appl_optional_invalid,created_by,created_dt)"
-			+ "values (1,:rankCode,:certifiCode,:mandatoryValid,:mandatoryInvalid,:optionalInvalid,:userName,now())";
+			+ "values (:applcode,:rankCode,:certifiCode,:mandatoryValid,:mandatoryInvalid,:optionalInvalid,:userName,now())";
 
 
 }

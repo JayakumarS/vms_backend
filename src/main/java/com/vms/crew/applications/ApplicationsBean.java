@@ -305,6 +305,7 @@ public class ApplicationsBean {
     private Integer tel1; 
     public int certificateCode;
     public int CertifiCode;
+
 	public int getCertificateCode() {
 		return certificateCode;
 	}
@@ -363,8 +364,14 @@ public class ApplicationsBean {
     public boolean optionalInvalid;
     public List<ApplicationsBean> certificates;
 
-     
+    public List<ApplicationsBean> splitCertificateNames;
 
+	public List<ApplicationsBean> getSplitCertificateNames() {
+		return splitCertificateNames;
+	}
+	public void setSplitCertificateNames(List<ApplicationsBean> splitCertificateNames) {
+		this.splitCertificateNames = splitCertificateNames;
+	}
 	public List<ApplicationsBean> getCertificates() {
 		return certificates;
 	}

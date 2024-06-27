@@ -135,9 +135,26 @@ public class ApplicationsDaoImpl implements ApplicationsDao{
 				applications.put("applicantimageFileName", bean.getApplicantimageFileName());
 				
 				
-				namedParameterJdbcTemplate.update(ApplicationsQueryUtil.SAVE_APPLICATION,applications);
-			
-			
+				int conHdrId = namedParameterJdbcTemplate.queryForObject(ApplicationsQueryUtil.SAVE_APPLICATION, applications,int.class);
+
+				if(conHdrId>0){
+					 for (ApplicationsBean certificate : bean.getCertificates()) {
+				            // Loop through each splitCertificateName in the current certificate
+				            for (ApplicationsBean splitCertificateName : certificate.getSplitCertificateNames()) {
+				                Map<String, Object> certificateMap = new HashMap<>();
+
+				                certificateMap.put("userName", userDetails.getUsername());
+				                certificateMap.put("applcode",conHdrId);
+				                certificateMap.put("rankCode", bean.getRankCode());
+				                certificateMap.put("certifiCode", certificate.getCertifiCode());
+				                certificateMap.put("mandatoryValid", splitCertificateName.isMandatoryValid());
+				                certificateMap.put("mandatoryInvalid", splitCertificateName.isMandatoryInvalid());
+				                certificateMap.put("optionalInvalid", splitCertificateName.isOptionalInvalid());
+
+				                namedParameterJdbcTemplate.update(ApplicationsQueryUtil.SAVE_CERTIFICATE, certificateMap);
+				            }
+				}
+				}
 		   resultBean.setSuccess(true);
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -277,31 +294,35 @@ public class ApplicationsDaoImpl implements ApplicationsDao{
 
 
 	public ApplicationsResultBean saveCertificate(ApplicationsBean bean) {
-		ApplicationsResultBean resultBean = new ApplicationsResultBean();
-		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		
-		try {
-			
-			
-			Map<String, Object> certificate = new HashMap<String, Object>();
-			
-			certificate.put("userName", userDetails.getUsername());
-			certificate.put("rankCode", bean.getRankCode());
-			certificate.put("certifiCode", bean.getCertifiCode());
-			certificate.put("mandatoryValid", bean.isMandatoryValid());
-			certificate.put("mandatoryInvalid", bean.isMandatoryInvalid());
-			certificate.put("optionalInvalid", bean.isOptionalInvalid());
+	    ApplicationsResultBean resultBean = new ApplicationsResultBean();
+	    UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-				
-			namedParameterJdbcTemplate.update(ApplicationsQueryUtil.SAVE_CERTIFICATE,certificate);
-					
-		   resultBean.setSuccess(true);
-		}catch(Exception e) {
-			e.printStackTrace();
-			resultBean.setSuccess(false);
-		}
-		return resultBean;
+	    try {
+	        // Loop through each certificate
+	        for (ApplicationsBean certificate : bean.getCertificates()) {
+	            // Loop through each splitCertificateName in the current certificate
+	            for (ApplicationsBean splitCertificateName : certificate.getSplitCertificateNames()) {
+	                Map<String, Object> certificateMap = new HashMap<>();
+
+	                certificateMap.put("userName", userDetails.getUsername());
+	                certificateMap.put("rankCode", bean.getRankCode());
+	                certificateMap.put("certifiCode", certificate.getCertifiCode());
+	                certificateMap.put("mandatoryValid", splitCertificateName.isMandatoryValid());
+	                certificateMap.put("mandatoryInvalid", splitCertificateName.isMandatoryInvalid());
+	                certificateMap.put("optionalInvalid", splitCertificateName.isOptionalInvalid());
+
+	                namedParameterJdbcTemplate.update(ApplicationsQueryUtil.SAVE_CERTIFICATE, certificateMap);
+	            }
+	        }
+
+	        resultBean.setSuccess(true);
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        resultBean.setSuccess(false);
+	    }
+	    return resultBean;
 	}
+
 
 
 
