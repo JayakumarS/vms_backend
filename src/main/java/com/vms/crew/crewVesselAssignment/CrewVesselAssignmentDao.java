@@ -9,5 +9,11 @@ public interface CrewVesselAssignmentDao {
 
 	
 	List<CrewVesselAssignmentBean> getrank();
+	
+	List<CrewVesselAssignmentBean> getport();
+
+//	List<CrewVesselAssignmentBean> showlist(CrewVesselAssignmentBean bean);
+
+//	public boolean savelist(CrewVesselAssignmentBean bean);
 
 }

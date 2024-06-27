@@ -7,10 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+
 import org.springframework.stereotype.Repository;
 
-import com.vms.crew.maintainRank.MaintainRankBean;
-import com.vms.crew.maintainRank.MaintainRankQueryUtil;
+
 
 @Repository
 
@@ -51,4 +51,49 @@ public class CrewVesselAssignmentDaoImpl implements CrewVesselAssignmentDao{
 		}
 		return getrank;
 	}
+	
+	@Override
+	public List<CrewVesselAssignmentBean> getport() {
+		List<CrewVesselAssignmentBean> getport = new ArrayList<>();
+
+		try {
+			getport = jdbcTemplate.query(CrewVesselAssignmentQueryUtil.getport, new Object[] {},new BeanPropertyRowMapper<>(CrewVesselAssignmentBean.class));
+
+				
+
+		} catch (Exception e) {
+		}
+		return getport;
+	}
+	
+	
+//	@Override
+//	public List<CrewVesselAssignmentBean> showlist(
+//			CrewVesselAssignmentBean bean) {
+//
+//		List<CrewVesselAssignmentBean> CrewVesselAssignmentBean = new ArrayList<>();
+//		
+//		
+//		try {
+//		
+//		} catch (Exception e) {
+//		}
+//		return CrewVesselAssignmentBean;
+//	}
+	
+//	@Override
+//	public boolean savelist(CrewVesselAssignmentBean alPaymentInformationList) {
+//
+//		
+//	
+//	
+//
+//		try {
+//			
+//		} catch (Exception e) {
+//		}
+//		return true;
+//	}
+
+
 }

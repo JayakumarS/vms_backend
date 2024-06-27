@@ -26,4 +26,6 @@ public class WorkLicenseQueryUtil {
 
 	public static final String get_desc_edit =  "SELECT COUNT(work_license_name) FROM work_license WHERE work_license_name = ?  AND work_license_name != ?";
 
+	public static final String getCodeById ="SELECT work_license_code FROM work_license WHERE work_license_id = ?";
+
 }

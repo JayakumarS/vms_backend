@@ -27,5 +27,7 @@ public static final String get_code_edit = "SELECT COUNT(vessel_insurance_code) 
 
 public static final String get_desc_edit = "SELECT COUNT(vessel_insurance_name) FROM vessel_insurance WHERE vessel_insurance_name = ?  AND vessel_insurance_name != ?";
 
+public static final String getCodeById = "SELECT vessel_insurance_code FROM vessel_insurance WHERE vessel_insurance_id = ?";
+
 
 }

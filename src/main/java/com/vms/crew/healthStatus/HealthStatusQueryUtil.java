@@ -23,6 +23,8 @@ public class HealthStatusQueryUtil {
 
 	public static final String health_desc = "select health_status_name from health_status where health_status_id= ?";
 
+	public static final String getCodeById = "SELECT health_status_code FROM health_status WHERE health_status_id = ?";
+
 	public static String get_code_edit="SELECT COUNT(health_status_code) FROM health_status WHERE health_status_code = ?  AND health_status_code != ?";
 
 	public static String get_desc_edit="SELECT COUNT(health_status_name) FROM health_status WHERE health_status_name = ?  AND health_status_name != ?";

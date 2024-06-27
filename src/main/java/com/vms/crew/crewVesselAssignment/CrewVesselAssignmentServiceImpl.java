@@ -23,4 +23,21 @@ public class CrewVesselAssignmentServiceImpl implements CrewVesselAssignmentServ
 		return CrewVesselAssignmentDao.getrank();
 	}
 	
+	
+	@Override
+	public List<CrewVesselAssignmentBean> getport() {
+		return CrewVesselAssignmentDao.getport();
+	}
+	
+	
+//	@Override
+//	public List<CrewVesselAssignmentBean> showlist(CrewVesselAssignmentBean bean) {
+//
+//		return CrewVesselAssignmentDao.showlist(bean);
+//	}
+//	@Override
+//	public boolean savelist(CrewVesselAssignmentBean CrewVesselAssignmentBean) {
+//
+//		return CrewVesselAssignmentBean.savelist(CrewVesselAssignmentBean);
+//	}
 }

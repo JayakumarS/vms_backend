@@ -26,6 +26,8 @@ public class VesselOwnerQueryUtil {
 
 	public static final String get_desc_edit = "SELECT COUNT(vessel_owner_name) FROM vessel_owner WHERE vessel_owner_name = ?  AND vessel_owner_name != ?;";
 
+	public static final String getCodeById = "SELECT vessel_owner_code FROM vessel_owner WHERE vessel_owner_id = ?";
+
 
 
 }

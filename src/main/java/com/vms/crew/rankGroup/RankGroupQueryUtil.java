@@ -28,4 +28,6 @@ public static final String get_code_edit = "SELECT COUNT(rank_group_code) FROM r
 
 public static final String get_desc_edit = "SELECT COUNT(rank_group_name) FROM rank_group WHERE rank_group_name = ?  AND rank_group_name != ?";
 
+public static final String getCodeById = "SELECT rank_group_code FROM rank_group WHERE rank_group_id = ?";
+
 }

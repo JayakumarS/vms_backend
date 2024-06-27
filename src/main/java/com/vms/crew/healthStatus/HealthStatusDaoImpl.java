@@ -13,6 +13,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
+import com.vms.crew.rankGroup.RankGroupQueryUtil;
 import com.vms.vessel.vesselOwner.VesselOwnerQueryUtil;
 
 
@@ -93,7 +94,12 @@ public class HealthStatusDaoImpl implements HealthStatusDao{
 	@Override
 	public HealthStatusResultBean delete(Integer id) {
 		HealthStatusResultBean resultBean = new HealthStatusResultBean();
+		String code = null;
+
 		try {
+			
+			code = jdbcTemplate.queryForObject(HealthStatusQueryUtil.getCodeById, new Object[]{id}, String.class);
+
 			jdbcTemplate.update(HealthStatusQueryUtil.delete,id);
 			resultBean.setSuccess(true);
 		}
@@ -101,8 +107,7 @@ public class HealthStatusDaoImpl implements HealthStatusDao{
 			 String errorMessage = e.getMessage();
 		        if (errorMessage.contains("violates foreign key constraint")) {
 		            resultBean.setSuccess(false);
-		            resultBean.setMessage("Cannot delete this health status because it is referenced in another");
-		        } else {
+		            resultBean.setMessage(code + " code cannot be deleted as it is already used in system.");
 		            e.printStackTrace();
 		            resultBean.setSuccess(false);
 		            resultBean.setMessage("Error in Delete");

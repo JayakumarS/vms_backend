@@ -42,5 +42,7 @@ public static final String get_code_edit = "SELECT COUNT(rank_code) FROM rank_ma
 
 public static final String get_desc_edit = "SELECT COUNT(rank_name) FROM rank_master WHERE rank_name = ?  AND rank_name != ?";
 
+public static final String getCodeById = "SELECT rank_code FROM rank_master WHERE rank_id = ?";
+
 
 }

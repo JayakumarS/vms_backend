@@ -13,6 +13,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
+import com.vms.common.agent.AgentQueryUtil;
 import com.vms.crew.maintainRank.MaintainRankBean;
 import com.vms.crew.maintainRank.MaintainRankQueryUtil;
 import com.vms.crew.workStatus.WorkStatusQueryUtil;
@@ -107,7 +108,11 @@ public class CertificatesDaoImpl implements CertificatesDao{
 	@Override
 	public CertificatesResultBean delete(Integer id) {
 		CertificatesResultBean resultBean = new CertificatesResultBean();
+		String code = null;
+
 		try {
+			code = jdbcTemplate.queryForObject(CertificatesQueryutil.getCodeById, new Object[]{id}, String.class);
+
 			jdbcTemplate.update(CertificatesQueryutil.delete,id);
 			resultBean.setSuccess(true);
 		}
@@ -116,6 +121,8 @@ public class CertificatesDaoImpl implements CertificatesDao{
 		        if (errorMessage.contains("violates foreign key constraint")) {
 		            resultBean.setSuccess(false);
 		            resultBean.setMessage("Cannot delete this certificate because it is referenced in another");
+		            
+		            resultBean.setMessage(code + " code cannot be deleted as it is already used in system.");
 		        } else {
 		            e.printStackTrace();
 		            resultBean.setSuccess(false);

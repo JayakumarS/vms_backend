@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
 import com.vms.crew.healthStatus.HealthStatusQueryUtil;
+import com.vms.crew.rankGroup.RankGroupQueryUtil;
 
 
 
@@ -104,7 +105,13 @@ public class MaintainRankDaoImpl implements MaintainRankDao{
 	@Override
 	public MaintainRankResultBean delete(Integer id) {
 		MaintainRankResultBean resultBean = new MaintainRankResultBean();
+		String code = null;
+
 		try {
+			
+			code = jdbcTemplate.queryForObject(MaintainRankQueryUtil.getCodeById, new Object[]{id}, String.class);
+
+			
 			jdbcTemplate.update(MaintainRankQueryUtil.delete,id);
 			resultBean.setSuccess(true);
 		}
@@ -112,7 +119,7 @@ public class MaintainRankDaoImpl implements MaintainRankDao{
 			 String errorMessage = e.getMessage();
 		        if (errorMessage.contains("violates foreign key constraint")) {
 		            resultBean.setSuccess(false);
-		            resultBean.setMessage("Cannot delete this rank because it is referenced in another");
+		            resultBean.setMessage(code + " code cannot be deleted as it is already used in system.");
 		        } else {
 		            e.printStackTrace();
 		            resultBean.setSuccess(false);

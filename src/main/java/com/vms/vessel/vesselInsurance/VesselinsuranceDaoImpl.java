@@ -13,6 +13,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
+import com.vms.crew.rankGroup.RankGroupQueryUtil;
 import com.vms.crew.workLicense.WorkLicenseQueryUtil;
 
 
@@ -102,7 +103,12 @@ public class VesselinsuranceDaoImpl implements VesselinsuranceDao{
 	@Override
 	public VesselinsuranceResultBean delete(Integer id) {
 		VesselinsuranceResultBean resultBean = new VesselinsuranceResultBean();
+		String code = null;
+
 		try {
+			
+			code = jdbcTemplate.queryForObject(VesselinsuranceQueryUtil.getCodeById, new Object[]{id}, String.class);
+
 			jdbcTemplate.update(VesselinsuranceQueryUtil.delete,id);
 			resultBean.setSuccess(true);
 		}
@@ -110,7 +116,7 @@ public class VesselinsuranceDaoImpl implements VesselinsuranceDao{
 			 String errorMessage = e.getMessage();
 		        if (errorMessage.contains("violates foreign key constraint")) {
 		            resultBean.setSuccess(false);
-		            resultBean.setMessage("Cannot delete this vessel insurance because it is referenced in another");
+		            resultBean.setMessage(code + " code cannot be deleted as it is already used in system.");
 		        } else {
 		            e.printStackTrace();
 		            resultBean.setSuccess(false);

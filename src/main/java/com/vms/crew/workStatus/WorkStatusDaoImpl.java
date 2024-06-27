@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
 import com.vms.crew.healthStatus.HealthStatusQueryUtil;
+import com.vms.crew.rankGroup.RankGroupQueryUtil;
 
 
 
@@ -89,7 +90,13 @@ public class WorkStatusDaoImpl implements WorkStatusDao{
 	@Override
 	public WorkStatusResultBean delete(Integer id) {
 		WorkStatusResultBean resultBean = new WorkStatusResultBean();
+		String code = null;
+
 		try {
+			
+			code = jdbcTemplate.queryForObject(WorkStatusQueryUtil.getCodeById, new Object[]{id}, String.class);
+
+			
 			jdbcTemplate.update(WorkStatusQueryUtil.delete,id);
 			resultBean.setSuccess(true);
 		}
@@ -97,7 +104,7 @@ public class WorkStatusDaoImpl implements WorkStatusDao{
 			  String errorMessage = e.getMessage();
 		        if (errorMessage.contains("violates foreign key constraint")) {
 		            resultBean.setSuccess(false);
-		            resultBean.setMessage("Cannot delete this work status because it is referenced in another");
+		            resultBean.setMessage(code + " code cannot be deleted as it is already used in system.");
 		        } else {
 		            e.printStackTrace();
 		            resultBean.setSuccess(false);

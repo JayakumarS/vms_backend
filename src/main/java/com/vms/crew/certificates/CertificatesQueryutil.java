@@ -27,6 +27,9 @@ public class CertificatesQueryutil {
 	public static final String certificates_desc = "select certificate_name from certificate_master where certificate_id= ?";
 
 	public static final String get_certificates_edit = "SELECT COUNT(certificate_name) FROM certificate_master WHERE certificate_name = ?  AND certificate_name != ?";
+	
+	public static final String getCodeById = "SELECT certificate_code FROM certificate_master WHERE certificate_id = ?";
+
 
 	
 }

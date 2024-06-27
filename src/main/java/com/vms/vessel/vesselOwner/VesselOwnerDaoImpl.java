@@ -96,7 +96,12 @@ public class VesselOwnerDaoImpl implements VesselOwnerDao{
 	@Override
 	public VesselOwnerResultBean delete(Integer id) {
 		VesselOwnerResultBean resultBean = new VesselOwnerResultBean();
+		String code = null;
+
 		try {
+			
+			code = jdbcTemplate.queryForObject(VesselOwnerQueryUtil.getCodeById, new Object[]{id}, String.class);
+
 			jdbcTemplate.update(VesselOwnerQueryUtil.delete,id);
 			resultBean.setSuccess(true);
 		}
@@ -104,7 +109,7 @@ public class VesselOwnerDaoImpl implements VesselOwnerDao{
 			 String errorMessage = e.getMessage();
 		        if (errorMessage.contains("violates foreign key constraint")) {
 		            resultBean.setSuccess(false);
-		            resultBean.setMessage("Cannot delete this vessel owner because it is referenced in another");
+		            resultBean.setMessage(code + " code cannot be deleted as it is already used in system.");
 		        } else {
 		            e.printStackTrace();
 		            resultBean.setSuccess(false);

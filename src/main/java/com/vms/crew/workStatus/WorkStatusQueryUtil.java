@@ -26,4 +26,6 @@ public class WorkStatusQueryUtil {
 
 	public static final String get_desc_edit = "SELECT COUNT(work_status_name) FROM work_status WHERE work_status_name = ?  AND work_status_name != ?";
 
+	public static final String getCodeById ="SELECT work_status_code FROM work_status WHERE work_status_id = ?";
+
 }

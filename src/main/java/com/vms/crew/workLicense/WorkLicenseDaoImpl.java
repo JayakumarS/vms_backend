@@ -13,6 +13,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
+import com.vms.crew.rankGroup.RankGroupQueryUtil;
 import com.vms.crew.workStatus.WorkStatusQueryUtil;
 
 
@@ -95,7 +96,12 @@ public class WorkLicenseDaoImpl implements WorkLicenseDao{
 	@Override
 	public WorkLicenseResultBean delete(Integer id) {
 		WorkLicenseResultBean resultBean = new WorkLicenseResultBean();
+		String code = null;
+
 		try {
+			
+			code = jdbcTemplate.queryForObject(WorkLicenseQueryUtil.getCodeById, new Object[]{id}, String.class);
+
 			jdbcTemplate.update(WorkLicenseQueryUtil.delete,id);
 			resultBean.setSuccess(true);
 		}
@@ -103,7 +109,7 @@ public class WorkLicenseDaoImpl implements WorkLicenseDao{
 			   String errorMessage = e.getMessage();
 		        if (errorMessage.contains("violates foreign key constraint")) {
 		            resultBean.setSuccess(false);
-		            resultBean.setMessage("Cannot delete this work license because it is referenced in another");
+		            resultBean.setMessage(code + " code cannot be deleted as it is already used in system.");
 		        } else {
 		            e.printStackTrace();
 		            resultBean.setSuccess(false);

@@ -96,7 +96,13 @@ public class RankGroupDaoImpl implements RankGroupDao {
 	@Override
 	public RankGroupResultBean delete(Integer id) {
 		RankGroupResultBean resultBean = new RankGroupResultBean();
+		String code = null;
+
 		try {
+			
+			code = jdbcTemplate.queryForObject(RankGroupQueryUtil.getCodeById, new Object[]{id}, String.class);
+
+			
 			jdbcTemplate.update(RankGroupQueryUtil.delete,id);
 			resultBean.setSuccess(true);
 		}
@@ -104,7 +110,7 @@ public class RankGroupDaoImpl implements RankGroupDao {
 			   String errorMessage = e.getMessage();
 		        if (errorMessage.contains("violates foreign key constraint")) {
 		            resultBean.setSuccess(false);
-		            resultBean.setMessage("Cannot delete this rank group because it is referenced in another");
+		            resultBean.setMessage(code + " code cannot be deleted as it is already used in system.");
 		        } else {
 		            e.printStackTrace();
 		            resultBean.setSuccess(false);
