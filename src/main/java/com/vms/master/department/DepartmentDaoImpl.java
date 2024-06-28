@@ -14,8 +14,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
-import com.vms.crew.rankGroup.RankGroupQueryUtil;
-
 @Repository
 public class DepartmentDaoImpl implements DepartmentDao {
 	
@@ -100,19 +98,23 @@ public class DepartmentDaoImpl implements DepartmentDao {
 	public DepartmentResultBean delete(Integer id) {
 		// TODO Auto-generated method stub
 		DepartmentResultBean resultBean = new DepartmentResultBean();
+		String code=null;
+		
 		try {
+			code = jdbcTemplate.queryForObject(DepartmentQueryUtil.getCodeById, new Object[]{id}, String.class);
+			
 			jdbcTemplate.update(DepartmentQueryUtil.department_delete,id);
 			resultBean.setSuccess(true);
 		}
 		catch (DataAccessException e) {
-	        String errorMessage = e.getMessage();
+			String errorMessage = e.getMessage();
 	        if (errorMessage.contains("violates foreign key constraint")) {
 	            resultBean.setSuccess(false);
-	            resultBean.setMsg("Cannot delete this Department Id because it is referenced in another table");
+	            resultBean.setMsg(code + " code cannot be deleted as it is already used in system.");
 	        } else {
 	            e.printStackTrace();
 	            resultBean.setSuccess(false);
-	            resultBean.setMsg(errorMessage);
+	            resultBean.setMsg("Error in Delete");
 	        }
 	    }
 		return resultBean;
@@ -126,17 +128,17 @@ public class DepartmentDaoImpl implements DepartmentDao {
 		
            try {
         	   
-        	String deptcode =  jdbcTemplate.queryForObject(DepartmentQueryUtil.dept_code,new Object[] { bean.getDeptId() },String.class);
+        	//String deptcode =  jdbcTemplate.queryForObject(DepartmentQueryUtil.dept_code,new Object[] { bean.getDeptId() },String.class);
 			String deptname =  jdbcTemplate.queryForObject(DepartmentQueryUtil.dept_name,new Object[] { bean.getDeptId() },String.class);
 
 			
 			
-			int code =  jdbcTemplate.queryForObject(DepartmentQueryUtil.get_code_edit,new Object[] { bean.getCode(),deptcode },Integer.class);
+			//int code =  jdbcTemplate.queryForObject(DepartmentQueryUtil.get_code_edit,new Object[] { bean.getCode(),deptcode },Integer.class);
 
 		    int name =  jdbcTemplate.queryForObject(DepartmentQueryUtil.get_name_edit,new Object[] { bean.getName(),deptname },Integer.class);
 
 			
-            if(code==0 && name==0) {
+            if(name==0) {
 		    
 			Map<String, Object> department = new HashMap<String, Object>();
 			
@@ -170,6 +172,20 @@ public class DepartmentDaoImpl implements DepartmentDao {
 		}
 		return resultBean;
 		
+	}
+	@Override
+	public DepartmentBean getSequenceCode() {
+	    DepartmentBean department = new DepartmentBean();
+
+	    try {
+	        String dept_id = jdbcTemplate.queryForObject(DepartmentQueryUtil.get_dept_id, String.class);
+	        department.setCode(dept_id);
+	    } catch (Exception e) {
+	        // Log the exception
+	        e.printStackTrace();
+	    }
+
+	    return department;
 	}
 }
 	

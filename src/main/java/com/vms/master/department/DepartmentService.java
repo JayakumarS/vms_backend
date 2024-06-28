@@ -10,5 +10,7 @@ public interface DepartmentService {
 	public DepartmentResultBean delete(Integer id);
 
 	public DepartmentResultBean update(DepartmentBean bean);
+	
+	public DepartmentBean getSequenceCode();
 
 }

@@ -39,4 +39,10 @@ public class DepartmentServiceImpl implements DepartmentService {
 		return departmentDao.update(bean);
 	}
 
+	@Override
+	public DepartmentBean getSequenceCode() {
+		// TODO Auto-generated method stub
+		return departmentDao.getSequenceCode();
+	}
+
 }

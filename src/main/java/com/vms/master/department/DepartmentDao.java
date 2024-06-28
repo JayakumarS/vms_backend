@@ -12,4 +12,6 @@ public interface DepartmentDao {
 	
 	public DepartmentResultBean update(DepartmentBean bean);
 
+	public DepartmentBean getSequenceCode();
+
 }
