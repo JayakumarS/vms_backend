@@ -7,6 +7,26 @@ public class MultiSeamenResultBean {
 	
 	public boolean success;
 	
+	public String message;
+	
+	public List<MultiSeamenBean> multiseamendetail;
+	
+	public List<MultiSeamenBean> getMultiseamendetail() {
+		return multiseamendetail;
+	}
+
+	public void setMultiseamendetail(List<MultiSeamenBean> multiseamendetail) {
+		this.multiseamendetail = multiseamendetail;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
 	private List<MultiSeamenBean> list;
 	
 	private MultiSeamenBean multiSeamenBean;

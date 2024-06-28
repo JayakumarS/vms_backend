@@ -8,7 +8,14 @@ public class MultiSeamenBean {
 	public String vessel;
 	public String startdate;
 	public Integer nationality;
+	public Integer seamenCode;
 	
+	public Integer getSeamenCode() {
+		return seamenCode;
+	}
+	public void setSeamenCode(Integer seamenCode) {
+		this.seamenCode = seamenCode;
+	}
 	public Integer getNationality() {
 		return nationality;
 	}
@@ -61,8 +68,15 @@ public class MultiSeamenBean {
 	public String currency;
 	public String joiningDate;
 	public String estSignOff;
+	public String createdDate;
 
 
+	public String getCreatedDate() {
+		return createdDate;
+	}
+	public void setCreatedDate(String createdDate) {
+		this.createdDate = createdDate;
+	}
 	public String getCode() {
 		return code;
 	}
