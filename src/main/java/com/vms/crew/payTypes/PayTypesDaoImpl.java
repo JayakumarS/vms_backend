@@ -94,7 +94,7 @@ public class PayTypesDaoImpl implements PayTypesDao {
 		PayTypesResultBean resultBean = new PayTypesResultBean();
 		String code = null; 
 		try {
-	    	code = jdbcTemplate.queryForObject(FleetQueryUtil.getCodeById, new Object[]{id}, String.class);
+	    	code = jdbcTemplate.queryForObject(PayTypesQueryUtil.getCodeById, new Object[]{id}, String.class);
 
 			
 			jdbcTemplate.update(PayTypesQueryUtil.delete,id);
