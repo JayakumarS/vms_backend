@@ -16,4 +16,10 @@ public class MultiSeamenSignOffServiceImpl implements MultiSeamenSignOffService{
 	public  List<MultiSeamenSignOffBean> multiSemanlist(String date,String vessel ,Integer port) {
 		return MultiSeamenSignOffDao.multiSemanlist(date,vessel,port);
  	}
+	
+	@Override
+	public boolean saveMultiSeamen(MultiSeamenSignOffBean MultiSeamenSignOffBean) {
+
+		return MultiSeamenSignOffDao.saveMultiSeamen(MultiSeamenSignOffBean);
+	}
 }

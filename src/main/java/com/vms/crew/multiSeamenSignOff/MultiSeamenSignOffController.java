@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -31,5 +32,20 @@ public class MultiSeamenSignOffController {
 		}
 		return multiSemanlist;
 	}
-
+	
+	
+	
+	@RequestMapping("/saveMultiSeamen")
+	public @ResponseBody MultiSeamenSignOffResultBean saveMultiSeamen(@RequestBody MultiSeamenSignOffBean MultiSeamenSignOffBean)
+			throws CustomException, InterruptedException {
+		MultiSeamenSignOffResultBean objPaymentInformationResultBean = new MultiSeamenSignOffResultBean();
+		boolean isSucess = false;
+		try {
+			isSucess = MultiSeamenSignOffService.saveMultiSeamen(MultiSeamenSignOffBean);
+			objPaymentInformationResultBean.setSuccess(true);
+		} catch (Exception e) {
+			throw new CustomException();
+		}
+		return objPaymentInformationResultBean;
+	}
 }
