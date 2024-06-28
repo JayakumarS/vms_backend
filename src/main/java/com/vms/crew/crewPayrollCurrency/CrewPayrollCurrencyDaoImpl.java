@@ -92,11 +92,24 @@ public class CrewPayrollCurrencyDaoImpl implements CrewPayrollCurrencyDao{
 	}
 	
 	@Override
-	public CrewPayrollCurrencyResultBean getCountry(String id) {		
+	public CrewPayrollCurrencyResultBean getCountry(Integer id) {		
 		CrewPayrollCurrencyResultBean resultBean = new CrewPayrollCurrencyResultBean();
 		resultBean.setSuccess(false);
 		try {
 			resultBean.setList(jdbcTemplate.query(CrewPayrollCurrencyQueryUtil.getCountry,new Object[] { id }, new BeanPropertyRowMapper<CrewPayrollCurrencyBean>(CrewPayrollCurrencyBean.class)));
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		return resultBean; 
+	}
+	
+	@Override
+	public CrewPayrollCurrencyResultBean getNationality(String id) {		
+		CrewPayrollCurrencyResultBean resultBean = new CrewPayrollCurrencyResultBean();
+		resultBean.setSuccess(false);
+		try {
+			resultBean.setList(jdbcTemplate.query(CrewPayrollCurrencyQueryUtil.getNationality,new Object[] { id }, new BeanPropertyRowMapper<CrewPayrollCurrencyBean>(CrewPayrollCurrencyBean.class)));
 		}
 		catch(Exception e){
 			e.printStackTrace();

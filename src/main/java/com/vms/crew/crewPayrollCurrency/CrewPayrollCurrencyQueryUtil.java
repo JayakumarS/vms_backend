@@ -6,7 +6,10 @@ public class CrewPayrollCurrencyQueryUtil {
 	
 	public static final String get_country_list="select crew_payroll_currency_country_name as countryname,crew_payroll_currency_code as currencycode,crew_payroll_currency_validation as validation ,crew_payroll_currency_id as currencyid from crew_payroll_currency order by created_dt desc";
 	
-	public static final String getCountry="SELECT currency_code AS currencycode FROM country_master where country_code=?";
+	public static final String getCountry="SELECT currency_code AS currencycode FROM country_master where country_id=?";
+
+	
+	public static final String getNationality="select nationality as nationality from country_master where country_code=?";
 	
 	public static final String getEdit = "select crew_payroll_currency_id as currencyid, crew_payroll_currency_country_name as countryname,crew_payroll_currency_code as currencycode,crew_payroll_currency_validation as validation from crew_payroll_currency where crew_payroll_currency_id = ?";
 	

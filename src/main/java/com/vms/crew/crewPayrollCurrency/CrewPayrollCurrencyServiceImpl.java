@@ -36,10 +36,17 @@ public class CrewPayrollCurrencyServiceImpl implements CrewPayrollCurrencyServic
 	}
 	
 	@Override
-	public CrewPayrollCurrencyResultBean getCountry(String id) {
+	public CrewPayrollCurrencyResultBean getCountry(Integer id) {
 		// TODO Auto-generated method stub
 		return CrewPayrollCurrencyDao.getCountry(id);
 	}
+	
+	@Override
+	public CrewPayrollCurrencyResultBean getNationality(String id) {
+		// TODO Auto-generated method stub
+		return CrewPayrollCurrencyDao.getNationality(id);
+	}
+
 
 	@Override
 	public CrewPayrollCurrencyResultBean update(CrewPayrollCurrencyBean bean) {

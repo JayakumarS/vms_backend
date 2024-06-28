@@ -73,10 +73,21 @@ public class CrewPayrollCurrencyController {
 		
 	}
 	@RequestMapping(value="/getCountry")
-	public CrewPayrollCurrencyResultBean getCountry(@RequestParam("id") String id) {
+	public CrewPayrollCurrencyResultBean getCountry(@RequestParam("id") Integer id) {
 		CrewPayrollCurrencyResultBean rbean = new CrewPayrollCurrencyResultBean();
 		try {
 			rbean = CrewPayrollCurrencyService.getCountry(id);
+		}catch(Exception e){
+			e.printStackTrace();	
+		}
+		return rbean;
+		
+	}
+	@RequestMapping(value="/getNationality")
+	public CrewPayrollCurrencyResultBean getNationality(@RequestParam("id") String id) {
+		CrewPayrollCurrencyResultBean rbean = new CrewPayrollCurrencyResultBean();
+		try {
+			rbean = CrewPayrollCurrencyService.getNationality(id);
 		}catch(Exception e){
 			e.printStackTrace();	
 		}

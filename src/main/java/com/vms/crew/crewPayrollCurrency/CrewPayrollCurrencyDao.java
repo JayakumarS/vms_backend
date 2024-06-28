@@ -12,7 +12,9 @@ public interface CrewPayrollCurrencyDao {
 
 	public CrewPayrollCurrencyResultBean delete(int id);
 	
-	public CrewPayrollCurrencyResultBean getCountry(String id);
+	public CrewPayrollCurrencyResultBean getCountry(Integer id);
+	
+	public CrewPayrollCurrencyResultBean getNationality(String id);
 
 
 	public CrewPayrollCurrencyResultBean update(CrewPayrollCurrencyBean bean);
