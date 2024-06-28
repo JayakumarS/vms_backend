@@ -4,6 +4,7 @@ public class CommonServiceBean {
 	
 	private String id;
 	private String text;
+	private String code;
 	private Integer RankId;
 	private Integer nationalityId;
 	
@@ -30,6 +31,12 @@ public class CommonServiceBean {
 	}
 	public void setText(String text) {
 		this.text = text;
+	}
+	public String getCode() {
+		return code;
+	}
+	public void setCode(String code) {
+		this.code = code;
 	}
 	
 }

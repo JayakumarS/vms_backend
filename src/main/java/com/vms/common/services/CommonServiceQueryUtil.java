@@ -41,8 +41,8 @@ public class CommonServiceQueryUtil {
 
 	public static final String GET_VESSEL = "select vessel_code as id,vessel_name as text from vessel_hdr";
 
-	public static final String GET_JOINPORT = "select port_name as id,country_name as name from country_master cm\r\n"
-			+ "left join port_master pm on cm.country_code = pm.country_code";
+	public static final String GET_JOINPORT = "select port_id as id,port_name as text,cm.country_name as code from port_master pm\r\n"
+			+ "left join country_master cm on cm.country_code = pm.country_code";
 	
 	public static final String GET_RANK_MASTERS = "select rank_id as id,rank_name as text from rank_master";
 	
