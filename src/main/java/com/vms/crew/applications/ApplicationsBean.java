@@ -349,24 +349,7 @@ public class ApplicationsBean {
 //	public void setRankCode(String rankCode) {
 //		this.rankCode = rankCode;
 //	}
-	public boolean isMandatoryValid() {
-		return mandatoryValid;
-	}
-	public void setMandatoryValid(boolean mandatoryValid) {
-		this.mandatoryValid = mandatoryValid;
-	}
-	public boolean isMandatoryInvalid() {
-		return mandatoryInvalid;
-	}
-	public void setMandatoryInvalid(boolean mandatoryInvalid) {
-		this.mandatoryInvalid = mandatoryInvalid;
-	}
-	public boolean isOptionalInvalid() {
-		return optionalInvalid;
-	}
-	public void setOptionalInvalid(boolean optionalInvalid) {
-		this.optionalInvalid = optionalInvalid;
-	}
+	
 
 	public String certificateName;
     public int rankCode;
@@ -376,32 +359,60 @@ public class ApplicationsBean {
 	public void setRankCode(int rankCode) {
 		this.rankCode = rankCode;
 	}
-	public boolean mmandatoryValid;
-    public boolean mmandatoryInvalid;
-    public boolean moptionalInvalid;
-	public boolean isMmandatoryValid() {
+
+    
+    
+    
+    private Boolean mandatoryValid;  
+    private Boolean mandatoryInvalid;  
+    private Boolean optionalInvalid;
+    
+	public Boolean mmandatoryValid;
+    public Boolean mmandatoryInvalid;
+    public Boolean moptionalInvalid;
+
+	
+    
+    
+    
+    public Boolean getMandatoryValid() {
+		return mandatoryValid;
+	}
+	public void setMandatoryValid(Boolean mandatoryValid) {
+		this.mandatoryValid = mandatoryValid;
+	}
+	public Boolean getMandatoryInvalid() {
+		return mandatoryInvalid;
+	}
+	public void setMandatoryInvalid(Boolean mandatoryInvalid) {
+		this.mandatoryInvalid = mandatoryInvalid;
+	}
+	public Boolean getOptionalInvalid() {
+		return optionalInvalid;
+	}
+	public void setOptionalInvalid(Boolean optionalInvalid) {
+		this.optionalInvalid = optionalInvalid;
+	}
+	public Boolean getMmandatoryValid() {
 		return mmandatoryValid;
 	}
-	public void setMmandatoryValid(boolean mmandatoryValid) {
+	public void setMmandatoryValid(Boolean mmandatoryValid) {
 		this.mmandatoryValid = mmandatoryValid;
 	}
-	public boolean isMmandatoryInvalid() {
+	public Boolean getMmandatoryInvalid() {
 		return mmandatoryInvalid;
 	}
-	public void setMmandatoryInvalid(boolean mmandatoryInvalid) {
+	public void setMmandatoryInvalid(Boolean mmandatoryInvalid) {
 		this.mmandatoryInvalid = mmandatoryInvalid;
 	}
-	public boolean isMoptionalInvalid() {
+	public Boolean getMoptionalInvalid() {
 		return moptionalInvalid;
 	}
-	public void setMoptionalInvalid(boolean moptionalInvalid) {
+	public void setMoptionalInvalid(Boolean moptionalInvalid) {
 		this.moptionalInvalid = moptionalInvalid;
 	}
 
-	public boolean mandatoryValid;
-    public boolean mandatoryInvalid;
-    public boolean optionalInvalid;
-    public List<ApplicationsBean> certificates;
+	public List<ApplicationsBean> certificates;
     public List<ApplicationsBean> medicalcertificates;
     public List<ApplicationsBean> splitCertificateMedicalNames;
     

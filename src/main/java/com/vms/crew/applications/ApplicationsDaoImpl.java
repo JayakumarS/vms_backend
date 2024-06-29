@@ -153,9 +153,9 @@ public class ApplicationsDaoImpl implements ApplicationsDao{
 				                    certificateMap.put("rankCode", bean.getRankCode());
 				                    certificateMap.put("certifiCode", certificate.getCertifiCode());
 				                    certificateMap.put("mcertificateCode", null); // Set medical certificate code to null
-				                    certificateMap.put("mandatoryValid", splitCertificateName.isMandatoryValid());
-				                    certificateMap.put("mandatoryInvalid", splitCertificateName.isMandatoryInvalid());
-				                    certificateMap.put("optionalInvalid", splitCertificateName.isOptionalInvalid());
+				                    certificateMap.put("mandatoryValid", splitCertificateName.getMandatoryValid());
+				                    certificateMap.put("mandatoryInvalid", splitCertificateName.getMandatoryInvalid());
+				                    certificateMap.put("optionalInvalid", splitCertificateName.getOptionalInvalid());
 
 				                    namedParameterJdbcTemplate.update(ApplicationsQueryUtil.SAVE_CERTIFICATE, certificateMap);
 				                }
@@ -176,9 +176,9 @@ public class ApplicationsDaoImpl implements ApplicationsDao{
 				                    certificateMap.put("rankCode", bean.getRankCode());
 				                    certificateMap.put("certifiCode", null); // Set regular certificate code to null
 				                    certificateMap.put("mcertificateCode", mcertificate.getMcertificateCode());
-				                    certificateMap.put("mandatoryValid", splitCertificateName.isMmandatoryValid());
-				                    certificateMap.put("mandatoryInvalid", splitCertificateName.isMmandatoryInvalid());
-				                    certificateMap.put("optionalInvalid", splitCertificateName.isMoptionalInvalid());
+				                    certificateMap.put("mandatoryValid", splitCertificateName.getMmandatoryValid());
+				                    certificateMap.put("mandatoryInvalid", splitCertificateName.getMmandatoryInvalid());
+				                    certificateMap.put("optionalInvalid", splitCertificateName.getMoptionalInvalid());
 
 				                    namedParameterJdbcTemplate.update(ApplicationsQueryUtil.SAVE_CERTIFICATE, certificateMap);
 				                }
@@ -211,20 +211,48 @@ public class ApplicationsDaoImpl implements ApplicationsDao{
 		return resultBean;
 	}
 	
+//	@Override
+//	public ApplicationsResultBean edit(Integer id) {		
+//		ApplicationsResultBean resultBean = new ApplicationsResultBean();
+//		resultBean.setSuccess(false);
+//		try {
+//			resultBean.setList(jdbcTemplate.query(ApplicationsQueryUtil.getEdit,new Object[] { id }, new BeanPropertyRowMapper<ApplicationsBean>(ApplicationsBean.class)));
+//			resultBean.setListpopup(jdbcTemplate.query(ApplicationsQueryUtil.getEditpopup,new Object[] { id,resultBean.}, new BeanPropertyRowMapper<ApplicationsBean>(ApplicationsBean.class)));
+//
+//		}
+//		catch(Exception e){
+//			e.printStackTrace();
+//		}
+//		return resultBean; 
+//	}
+	
+	
 	@Override
-	public ApplicationsResultBean edit(Integer id) {		
-		ApplicationsResultBean resultBean = new ApplicationsResultBean();
-		resultBean.setSuccess(false);
-		try {
-			resultBean.setList(jdbcTemplate.query(ApplicationsQueryUtil.getEdit,new Object[] { id }, new BeanPropertyRowMapper<ApplicationsBean>(ApplicationsBean.class)));
-			resultBean.setListpopup(jdbcTemplate.query(ApplicationsQueryUtil.getEditpopup,new Object[] { id }, new BeanPropertyRowMapper<ApplicationsBean>(ApplicationsBean.class)));
-
-		}
-		catch(Exception e){
-			e.printStackTrace();
-		}
-		return resultBean; 
+	public ApplicationsResultBean edit(Integer id) {
+	    ApplicationsResultBean resultBean = new ApplicationsResultBean();
+	    resultBean.setSuccess(false);
+	    try {
+	        // Fetch the main details using getEdit query
+	        List<ApplicationsBean> mainList = jdbcTemplate.query(ApplicationsQueryUtil.getEdit, new Object[]{id}, new BeanPropertyRowMapper<>(ApplicationsBean.class));
+	        
+	        if (!mainList.isEmpty()) {
+	            // Assuming the first item contains the necessary rank_id
+	            ApplicationsBean mainBean = mainList.get(0);
+	            Integer rankId = mainBean.getRank();  // Adjust based on your actual getter method for rank_id
+	            
+	            // Fetch the popup details using getEditpopup query with the rank_id
+	            List<ApplicationsBean> popupList = jdbcTemplate.query(ApplicationsQueryUtil.getEditpopup, new Object[]{id,id,rankId,id,rankId}, new BeanPropertyRowMapper<>(ApplicationsBean.class));
+	            
+	            resultBean.setList(mainList);
+	            resultBean.setListpopup(popupList);
+	            resultBean.setSuccess(true);
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    return resultBean;
 	}
+
 	
 	
 	@Override
@@ -314,6 +342,57 @@ public class ApplicationsDaoImpl implements ApplicationsDao{
 					namedParameterJdbcTemplate.update(ApplicationsQueryUtil.UPDATE_APPLICATION,applications);
 			
 			
+					
+					   // Delete existing certificates
+			        Map<String, Object> deleteParams = new HashMap<>();
+			        deleteParams.put("applcode", bean.getCode());
+			        namedParameterJdbcTemplate.update(ApplicationsQueryUtil.DELETE_CERTIFICATES, deleteParams);
+
+			        // Insert regular certificates
+			        List<ApplicationsBean> certificates = bean.getCertificates();
+			        if (certificates != null && !certificates.isEmpty()) {
+			            for (ApplicationsBean certificate : certificates) {
+			                List<ApplicationsBean> splitCertificateNames = certificate.getSplitCertificateNames();
+			                if (splitCertificateNames != null && !splitCertificateNames.isEmpty()) {
+			                    for (ApplicationsBean splitCertificateName : splitCertificateNames) {
+			                        Map<String, Object> certificateMap = new HashMap<>();
+			                        certificateMap.put("userName", userDetails.getUsername());
+			                        certificateMap.put("applcode", bean.getCode());
+			                        certificateMap.put("rankCode", bean.getRankCode());
+			                        certificateMap.put("certifiCode", certificate.getCertifiCode());
+			                        certificateMap.put("mcertificateCode", null); // Set medical certificate code to null
+			                        certificateMap.put("mandatoryValid", splitCertificateName.getMandatoryValid());
+			                        certificateMap.put("mandatoryInvalid", splitCertificateName.getMandatoryInvalid());
+			                        certificateMap.put("optionalInvalid", splitCertificateName.getOptionalInvalid());
+
+			                        namedParameterJdbcTemplate.update(ApplicationsQueryUtil.SAVE_CERTIFICATE, certificateMap);
+			                    }
+			                }
+			            }
+			        }
+
+			        // Insert medical certificates
+			        List<ApplicationsBean> medicalCertificates = bean.getMedicalcertificates();
+			        if (medicalCertificates != null && !medicalCertificates.isEmpty()) {
+			            for (ApplicationsBean mcertificate : medicalCertificates) {
+			                List<ApplicationsBean> splitCertificateMedicalNames = mcertificate.getSplitCertificateMedicalNames();
+			                if (splitCertificateMedicalNames != null && !splitCertificateMedicalNames.isEmpty()) {
+			                    for (ApplicationsBean splitCertificateName : splitCertificateMedicalNames) {
+			                        Map<String, Object> certificateMap = new HashMap<>();
+			                        certificateMap.put("userName", userDetails.getUsername());
+			                        certificateMap.put("applcode", bean.getCode());
+			                        certificateMap.put("rankCode", bean.getRankCode());
+			                        certificateMap.put("certifiCode", null); // Set regular certificate code to null
+			                        certificateMap.put("mcertificateCode", mcertificate.getMcertificateCode());
+			                        certificateMap.put("mandatoryValid", splitCertificateName.getMmandatoryValid());
+			                        certificateMap.put("mandatoryInvalid", splitCertificateName.getMmandatoryInvalid());
+			                        certificateMap.put("optionalInvalid", splitCertificateName.getMoptionalInvalid());
+
+			                        namedParameterJdbcTemplate.update(ApplicationsQueryUtil.SAVE_CERTIFICATE, certificateMap);
+			                    }
+			                }
+			            }
+			        }
 		   resultBean.setSuccess(true);
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -368,9 +447,9 @@ public class ApplicationsDaoImpl implements ApplicationsDao{
 	                certificateMap.put("userName", userDetails.getUsername());
 	                certificateMap.put("rankCode", bean.getRankCode());
 	                certificateMap.put("certifiCode", certificate.getCertifiCode());
-	                certificateMap.put("mandatoryValid", splitCertificateName.isMandatoryValid());
-	                certificateMap.put("mandatoryInvalid", splitCertificateName.isMandatoryInvalid());
-	                certificateMap.put("optionalInvalid", splitCertificateName.isOptionalInvalid());
+	                certificateMap.put("mandatoryValid", splitCertificateName.getMandatoryValid());
+	                certificateMap.put("mandatoryInvalid", splitCertificateName.getMandatoryInvalid());
+	                certificateMap.put("optionalInvalid", splitCertificateName.getOptionalInvalid());
 
 	                namedParameterJdbcTemplate.update(ApplicationsQueryUtil.SAVE_CERTIFICATE, certificateMap);
 	            }
