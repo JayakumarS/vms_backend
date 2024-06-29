@@ -39,8 +39,7 @@ public class ShipManagersDaoImpl implements ShipManagersDao {
 		try {
 			int shipman =  jdbcTemplate.queryForObject(ShipManagersQueryUtil.get_code,new Object[] { bean.getShipman() },Integer.class);
 
-		    int name =  jdbcTemplate.queryForObject(ShipManagersQueryUtil.get_desc,new Object[] { bean.getName() },Integer.class);
-		    if(shipman==0 && name==0) {
+		    if(shipman==0) {
 			
 			Map<String, Object> shipManagers = new HashMap<String, Object>();
 			
@@ -57,7 +56,7 @@ public class ShipManagersDaoImpl implements ShipManagersDao {
 		   resultBean.setSuccess(true);
 		    }
 		    else {
-	 	 		   resultBean.setMessage(  bean.getShipman() +" already exists,please enter a different Shipman");
+	 	 		   resultBean.setMessage(  bean.getShipman() +" already exists,please enter a different Ship Managers Code");
 
 		  	        }
 		}catch(Exception e) {
@@ -116,13 +115,11 @@ public class ShipManagersDaoImpl implements ShipManagersDao {
 		try {
 			
 			String shipmancode =  jdbcTemplate.queryForObject(ShipManagersQueryUtil.shipman_code,new Object[] { bean.getShipmanid() },String.class);
-			String shipmanname =  jdbcTemplate.queryForObject(ShipManagersQueryUtil.name_desc,new Object[] { bean.getShipmanid() },String.class);
 
 			
 			int shipman =  jdbcTemplate.queryForObject(ShipManagersQueryUtil.get_shipman_edit,new Object[] { bean.getShipman(),shipmancode },int.class);
 
-		    int name =  jdbcTemplate.queryForObject(ShipManagersQueryUtil.get_name_edit,new Object[] { bean.getName(),shipmanname },int.class);
-			if(shipman == 0 && name == 0) {
+			if(shipman == 0) {
 			Map<String, Object> shipManagers = new HashMap<String, Object>();
 		    	shipManagers.put("shipmanid", bean.getShipmanid());
 				shipManagers.put("shipman", bean.getShipman());
@@ -137,7 +134,7 @@ public class ShipManagersDaoImpl implements ShipManagersDao {
 		   resultBean.setSuccess(true);
 		}
 		   else {
- 	 		   resultBean.setMessage(  bean.getShipman() +" already exists,please enter a different Shipman");
+ 	 		   resultBean.setMessage(  bean.getShipman() +" already exists,please enter a different Ship Managers Code");
 
 
  	        }

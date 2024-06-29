@@ -40,4 +40,13 @@ public class FleetManagersBean {
 
 	private String code;
 
+	
+	public String getFleetname() {
+		return fleetname;
+	}
+	public void setFleetname(String fleetname) {
+		this.fleetname = fleetname;
+	}
+
+	private String fleetname;
 }

@@ -6,12 +6,15 @@ public class FleetManagersQueryUtil {
 			+ "fleet_Managers_Technical_Manager,created_by,created_dt) values(:code,:fleet,:opmanager,:techmanager,:userName,now())";
 	
 	
-	public static final String getList = "select fleet_Managers_id as fleetManagersid,fleet_Managers_code as code,fleet_Managers_fleet as fleet,\r\n"
-			+ "fleet_Managers_Operating_Manager as opmanager,fleet_Managers_Technical_Manager as techmanager from fleet_Managers";
+	public static final String getList = "select fma.fleet_Managers_id as fleetManagersid,fma.fleet_Managers_code as code,fma.fleet_Managers_fleet as fleet,fm.fleet_name as fleetname,\r\n"
+			+ "fma.fleet_Managers_Operating_Manager as opmanager,fma.fleet_Managers_Technical_Manager as techmanager from fleet_Managers fma\r\n"
+			+ "left join fleet_master fm on fm.fleet_id=fma.fleet_Managers_fleet";
 
 
-	public static final String getEdit = "select fleet_Managers_id as fleetManagersid,fleet_Managers_code as code,fleet_Managers_fleet as fleet,\r\n"
-			+ "fleet_Managers_Operating_Manager as opmanager,fleet_Managers_Technical_Manager as techmanager from fleet_Managers where fleet_Managers_id=?";
+	public static final String getEdit = "select fma.fleet_Managers_id as fleetManagersid,fma.fleet_Managers_code as code,fma.fleet_Managers_fleet as fleet,fm.fleet_name as fleetname,\r\n"
+			+ "fma.fleet_Managers_Operating_Manager as opmanager,fma.fleet_Managers_Technical_Manager as techmanager from fleet_Managers fma\r\n"
+			+ "left join fleet_master fm on fm.fleet_id=fma.fleet_Managers_fleet\r\n"
+			+ "where fma.fleet_Managers_id=?";
 
 
 	public static final String delete = "delete from fleet_Managers where fleet_Managers_id=?";
