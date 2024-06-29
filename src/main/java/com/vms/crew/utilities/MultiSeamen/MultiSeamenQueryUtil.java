@@ -33,4 +33,18 @@ public class MultiSeamenQueryUtil {
 
 	public static final String GET_EDIT_MUlTISEAMEN_DTL = "select m_seamen_name as name,m_seamen_rank_code as rank,nationality as nationality,m_seamen_pay as pay,m_seamen_currency as currency,to_char(m_seamen_joining_date,'DD/MM/YYYY') as joiningDate,\r\n"
 			+ "to_char(m_seamen_est_sign_off,'DD/MM/YYYY') as estSignOff from multi_seamen_dtl where m_seamen_hdr_code=?";
+
+
+	public static String GET_MULTISEAMEN_LIST(Integer id) {
+	    String query = "WITH valid_rows AS (\r\n"
+	    		+ "    SELECT * \r\n"
+	    		+ "    FROM appl_checklist \r\n"
+	    		+ "    WHERE appl_rank_code = 4\r\n"
+	    		+ ")\r\n"
+	    		+ "SELECT * \r\n"
+	    		+ "FROM valid_rows\r\n"
+	    		+ "WHERE appl_mandatory_valid = TRUE\r\n"
+	    		+ "AND (SELECT COUNT(*) FROM valid_rows WHERE appl_mandatory_valid = TRUE) = (SELECT COUNT(*) FROM valid_rows);";
+	    return query;
+	}
 }

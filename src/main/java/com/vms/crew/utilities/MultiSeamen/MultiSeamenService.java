@@ -14,4 +14,6 @@ public interface MultiSeamenService {
 
 	public MultiSeamenResultBean updateMultiSeamen(MultiSeamenBean bean);
 
+	public MultiSeamenResultBean checkValid(Integer id);
+
 }

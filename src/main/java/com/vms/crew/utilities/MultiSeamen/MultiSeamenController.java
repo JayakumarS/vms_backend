@@ -71,4 +71,15 @@ public class MultiSeamenController {
 		return rbean;
 		
 	}
+	
+	@RequestMapping(value="/checkValid")
+	public MultiSeamenResultBean checkValid(Integer id) {
+		MultiSeamenResultBean rbean = new MultiSeamenResultBean();
+		try {
+			rbean = multiSeamenService.checkValid(id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+   		return rbean;
+   	}
 }

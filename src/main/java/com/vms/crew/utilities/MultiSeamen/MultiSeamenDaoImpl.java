@@ -184,4 +184,18 @@ public class MultiSeamenDaoImpl implements MultiSeamenDao{
 		return resultBean;
 	}
 
+	@Override
+	public MultiSeamenResultBean checkValid(Integer id) {
+		MultiSeamenResultBean resultBean = new MultiSeamenResultBean();
+		List<MultiSeamenBean> listBean = new ArrayList<MultiSeamenBean>();
+		
+		try {
+			listBean = jdbcTemplate.query(MultiSeamenQueryUtil.GET_MULTISEAMEN_LIST(id),new BeanPropertyRowMapper<MultiSeamenBean>(MultiSeamenBean.class));
+			resultBean.setList(listBean);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return resultBean;
+	}
+
 }

@@ -13,6 +13,8 @@ public interface MultiSeamenDao {
 	public MultiSeamenResultBean deleteMultiSeamen(Integer id);
 
 	public MultiSeamenResultBean updateMultiSeamen(MultiSeamenBean bean);
+
+	public MultiSeamenResultBean checkValid(Integer id);
 	
 
 }

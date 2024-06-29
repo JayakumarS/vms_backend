@@ -40,6 +40,11 @@ public class MultiSeamenServiceImpl implements MultiSeamenService{
 	public MultiSeamenResultBean updateMultiSeamen(MultiSeamenBean bean) {
 		// TODO Auto-generated method stub
 		return multiSeamenDao.updateMultiSeamen(bean);
+	}
 	
-}
+	@Override
+	public MultiSeamenResultBean checkValid(Integer id) {
+		// TODO Auto-generated method stub
+		return multiSeamenDao.checkValid(id);
+	}
 }
