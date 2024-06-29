@@ -17,6 +17,9 @@ public interface InterviewSetupDao {
 	public List<InterviewSetupBean> getRankMasters();
 
 	InterviewSetupResultBean savedetail(InterviewSetupBean bean, Integer rank);
+
+	
+	
 	
 
 }

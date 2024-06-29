@@ -14,7 +14,7 @@ public class BloodGroupQueryUtil {
 	
 	public static final String getEdit ="SELECT blood_group_code AS bloodGroupCode, blood_group_name AS name, is_active AS active, blood_group_id AS bloodGroupId FROM blood_group WHERE blood_group_id = CAST(? AS INTEGER)";
 	
-	public static final String delete = "delete from blood_group where blood_group_id = ? ";
+	public static final String delete = "delete from blood_group where blood_group_id = CAST(? AS INTEGER) ";
 
 	public static final String get_BLOODGROUP_Id = "SELECT CONCAT(CAST(COALESCE(MAX(CAST(NULLIF(SUBSTRING(blood_group_code FROM 1), '') AS INTEGER)), 0) + 1 AS TEXT)) AS next_blood_group_code FROM blood_group";
 

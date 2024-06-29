@@ -63,7 +63,7 @@ public class BloodGroupDaoImpl implements BloodGroupDao {
 		   resultBean.setSuccess(true);
 	            }
 	    		  else {
-	    	 		   resultBean.setMessage("These details already exist");
+	    	 		   resultBean.setMessage( bean.getName() + "  Blood Group Code  already exists, please choose a different name ");
 
 	    	        }	
 		}catch(Exception e) {
@@ -139,7 +139,7 @@ public class BloodGroupDaoImpl implements BloodGroupDao {
 		   
 		 }
 		  else {
-	 		   resultBean.setMessage("These details already exist");
+	 		   resultBean.setMessage( bean.getName() +" Blood Group Code  already exists, please choose a different name ");
 
 	        }	
 		}catch(Exception e) {
@@ -159,9 +159,16 @@ public class BloodGroupDaoImpl implements BloodGroupDao {
 			resultBean.setSuccess(true);
 		}
 		catch(Exception e) {
-			e.printStackTrace();
-			resultBean.setSuccess(false);
-		}	
+			String errorMessage = e.getMessage();
+	        if (errorMessage.contains("violates foreign key constraint")) {
+	            resultBean.setSuccess(false);
+	            resultBean.setMessage("Cannot delete this blood group because it is referenced in another");
+	        } else {
+	            e.printStackTrace();
+	            resultBean.setSuccess(false);
+	            resultBean.setMessage("Error in Delete");
+	        }
+	}	
 		return resultBean;
 	}
 

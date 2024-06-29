@@ -12,7 +12,7 @@ public class ReligionQueryUtil {
 	public static final String getEdit =  "select religion_code as code,religion_name as name,is_active as active, religion_id as religionId from religion_master where religion_id = CAST(? AS INTEGER)";
 
 	
-	public static final String delete = "delete from religion_master where religion_id = ? ";
+	public static final String delete = "delete from religion_master where religion_id = CAST(? AS INTEGER) ";
 
 	public static final String get_RELIGION_Id ="SELECT CONCAT(CAST(COALESCE(MAX(CAST(NULLIF(SUBSTRING(religion_code FROM 1), '') AS INTEGER)), 0) + 1 AS TEXT)) AS next_religion_code FROM religion_master";
 
