@@ -44,7 +44,7 @@ public class VesselParticularDaoImpl implements VesselParticularDao{
 			vesselParticular.put("sName", bean.getShortname());
 			vesselParticular.put("type", bean.getType());
 			vesselParticular.put("fleet", (bean.getFleet() == null || bean.getFleet().isEmpty()) ? null : Integer.parseInt(bean.getFleet()));
-			vesselParticular.put("vesselType", bean.getVesseltype());
+			vesselParticular.put("vesselType", Integer.parseInt(bean.getVesseltype()));
 			vesselParticular.put("pI", (bean.getPandi() == null || bean.getPandi().isEmpty()) ? null : Integer.parseInt(bean.getPandi()));
 			vesselParticular.put("hM", (bean.getHullandmachinery() == null || bean.getHullandmachinery().isEmpty()) ? null : Integer.parseInt(bean.getHullandmachinery()));
 			vesselParticular.put("vesselGroup", bean.getVesselgroup());
@@ -164,7 +164,7 @@ public class VesselParticularDaoImpl implements VesselParticularDao{
 			vesselParticular.put("sName", bean.getShortname());
 			vesselParticular.put("type", bean.getType());
 			vesselParticular.put("fleet", (bean.getFleet() == null || bean.getFleet().isEmpty()) ? null : Integer.parseInt(bean.getFleet()));
-			vesselParticular.put("vesselType", bean.getVesseltype());
+			vesselParticular.put("vesselType", Integer.parseInt(bean.getVesseltype()));
 			vesselParticular.put("pI", (bean.getPandi() == null || bean.getPandi().isEmpty()) ? null : Integer.parseInt(bean.getPandi()));
 			vesselParticular.put("hM", (bean.getHullandmachinery() == null || bean.getHullandmachinery().isEmpty()) ? null : Integer.parseInt(bean.getHullandmachinery()));
 			vesselParticular.put("vesselGroup", bean.getVesselgroup());

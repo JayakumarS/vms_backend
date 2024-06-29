@@ -18,7 +18,7 @@ public class CommonServiceQueryUtil {
 	
 	public static final String CLASS_LIST = "select vessel_class_id as id,vessel_class_name as text from vessel_class";
 	
-	public static final String VESSEL_TYPE = "select vessel_type_code as id,vessel_type_name as text from vessel_type";
+	public static final String VESSEL_TYPE = "select vessel_type_id as id,vessel_type_name as text from vessel_type";
 	
 	public static final String VESSEL_INSURANCE = "select vessel_insurance_id as id,vessel_insurance_name as text from vessel_insurance";
 	

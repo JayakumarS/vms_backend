@@ -59,7 +59,7 @@ public class PersonMaintenanceDaoImpl implements PersonMaintenanceDao{
 			personMaintenanceMap.put("agent", (bean.getAgent() == null || bean.getAgent().isEmpty()) ? null : Integer.parseInt(bean.getAgent()));
 			personMaintenanceMap.put("expMonth", bean.getExpMonth());
 			personMaintenanceMap.put("noVoyage", bean.getNoVoyage());
-			personMaintenanceMap.put("vslType", (bean.getProposedType() == null || bean.getProposedType().isEmpty()) ? null : bean.getProposedType());
+			personMaintenanceMap.put("vslType", (bean.getProposedType() == null || bean.getProposedType().isEmpty()) ? null : Integer.parseInt(bean.getProposedType()));
 			personMaintenanceMap.put("lastSignOff", (bean.getSignedOff() == null || bean.getSignedOff().isEmpty()) ? null : bean.getSignedOff());
 			personMaintenanceMap.put("available", (bean.getAvailableFrom() == null || bean.getAvailableFrom().isEmpty()) ? null : bean.getAvailableFrom());
 			personMaintenanceMap.put("remarksOne", bean.getRemarksOne());
@@ -216,7 +216,7 @@ public class PersonMaintenanceDaoImpl implements PersonMaintenanceDao{
 			personMaintenanceMap.put("agent", (bean.getAgent() == null || bean.getAgent().isEmpty()) ? null : Integer.parseInt(bean.getAgent()));
 			personMaintenanceMap.put("expMonth", bean.getExpMonth());
 			personMaintenanceMap.put("noVoyage", bean.getNoVoyage());
-			personMaintenanceMap.put("vslType", (bean.getProposedType() == null || bean.getProposedType().isEmpty()) ? null : bean.getProposedType());
+			personMaintenanceMap.put("vslType", (bean.getProposedType() == null || bean.getProposedType().isEmpty()) ? null : Integer.parseInt(bean.getProposedType()));
 			personMaintenanceMap.put("lastSignOff", (bean.getSignedOff() == null || bean.getSignedOff().isEmpty()) ? null : bean.getSignedOff());
 			personMaintenanceMap.put("available", (bean.getAvailableFrom() == null || bean.getAvailableFrom().isEmpty()) ? null : bean.getAvailableFrom());
 			personMaintenanceMap.put("remarksOne", bean.getRemarksOne());

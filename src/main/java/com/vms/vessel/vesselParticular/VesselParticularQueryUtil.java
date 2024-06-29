@@ -18,7 +18,7 @@ public class VesselParticularQueryUtil {
 	public static final String getList = "select vessel_code as code,vessel_name as name,f.fleet_name as fleet,vt.vessel_type_name as vesseltype "
 			+ "from vessel_hdr vh "
 			+ "left join fleet_master f on vh.fleet_code = f.fleet_id "
-			+ "left join vessel_type vt on vh.vessel_type_code = vt.vessel_type_code "
+			+ "left join vessel_type vt on vh.vessel_code = vt.vessel_type_id "
 			+ "order by vh.created_dt desc ";
 	
 	public static final String GET_HDR_DTLS = "select vh.vessel_code as code,vessel_name as name,vessel_short_name as shortname,vh.fleet_code as fleet,vh.vessel_type_code as vesseltype,pandi_ins_code as pandi, "
@@ -29,7 +29,7 @@ public class VesselParticularQueryUtil {
 			+ "vi.vessel_insurance_name as pandiName,vih.vessel_insurance_name as hullandmachineryName,"
 			+ "vif.vessel_insurance_name as fdanddName from vessel_hdr vh  "
 			+ "left join fleet_master f on f.fleet_id = vh.fleet_code "
-			+ "left join vessel_type vt on vt.vessel_type_code = vh.vessel_type_code "
+			+ "left join vessel_type vt on vt.vessel_type_id = vh.vessel_type_code "
 			+ "left join vessel_insurance vi on vi.vessel_insurance_id = vh.pandi_ins_code "
 			+ "left join vessel_insurance vih on vih.vessel_insurance_id = vh.hull_ins_code "
 			+ "left join vessel_insurance vif on vif.vessel_insurance_id = vh.fd_ins_code "
