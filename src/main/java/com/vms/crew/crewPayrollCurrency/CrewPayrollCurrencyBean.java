@@ -5,6 +5,13 @@ public class CrewPayrollCurrencyBean {
 	private String currencycode;
 	private String countryname;
 	private Boolean validation;
+	private String nationality;
+	public String getNationality() {
+		return nationality;
+	}
+	public void setNationality(String nationality) {
+		this.nationality = nationality;
+	}
 	public Integer getCurrencyid() {
 		return currencyid;
 	}
