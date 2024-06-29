@@ -13,6 +13,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
+import com.vms.crew.rankGroup.RankGroupQueryUtil;
+
 
 @Repository
 public class VesselTypeDaoImpl implements VesselTypeDao{
@@ -29,16 +31,24 @@ public class VesselTypeDaoImpl implements VesselTypeDao{
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		try {
+			
+			int code =  jdbcTemplate.queryForObject(VesselTypeQueryUtil.get_code,new Object[] { bean.getCode() },Integer.class);
+
+			 if(code==0) {
 			Map<String, Object> vesselType = new HashMap<String, Object>();
 			
-			for(VesselTypeBean listBean : bean.getVesselTypeDtls()) {
 				vesselType.put("userName", userDetails.getUsername());
-				vesselType.put("code", listBean.getCode());
-				vesselType.put("desc", listBean.getDescription());
+				vesselType.put("code", bean.getCode());
+				vesselType.put("desc", bean.getDescription());
 				namedParameterJdbcTemplate.update(VesselTypeQueryUtil.SAVE_VESSEL_TYPE,vesselType);
-			}
+			
 			
 		   resultBean.setSuccess(true);
+	            }
+		        else {
+			 		   resultBean.setMessage(  bean.getCode() +" already exists,please enter a different Vessel Type Code");
+
+		        }
 		}catch(Exception e) {
 			e.printStackTrace();
 			resultBean.setSuccess(false);
@@ -61,7 +71,7 @@ public class VesselTypeDaoImpl implements VesselTypeDao{
 	}
 
 	@Override
-	public VesselTypeResultBean edit(String id) {		
+	public VesselTypeResultBean edit(Integer id) {		
 		VesselTypeResultBean resultBean = new VesselTypeResultBean();
 		resultBean.setSuccess(false);
 		try {
@@ -74,9 +84,15 @@ public class VesselTypeDaoImpl implements VesselTypeDao{
 	}
 
 	@Override
-	public VesselTypeResultBean delete(String id) {
+	public VesselTypeResultBean delete(Integer id) {
 		VesselTypeResultBean resultBean = new VesselTypeResultBean();
+		String code = null;
+
 		try {
+			code = jdbcTemplate.queryForObject(VesselTypeQueryUtil.getCodeById, new Object[]{id}, String.class);
+
+			
+			
 			jdbcTemplate.update(VesselTypeQueryUtil.delete,id);
 			resultBean.setSuccess(true);
 		}
@@ -93,24 +109,30 @@ public class VesselTypeDaoImpl implements VesselTypeDao{
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		try {
+			
+		String vessetypecode =  jdbcTemplate.queryForObject(VesselTypeQueryUtil.vessetype_code,new Object[] { bean.getVessetypeid() },String.class);
+			
+			
+			int code =  jdbcTemplate.queryForObject(VesselTypeQueryUtil.get_code_edit,new Object[] { bean.getCode(),vessetypecode },Integer.class);
+
+
+			
+            if(code==0) {
 			Map<String, Object> vesselType = new HashMap<String, Object>();
 			
-			for(VesselTypeBean listBean : bean.getVesselTypeDtls()) {
 				vesselType.put("userName", userDetails.getUsername());
-				vesselType.put("code", listBean.getCode());
-				vesselType.put("desc", listBean.getDescription());
-				
-				int k = jdbcTemplate.queryForObject(VesselTypeQueryUtil.checkDelete, new Object[] { listBean.getCode() },Integer.class);
-				
-				if(k == 0) {
-				   namedParameterJdbcTemplate.update(VesselTypeQueryUtil.SAVE_VESSEL_TYPE,vesselType);
-				}
-				else {
+				vesselType.put("code", bean.getCode());
+				vesselType.put("desc", bean.getDescription());				
+				vesselType.put("vessetypeid", bean.getVessetypeid());
+
 					namedParameterJdbcTemplate.update(VesselTypeQueryUtil.UPDATE_VESSEL_TYPE,vesselType);
-				}
-			}
-		   resultBean.setSuccess(true);
-		}catch(Exception e) {
+			
+					   resultBean.setSuccess(true);
+            }
+            else {
+ 	 		   resultBean.setMessage(  bean.getCode() +" already exists,please enter a different Rank Group Code");
+
+            }		}catch(Exception e) {
 			e.printStackTrace();
 			resultBean.setSuccess(false);
 		}

@@ -13,6 +13,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
+import com.vms.vessel.vesselOwner.VesselOwnerQueryUtil;
+
 
 @Repository
 public class VesselPrefixDaoImpl implements VesselPrefixDao{
@@ -29,19 +31,33 @@ public class VesselPrefixDaoImpl implements VesselPrefixDao{
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		try {
+			
+       int code =  jdbcTemplate.queryForObject(VesselPrefixQueryUtil.get_code,new Object[] { bean.getCode() },Integer.class);
+
+
+			
+            if(code==0) {
+            	
+            	
+            
 			Map<String, Object> vesselType = new HashMap<String, Object>();
 			
-			for(VesselPrefixBean listBean : bean.getFirstDetailRow()) {
 				vesselType.put("userName", userDetails.getUsername());
-				vesselType.put("code", listBean.getCode());
-				vesselType.put("desc", listBean.getDescription());
+				vesselType.put("code", bean.getCode());
+				vesselType.put("desc", bean.getDescription());
 				namedParameterJdbcTemplate.update(VesselPrefixQueryUtil.SAVE_VESSEL_TYPE,vesselType);
-			}
 			
-		   resultBean.setSuccess(true);
-		}catch(Exception e) {
+			
+				   resultBean.setSuccess(true);
+  		  }
+  		  else {
+   	 		   resultBean.setMessage(  bean.getCode() +" already exists,please enter a different Vessel Prefix Code");
+
+  	        }		}catch(Exception e) {
 			e.printStackTrace();
 			resultBean.setSuccess(false);
+	 		   resultBean.setMessage("Not Updated");
+
 		}
 		return resultBean;
 	}
@@ -61,7 +77,7 @@ public class VesselPrefixDaoImpl implements VesselPrefixDao{
 	}
 
 	@Override
-	public VesselPrefixResultBean edit(String id) {		
+	public VesselPrefixResultBean edit(Integer id) {		
 		VesselPrefixResultBean resultBean = new VesselPrefixResultBean();
 		resultBean.setSuccess(false);
 		try {
@@ -74,15 +90,27 @@ public class VesselPrefixDaoImpl implements VesselPrefixDao{
 	}
 
 	@Override
-	public VesselPrefixResultBean delete(String id) {
+	public VesselPrefixResultBean delete(Integer id) {
 		VesselPrefixResultBean resultBean = new VesselPrefixResultBean();
+		String code = null;
+
 		try {
+			
+			code = jdbcTemplate.queryForObject(VesselPrefixQueryUtil.getCodeById, new Object[]{id}, String.class);
+
 			jdbcTemplate.update(VesselPrefixQueryUtil.delete,id);
 			resultBean.setSuccess(true);
 		}
 		catch(Exception e) {
-			e.printStackTrace();
-			resultBean.setSuccess(false);
+			 String errorMessage = e.getMessage();
+		        if (errorMessage.contains("violates foreign key constraint")) {
+		            resultBean.setSuccess(false);
+		            resultBean.setMessage(code + " code cannot be deleted as it is already used in system.");
+		        } else {
+		            e.printStackTrace();
+		            resultBean.setSuccess(false);
+		            resultBean.setMessage("Error in Delete");
+		        }
 		}	
 		return resultBean;
 	}
@@ -93,26 +121,37 @@ public class VesselPrefixDaoImpl implements VesselPrefixDao{
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		try {
+			
+			String prefixcode =  jdbcTemplate.queryForObject(VesselPrefixQueryUtil.prefix_code,new Object[] { bean.getVesselprefixid() },String.class);
+
+
+
+			int code =  jdbcTemplate.queryForObject(VesselPrefixQueryUtil.get_code_edit,new Object[] { bean.getCode(),prefixcode },Integer.class);
+
+
+			if(code==0) {
+			
 			Map<String, Object> vesselType = new HashMap<String, Object>();
 			
-			for(VesselPrefixBean listBean : bean.getFirstDetailRow()) {
 				vesselType.put("userName", userDetails.getUsername());
-				vesselType.put("code", listBean.getCode());
-				vesselType.put("desc", listBean.getDescription());
+				vesselType.put("code", bean.getCode());
+				vesselType.put("desc", bean.getDescription());
+				vesselType.put("vesselprefixid", bean.getVesselprefixid());
+
 				
-				int k = jdbcTemplate.queryForObject(VesselPrefixQueryUtil.checkDelete, new Object[] { listBean.getCode() },Integer.class);
-				
-				if(k == 0) {
-				   namedParameterJdbcTemplate.update(VesselPrefixQueryUtil.SAVE_VESSEL_TYPE,vesselType);
-				}
-				else {
 					namedParameterJdbcTemplate.update(VesselPrefixQueryUtil.UPDATE_VESSEL_TYPE,vesselType);
-				}
-			}
-		   resultBean.setSuccess(true);
-		}catch(Exception e) {
+				
+		
+					   resultBean.setSuccess(true);
+	  		  }
+	  		  else {
+		 		   resultBean.setMessage(  bean.getCode() +" already exists,please enter a different Vessel Prefix  Code");
+
+	  	        }		}catch(Exception e) {
 			e.printStackTrace();
 			resultBean.setSuccess(false);
+	 		   resultBean.setMessage("Not Updated");
+
 		}
 		return resultBean;
 	}

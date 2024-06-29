@@ -25,5 +25,11 @@ public class VesselPrefixBean {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+	public Integer getVesselprefixid() {
+		return vesselprefixid;
+	}
+	public void setVesselprefixid(Integer vesselprefixid) {
+		this.vesselprefixid = vesselprefixid;
+	}
+	private Integer vesselprefixid;
 }

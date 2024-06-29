@@ -50,6 +50,7 @@ public class VesselinsuranceDaoImpl implements VesselinsuranceDao{
 				vesselinsurance.put("code", bean.getCode());
 				vesselinsurance.put("desc", bean.getDescription());
 				vesselinsurance.put("remarks", bean.getRemarks());
+				vesselinsurance.put("flag", bean.getFlag());
 
 				namedParameterJdbcTemplate.update(VesselinsuranceQueryUtil.SAVE_vsl_insurance,vesselinsurance);
 			
@@ -58,7 +59,7 @@ public class VesselinsuranceDaoImpl implements VesselinsuranceDao{
 		   
             }
   		  else {
-  	 		   resultBean.setMessage(  bean.getCode() +" already exists,please enter a different Vessel Insurance Code");
+  	 		   resultBean.setMessage(  bean.getCode() +" already exists,please enter a different Code");
 
   	        }
             
@@ -74,12 +75,27 @@ public class VesselinsuranceDaoImpl implements VesselinsuranceDao{
 	}
 
 	@Override
-	public VesselinsuranceResultBean getList() {
+	public VesselinsuranceResultBean getListpandi() {
 		VesselinsuranceResultBean resultBean = new VesselinsuranceResultBean();
 		List<VesselinsuranceBean> listBean = new ArrayList<VesselinsuranceBean>();
 		
 		try {
-			listBean = jdbcTemplate.query(VesselinsuranceQueryUtil.getList,new BeanPropertyRowMapper<VesselinsuranceBean>(VesselinsuranceBean.class));
+			listBean = jdbcTemplate.query(VesselinsuranceQueryUtil.getList_pandi,new BeanPropertyRowMapper<VesselinsuranceBean>(VesselinsuranceBean.class));
+			resultBean.setList(listBean);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return resultBean;
+	}
+	
+	
+	@Override
+	public VesselinsuranceResultBean getListfdandd() {
+		VesselinsuranceResultBean resultBean = new VesselinsuranceResultBean();
+		List<VesselinsuranceBean> listBean = new ArrayList<VesselinsuranceBean>();
+		
+		try {
+			listBean = jdbcTemplate.query(VesselinsuranceQueryUtil.getList_fdandd,new BeanPropertyRowMapper<VesselinsuranceBean>(VesselinsuranceBean.class));
 			resultBean.setList(listBean);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -159,7 +175,7 @@ public class VesselinsuranceDaoImpl implements VesselinsuranceDao{
 		   resultBean.setSuccess(true);
 	   	 }
 			  else {
-	  	 		   resultBean.setMessage(  bean.getCode() +" already exists,please enter a different Vessel Insurance Code");
+	  	 		   resultBean.setMessage(  bean.getCode() +" already exists,please enter a different Code");
 
 		        }	
 	        

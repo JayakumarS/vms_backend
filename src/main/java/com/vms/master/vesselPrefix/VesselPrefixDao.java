@@ -6,9 +6,9 @@ public interface VesselPrefixDao {
 
 	public VesselPrefixResultBean getList();
 
-	public VesselPrefixResultBean edit(String id);
+	public VesselPrefixResultBean edit(Integer id);
 
-	public VesselPrefixResultBean delete(String id);
+	public VesselPrefixResultBean delete(Integer id);
 
 	public VesselPrefixResultBean update(VesselPrefixBean bean);
 

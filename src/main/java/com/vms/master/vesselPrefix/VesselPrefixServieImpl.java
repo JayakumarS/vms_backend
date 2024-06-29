@@ -22,13 +22,13 @@ public class VesselPrefixServieImpl implements VesselPrefixService{
 	}
 
 	@Override
-	public VesselPrefixResultBean edit(String id) {
+	public VesselPrefixResultBean edit(Integer id) {
 		// TODO Auto-generated method stub
 		return vesselTypeDao.edit(id);
 	}
 
 	@Override
-	public VesselPrefixResultBean delete(String id) {
+	public VesselPrefixResultBean delete(Integer id) {
 		// TODO Auto-generated method stub
 		return vesselTypeDao.delete(id);
 	}

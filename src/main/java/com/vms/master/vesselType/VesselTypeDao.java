@@ -6,9 +6,9 @@ public interface VesselTypeDao {
 
 	public VesselTypeResultBean getList();
 
-	public VesselTypeResultBean edit(String id);
+	public VesselTypeResultBean edit(Integer id);
 
-	public VesselTypeResultBean delete(String id);
+	public VesselTypeResultBean delete(Integer id);
 
 	public VesselTypeResultBean update(VesselTypeBean bean);
 

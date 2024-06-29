@@ -6,7 +6,9 @@ public interface VesselinsuranceDao {
 	
 	public VesselinsuranceResultBean save(VesselinsuranceBean bean);
 
-	public VesselinsuranceResultBean getList();
+	public VesselinsuranceResultBean getListpandi();
+	
+	public VesselinsuranceResultBean getListfdandd();
 
 	public VesselinsuranceResultBean edit(Integer id);
 

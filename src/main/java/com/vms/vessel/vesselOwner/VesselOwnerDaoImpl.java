@@ -37,10 +37,9 @@ public class VesselOwnerDaoImpl implements VesselOwnerDao{
 
 			int code =  jdbcTemplate.queryForObject(VesselOwnerQueryUtil.get_code,new Object[] { bean.getCode() },Integer.class);
 
-		    int desc =  jdbcTemplate.queryForObject(VesselOwnerQueryUtil.get_desc,new Object[] { bean.getDescription() },Integer.class);
 
 			
-            if(code==0 && desc==0) {
+            if(code==0) {
             	
             
 			Map<String, Object> vesselowner = new HashMap<String, Object>();

@@ -27,11 +27,22 @@ public class VesselinsuranceController {
 		return rbean;
 	}
 	
-	@RequestMapping(value="/list")
-	public VesselinsuranceResultBean list() {
+	@RequestMapping(value="/listpani")
+	public VesselinsuranceResultBean getListpandi() {
 		VesselinsuranceResultBean rbean = new VesselinsuranceResultBean();
 		try {
-			rbean = VesselinsuranceService.getList();
+			rbean = VesselinsuranceService.getListpandi();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+   		return rbean;
+   	}
+	
+	@RequestMapping(value="/listfdandd")
+	public VesselinsuranceResultBean getListfdandd() {
+		VesselinsuranceResultBean rbean = new VesselinsuranceResultBean();
+		try {
+			rbean = VesselinsuranceService.getListfdandd();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

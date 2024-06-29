@@ -25,5 +25,12 @@ public class VesselTypeBean {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+    private Integer vessetypeid;
+
+	public Integer getVessetypeid() {
+		return vessetypeid;
+	}
+	public void setVessetypeid(Integer vessetypeid) {
+		this.vessetypeid = vessetypeid;
+	}	
 }

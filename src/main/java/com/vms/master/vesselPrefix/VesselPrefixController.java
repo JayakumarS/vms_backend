@@ -35,7 +35,7 @@ public class VesselPrefixController {
    	}
 	
 	@RequestMapping(value="/edit")
-	public VesselPrefixResultBean edit(@RequestParam("id") String id) {
+	public VesselPrefixResultBean edit(@RequestParam("id") Integer id) {
 		VesselPrefixResultBean rbean = new VesselPrefixResultBean();
 		try {
 			rbean = vesselPrefixService.edit(id);
@@ -57,7 +57,7 @@ public class VesselPrefixController {
 	}
 	
 	@RequestMapping(value="/delete")
-	public VesselPrefixResultBean delete(@RequestParam("id") String id) {
+	public VesselPrefixResultBean delete(@RequestParam("id") Integer id) {
 		VesselPrefixResultBean rbean = new VesselPrefixResultBean();
 		try {
 			rbean = vesselPrefixService.delete(id);

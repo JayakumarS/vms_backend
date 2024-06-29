@@ -43,4 +43,12 @@ public class VesselinsuranceBean {
 	public void setVesselinsuranceid(Integer vesselinsuranceid) {
 		this.vesselinsuranceid = vesselinsuranceid;
 	}
+	
+	private String flag;
+	public String getFlag() {
+		return flag;
+	}
+	public void setFlag(String flag) {
+		this.flag = flag;
+	}
 }

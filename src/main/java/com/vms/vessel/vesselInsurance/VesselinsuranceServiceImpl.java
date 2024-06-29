@@ -16,10 +16,17 @@ public class VesselinsuranceServiceImpl implements VesselinsuranceService{
 	}
 
 	@Override
-	public VesselinsuranceResultBean getList() {
+	public VesselinsuranceResultBean getListpandi() {
 		// TODO Auto-generated method stub
-		return VesselinsuranceDao.getList();
+		return VesselinsuranceDao.getListpandi();
 	}
+	
+	@Override
+	public VesselinsuranceResultBean getListfdandd() {
+		// TODO Auto-generated method stub
+		return VesselinsuranceDao.getListfdandd();
+	}
+
 
 	@Override
 	public VesselinsuranceResultBean edit(Integer id) {

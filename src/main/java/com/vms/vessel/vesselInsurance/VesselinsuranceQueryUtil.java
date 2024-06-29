@@ -2,12 +2,15 @@ package com.vms.vessel.vesselInsurance;
 
 public class VesselinsuranceQueryUtil {
 	
-public static final String SAVE_vsl_insurance = "Insert into vessel_insurance (vessel_insurance_code,vessel_insurance_name,remarks,created_by,created_dt)"
-		+ "values (:code,:desc,:remarks,:userName,now())";
+public static final String SAVE_vsl_insurance = "Insert into vessel_insurance (vessel_insurance_code,vessel_insurance_name,remarks,ins_flag,created_by,created_dt)"
+		+ "values (:code,:desc,:remarks,:flag,:userName,now())";
 
-public static final String getList = "select vessel_insurance_code as code,vessel_insurance_name as description,remarks as remarks,vessel_insurance_id as vesselinsuranceid from vessel_insurance order by created_dt desc";
+public static final String getList_pandi = "select vessel_insurance_code as code,vessel_insurance_name as description,remarks as remarks,vessel_insurance_id as vesselinsuranceid,ins_flag as flag from vessel_insurance where ins_flag='P&I' order by created_dt desc";
 
-public static final String getEdit = "select vessel_insurance_code as code,vessel_insurance_name as description,remarks as remarks,vessel_insurance_id as vesselinsuranceid from vessel_insurance where vessel_insurance_id = ?";
+public static final String getList_fdandd = "select vessel_insurance_code as code,vessel_insurance_name as description,remarks as remarks,vessel_insurance_id as vesselinsuranceid,ins_flag as flag from vessel_insurance where ins_flag='FD&D' order by created_dt desc";
+
+
+public static final String getEdit = "select vessel_insurance_code as code,vessel_insurance_name as description,remarks as remarks,vessel_insurance_id as vesselinsuranceid,ins_flag as flag from vessel_insurance where vessel_insurance_id = ?";
 
 public static final String delete = "delete from vessel_insurance where vessel_insurance_id = ? ";
 
