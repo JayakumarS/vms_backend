@@ -7,14 +7,19 @@ public class FleetManagersQueryUtil {
 	
 	
 	public static final String getList = "select fma.fleet_Managers_id as fleetManagersid,fma.fleet_Managers_code as code,fma.fleet_Managers_fleet as fleet,fm.fleet_name as fleetname,\r\n"
-			+ "fma.fleet_Managers_Operating_Manager as opmanager,fma.fleet_Managers_Technical_Manager as techmanager from fleet_Managers fma\r\n"
-			+ "left join fleet_master fm on fm.fleet_id=fma.fleet_Managers_fleet";
+			+ "cm1.crew_master_name as opmanagername,cm2.crew_master_name as techmanagername, fma.fleet_Managers_Operating_Manager as opmanager,fma.fleet_Managers_Technical_Manager as techmanager\r\n"
+			+ "from fleet_Managers fma\r\n"
+			+ "left join fleet_master fm on fm.fleet_id=fma.fleet_Managers_fleet\r\n"
+			+ "left join crew_master cm1 on cm1.crew_master_code=fma.fleet_Managers_Operating_Manager\r\n"
+			+ "left join crew_master cm2 on cm2.crew_master_code=fma.fleet_Managers_Technical_Manager";
 
 
 	public static final String getEdit = "select fma.fleet_Managers_id as fleetManagersid,fma.fleet_Managers_code as code,fma.fleet_Managers_fleet as fleet,fm.fleet_name as fleetname,\r\n"
-			+ "fma.fleet_Managers_Operating_Manager as opmanager,fma.fleet_Managers_Technical_Manager as techmanager from fleet_Managers fma\r\n"
+			+ "cm1.crew_master_name as opmanagername,cm2.crew_master_name as techmanagername, fma.fleet_Managers_Operating_Manager as opmanager,fma.fleet_Managers_Technical_Manager as techmanager\r\n"
+			+ "from fleet_Managers fma\r\n"
 			+ "left join fleet_master fm on fm.fleet_id=fma.fleet_Managers_fleet\r\n"
-			+ "where fma.fleet_Managers_id=?";
+			+ "left join crew_master cm1 on cm1.crew_master_code=fma.fleet_Managers_Operating_Manager\r\n"
+			+ "left join crew_master cm2 on cm2.crew_master_code=fma.fleet_Managers_Technical_Manager where fma.fleet_Managers_id=?";
 
 
 	public static final String delete = "delete from fleet_Managers where fleet_Managers_id=?";

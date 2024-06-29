@@ -5,12 +5,12 @@ public class MaintainRankQueryUtil {
 	public static final String SAVE_VESSEL_TYPE = "Insert into rank_master (rank_code,rank_name,dept_code,rank_group_code,ot_flag,rank_remarks,is_active,created_by,created_dt)\r\n"
 			+ "values (:code,:description,:department,:groupage,:oAndt,:remarks,:isActive,:userName,now())";
 
-public static final String getList = "select rm.rank_code as code,rm.rank_name as description,rm.dept_code as department,dm.dept_code as departmentname,rg.rank_group_name as \r\n"
+public static final String getList = "select rm.rank_code as code,rm.rank_name as description,rm.dept_code as department,dm.dept_name as departmentname,rg.rank_group_name as \r\n"
 		+ "groupagename,rm.rank_group_code as groupage,rm.ot_flag as oAndt,rm.rank_remarks as remarks,rm.is_active as \r\n"
 		+ "isActive,rank_id as rankid from rank_master rm left Join  rank_group rg ON rg.rank_group_id = rm.rank_group_code\r\n"
 		+ "left Join  department_master dm ON dm.dept_id = rm.dept_code";
 
-public static final String getEdit = "select rm.rank_code as code,rm.rank_name as description,rm.dept_code as department,dm.dept_code as departmentname,rg.rank_group_name as \r\n"
+public static final String getEdit = "select rm.rank_code as code,rm.rank_name as description,rm.dept_code as department,dm.dept_name as departmentname,rg.rank_group_name as \r\n"
 		+ "groupagename,rm.rank_group_code as groupage,rm.ot_flag as oAndt,rm.rank_remarks as remarks,rm.is_active as \r\n"
 		+ "isActive,rank_id as rankid from rank_master rm left Join  rank_group rg ON rg.rank_group_id = rm.rank_group_code\r\n"
 		+ "left Join  department_master dm ON dm.dept_id = rm.dept_code where rank_id = ?";

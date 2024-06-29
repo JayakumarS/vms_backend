@@ -49,4 +49,21 @@ public class FleetManagersBean {
 	}
 
 	private String fleetname;
+	
+	private String techmanagername;
+	
+	public String getTechmanagername() {
+		return techmanagername;
+	}
+	public void setTechmanagername(String techmanagername) {
+		this.techmanagername = techmanagername;
+	}
+	public String getOpmanagername() {
+		return opmanagername;
+	}
+	public void setOpmanagername(String opmanagername) {
+		this.opmanagername = opmanagername;
+	}
+
+	private String opmanagername;
 }
