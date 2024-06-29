@@ -13,6 +13,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
+import com.vms.crew.certificates.CertificatesBean;
+import com.vms.crew.certificates.CertificatesQueryutil;
 import com.vms.crew.payTypes.PayTypesQueryUtil;
 
 
@@ -156,6 +158,22 @@ public class OfficialManagersDaoImpl implements OfficialManagersDao{
 			resultBean.setSuccess(false);
 		}
 		return resultBean;
+	}
+	
+	
+	@Override
+	public OfficialManagersBean getSequenceCode() {
+		OfficialManagersBean officialManagers = new OfficialManagersBean();
+
+	    try {
+	        String officialManagersId = jdbcTemplate.queryForObject(OfficialManagersQueryUtil.officialManagersId, String.class);
+	        officialManagers.setCode(officialManagersId);
+	    } catch (Exception e) {
+	        // Log the exception
+	        e.printStackTrace();
+	    }
+
+	    return officialManagers;
 	}
 	
 

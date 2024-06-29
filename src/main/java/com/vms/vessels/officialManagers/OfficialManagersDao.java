@@ -1,6 +1,6 @@
 package com.vms.vessels.officialManagers;
 
-
+import com.vms.crew.certificates.CertificatesBean;
 
 public interface OfficialManagersDao {
 	
@@ -13,5 +13,7 @@ public interface OfficialManagersDao {
 	public OfficialManagersResultBean delete(Integer id);
 
 	public OfficialManagersResultBean update(OfficialManagersBean bean);
+
+	OfficialManagersBean getSequenceCode();
 
 }

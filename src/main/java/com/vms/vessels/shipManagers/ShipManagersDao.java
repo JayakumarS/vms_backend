@@ -1,6 +1,6 @@
 package com.vms.vessels.shipManagers;
 
-
+import com.vms.crew.certificates.CertificatesBean;
 
 public interface ShipManagersDao {
 
@@ -13,5 +13,8 @@ public interface ShipManagersDao {
 	public ShipManagersResultBean delete(int id);
 
 	public ShipManagersResultBean update(ShipManagersBean bean);
+	
+	ShipManagersBean getSequenceCode();
+
 
 }

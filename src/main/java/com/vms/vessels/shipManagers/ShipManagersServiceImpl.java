@@ -3,6 +3,8 @@ package com.vms.vessels.shipManagers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.vms.crew.certificates.CertificatesBean;
+
 
 
 @Service
@@ -40,4 +42,9 @@ public class ShipManagersServiceImpl implements ShipManagersService {
 		return shipManagersDao.update(bean);
 	}
 
+	
+	@Override
+	public ShipManagersBean getSequenceCode() {
+		return shipManagersDao.getSequenceCode();
+	}
 }

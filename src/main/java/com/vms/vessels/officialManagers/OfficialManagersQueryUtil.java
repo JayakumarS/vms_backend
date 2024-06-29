@@ -30,5 +30,8 @@ public static final String offmanager_code = "select official_manager_code from 
 
 public static final String name_desc = "select official_manager_name from official_managers where official_managers_id= ?";
 
+public static final String officialManagersId = "SELECT CONCAT('VOM', LPAD(CAST(COALESCE(MAX(CAST(SUBSTRING(official_manager_code, 4) AS INTEGER)), 0) + 1 AS TEXT), 4, '0')) AS next_official_manager_code\r\n"
+		+ "FROM official_managers";
+
 
 }

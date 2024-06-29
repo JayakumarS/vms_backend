@@ -29,4 +29,7 @@ public static final String shipman_code = "select ship_manager_code from ship_ma
 
 public static final String name_desc = "select ship_manager_name from ship_managers where ship_managers_id= ?";
 
+public static final String get_shipManagersId = "SELECT CONCAT('VSM', LPAD(CAST(COALESCE(MAX(CAST(SUBSTRING(ship_manager_code, 4) AS INTEGER)), 0) + 1 AS TEXT), 4, '0')) AS next_ship_manager_code\r\n"
+		+ "FROM ship_managers";
+
 }

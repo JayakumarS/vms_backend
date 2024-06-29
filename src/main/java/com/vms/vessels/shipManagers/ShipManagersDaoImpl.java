@@ -13,6 +13,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
+import com.vms.crew.certificates.CertificatesBean;
+import com.vms.crew.certificates.CertificatesQueryutil;
 import com.vms.crew.payTypes.PayTypesQueryUtil;
 
 
@@ -148,4 +150,22 @@ public class ShipManagersDaoImpl implements ShipManagersDao {
 	}
 	
 
+	
+	@Override
+	public ShipManagersBean getSequenceCode() {
+		ShipManagersBean shipManagers = new ShipManagersBean();
+
+	    try {
+	        String shipManagersId = jdbcTemplate.queryForObject(ShipManagersQueryUtil.get_shipManagersId, String.class);
+	        shipManagers.setShipman(shipManagersId);
+	    } catch (Exception e) {
+	        // Log the exception
+	        e.printStackTrace();
+	    }
+
+	    return shipManagers;
+	}
+	
+	
+	
 }

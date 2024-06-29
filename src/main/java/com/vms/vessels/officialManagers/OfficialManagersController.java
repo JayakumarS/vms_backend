@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.vms.common.ConfigurationProps;
 import com.vms.core.util.CustomException;
+import com.vms.crew.certificates.CertificatesBean;
 
 
 
@@ -105,5 +106,13 @@ public class OfficialManagersController {
 		}
 		return resultBean;
 	}
+	@RequestMapping("/getSequenceCode")
+	public @ResponseBody OfficialManagersBean getSequenceCode() {
+		OfficialManagersBean getSequenceCode = null;
 
+	   getSequenceCode = officialManagersService.getSequenceCode();
+
+		return getSequenceCode;
+	}
+	
 }

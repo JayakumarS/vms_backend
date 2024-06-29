@@ -14,4 +14,6 @@ public interface OfficialManagersService {
 
 	public OfficialManagersResultBean update(OfficialManagersBean bean);
 
+	OfficialManagersBean getSequenceCode();
+
 }

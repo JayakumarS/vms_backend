@@ -3,6 +3,8 @@ package com.vms.vessels.officialManagers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.vms.crew.certificates.CertificatesBean;
+
 
 
 @Service
@@ -41,6 +43,9 @@ public class OfficialManagersServiceImpl implements OfficialManagersService {
 	}
 	
 	
-	
+	@Override
+	public OfficialManagersBean getSequenceCode() {
+		return OfficialManagersDao.getSequenceCode();
+	}
 	
 }

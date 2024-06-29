@@ -13,5 +13,8 @@ public interface ShipManagersService {
 	public ShipManagersResultBean delete(int id);
 
 	public ShipManagersResultBean update(ShipManagersBean bean);
+	
+	ShipManagersBean getSequenceCode();
+
 
 }
