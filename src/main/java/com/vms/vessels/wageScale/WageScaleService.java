@@ -12,4 +12,7 @@ public interface WageScaleService {
 	public WageScaleResultBean delete(int id);
 
 	public WageScaleResultBean update(WageScaleBean bean);
+	
+	WageScaleBean getSequenceCode();
+
 }

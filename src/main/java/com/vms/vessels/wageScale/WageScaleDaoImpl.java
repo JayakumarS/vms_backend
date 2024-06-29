@@ -14,6 +14,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
+import com.vms.crew.certificates.CertificatesBean;
+import com.vms.crew.certificates.CertificatesQueryutil;
+
 
 
 
@@ -148,4 +151,23 @@ public WageScaleResultBean update(WageScaleBean bean) {
 	}
 	return resultBean;
 }
+
+
+@Override
+public WageScaleBean getSequenceCode() {
+	WageScaleBean WageScaleBean = new WageScaleBean();
+
+    try {
+        String WageScaleId = jdbcTemplate.queryForObject(WageScaleQueryUtil.WageScaleId, String.class);
+        WageScaleBean.setCode(WageScaleId);
+    } catch (Exception e) {
+        // Log the exception
+        e.printStackTrace();
+    }
+
+    return WageScaleBean;
+}
+
+
+
 }

@@ -31,4 +31,7 @@ public static final String get_desc_edit = "SELECT COUNT(wage_scale_name) FROM w
 
 public static final String getCodeById = "SELECT wage_scale_code FROM wage_scales WHERE wage_scale_id = ?";
 
+public static final String WageScaleId = "SELECT CONCAT('WS', LPAD(CAST(COALESCE(MAX(CAST(SUBSTRING(wage_scale_code, 4) AS INTEGER)), 0) + 1 AS TEXT), 4, '0')) AS next_wage_scale_code\r\n"
+		+ "FROM wage_scales";
+
 }

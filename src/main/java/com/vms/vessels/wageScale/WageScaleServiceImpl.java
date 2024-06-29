@@ -3,6 +3,8 @@ package com.vms.vessels.wageScale;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.vms.crew.certificates.CertificatesBean;
+
 
 @Service
 public class WageScaleServiceImpl implements WageScaleService {
@@ -40,4 +42,10 @@ public class WageScaleServiceImpl implements WageScaleService {
 		// TODO Auto-generated method stub
 		return WageScaleDao.update(bean);
 	}
+	
+	@Override
+	public WageScaleBean getSequenceCode() {
+		return WageScaleDao.getSequenceCode();
+	}
+	
 }

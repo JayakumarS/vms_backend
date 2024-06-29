@@ -52,6 +52,8 @@ public class VesselTypeDaoImpl implements VesselTypeDao{
 		}catch(Exception e) {
 			e.printStackTrace();
 			resultBean.setSuccess(false);
+	 		   resultBean.setMessage("Not Updated");
+
 		}
 		return resultBean;
 	}
@@ -135,6 +137,8 @@ public class VesselTypeDaoImpl implements VesselTypeDao{
             }		}catch(Exception e) {
 			e.printStackTrace();
 			resultBean.setSuccess(false);
+	 		   resultBean.setMessage("Not Updated");
+
 		}
 		return resultBean;
 	}

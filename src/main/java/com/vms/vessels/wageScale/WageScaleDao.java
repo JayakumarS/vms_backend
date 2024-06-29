@@ -1,5 +1,6 @@
 package com.vms.vessels.wageScale;
 
+import com.vms.crew.certificates.CertificatesBean;
 
 public interface WageScaleDao {
 
@@ -13,4 +14,7 @@ public interface WageScaleDao {
 	public WageScaleResultBean delete(int id);
 
 	public WageScaleResultBean update(WageScaleBean bean);
+	
+	WageScaleBean getSequenceCode();
+
 }
