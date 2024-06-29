@@ -19,9 +19,8 @@ public class CrewPayrollCurrencyQueryUtil {
 	
 	public static final String getNationality="select nationality as nationality from country_master where country_code=?";
 	
-	public static final String getEdit = "select cp.crew_payroll_currency_id as currencyid, cm.nationality AS countryname,cp.crew_payroll_currency_code as currencycode,cp.crew_payroll_currency_validation as validation\r\n"
-			+ " from crew_payroll_currency cp \r\n"
-			+ " LEFT JOIN \r\n"
+	public static final String getEdit = "select crew_payroll_currency_id as currencyid, crew_payroll_currency_country_name as countryname,crew_payroll_currency_code as currencycode,crew_payroll_currency_validation as validation\r\n"
+			+ " from crew_payroll_currency cp LEFT JOIN \r\n"
 			+ " country_master cm ON  cm.country_id  = cp.crew_payroll_currency_country_name\r\n"
 			+ " where crew_payroll_currency_id = ?";
 	
