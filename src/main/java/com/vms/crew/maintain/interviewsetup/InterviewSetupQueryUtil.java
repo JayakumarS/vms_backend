@@ -37,8 +37,7 @@ public class InterviewSetupQueryUtil {
 	
 	
 
-	public static final String getEdit = "select ihdr.interview_setup_id  as interviewsetupid,ihdr.rank_id as rank,regexp_replace(regexp_replace(idtl.interview_setup_description, '&nbsp;', ' ', 'g'),'<[^>]*>', '', 'g') AS description,ihdr.description as desc from interview_setup_hdr ihdr left join interview_setup_dtl idtl on idtl.interview_setup_hdr_id= ihdr.interview_setup_id"
-			+ " where ihdr.interview_setup_id = CAST(? AS INTEGER) ";
+	public static final String getEdit = "select ihdr.interview_setup_id  as interviewsetupid,ihdr.rank_id as rank,rm.rank_name as rankname,regexp_replace(regexp_replace(idtl.interview_setup_description, '&nbsp;', ' ', 'g'),'<[^>]*>', '', 'g') AS description,ihdr.description as desc from interview_setup_hdr ihdr left join interview_setup_dtl idtl on idtl.interview_setup_hdr_id= ihdr.interview_setup_id LEFT JOIN rank_master rm ON rm.rank_id = ihdr.rank_id where ihdr.interview_setup_id = CAST(? AS INTEGER) ";
 
 	
 	
