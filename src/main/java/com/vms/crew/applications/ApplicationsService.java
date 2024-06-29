@@ -18,5 +18,6 @@ public interface ApplicationsService {
 
 	public ApplicationsResultBean saveCertificate(ApplicationsBean bean);
 
+	public ApplicationsResultBean mcertificateList(int rankCode);
 
 }

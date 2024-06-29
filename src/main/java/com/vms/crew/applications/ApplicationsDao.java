@@ -27,4 +27,6 @@ public interface ApplicationsDao {
 
 	public ApplicationsResultBean saveCertificate(ApplicationsBean bean);
 
+	public  ApplicationsResultBean mcertificateList(int rankCode);
+
 }

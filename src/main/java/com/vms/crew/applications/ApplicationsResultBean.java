@@ -15,6 +15,26 @@ public class ApplicationsResultBean {
 
 	public boolean success;
 	private List<ApplicationsBean> list;
+	private List<ApplicationsBean> list1;
+	private List<ApplicationsBean>listpopup;
+	public String message;
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+	public List<ApplicationsBean> getListpopup() {
+		return listpopup;
+	}
+
+	public void setListpopup(List<ApplicationsBean> listpopup) {
+		this.listpopup = listpopup;
+	}
+
 	public List<ApplicationsBean> getList() {
 		return list;
 	}
@@ -38,6 +58,14 @@ public class ApplicationsResultBean {
 
 	public void setPath(String path) {
 		this.path = path;
+	}
+
+	public List<ApplicationsBean> getList1() {
+		return list1;
+	}
+
+	public void setList1(List<ApplicationsBean> list1) {
+		this.list1 = list1;
 	}
 
 	private String path;

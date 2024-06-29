@@ -304,8 +304,31 @@ public class ApplicationsBean {
     private String address1; 
     private Integer tel1; 
     public int certificateCode;
-    public int CertifiCode;
+    public Integer CertifiCode;
+    
+    public Integer getCertifiCode() {
+		return CertifiCode;
+	}
+	public void setCertifiCode(Integer certifiCode) {
+		CertifiCode = certifiCode;
+	}
 
+	public Integer mcertificateCode;
+	public String mcertificateName;
+
+	
+	public Integer getMcertificateCode() {
+		return mcertificateCode;
+	}
+	public void setMcertificateCode(Integer mcertificateCode) {
+		this.mcertificateCode = mcertificateCode;
+	}
+	public String getMcertificateName() {
+		return mcertificateName;
+	}
+	public void setMcertificateName(String mcertificateName) {
+		this.mcertificateName = mcertificateName;
+	}
 	public int getCertificateCode() {
 		return certificateCode;
 	}
@@ -313,12 +336,7 @@ public class ApplicationsBean {
 		this.certificateCode = certificateCode;
 	}
 
-	public int getCertifiCode() {
-		return CertifiCode;
-	}
-	public void setCertifiCode(int certifiCode) {
-		CertifiCode = certifiCode;
-	}
+	
 	public String getCertificateName() {
 		return certificateName;
 	}
@@ -358,13 +376,49 @@ public class ApplicationsBean {
 	public void setRankCode(int rankCode) {
 		this.rankCode = rankCode;
 	}
+	public boolean mmandatoryValid;
+    public boolean mmandatoryInvalid;
+    public boolean moptionalInvalid;
+	public boolean isMmandatoryValid() {
+		return mmandatoryValid;
+	}
+	public void setMmandatoryValid(boolean mmandatoryValid) {
+		this.mmandatoryValid = mmandatoryValid;
+	}
+	public boolean isMmandatoryInvalid() {
+		return mmandatoryInvalid;
+	}
+	public void setMmandatoryInvalid(boolean mmandatoryInvalid) {
+		this.mmandatoryInvalid = mmandatoryInvalid;
+	}
+	public boolean isMoptionalInvalid() {
+		return moptionalInvalid;
+	}
+	public void setMoptionalInvalid(boolean moptionalInvalid) {
+		this.moptionalInvalid = moptionalInvalid;
+	}
 
 	public boolean mandatoryValid;
     public boolean mandatoryInvalid;
     public boolean optionalInvalid;
     public List<ApplicationsBean> certificates;
+    public List<ApplicationsBean> medicalcertificates;
+    public List<ApplicationsBean> splitCertificateMedicalNames;
+    
+    public List<ApplicationsBean> getSplitCertificateMedicalNames() {
+		return splitCertificateMedicalNames;
+	}
+	public void setSplitCertificateMedicalNames(List<ApplicationsBean> splitCertificateMedicalNames) {
+		this.splitCertificateMedicalNames = splitCertificateMedicalNames;
+	}
+	public List<ApplicationsBean> getMedicalcertificates() {
+		return medicalcertificates;
+	}
+	public void setMedicalcertificates(List<ApplicationsBean> medicalcertificates) {
+		this.medicalcertificates = medicalcertificates;
+	}
 
-    public List<ApplicationsBean> splitCertificateNames;
+	public List<ApplicationsBean> splitCertificateNames;
 
 	public List<ApplicationsBean> getSplitCertificateNames() {
 		return splitCertificateNames;

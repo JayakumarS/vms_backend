@@ -54,6 +54,11 @@ public class ApplicationsServiceImpl implements ApplicationsService{
 		return ApplicationsDao.certificateList(rankCode);
 	}
 
+	@Override
+	public ApplicationsResultBean mcertificateList(int rankCode) {
+		// TODO Auto-generated method stub
+		return ApplicationsDao.mcertificateList(rankCode);
+	}
 
 	@Override
 	public ApplicationsResultBean saveCertificate(ApplicationsBean bean) {

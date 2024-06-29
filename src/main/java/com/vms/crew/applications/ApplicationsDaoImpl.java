@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -137,24 +138,56 @@ public class ApplicationsDaoImpl implements ApplicationsDao{
 				
 				int conHdrId = namedParameterJdbcTemplate.queryForObject(ApplicationsQueryUtil.SAVE_APPLICATION, applications,int.class);
 
-				if(conHdrId>0){
-					 for (ApplicationsBean certificate : bean.getCertificates()) {
-				            // Loop through each splitCertificateName in the current certificate
-				            for (ApplicationsBean splitCertificateName : certificate.getSplitCertificateNames()) {
-				                Map<String, Object> certificateMap = new HashMap<>();
 
-				                certificateMap.put("userName", userDetails.getUsername());
-				                certificateMap.put("applcode",conHdrId);
-				                certificateMap.put("rankCode", bean.getRankCode());
-				                certificateMap.put("certifiCode", certificate.getCertifiCode());
-				                certificateMap.put("mandatoryValid", splitCertificateName.isMandatoryValid());
-				                certificateMap.put("mandatoryInvalid", splitCertificateName.isMandatoryInvalid());
-				                certificateMap.put("optionalInvalid", splitCertificateName.isOptionalInvalid());
+				if (conHdrId > 0) {
+				    // Insert regular certificates
+				    List<ApplicationsBean> certificates = bean.getCertificates();
+				    if (certificates != null && !certificates.isEmpty()) {
+				        for (ApplicationsBean certificate : certificates) {
+				            List<ApplicationsBean> splitCertificateNames = certificate.getSplitCertificateNames();
+				            if (splitCertificateNames != null && !splitCertificateNames.isEmpty()) {
+				                for (ApplicationsBean splitCertificateName : splitCertificateNames) {
+				                    Map<String, Object> certificateMap = new HashMap<>();
+				                    certificateMap.put("userName", userDetails.getUsername());
+				                    certificateMap.put("applcode", conHdrId);
+				                    certificateMap.put("rankCode", bean.getRankCode());
+				                    certificateMap.put("certifiCode", certificate.getCertifiCode());
+				                    certificateMap.put("mcertificateCode", null); // Set medical certificate code to null
+				                    certificateMap.put("mandatoryValid", splitCertificateName.isMandatoryValid());
+				                    certificateMap.put("mandatoryInvalid", splitCertificateName.isMandatoryInvalid());
+				                    certificateMap.put("optionalInvalid", splitCertificateName.isOptionalInvalid());
 
-				                namedParameterJdbcTemplate.update(ApplicationsQueryUtil.SAVE_CERTIFICATE, certificateMap);
+				                    namedParameterJdbcTemplate.update(ApplicationsQueryUtil.SAVE_CERTIFICATE, certificateMap);
+				                }
 				            }
+				        }
+				    }
+
+				    // Insert medical certificates
+				    List<ApplicationsBean> medicalCertificates = bean.getMedicalcertificates();
+				    if (medicalCertificates != null && !medicalCertificates.isEmpty()) {
+				        for (ApplicationsBean mcertificate : medicalCertificates) {
+				            List<ApplicationsBean> splitCertificateMedicalNames = mcertificate.getSplitCertificateMedicalNames();
+				            if (splitCertificateMedicalNames != null && !splitCertificateMedicalNames.isEmpty()) {
+				                for (ApplicationsBean splitCertificateName : splitCertificateMedicalNames) {
+				                    Map<String, Object> certificateMap = new HashMap<>();
+				                    certificateMap.put("userName", userDetails.getUsername());
+				                    certificateMap.put("applcode", conHdrId);
+				                    certificateMap.put("rankCode", bean.getRankCode());
+				                    certificateMap.put("certifiCode", null); // Set regular certificate code to null
+				                    certificateMap.put("mcertificateCode", mcertificate.getMcertificateCode());
+				                    certificateMap.put("mandatoryValid", splitCertificateName.isMmandatoryValid());
+				                    certificateMap.put("mandatoryInvalid", splitCertificateName.isMmandatoryInvalid());
+				                    certificateMap.put("optionalInvalid", splitCertificateName.isMoptionalInvalid());
+
+				                    namedParameterJdbcTemplate.update(ApplicationsQueryUtil.SAVE_CERTIFICATE, certificateMap);
+				                }
+				            }
+				        }
+				    }
 				}
-				}
+
+
 		   resultBean.setSuccess(true);
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -184,6 +217,8 @@ public class ApplicationsDaoImpl implements ApplicationsDao{
 		resultBean.setSuccess(false);
 		try {
 			resultBean.setList(jdbcTemplate.query(ApplicationsQueryUtil.getEdit,new Object[] { id }, new BeanPropertyRowMapper<ApplicationsBean>(ApplicationsBean.class)));
+			resultBean.setListpopup(jdbcTemplate.query(ApplicationsQueryUtil.getEditpopup,new Object[] { id }, new BeanPropertyRowMapper<ApplicationsBean>(ApplicationsBean.class)));
+
 		}
 		catch(Exception e){
 			e.printStackTrace();
@@ -195,14 +230,26 @@ public class ApplicationsDaoImpl implements ApplicationsDao{
 	@Override
 	public ApplicationsResultBean delete(Integer id) {
 		ApplicationsResultBean resultBean = new ApplicationsResultBean();
+		 String code = null; 
+
 		try {
+			code = jdbcTemplate.queryForObject(ApplicationsQueryUtil.getCodeById, new Object[]{id}, String.class);
+
+			
 			jdbcTemplate.update(ApplicationsQueryUtil.delete,id);
 			resultBean.setSuccess(true);
 		}
-		catch(Exception e) {
-			e.printStackTrace();
-			resultBean.setSuccess(false);
-		}	
+		catch (DataAccessException e) {
+	        String errorMessage = e.getMessage();
+	        if (errorMessage.contains("violates foreign key constraint")) {
+	            resultBean.setSuccess(false);
+	            resultBean.setMessage(code + " code cannot be deleted as it is already used in system.");
+	        } else {
+	            e.printStackTrace();
+	            resultBean.setSuccess(false);
+	            resultBean.setMessage(errorMessage);
+	        }
+		}		
 		return resultBean;
 	}
 	
@@ -292,6 +339,20 @@ public class ApplicationsDaoImpl implements ApplicationsDao{
 	}
 
 
+
+	@Override
+	public ApplicationsResultBean mcertificateList(int rankCode) {
+		ApplicationsResultBean resultBean = new ApplicationsResultBean();
+		List<ApplicationsBean> listBean = new ArrayList<ApplicationsBean>();
+		
+		try {
+			listBean = jdbcTemplate.query(ApplicationsQueryUtil.get_mcertificate_List(rankCode),new BeanPropertyRowMapper<ApplicationsBean>(ApplicationsBean.class));
+			resultBean.setList1(listBean);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return resultBean;
+	}
 
 	public ApplicationsResultBean saveCertificate(ApplicationsBean bean) {
 	    ApplicationsResultBean resultBean = new ApplicationsResultBean();

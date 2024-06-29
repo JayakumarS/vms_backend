@@ -100,8 +100,27 @@ public class ApplicationsQueryUtil {
 	}
 	
 	
-	public static final String SAVE_CERTIFICATE = "Insert into appl_checklist(appl_code,appl_rank_code,appl_certificate_code,appl_mandatory_valid,appl_mandatory_invalid,appl_optional_invalid,created_by,created_dt)"
-			+ "values (:applcode,:rankCode,:certifiCode,:mandatoryValid,:mandatoryInvalid,:optionalInvalid,:userName,now())";
+	public static String get_mcertificate_List(int rankCode) {
+		String query = "SELECT rm.rank_code as rankCode, cm.medical_id as mcertificateCode, STRING_AGG(cm.medical_name, ', ') as mcertificateName FROM rank_medicals rm \r\n"
+				+ "	LEFT JOIN medical_master cm ON rm.medical_code = cm.medical_id "
+				+ "	WHERE rm.rank_code =('" + rankCode +"')"
+				+ "	GROUP BY rm.rank_code,cm.medical_id";	          
+		return query;
+	}
+	
+	public static final String SAVE_CERTIFICATE = "Insert into appl_checklist(appl_code,appl_rank_code,appl_certificate_code,appl_medicalcertificate_code,appl_mandatory_valid,appl_mandatory_invalid,appl_optional_invalid,created_by,created_dt)"
+			+ "values (:applcode,:rankCode,:certifiCode,:mcertificateCode,:mandatoryValid,:mandatoryInvalid,:optionalInvalid,:userName,now())";
 
+	public static final String getEditpopup = "SELECT acl.appl_code AS applcode,acl.appl_rank_code AS rankCode,acl.appl_certificate_code AS CertifiCode,cm.certificate_name AS certificateName,acl.appl_medicalcertificate_code AS mcertificateCode,mm.medical_name AS mcertificateName,acl.appl_mandatory_valid AS mandatoryValid,acl.appl_mandatory_invalid AS mandatoryInvalid,acl.appl_optional_invalid AS optionalInvalid"
+			+ " FROM appl_checklist acl"
+			+ " LEFT JOIN certificate_master cm ON acl.appl_certificate_code = cm.certificate_id"
+			+ " LEFT JOIN  medical_master mm ON acl.appl_medicalcertificate_code = mm.medical_id"
+			+ " WHERE acl.appl_code = ?";
+			
+			
+//			"select appl_code as applcode,appl_rank_code as rankCode,appl_certificate_code as CertifiCode,appl_medicalcertificate_code as mcertificateCode,appl_mandatory_valid as mandatoryValid,appl_mandatory_invalid as mandatoryInvalid,appl_optional_invalid as optionalInvalid from appl_checklist where appl_code =?";
+
+	
+	public static final String getCodeById = "SELECT crew_applicant_code FROM crew_applicant WHERE crew_applicant_code = ?";
 
 }

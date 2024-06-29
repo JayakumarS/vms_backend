@@ -125,6 +125,22 @@ public class ApplicationsController {
 	   		return rbean;
 	   	}
 		
+		
+		
+		///Load Certificate
+		
+			@RequestMapping(value="/mcertificateList")
+			public ApplicationsResultBean mcertificateList(@RequestParam("rankCode") int rankCode) {
+				ApplicationsResultBean rbean = new ApplicationsResultBean();
+				try {
+					rbean = ApplicationsService.mcertificateList(rankCode);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+		   		return rbean;
+		   	}
+		
+		
 	///Save Certificate
 		
 		@RequestMapping(value="/saveCertificate")
