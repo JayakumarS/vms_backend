@@ -9,7 +9,14 @@ public class MultiSeamenBean {
 	public String startdate;
 	public Integer nationality;
 	public Integer seamenCode;
+	public boolean validCheck;
 	
+	public boolean isValidCheck() {
+		return validCheck;
+	}
+	public void setValidCheck(boolean validCheck) {
+		this.validCheck = validCheck;
+	}
 	public Integer getSeamenCode() {
 		return seamenCode;
 	}

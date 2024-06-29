@@ -31,8 +31,10 @@ public class MultiSeamenQueryUtil {
 			+ " from multi_seamen_hdr order by m_seamen_code desc";
 
 
-	public static final String GET_EDIT_MUlTISEAMEN_DTL = "select m_seamen_name as name,m_seamen_rank_code as rank,nationality as nationality,m_seamen_pay as pay,m_seamen_currency as currency,to_char(m_seamen_joining_date,'DD/MM/YYYY') as joiningDate,\r\n"
-			+ "to_char(m_seamen_est_sign_off,'DD/MM/YYYY') as estSignOff from multi_seamen_dtl where m_seamen_hdr_code=?";
+	public static final String GET_EDIT_MUlTISEAMEN_DTL = "select m_seamen_name as name,m_seamen_rank_code as rank,nationality as nationality,m_seamen_pay as pay,m_seamen_currency as currency,\r\n"
+			+ "to_char(m_seamen_joining_date,'DD/MM/YYYY') as joiningDate,\r\n"
+			+ "to_char(m_seamen_est_sign_off,'DD/MM/YYYY') as estSignOff,appl_mandatory_valid as validCheck from multi_seamen_dtl\r\n"
+			+ "left join appl_checklist on appl_rank_code = m_seamen_rank_code where m_seamen_hdr_code=?";
 
 
 	public static String GET_MULTISEAMEN_LIST(Integer id) {
