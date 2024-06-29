@@ -128,5 +128,24 @@ public class MultiSeamenBean {
 		this.estSignOff = estSignOff;
 	}
 	
+	
+	
+	private String portname;
+	public String getPortname() {
+		return portname;
+	}
+	public void setPortname(String portname) {
+		this.portname = portname;
+	}
+	public String getVesselname() {
+		return vesselname;
+	}
+	public void setVesselname(String vesselname) {
+		this.vesselname = vesselname;
+	}
+
+
+	private String vesselname;
+	
 
 }

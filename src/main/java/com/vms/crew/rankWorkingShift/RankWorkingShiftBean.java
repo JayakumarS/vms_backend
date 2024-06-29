@@ -184,5 +184,28 @@ public class RankWorkingShiftBean {
 
 
 	private List<RankWorkingShiftBean> rankWorkingShiftBeanDtls;
+	
+	private String vesselname;
+	public String getVesselname() {
+		return vesselname;
+	}
+
+
+	public void setVesselname(String vesselname) {
+		this.vesselname = vesselname;
+	}
+
+
+	public String getRankname() {
+		return rankname;
+	}
+
+
+	public void setRankname(String rankname) {
+		this.rankname = rankname;
+	}
+
+
+	private String	rankname;
 
 }

@@ -27,8 +27,11 @@ public class MultiSeamenQueryUtil {
 	public static final String DELETE_OFFSIGN_DTL = "delete from multi_seamen_dtl where m_seamen_hdr_code=?";
 
 
-	public static final String GET_MULTISEAMEN_LIST = "select m_seamen_code as seamenCode,m_seamen_vessel_code as vessel,to_char(m_seamen_starting_date,'DD/MM/YYYY') as startdate,m_seamen_joining_port as joinPort,to_char(created_dt,'DD/MM/YYYY') as createdDate \r\n"
-			+ " from multi_seamen_hdr order by m_seamen_code desc";
+	public static final String GET_MULTISEAMEN_LIST = "select ms.m_seamen_code as seamenCode,ms.m_seamen_vessel_code as vessel,to_char(ms.m_seamen_starting_date,'DD/MM/YYYY') as\r\n"
+			+ "startdate,ms.m_seamen_joining_port as joinPort,to_char(ms.created_dt,'DD/MM/YYYY') as createdDate,\r\n"
+			+ "vh.vessel_name as vesselname,pm.port_name as portname from multi_seamen_hdr ms \r\n"
+			+ "left join vessel_hdr vh on vh.vessel_code=ms.m_seamen_vessel_code\r\n"
+			+ "left join port_master pm on pm.port_id=ms.m_seamen_joining_port";
 
 
 	public static final String GET_EDIT_MUlTISEAMEN_DTL = "select m_seamen_name as name,m_seamen_rank_code as rank,nationality as nationality,m_seamen_pay as pay,m_seamen_currency as currency,\r\n"

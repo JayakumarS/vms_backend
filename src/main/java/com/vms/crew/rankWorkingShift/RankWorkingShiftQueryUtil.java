@@ -9,10 +9,21 @@ public class RankWorkingShiftQueryUtil {
 			+"values (:shiftStart::TIME,:shiftEnd::TIME,:place,:watchKeeping,:userName,:rankshiftiddtl,now())";
 
 
-	public static final String getList = "select rank_shift_vessel_code as vessel,rank_shift_rank_code as rankcode,rank_shift_start_date as sDate ,rank_shift_end_date as eDate,rank_shift_remarks as remarks, rank_shift_id as rankshiftid  from rank_shift_master order by created_dt desc";
+	public static final String getList = "select rsm.rank_shift_vessel_code as vessel,vh.vessel_name as vesselname,rsm.rank_shift_rank_code as rankcode,\r\n"
+			+ "rm.rank_name as rankname,rsm.rank_shift_start_date as sDate ,\r\n"
+			+ "rsm.rank_shift_end_date as eDate,rsm.rank_shift_remarks as remarks,rsm.rank_shift_id as rankshiftid  \r\n"
+			+ "from rank_shift_master rsm\r\n"
+			+ "left join vessel_hdr vh on vh.vessel_code=rsm.rank_shift_vessel_code\r\n"
+			+ "left join rank_master rm on rm.rank_id=rsm.rank_shift_rank_code\r\n"
+			+ "order by rsm.created_dt desc";
 			
 
-	public static final String getEdit = "select rank_shift_vessel_code as vessel,rank_shift_rank_code as rankcode,to_char(rank_shift_start_date,'DD/MM/YYYY') as sDate, to_char(rank_shift_end_date,'DD/MM/YYYY') as eDate,rank_shift_remarks as remarks,rank_shift_watchkeep_hrs_flag as watchkeepers,rank_shift_id as rankshiftid  from rank_shift_master where rank_shift_id =?";
+	public static final String getEdit = "select rsm.rank_shift_vessel_code as vessel,rsm.rank_shift_rank_code as rankcode,to_char(rsm.rank_shift_start_date,'DD/MM/YYYY') as sDate,\r\n"
+			+ "to_char(rsm.rank_shift_end_date,'DD/MM/YYYY') as eDate,rsm.rank_shift_remarks as remarks,rsm.rank_shift_watchkeep_hrs_flag as watchkeepers,\r\n"
+			+ "rsm.rank_shift_id as rankshiftid ,vh.vessel_name as vesselname ,rm.rank_name as rankname from rank_shift_master rsm \r\n"
+			+ "left join vessel_hdr vh on vh.vessel_code=rsm.rank_shift_vessel_code\r\n"
+			+ "left join rank_master rm on rm.rank_id=rsm.rank_shift_rank_code\r\n"
+			+ "where rank_shift_id =?";
 	
 	public static final String getEditDtl = "select  to_char(rank_shift_dtl_start_date, 'HH24:MI') as shiftStart,to_char(rank_shift_dtl_end_date, 'HH24:MI') as shiftEnd,rank_shift_place as place,rank_shift_watch_keeping as watchKeeping,rank_shift_id as rankshiftid  from rank_shift_dtl where rank_shift_id =?";
 
