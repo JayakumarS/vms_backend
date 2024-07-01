@@ -19,7 +19,15 @@ public class InterviewSetupBean {
 	private String rankname;
 	private List<InterviewSetupBean> InterviewSetupdetail;
 	private List<InterviewSetupBean>interviewSetupBeanDtls;
+	private String descriptiondtl;
 	
+	
+	public String getDescriptiondtl() {
+		return descriptiondtl;
+	}
+	public void setDescriptiondtl(String descriptiondtl) {
+		this.descriptiondtl = descriptiondtl;
+	}
 	public List<InterviewSetupBean> getInterviewSetupdetail() {
 		return InterviewSetupdetail;
 	}
