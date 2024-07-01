@@ -93,25 +93,20 @@ public class IceClassDaoImpl implements IceClassDao {
 	@Override
 	public IceClassResultBean delete(Integer id) {
 		IceClassResultBean resultBean = new IceClassResultBean();
-		String code = null;
 
 		try {
-			code = jdbcTemplate.queryForObject(IceClassQueryUtil.getCodeById, new Object[]{id}, String.class);
-
 			jdbcTemplate.update(IceClassQueryUtil.delete_ice,id);
 			resultBean.setSuccess(true);
 		}
 		catch(Exception e) {
-			 String errorMessage = e.getMessage();
+			  String errorMessage = e.getMessage();
 		        if (errorMessage.contains("violates foreign key constraint")) {
 		            resultBean.setSuccess(false);
-		            resultBean.setMsg("Cannot delete this certificate because it is referenced in another");
-		            
-		            resultBean.setMsg(code + " code cannot be deleted as it is already used in system.");
+		            resultBean.setMsg("Cannot delete this UOM Id because it is referenced in another table");
 		        } else {
 		            e.printStackTrace();
 		            resultBean.setSuccess(false);
-		            resultBean.setMsg("Error in Delete");
+		            resultBean.setMsg(errorMessage);
 		        }
 		}	
 		return resultBean;

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -57,7 +58,7 @@ public class UOMController {
 	}
 	
 	@RequestMapping(value="/deleteUom")
-	public UOMResultBean deleteUom(@RequestParam("id") String id) {
+	public UOMResultBean deleteUom(@RequestParam("id") Integer id) {
 		UOMResultBean rbean = new UOMResultBean();
 		try {
 			rbean = uomService.deleteUom(id);
@@ -66,6 +67,15 @@ public class UOMController {
 		}
 		return rbean;
 		
+	}
+	
+	@RequestMapping(value="/getSequenceCode")
+	public @ResponseBody UOMBean getSequenceCode() {
+		UOMBean getSequenceCode = null;
+
+	   getSequenceCode = uomService.getSequenceCode();
+
+		return getSequenceCode;
 	}
 
 }

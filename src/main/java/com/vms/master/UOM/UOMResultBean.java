@@ -28,5 +28,13 @@ public class UOMResultBean {
 	public void setList(List<UOMBean> list) {
 		this.list = list;
 	}
+	public UOMBean getUomBean() {
+		return uomBean;
+	}
+	public void setUomBean(UOMBean uomBean) {
+		this.uomBean = uomBean;
+	}
+	private UOMBean uomBean;
+	
 
 }

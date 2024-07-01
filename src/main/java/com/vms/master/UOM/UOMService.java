@@ -8,9 +8,11 @@ public interface UOMService {
 
 	public UOMResultBean editUom(Integer id);
 
-	public UOMResultBean deleteUom(String id);
+	public UOMResultBean deleteUom(Integer id);
 
 	public UOMResultBean updateUom(UOMBean bean);
+	
+	UOMBean getSequenceCode();
 
 
 }

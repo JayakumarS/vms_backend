@@ -15,5 +15,5 @@ public class IceClassQueryUtil {
 
 	public static final String get_code= "SELECT MAX(ice_code_id+1) FROM ice_class";
 
-	public static final String getCodeById = "SELECT ice_code FROM ice_class WHERE ice_id = ?";
+	public static final String getCodeById = "SELECT COALESCE(MAX(ice_code_id+1), 1) AS code FROM ice_class";
 }

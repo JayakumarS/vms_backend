@@ -73,7 +73,7 @@ public class IceClassController {
 		
 	}
 	
-	@RequestMapping("/getSequenceCode")
+	@RequestMapping(value="/getSequenceCode")
 	public @ResponseBody IceClassBean getSequenceCode() {
 		IceClassBean getSequenceCode = null;
 

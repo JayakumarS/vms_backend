@@ -31,7 +31,7 @@ public class UOMServiceImpl implements UOMService{
 	
 
 	@Override
-	public UOMResultBean deleteUom(String id) {
+	public UOMResultBean deleteUom(Integer id) {
 		// TODO Auto-generated method stub
 		return uomDao.deleteUom(id);
 	}
@@ -41,6 +41,12 @@ public class UOMServiceImpl implements UOMService{
 		// TODO Auto-generated method stub
 		return uomDao.updateUom(bean);
 	
+	}
+
+	@Override
+	public UOMBean getSequenceCode() {
+		// TODO Auto-generated method stub
+		return uomDao.getSequenceCode();
 	}
 
 

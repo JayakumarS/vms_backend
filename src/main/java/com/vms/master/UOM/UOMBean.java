@@ -3,15 +3,15 @@ package com.vms.master.UOM;
 
 public class UOMBean {
 	
-	public String uomCode;
+	public Integer uomCode;
 	public String uomName;
 	public Integer uomId;
 	
 
-	public String getUomCode() {
+	public Integer getUomCode() {
 		return uomCode;
 	}
-	public void setUomCode(String uomCode) {
+	public void setUomCode(Integer uomCode) {
 		this.uomCode = uomCode;
 	}
 	public String getUomName() {

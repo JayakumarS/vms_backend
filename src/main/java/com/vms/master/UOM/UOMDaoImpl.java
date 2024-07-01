@@ -13,9 +13,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
-import com.vms.master.Country.CountryQueryUtil;
-import com.vms.master.Port.PortQueryUtil;
-
 @Repository
 public class UOMDaoImpl implements UOMDao{
 
@@ -31,9 +28,7 @@ public class UOMDaoImpl implements UOMDao{
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		try {
-			int code =  jdbcTemplate.queryForObject(UOMQueryUtil.get_code,new Object[] { bean.getUomCode() },Integer.class);
 			
-            if(code==0) {
 			Map<String, Object> Country = new HashMap<String, Object>();
 			
 			Country.put("userName", userDetails.getUsername());
@@ -44,10 +39,7 @@ public class UOMDaoImpl implements UOMDao{
 			
 			
 		   resultBean.setSuccess(true);
-            }else {
-       		   resultBean.setMessage(bean.getUomCode() +" already exists,please enter a different UOM Code");
-
-            }
+		   
 		}catch(Exception e) {
 			e.printStackTrace();
 			resultBean.setSuccess(false);
@@ -74,7 +66,7 @@ public class UOMDaoImpl implements UOMDao{
 		UOMResultBean resultBean = new UOMResultBean();
 		resultBean.setSuccess(false);
 		try {
-			resultBean.setList(jdbcTemplate.query(UOMQueryUtil.GET_EDIT_UOM,new Object[] { id }, new BeanPropertyRowMapper<UOMBean>(UOMBean.class)));
+			resultBean.setUomBean(jdbcTemplate.queryForObject(UOMQueryUtil.GET_EDIT_UOM,new Object[] { id }, new BeanPropertyRowMapper<UOMBean>(UOMBean.class)));
 		}
 		catch(Exception e){
 			e.printStackTrace();
@@ -84,7 +76,7 @@ public class UOMDaoImpl implements UOMDao{
 	
 	
 	@Override
-	public UOMResultBean deleteUom(String id) {
+	public UOMResultBean deleteUom(Integer id) {
 		UOMResultBean resultBean = new UOMResultBean();
 		try {
 			jdbcTemplate.update(UOMQueryUtil.DELETE_UOM,id);
@@ -111,11 +103,6 @@ public class UOMDaoImpl implements UOMDao{
 		
 		try {
 			
-			String uomcode =  jdbcTemplate.queryForObject(PortQueryUtil.uom_code,new Object[] { bean.getUomId() },String.class);
-
-			int code =  jdbcTemplate.queryForObject(PortQueryUtil.get_uom_code_edit,new Object[] { bean.getUomCode(),uomcode },Integer.class);
-
-            if(code==0) {
 			Map<String, Object> Country = new HashMap<String, Object>();
 			
 			Country.put("userName", userDetails.getUsername());
@@ -127,13 +114,25 @@ public class UOMDaoImpl implements UOMDao{
 				namedParameterJdbcTemplate.update(UOMQueryUtil.UPDATE_UOM,Country);
 				
 		   resultBean.setSuccess(true);
-            }else {
-        		   resultBean.setMessage(bean.getUomCode() +" already exists,please enter a different UOM Code");
-
-            }
+            
 		}catch(Exception e) {
 			e.printStackTrace();
 			resultBean.setSuccess(false);
+		}
+		return resultBean;
+	}
+	
+	public UOMBean getSequenceCode() {
+		UOMBean resultBean = new UOMBean();
+		
+		try {
+			 Integer code = jdbcTemplate.queryForObject(UOMQueryUtil.get_sequence_code, Integer.class);
+		        resultBean.setUomCode(code);
+		        
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			
 		}
 		return resultBean;
 	}
