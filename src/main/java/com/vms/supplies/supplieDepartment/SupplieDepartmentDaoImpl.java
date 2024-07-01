@@ -13,10 +13,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
-import com.vms.vessel.vesselParticular.VesselParticularBean;
-import com.vms.vessel.vesselParticular.VesselParticularQueryUtil;
-import com.vms.vessel.vesselParticular.VesselParticularResultBean;
-
 
 @Repository
 
@@ -38,6 +34,7 @@ public class SupplieDepartmentDaoImpl implements SupplieDepartmentDao{
 						
 			depMap.put("userName", userDetails.getUsername());
 			depMap.put("code", bean.getCode());
+			depMap.put("depCode", bean.getDepCode());
 			depMap.put("depName", bean.getDepartment());
 			depMap.put("formType", bean.getFormType());
 			depMap.put("itemOrder", bean.getItemsToOrderComments());
@@ -112,6 +109,7 @@ public class SupplieDepartmentDaoImpl implements SupplieDepartmentDao{
 						
 			depMap.put("userName", userDetails.getUsername());
 			depMap.put("code", bean.getCode());
+			depMap.put("depCode", bean.getDepCode());
 			depMap.put("depName", bean.getDepartment());
 			depMap.put("formType", bean.getFormType());
 			depMap.put("itemOrder", bean.getItemsToOrderComments());

@@ -5,6 +5,7 @@ import java.util.List;
 
 public class SupplieDepartmentBean {
 	private String code;
+	private String depCode;
 	private String department;
 	private String formType;
 	private String itemsToOrderComments;
@@ -24,6 +25,12 @@ public class SupplieDepartmentBean {
 	}
 	public void setList(List<SupplieDepartmentBean> list) {
 		this.list = list;
+	}
+	public String getDepCode() {
+		return depCode;
+	}
+	public void setDepCode(String depCode) {
+		this.depCode = depCode;
 	}
 	public Integer getMinimumItems() {
 		return minimumItems;
