@@ -173,4 +173,10 @@ public class CommonServiceServiceImpl implements CommonServiceService{
 		// TODO Auto-generated method stub
 		return commonServicesDao.getNationality();
 	}
+
+	@Override
+	public List<CommonServiceBean> getUom() {
+		// TODO Auto-generated method stub
+		return commonServicesDao.getUom();
+	}
 }

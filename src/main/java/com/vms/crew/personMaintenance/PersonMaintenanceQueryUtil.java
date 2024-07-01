@@ -5,9 +5,9 @@ public class PersonMaintenanceQueryUtil {
 	public static final String SAVE_CREW_MASTER = "Insert into crew_master "
 			+ "(crew_master_code, crew_master_surname, crew_master_name, crew_master_middle_name, crew_master_nationality, crew_master_rank, crew_master_birth_date, crew_master_gender, crew_master_father_name, crew_master_mother_name, crew_master_place, crew_master_license, "
 			+ "crew_master_health_status, crew_master_decision_c, crew_master_work_status, crew_master_religion, crew_master_agent, exp_month, no_voyages, crew_master_vessel_type, crew_master_last_sign_off, crew_master_available_from, remarks_one, "
-			+ "remarks_two, recom_by, status,crew_master_age,crew_master_comp_service,crew_master_sea_service,crew_master_years_rank,created_by, created_dt) "
+			+ "remarks_two, recom_by, status,crew_master_age,crew_master_comp_service,crew_master_sea_service,crew_master_years_rank,applicant_code,created_by, created_dt) "
 			+ "values(:code,:surname,:name,:middle,:nationality,:rank,to_date(:bDate,'dd/mm/yyyy'),:gender,:father,:mother,:place,:licence,:healthSt,:decisionC,:workStatus,:religion, "
-			+ ":agent,:expMonth,:noVoyage,:vslType,to_date(:lastSignOff,'dd/mm/yyyy'),to_date(:available,'dd/mm/yyyy'),:remarksOne,:remarksTwo,:reCom,:active,:age,:compService,:seaService,:yearsInRank,:userName,now()) ";
+			+ ":agent,:expMonth,:noVoyage,:vslType,to_date(:lastSignOff,'dd/mm/yyyy'),to_date(:available,'dd/mm/yyyy'),:remarksOne,:remarksTwo,:reCom,:active,:age,:compService,:seaService,:yearsInRank,:appCode,:userName,now()) ";
 	
 	public static final String SAVE_CREW_MASTER_DOCUMENT = "Insert into crew_master_document "
 			+ "(crew_master_code, crew_master_passport, passport_issue, passport_expiry, passport_issue_place, crew_master_s_book, "
@@ -61,7 +61,7 @@ public class PersonMaintenanceQueryUtil {
 			+ "crew_master_mother_name as mother,crew_master_place as place,crew_master_license as licence,crew_master_health_status as health, "
 			+ "crew_master_decision_c as decision,crew_master_work_status as workStatus,crew_master_religion as religion,crew_master_agent as agent,exp_month as expMonth, "
 			+ "no_voyages as noVoyage,crew_master_vessel_type as proposedType,to_char(crew_master_last_sign_off,'dd/mm/yyyy') as signedOff,to_char(crew_master_available_from,'dd/mm/yyyy') as availableFrom, "
-			+ "remarks_one as remarksOne,remarks_two as remarksTwo,recom_by as reCom,status as active from crew_master cm "
+			+ "remarks_one as remarksOne,remarks_two as remarksTwo,recom_by as reCom,status as active,applicant_code as applCode from crew_master cm "
 			+ "where crew_master_code = ? ";
 	
 	public static final String GET_CREW_MASTER_DOCUMENT_DTLS = "select crew_master_passport as passPort,to_char(passport_issue,'dd/mm/yyyy') as pIssue,to_char(passport_expiry,'dd/mm/yyyy') as pExpiry,passport_issue_place as pIssuePlace, "
@@ -76,7 +76,7 @@ public class PersonMaintenanceQueryUtil {
 			+ "crew_master_agent=:agent, exp_month=:expMonth, no_voyages=:noVoyage, crew_master_vessel_type=:vslType, crew_master_last_sign_off=to_date(:lastSignOff,'dd/mm/yyyy'), crew_master_available_from=to_date(:available,'dd/mm/yyyy'), "
 			+ "remarks_one=:remarksOne, remarks_two=:remarksTwo, recom_by=:reCom, status=:active,"
 			+ "crew_master_age=:age,crew_master_comp_service=:compService,crew_master_sea_service=:seaService,crew_master_years_rank=:yearsInRank,"
-			+ "modified_by=:userName, modified_dt=now() "
+			+ "applicant_code=:appCode,modified_by=:userName, modified_dt=now() "
 			+ "where crew_master_code=:code ";
 	
 	public static final String UPDATE_CREW_MASTER_DOCUMENT = "update crew_master_document "

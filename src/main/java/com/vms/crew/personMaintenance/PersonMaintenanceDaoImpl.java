@@ -41,6 +41,7 @@ public class PersonMaintenanceDaoImpl implements PersonMaintenanceDao{
 			//Header
 			personMaintenanceMap.put("userName", userDetails.getUsername());
 			personMaintenanceMap.put("code", bean.getCode());
+			personMaintenanceMap.put("appCode", Integer.parseInt(bean.getApplCode()));
 			personMaintenanceMap.put("surname", bean.getSurname());
 			personMaintenanceMap.put("name", bean.getName());
 			personMaintenanceMap.put("middle", bean.getMiddle());
@@ -198,6 +199,7 @@ public class PersonMaintenanceDaoImpl implements PersonMaintenanceDao{
 			//Header
 			personMaintenanceMap.put("userName", userDetails.getUsername());
 			personMaintenanceMap.put("code", bean.getCode());
+			personMaintenanceMap.put("appCode", Integer.parseInt(bean.getApplCode()));
 			personMaintenanceMap.put("surname", bean.getSurname());
 			personMaintenanceMap.put("name", bean.getName());
 			personMaintenanceMap.put("middle", bean.getMiddle());

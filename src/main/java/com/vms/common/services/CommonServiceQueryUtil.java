@@ -65,4 +65,6 @@ public class CommonServiceQueryUtil {
 	public static final String GET_DEPARTMENT = "select dept_id as id ,dept_name as text  from department_master";
 
 	public static final String GET_NATIONALITY = "select country_id as id ,nationality as text from country_master";
+	
+	public static final String GET_UOM = "select uom_id as id,uom_code as text from unit_of_measurement ";
 }

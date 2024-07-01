@@ -355,5 +355,18 @@ public class CommonServiceController {
 				}
 				return commonUtilityResultBean;
 			}
+			
+		//UOM List
+		@RequestMapping("/getUom")
+		public @ResponseBody CommonServicesResultBean getUom() throws CustomException {
+			CommonServicesResultBean commonUtilityResultBean = new CommonServicesResultBean();
+			try {
+				commonUtilityResultBean.setlCommonUtilityBean(commonServicesService.getUom());
+				commonUtilityResultBean.setSuccess(true);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return commonUtilityResultBean;
+		}	
 
 }

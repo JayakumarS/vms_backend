@@ -59,6 +59,8 @@ public interface CommonServiceService {
 	
 	public List<CommonServiceBean> getNationality();
 
+	public List<CommonServiceBean> getUom();
+
 
 
 }

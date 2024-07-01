@@ -59,5 +59,7 @@ public interface CommonServiceDao {
 	
 	public List<CommonServiceBean> getNationality();
 
+	public List<CommonServiceBean> getUom();
+
 
 }

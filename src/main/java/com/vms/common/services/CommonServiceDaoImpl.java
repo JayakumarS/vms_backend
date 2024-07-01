@@ -334,6 +334,18 @@ public class CommonServiceDaoImpl implements CommonServiceDao{
 		}
 		return lCommonUtilityBean;
 	}
+
+
+	@Override
+	public List<CommonServiceBean> getUom() {
+		List<CommonServiceBean> lCommonUtilityBean = new ArrayList<CommonServiceBean>();
+		try {
+			lCommonUtilityBean = jdbcTemplate.query(CommonServiceQueryUtil.GET_UOM,new Object[]{},new BeanPropertyRowMapper<CommonServiceBean>(CommonServiceBean.class));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return lCommonUtilityBean;
+	}
 	
 	
 }
