@@ -370,12 +370,18 @@ public class ApplicationsBean {
 	public Boolean mmandatoryValid;
     public Boolean mmandatoryInvalid;
     public Boolean moptionalInvalid;
-
+    public Boolean crewflag;
 	
     
     
     
-    public Boolean getMandatoryValid() {
+    public Boolean getCrewflag() {
+		return crewflag;
+	}
+	public void setCrewflag(Boolean crewflag) {
+		this.crewflag = crewflag;
+	}
+	public Boolean getMandatoryValid() {
 		return mandatoryValid;
 	}
 	public void setMandatoryValid(Boolean mandatoryValid) {

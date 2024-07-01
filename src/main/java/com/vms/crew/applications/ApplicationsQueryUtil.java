@@ -53,13 +53,14 @@ public class ApplicationsQueryUtil {
 			+ "ca.pass_Book_file_Name as passBookfileName,ca.sBook_file_Path as sBookfilePath,ca.sBook_file_Name as sBookfileName,\r\n"
 			+ "ca.applicant_image_Path as applicantimagePath,ca.applicant_image_File_Name as applicantimageFileName,\r\n"
 			+ "cm.nationality as nationalityname,rm.rank_name as rankname,vh,vessel_name as vesselname,am.agent_code_name as agentname,et.engine_type_name as enginename\r\n"
-			+ ",wl.work_license_name as licensename from crew_applicant ca \r\n"
+			+ ",wl.work_license_name as licensename,CASE WHEN ca.crew_applicant_code = crew_master.applicant_code THEN TRUE ELSE FALSE END AS crewflag from crew_applicant ca \r\n"
 			+ "left Join  country_master cm ON cm.country_id = ca.appl_nationality\r\n"
 			+ "left Join rank_master rm ON rm.rank_id = ca.appl_rank\r\n"
 			+ "left Join vessel_hdr vh ON vh.vessel_code = ca.appl_vessel\r\n"
 			+ "left Join agent_master am ON am.agent_id = ca.appl_agent\r\n"
 			+ "left Join engine_type et ON et.engine_type_id = ca.appl_engine\r\n"
 			+ "left Join work_license wl ON wl.work_license_id = ca.appl_licence\r\n"
+			+ "LEFT JOIN crew_master ON ca.crew_applicant_code = crew_master.applicant_code\r\n"
 			+ "where crew_applicant_code=?";
 
 	public static final String delete = "delete from crew_applicant where crew_applicant_code = ? ";
