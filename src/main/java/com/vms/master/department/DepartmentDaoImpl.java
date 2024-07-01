@@ -127,20 +127,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
            try {
-        	   
-        	//String deptcode =  jdbcTemplate.queryForObject(DepartmentQueryUtil.dept_code,new Object[] { bean.getDeptId() },String.class);
-			String deptname =  jdbcTemplate.queryForObject(DepartmentQueryUtil.dept_name,new Object[] { bean.getDeptId() },String.class);
-
-			
-			
-			//int code =  jdbcTemplate.queryForObject(DepartmentQueryUtil.get_code_edit,new Object[] { bean.getCode(),deptcode },Integer.class);
-
-		    int name =  jdbcTemplate.queryForObject(DepartmentQueryUtil.get_name_edit,new Object[] { bean.getName(),deptname },Integer.class);
-
-			
-            if(name==0) {
-		    
-			Map<String, Object> department = new HashMap<String, Object>();
+        	   Map<String, Object> department = new HashMap<String, Object>();
 			
 			 if(bean.getActive()!=null && bean.getActive().equalsIgnoreCase("true")) {
                  bean.setActive("Y");
@@ -160,19 +147,15 @@ public class DepartmentDaoImpl implements DepartmentDao {
 		
 		   resultBean.setSuccess(true);
             }
-            else {
-     		   resultBean.setMsg("These details already exist");
+           catch(Exception e) {
+   			e.printStackTrace();
+   			resultBean.setSuccess(false);
+   	 		   resultBean.setMsg("Not Updated");
 
-            }
-		}catch(Exception e) {
-			e.printStackTrace();
-			resultBean.setSuccess(false);
-	 		   resultBean.setMsg("Not Updated");
-
-		}
+   		}
 		return resultBean;
-		
 	}
+		
 	@Override
 	public DepartmentBean getSequenceCode() {
 	    DepartmentBean department = new DepartmentBean();
