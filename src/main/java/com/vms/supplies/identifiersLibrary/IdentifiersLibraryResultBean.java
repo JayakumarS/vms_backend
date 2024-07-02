@@ -24,6 +24,14 @@ public class IdentifiersLibraryResultBean {
 	
 	private List<IdentifiersLibraryBean> paymentlist;
 	
+	private List<IdentifiersLibraryBean> officelist;
+	
+	public List<IdentifiersLibraryBean> getOfficelist() {
+		return officelist;
+	}
+	public void setOfficelist(List<IdentifiersLibraryBean> officelist) {
+		this.officelist = officelist;
+	}
 	public List<IdentifiersLibraryBean> getPaymentlist() {
 		return paymentlist;
 	}

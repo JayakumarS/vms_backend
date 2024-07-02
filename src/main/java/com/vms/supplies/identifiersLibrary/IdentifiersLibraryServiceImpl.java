@@ -60,6 +60,12 @@ public class IdentifiersLibraryServiceImpl implements IdentifiersLibraryService 
 	}
 	
 	@Override
+	public IdentifiersLibraryResultBean saveoffice(IdentifiersLibraryBean bean) {
+		// TODO Auto-generated method stub
+		return IdentifiersLibraryDao.saveoffice(bean);
+	}
+	
+	@Override
 	public IdentifiersLibraryResultBean edit(Integer id) {
 		// TODO Auto-generated method stub
 		return IdentifiersLibraryDao.edit(id);
@@ -99,6 +105,12 @@ public class IdentifiersLibraryServiceImpl implements IdentifiersLibraryService 
 	public IdentifiersLibraryResultBean editpayment(Integer id) {
 		// TODO Auto-generated method stub
 		return IdentifiersLibraryDao.editpayment(id);
+	}
+	
+	@Override
+	public IdentifiersLibraryResultBean editoffice(Integer id) {
+		// TODO Auto-generated method stub
+		return IdentifiersLibraryDao.editoffice(id);
 	}
 	
 	
@@ -142,6 +154,12 @@ public class IdentifiersLibraryServiceImpl implements IdentifiersLibraryService 
 	public IdentifiersLibraryResultBean getPaymentlist() {
 		// TODO Auto-generated method stub
 		return IdentifiersLibraryDao.getPaymentlist();
+	}
+	
+	@Override
+	public IdentifiersLibraryResultBean getOfficelist() {
+		// TODO Auto-generated method stub
+		return IdentifiersLibraryDao.getOfficelist();
 	}
 	
 	@Override
@@ -197,6 +215,12 @@ public class IdentifiersLibraryServiceImpl implements IdentifiersLibraryService 
 		return IdentifiersLibraryDao.updatepayment(bean);
 	}
 	
+	@Override
+	public IdentifiersLibraryResultBean updateoffice(IdentifiersLibraryBean bean) {
+		// TODO Auto-generated method stub
+		return IdentifiersLibraryDao.updateoffice(bean);
+	}
+	
 	
 	@Override
 	public IdentifiersLibraryResultBean delete(int id) {
@@ -241,6 +265,13 @@ public class IdentifiersLibraryServiceImpl implements IdentifiersLibraryService 
 		// TODO Auto-generated method stub
 		return IdentifiersLibraryDao.deletepayment(id);
 	}
+	
+	@Override
+	public IdentifiersLibraryResultBean deleteoffice(int id) {
+		// TODO Auto-generated method stub
+		return IdentifiersLibraryDao.deleteoffice(id);
+	}
+
 
 
 }

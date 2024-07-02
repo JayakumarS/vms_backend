@@ -17,7 +17,15 @@ public class IdentifiersLibraryBean {
 	private Integer luboilId;
 	private Integer paymentId;
 	private Boolean advancePayment;
+	private Integer supplierofficeId;
 	
+	
+	public Integer getSupplierofficeId() {
+		return supplierofficeId;
+	}
+	public void setSupplierofficeId(Integer supplierofficeId) {
+		this.supplierofficeId = supplierofficeId;
+	}
 	public Integer getPaymentId() {
 		return paymentId;
 	}
