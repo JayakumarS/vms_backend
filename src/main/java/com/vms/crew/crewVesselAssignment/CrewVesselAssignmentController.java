@@ -47,19 +47,36 @@ public class CrewVesselAssignmentController {
 	}
 	
 	
-//	@RequestMapping("/showlist")     
-//	public @ResponseBody CrewVesselAssignmentResultBean showlist(@RequestBody CrewVesselAssignmentBean bean)
-//			throws CustomException, InterruptedException {
-//		CrewVesselAssignmentResultBean objPaymentInformationResultBean = new CrewVesselAssignmentResultBean();
-//		try {
-//			objPaymentInformationResultBean.setVesselList(CrewVesselAssignmentService.showlist(bean));
-//			objPaymentInformationResultBean.setSuccess(true);
-//		} catch (Exception e) {
-//			throw new CustomException();
-//		}
-//		return objPaymentInformationResultBean;
-//	}
-//	
+	
+	@RequestMapping("/list")
+	public CrewVesselAssignmentResultBean list() {
+		CrewVesselAssignmentResultBean rbean = new CrewVesselAssignmentResultBean();
+		try {
+			rbean = CrewVesselAssignmentService.getList();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+   		return rbean;
+   	}
+	@RequestMapping("/showlist")     
+	public CrewVesselAssignmentResultBean showlist(@RequestBody CrewVesselAssignmentBean bean)
+			throws CustomException {
+		CrewVesselAssignmentResultBean objResultBean = new CrewVesselAssignmentResultBean();
+		try {
+			objResultBean.setVesselList(CrewVesselAssignmentService.showlist(bean));
+			objResultBean.setSuccess(true);
+		} catch (Exception e) {
+			throw new CustomException();
+		}
+		return objResultBean;
+	}
+
+	
+	
+	
+	
+
+	
 	
 //	@RequestMapping("/savelist")
 //	public @ResponseBody CrewVesselAssignmentResultBean savelist(@RequestBody CrewVesselAssignmentBean bean)

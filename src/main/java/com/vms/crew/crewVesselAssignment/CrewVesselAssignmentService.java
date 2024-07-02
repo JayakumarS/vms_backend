@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 
 
+
 public interface CrewVesselAssignmentService {
 	
 	List<CrewVesselAssignmentBean> getvessel();
@@ -13,9 +14,14 @@ public interface CrewVesselAssignmentService {
 	List<CrewVesselAssignmentBean> getrank();
 	
 	List<CrewVesselAssignmentBean> getport();
+	
+	public CrewVesselAssignmentResultBean getList();
 
-//	List<CrewVesselAssignmentBean> showlist(CrewVesselAssignmentBean bean);
+
+	List<CrewVesselAssignmentBean> showlist(CrewVesselAssignmentBean bean) throws Exception;
 
 //	public boolean savelist(CrewVesselAssignmentBean bean);
+	
+
 
 }
