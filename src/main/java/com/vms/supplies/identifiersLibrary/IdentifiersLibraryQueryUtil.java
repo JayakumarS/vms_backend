@@ -106,7 +106,7 @@ public class IdentifiersLibraryQueryUtil {
 
 	public static String getEditfunction="select function_id as functionId,function_code as code2, function_name as description from function  where function_id =?";
 	
-	public static String getEditpayment="select payment_terms_id as paymentId,payment_terms_code as code2, payment_terms_name as description,payment_terms_scale as scale ,advance_payment as advpayment from payment_terms  where payment_terms_id =?";
+	public static String getEditpayment="select payment_terms_id as paymentId,payment_terms_code as code2, payment_terms_name as description,payment_terms_scale as scale ,advance_payment as advancePayment from payment_terms  where payment_terms_id =?";
 
 			
 	
