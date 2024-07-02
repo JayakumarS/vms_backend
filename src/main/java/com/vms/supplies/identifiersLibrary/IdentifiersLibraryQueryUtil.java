@@ -11,6 +11,9 @@ public class IdentifiersLibraryQueryUtil {
 	public static final String SAVE_function="Insert into function (function_code,function_name,created_by,created_dt)"
 			+ "values (:code2,:desc,:userName,now())";
 	
+	public static final String SAVE_delivery="Insert into item_delivery (item_delivery_code,item_delivery_name,item_delivery_scale,created_by,created_dt)"
+			+ "values (:code1,:desc,:scale,:userName,now())";
+	
 	
 	public static final String DELETE_freight_type ="delete from freight_type where freight_type_id=?";
 	
@@ -21,6 +24,9 @@ public class IdentifiersLibraryQueryUtil {
 	public static final String getListstorage="select storage_location_id  as storageId,storage_location_code as code1, storage_location_name as description from storage_location order by created_dt desc";
 	
 	public static final String getListfunction="select function_id as functionId,function_code as code2, function_name as description from function order by created_dt desc";
+	
+	public static final String getListdelivery="select item_delivery_id  as itemId,item_delivery_code as code1, item_delivery_name as description,item_delivery_scale as scale from item_delivery order by created_dt desc";
+
 
  
 	public static final String get_storage_id="SELECT CONCAT('VSC', LPAD(CAST(COALESCE(MAX(CAST(SUBSTRING(storage_location_code::text FROM 4) AS INTEGER)), 0) + 1 AS TEXT), 4, '0')) AS next_storage_location_code FROM storage_location";
@@ -41,6 +47,13 @@ public class IdentifiersLibraryQueryUtil {
 
 	public static String deletefunction ="delete from function where function_id = ?";
 	
+	public static String deletedelivery ="delete from item_delivery where item_delivery_id = ?";
+
+	
+	public static String getEditdelivery="select item_delivery_id as itemId,item_delivery_code as code1, item_delivery_name as description,item_delivery_scale as scale from item_delivery  where item_delivery_id =?";
+	
+	public static String UPDATE_delivery="update item_delivery set item_delivery_code=:code1,item_delivery_name=:description,item_delivery_scale=:scale,modified_by=:userName,modified_dt=now() where item_delivery_id = :itemId";
+
 
 
 	public static String UPDATE_function="update function set function_code=:code2,function_name=:description,modified_by=:userName,modified_dt=now() where function_id = :functionId";

@@ -14,7 +14,11 @@ public interface IdentifiersLibraryService {
 	
 	public IdentifiersLibraryResultBean editfunction(Integer id);
 	
+	public IdentifiersLibraryResultBean editdelivery(Integer id);
 	
+	public IdentifiersLibraryResultBean getList3();
+	
+	public IdentifiersLibraryResultBean saveitemdelilvery(IdentifiersLibraryBean bean);
 	
 	public IdentifiersLibraryResultBean getList();
 	
@@ -25,6 +29,8 @@ public interface IdentifiersLibraryService {
 	public IdentifiersLibraryResultBean deletestorage(int id);
 	
 	public IdentifiersLibraryResultBean deletefunction(int id);
+	
+	public IdentifiersLibraryResultBean deletedelivery(int id);
 
 	
 	public IdentifiersLibraryResultBean update(IdentifiersLibraryBean bean);
@@ -32,6 +38,8 @@ public interface IdentifiersLibraryService {
 	public IdentifiersLibraryResultBean updatestorage(IdentifiersLibraryBean bean);
 	
 	public IdentifiersLibraryResultBean updatefunction(IdentifiersLibraryBean bean);
+	
+	public IdentifiersLibraryResultBean updatedelivery(IdentifiersLibraryBean bean);
 
 	
 	public IdentifiersLibraryResultBean getList2();

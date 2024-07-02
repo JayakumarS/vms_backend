@@ -11,9 +11,22 @@ public class IdentifiersLibraryBean {
 	private String code1;
 	private String code2;
 	private Integer functionId;
+	private Integer itemId;
+	private Integer scale;
 	
-	
-	
+
+	public Integer getScale() {
+		return scale;
+	}
+	public void setScale(Integer scale) {
+		this.scale = scale;
+	}
+	public Integer getItemId() {
+		return itemId;
+	}
+	public void setItemId(Integer itemId) {
+		this.itemId = itemId;
+	}
 	public Integer getFunctionId() {
 		return functionId;
 	}

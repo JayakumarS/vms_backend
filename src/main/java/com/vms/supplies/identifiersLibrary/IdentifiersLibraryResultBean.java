@@ -16,7 +16,14 @@ public class IdentifiersLibraryResultBean {
 	private List<IdentifiersLibraryBean> list;
 	private List<IdentifiersLibraryBean> list1;
 	private List<IdentifiersLibraryBean> list2;
+	private List<IdentifiersLibraryBean> list3;
 	
+	public List<IdentifiersLibraryBean> getList3() {
+		return list3;
+	}
+	public void setList3(List<IdentifiersLibraryBean> list3) {
+		this.list3 = list3;
+	}
 	public List<IdentifiersLibraryBean> getList2() {
 		return list2;
 	}

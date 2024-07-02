@@ -138,6 +138,25 @@ public class IdentifiersLibraryDaoImpl implements IdentifiersLibraryDao {
 		return resultBean;
 	}
 	@Override
+	public IdentifiersLibraryResultBean deletedelivery(int id) {
+		IdentifiersLibraryResultBean resultBean = new IdentifiersLibraryResultBean();
+		String code = null; 
+		try {
+
+			
+			jdbcTemplate.update(IdentifiersLibraryQueryUtil.deletedelivery,id);
+			resultBean.setSuccess(true);
+		}
+	  catch (DataAccessException e) {
+	     
+	            e.printStackTrace();
+	            resultBean.setSuccess(false);
+	            resultBean.setMessage("error in delete");
+	        
+	    }	
+		return resultBean;
+	}
+	@Override
 	public IdentifiersLibraryResultBean update(IdentifiersLibraryBean bean) {
 		IdentifiersLibraryResultBean resultBean = new IdentifiersLibraryResultBean();
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -223,6 +242,36 @@ public class IdentifiersLibraryDaoImpl implements IdentifiersLibraryDao {
 	}
 	
 	@Override
+	public IdentifiersLibraryResultBean updatedelivery(IdentifiersLibraryBean bean) {
+		IdentifiersLibraryResultBean resultBean = new IdentifiersLibraryResultBean();
+		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		
+		try {
+		
+			Map<String, Object> delivery = new HashMap<String, Object>();
+			
+		
+			delivery.put("userName", userDetails.getUsername());
+			delivery.put("code1", bean.getCode1());
+			delivery.put("description", bean.getDescription());
+			delivery.put("scale", bean.getScale());
+			delivery.put("itemId", bean.getItemId());
+
+			
+				namedParameterJdbcTemplate.update(IdentifiersLibraryQueryUtil.UPDATE_delivery,delivery);
+			
+		
+		   resultBean.setSuccess(true);
+		  
+		}catch(Exception e) {
+			e.printStackTrace();
+			resultBean.setSuccess(false);
+			resultBean.setMessage("Not Updated");
+		}
+		return resultBean;
+	}
+	
+	@Override
 	public IdentifiersLibraryResultBean savestorage(IdentifiersLibraryBean bean) {
 		IdentifiersLibraryResultBean resultBean = new IdentifiersLibraryResultBean();
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -263,6 +312,35 @@ public class IdentifiersLibraryDaoImpl implements IdentifiersLibraryDao {
 					function.put("code2", bean.getCode2());
 					function.put("desc", bean.getDescription());
 				namedParameterJdbcTemplate.update(IdentifiersLibraryQueryUtil.SAVE_function,function);
+		
+			 resultBean.setSuccess(true);
+			 
+			 
+		   
+		}catch(Exception e) {
+			e.printStackTrace();
+			resultBean.setSuccess(false);
+			resultBean.setMessage("Not Updated");
+		}
+		return resultBean;
+	}
+	
+	@Override
+	public IdentifiersLibraryResultBean saveitemdelilvery(IdentifiersLibraryBean bean) {
+		IdentifiersLibraryResultBean resultBean = new IdentifiersLibraryResultBean();
+		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		
+		try {
+			 
+			Map<String, Object> delivery = new HashMap<String, Object>();
+
+				
+			delivery.put("userName", userDetails.getUsername());
+			delivery.put("code1", bean.getCode1());
+			delivery.put("desc", bean.getDescription());
+			delivery.put("scale", bean.getScale());
+					
+				namedParameterJdbcTemplate.update(IdentifiersLibraryQueryUtil.SAVE_delivery,delivery);
 		
 			 resultBean.setSuccess(true);
 			 
@@ -317,6 +395,20 @@ public class IdentifiersLibraryDaoImpl implements IdentifiersLibraryDao {
 	}
 	
 	@Override
+	public IdentifiersLibraryResultBean getList3() {
+		IdentifiersLibraryResultBean resultBean = new IdentifiersLibraryResultBean();
+		List<IdentifiersLibraryBean> listBean = new ArrayList<IdentifiersLibraryBean>();
+		
+		try {
+			listBean = jdbcTemplate.query(IdentifiersLibraryQueryUtil.getListdelivery,new BeanPropertyRowMapper<IdentifiersLibraryBean>(IdentifiersLibraryBean.class));
+			resultBean.setList(listBean);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return resultBean;
+	}
+	
+	@Override
 	public IdentifiersLibraryBean getCodemax() {
 		IdentifiersLibraryBean bean = new IdentifiersLibraryBean();
 		
@@ -361,6 +453,19 @@ public class IdentifiersLibraryDaoImpl implements IdentifiersLibraryDao {
 		resultBean.setSuccess(false);
 		try {
 			resultBean.setList(jdbcTemplate.query(IdentifiersLibraryQueryUtil.getEditfunction,new Object[] { id }, new BeanPropertyRowMapper<IdentifiersLibraryBean>(IdentifiersLibraryBean.class)));
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		return resultBean; 
+	}
+	
+	@Override
+	public IdentifiersLibraryResultBean editdelivery(Integer id) {		
+		IdentifiersLibraryResultBean resultBean = new IdentifiersLibraryResultBean();
+		resultBean.setSuccess(false);
+		try {
+			resultBean.setList(jdbcTemplate.query(IdentifiersLibraryQueryUtil.getEditdelivery,new Object[] { id }, new BeanPropertyRowMapper<IdentifiersLibraryBean>(IdentifiersLibraryBean.class)));
 		}
 		catch(Exception e){
 			e.printStackTrace();

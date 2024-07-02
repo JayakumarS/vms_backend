@@ -7,8 +7,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.vms.supplies.freightType.FreightTypeBean;
-import com.vms.supplies.freightType.FreightTypeResultBean;
+
 
 
 
@@ -53,6 +52,17 @@ public class IdentifiersLibraryController {
 		return rbean;
 	}
 	
+	@RequestMapping(value="/saveitemdelilvery")
+	public IdentifiersLibraryResultBean saveitemdelilvery(@RequestBody IdentifiersLibraryBean bean) {
+		IdentifiersLibraryResultBean rbean = new IdentifiersLibraryResultBean();
+		try {
+			rbean = IdentifiersLibraryService.saveitemdelilvery(bean);
+		}catch(Exception e){
+			e.printStackTrace();	
+		}
+		return rbean;
+	}
+	
 	@RequestMapping(value="/list")
 	public IdentifiersLibraryResultBean list() {
 		IdentifiersLibraryResultBean rbean = new IdentifiersLibraryResultBean();
@@ -79,6 +89,17 @@ public class IdentifiersLibraryController {
 		IdentifiersLibraryResultBean rbean = new IdentifiersLibraryResultBean();
 		try {
 			rbean = IdentifiersLibraryService.getList2();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+   		return rbean;
+   	}
+	
+	@RequestMapping(value="/listdelivery")
+	public IdentifiersLibraryResultBean listdelivery() {
+		IdentifiersLibraryResultBean rbean = new IdentifiersLibraryResultBean();
+		try {
+			rbean = IdentifiersLibraryService. getList3();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -130,6 +151,17 @@ public class IdentifiersLibraryController {
 		return rbean;
 	}
 	
+	@RequestMapping(value="/editdelivery")
+	public IdentifiersLibraryResultBean editdelivery(@RequestParam("id") int id) {
+		IdentifiersLibraryResultBean rbean = new IdentifiersLibraryResultBean();
+		try {
+			rbean = IdentifiersLibraryService.editdelivery(id);
+		}catch(Exception e){
+			e.printStackTrace();	
+		}
+		return rbean;
+	}
+	
 	
 	@RequestMapping(value="/update")
 	public IdentifiersLibraryResultBean update(@RequestBody IdentifiersLibraryBean bean) {
@@ -159,6 +191,17 @@ public class IdentifiersLibraryController {
 		IdentifiersLibraryResultBean rbean = new IdentifiersLibraryResultBean();
 		try {
 			rbean = IdentifiersLibraryService.updatefunction(bean);
+		}catch(Exception e){
+			e.printStackTrace();	
+		}
+		return rbean;
+	}
+	
+	@RequestMapping(value="/updatedelivery")
+	public IdentifiersLibraryResultBean updatedelivery(@RequestBody IdentifiersLibraryBean bean) {
+		IdentifiersLibraryResultBean rbean = new IdentifiersLibraryResultBean();
+		try {
+			rbean = IdentifiersLibraryService.updatedelivery(bean);
 		}catch(Exception e){
 			e.printStackTrace();	
 		}
@@ -203,6 +246,18 @@ public class IdentifiersLibraryController {
 		IdentifiersLibraryResultBean rbean = new IdentifiersLibraryResultBean();
 		try {
 			rbean = IdentifiersLibraryService.deletefunction(id);
+		}catch(Exception e){
+			e.printStackTrace();	
+		}
+		return rbean;
+		
+	}
+	
+	@RequestMapping(value="/deletedelivery")
+	public IdentifiersLibraryResultBean deletedelivery(@RequestParam("id") int id) {
+		IdentifiersLibraryResultBean rbean = new IdentifiersLibraryResultBean();
+		try {
+			rbean = IdentifiersLibraryService.deletedelivery(id);
 		}catch(Exception e){
 			e.printStackTrace();	
 		}

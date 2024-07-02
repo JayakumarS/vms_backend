@@ -36,6 +36,12 @@ public class IdentifiersLibraryServiceImpl implements IdentifiersLibraryService 
 	}
 	
 	@Override
+	public IdentifiersLibraryResultBean saveitemdelilvery(IdentifiersLibraryBean bean) {
+		// TODO Auto-generated method stub
+		return IdentifiersLibraryDao.saveitemdelilvery(bean);
+	}
+	
+	@Override
 	public IdentifiersLibraryResultBean edit(Integer id) {
 		// TODO Auto-generated method stub
 		return IdentifiersLibraryDao.edit(id);
@@ -51,6 +57,12 @@ public class IdentifiersLibraryServiceImpl implements IdentifiersLibraryService 
 	public IdentifiersLibraryResultBean editfunction(Integer id) {
 		// TODO Auto-generated method stub
 		return IdentifiersLibraryDao.editfunction(id);
+	}
+	
+	@Override
+	public IdentifiersLibraryResultBean editdelivery(Integer id) {
+		// TODO Auto-generated method stub
+		return IdentifiersLibraryDao.editdelivery(id);
 	}
 	
 	
@@ -70,6 +82,12 @@ public class IdentifiersLibraryServiceImpl implements IdentifiersLibraryService 
 	public IdentifiersLibraryResultBean getList2() {
 		// TODO Auto-generated method stub
 		return IdentifiersLibraryDao.getList2();
+	}
+	
+	@Override
+	public IdentifiersLibraryResultBean getList3() {
+		// TODO Auto-generated method stub
+		return IdentifiersLibraryDao.getList3();
 	}
 	
 	@Override
@@ -101,6 +119,12 @@ public class IdentifiersLibraryServiceImpl implements IdentifiersLibraryService 
 		// TODO Auto-generated method stub
 		return IdentifiersLibraryDao.updatefunction(bean);
 	}
+	@Override
+	public IdentifiersLibraryResultBean updatedelivery(IdentifiersLibraryBean bean) {
+		// TODO Auto-generated method stub
+		return IdentifiersLibraryDao.updatedelivery(bean);
+	}
+	
 	
 	@Override
 	public IdentifiersLibraryResultBean delete(int id) {
@@ -120,6 +144,12 @@ public class IdentifiersLibraryServiceImpl implements IdentifiersLibraryService 
 	public IdentifiersLibraryResultBean deletefunction(int id) {
 		// TODO Auto-generated method stub
 		return IdentifiersLibraryDao.deletefunction(id);
+	}
+	
+	@Override
+	public IdentifiersLibraryResultBean deletedelivery(int id) {
+		// TODO Auto-generated method stub
+		return IdentifiersLibraryDao.deletedelivery(id);
 	}
 
 
