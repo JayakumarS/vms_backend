@@ -284,122 +284,121 @@ public class ApplicationsDaoImpl implements ApplicationsDao{
 	
 	@Override
 	public ApplicationsResultBean update(ApplicationsBean bean) {
-		ApplicationsResultBean resultBean = new ApplicationsResultBean();
-		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		
-		try {
-			Map<String, Object> applications = new HashMap<String, Object>();
-			
-		    applications.put("userName", userDetails.getUsername());
-			applications.put("code", bean.getCode());
-			applications.put("surname", bean.getSurname());
-			applications.put("name", bean.getName());
-			applications.put("nation", bean.getNation());
-			applications.put("midname", bean.getMidname());
-			applications.put("rank", bean.getRank());
-			applications.put("dob", bean.getDob());
-			applications.put("father", bean.getFather());
-			applications.put("mother", bean.getMother());
-			applications.put("birthplace", bean.getBirthplace());
-			applications.put("vessel", bean.getVessel());
-			applications.put("priormonth", bean.getPriormonth());
-			applications.put("decisioncode", bean.getDecisioncode());
-			applications.put("engine", bean.getEngine());
-			applications.put("signOffDate", bean.getSignOffDate());
-			applications.put("agent", bean.getAgent());
-			applications.put("remarks", bean.getRemarks());
-			applications.put("appDate", bean.getAppDate());
-			applications.put("recom", bean.getRecom());
-			applications.put("availfromDate", bean.getAvailfromDate());
-			applications.put("book", bean.getBook());
-			applications.put("issue", bean.getIssue());
-			applications.put("expiryDate", bean.getExpiryDate());
-			applications.put("passport", bean.getPassport());
-			applications.put("passportissue", bean.getPassportissue());
-			applications.put("passportExpiryDate", bean.getPassportExpiryDate());
-			applications.put("licence", bean.getLicence());
-			applications.put("licenceissue", bean.getLicenceissue());
-			applications.put("licenceExpiryDate", bean.getLicenceExpiryDate());
-			applications.put("grade", bean.getGrade());
-			applications.put("licenceno", bean.getLicenceno());
-			applications.put("kin", bean.getKin());
-			applications.put("city", bean.getCity());
-			applications.put("address1", bean.getAddress1());
-			applications.put("tel1", bean.getTel1());
-			applications.put("address2", bean.getAddress2());
-			applications.put("tel2", bean.getTel2());
-			
-			applications.put("cvOperationsfilePath", bean.getCvOperationsfilePath());
-			applications.put("cvOperationsfileName", bean.getCvOperationsfileName());
-			applications.put("passBookfilePath", bean.getPassBookfilePath());
-			applications.put("passBookfileName", bean.getPassBookfileName());
-			applications.put("sBookfilePath", bean.getsBookfilePath());
-			applications.put("sBookfileName", bean.getsBookfileName());
-			applications.put("applicantimagePath", bean.getApplicantimagePath());
-			applications.put("applicantimageFileName", bean.getApplicantimagePath());
-				
-			
-					namedParameterJdbcTemplate.update(ApplicationsQueryUtil.UPDATE_APPLICATION,applications);
-			
-			
-					
-					   // Delete existing certificates
-			        Map<String, Object> deleteParams = new HashMap<>();
-			        deleteParams.put("applcode", bean.getCode());
-			        namedParameterJdbcTemplate.update(ApplicationsQueryUtil.DELETE_CERTIFICATES, deleteParams);
+	    ApplicationsResultBean resultBean = new ApplicationsResultBean();
+	    UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-			        // Insert regular certificates
-			        List<ApplicationsBean> certificates = bean.getCertificates();
-			        if (certificates != null && !certificates.isEmpty()) {
-			            for (ApplicationsBean certificate : certificates) {
-			                List<ApplicationsBean> splitCertificateNames = certificate.getSplitCertificateNames();
-			                if (splitCertificateNames != null && !splitCertificateNames.isEmpty()) {
-			                    for (ApplicationsBean splitCertificateName : splitCertificateNames) {
-			                        Map<String, Object> certificateMap = new HashMap<>();
-			                        certificateMap.put("userName", userDetails.getUsername());
-			                        certificateMap.put("applcode", bean.getCode());
-			                        certificateMap.put("rankCode", bean.getRankCode());
-			                        certificateMap.put("certifiCode", certificate.getCertifiCode());
-			                        certificateMap.put("mcertificateCode", null); // Set medical certificate code to null
-			                        certificateMap.put("mandatoryValid", splitCertificateName.getMandatoryValid());
-			                        certificateMap.put("mandatoryInvalid", splitCertificateName.getMandatoryInvalid());
-			                        certificateMap.put("optionalInvalid", splitCertificateName.getOptionalInvalid());
+	    try {
+	        // Update application details
+	        Map<String, Object> applications = new HashMap<>();
+	        applications.put("userName", userDetails.getUsername());
+	        applications.put("code", bean.getCode());
+	        applications.put("surname", bean.getSurname());
+	        applications.put("name", bean.getName());
+	        applications.put("nation", bean.getNation());
+	        applications.put("midname", bean.getMidname());
+	        applications.put("rank", bean.getRank());
+	        applications.put("dob", bean.getDob());
+	        applications.put("father", bean.getFather());
+	        applications.put("mother", bean.getMother());
+	        applications.put("birthplace", bean.getBirthplace());
+	        applications.put("vessel", bean.getVessel());
+	        applications.put("priormonth", bean.getPriormonth());
+	        applications.put("decisioncode", bean.getDecisioncode());
+	        applications.put("engine", bean.getEngine());
+	        applications.put("signOffDate", bean.getSignOffDate());
+	        applications.put("agent", bean.getAgent());
+	        applications.put("remarks", bean.getRemarks());
+	        applications.put("appDate", bean.getAppDate());
+	        applications.put("recom", bean.getRecom());
+	        applications.put("availfromDate", bean.getAvailfromDate());
+	        applications.put("book", bean.getBook());
+	        applications.put("issue", bean.getIssue());
+	        applications.put("expiryDate", bean.getExpiryDate());
+	        applications.put("passport", bean.getPassport());
+	        applications.put("passportissue", bean.getPassportissue());
+	        applications.put("passportExpiryDate", bean.getPassportExpiryDate());
+	        applications.put("licence", bean.getLicence());
+	        applications.put("licenceissue", bean.getLicenceissue());
+	        applications.put("licenceExpiryDate", bean.getLicenceExpiryDate());
+	        applications.put("grade", bean.getGrade());
+	        applications.put("licenceno", bean.getLicenceno());
+	        applications.put("kin", bean.getKin());
+	        applications.put("city", bean.getCity());
+	        applications.put("address1", bean.getAddress1());
+	        applications.put("tel1", bean.getTel1());
+	        applications.put("address2", bean.getAddress2());
+	        applications.put("tel2", bean.getTel2());
+	        applications.put("cvOperationsfilePath", bean.getCvOperationsfilePath());
+	        applications.put("cvOperationsfileName", bean.getCvOperationsfileName());
+	        applications.put("passBookfilePath", bean.getPassBookfilePath());
+	        applications.put("passBookfileName", bean.getPassBookfileName());
+	        applications.put("sBookfilePath", bean.getsBookfilePath());
+	        applications.put("sBookfileName", bean.getsBookfileName());
+	        applications.put("applicantimagePath", bean.getApplicantimagePath());
+	        applications.put("applicantimageFileName", bean.getApplicantimageFileName());
 
-			                        namedParameterJdbcTemplate.update(ApplicationsQueryUtil.SAVE_CERTIFICATE, certificateMap);
-			                    }
-			                }
-			            }
-			        }
+	        namedParameterJdbcTemplate.update(ApplicationsQueryUtil.UPDATE_APPLICATION, applications);
 
-			        // Insert medical certificates
-			        List<ApplicationsBean> medicalCertificates = bean.getMedicalcertificates();
-			        if (medicalCertificates != null && !medicalCertificates.isEmpty()) {
-			            for (ApplicationsBean mcertificate : medicalCertificates) {
-			                List<ApplicationsBean> splitCertificateMedicalNames = mcertificate.getSplitCertificateMedicalNames();
-			                if (splitCertificateMedicalNames != null && !splitCertificateMedicalNames.isEmpty()) {
-			                    for (ApplicationsBean splitCertificateName : splitCertificateMedicalNames) {
-			                        Map<String, Object> certificateMap = new HashMap<>();
-			                        certificateMap.put("userName", userDetails.getUsername());
-			                        certificateMap.put("applcode", bean.getCode());
-			                        certificateMap.put("rankCode", bean.getRankCode());
-			                        certificateMap.put("certifiCode", null); // Set regular certificate code to null
-			                        certificateMap.put("mcertificateCode", mcertificate.getMcertificateCode());
-			                        certificateMap.put("mandatoryValid", splitCertificateName.getMmandatoryValid());
-			                        certificateMap.put("mandatoryInvalid", splitCertificateName.getMmandatoryInvalid());
-			                        certificateMap.put("optionalInvalid", splitCertificateName.getMoptionalInvalid());
+	        // Check if there are certificates to process
+	        List<ApplicationsBean> certificates = bean.getCertificates();
+	        if (certificates != null && !certificates.isEmpty()) {
+	            // Delete existing certificates
+	            Map<String, Object> deleteParams = new HashMap<>();
+	            deleteParams.put("applcode", bean.getCode());
+	            namedParameterJdbcTemplate.update(ApplicationsQueryUtil.DELETE_CERTIFICATES, deleteParams);
 
-			                        namedParameterJdbcTemplate.update(ApplicationsQueryUtil.SAVE_CERTIFICATE, certificateMap);
-			                    }
-			                }
-			            }
-			        }
-		   resultBean.setSuccess(true);
-		}catch(Exception e) {
-			e.printStackTrace();
-			resultBean.setSuccess(false);
-		}
-		return resultBean;
+	            // Insert regular certificates
+	            for (ApplicationsBean certificate : certificates) {
+	                List<ApplicationsBean> splitCertificateNames = certificate.getSplitCertificateNames();
+	                if (splitCertificateNames != null && !splitCertificateNames.isEmpty()) {
+	                    for (ApplicationsBean splitCertificateName : splitCertificateNames) {
+	                        Map<String, Object> certificateMap = new HashMap<>();
+	                        certificateMap.put("userName", userDetails.getUsername());
+	                        certificateMap.put("applcode", bean.getCode());
+	                        certificateMap.put("rankCode", bean.getRankCode());
+	                        certificateMap.put("certifiCode", certificate.getCertifiCode());
+	                        certificateMap.put("mcertificateCode", null); // Set medical certificate code to null
+	                        certificateMap.put("mandatoryValid", splitCertificateName.getMandatoryValid());
+	                        certificateMap.put("mandatoryInvalid", splitCertificateName.getMandatoryInvalid());
+	                        certificateMap.put("optionalInvalid", splitCertificateName.getOptionalInvalid());
+
+	                        namedParameterJdbcTemplate.update(ApplicationsQueryUtil.SAVE_CERTIFICATE, certificateMap);
+	                    }
+	                }
+	            }
+	        }
+
+	        // Check if there are medical certificates to process
+	        List<ApplicationsBean> medicalCertificates = bean.getMedicalcertificates();
+	        if (medicalCertificates != null && !medicalCertificates.isEmpty()) {	           
+	            for (ApplicationsBean mcertificate : medicalCertificates) {
+	                List<ApplicationsBean> splitCertificateMedicalNames = mcertificate.getSplitCertificateMedicalNames();
+	                if (splitCertificateMedicalNames != null && !splitCertificateMedicalNames.isEmpty()) {
+	                    for (ApplicationsBean splitCertificateName : splitCertificateMedicalNames) {
+	                        Map<String, Object> certificateMap = new HashMap<>();
+	                        certificateMap.put("userName", userDetails.getUsername());
+	                        certificateMap.put("applcode", bean.getCode());
+	                        certificateMap.put("rankCode", bean.getRankCode());
+	                        certificateMap.put("certifiCode", null); // Set regular certificate code to null
+	                        certificateMap.put("mcertificateCode", mcertificate.getMcertificateCode());
+	                        certificateMap.put("mandatoryValid", splitCertificateName.getMmandatoryValid());
+	                        certificateMap.put("mandatoryInvalid", splitCertificateName.getMmandatoryInvalid());
+	                        certificateMap.put("optionalInvalid", splitCertificateName.getMoptionalInvalid());
+
+	                        namedParameterJdbcTemplate.update(ApplicationsQueryUtil.SAVE_CERTIFICATE, certificateMap);
+	                    }
+	                }
+	            }
+	        }
+
+	        resultBean.setSuccess(true);
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        resultBean.setSuccess(false);
+	    }
+	    return resultBean;
 	}
+
 
 
 
