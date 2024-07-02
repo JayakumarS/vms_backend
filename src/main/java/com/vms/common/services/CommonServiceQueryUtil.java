@@ -56,7 +56,11 @@ public class CommonServiceQueryUtil {
 	
 	public static final String GET_HEALTH_STATUS = "select health_status_id as id,health_status_name as text from health_status";
 
-	public static final String GET_SEAMEN_NAME = "select crew_master_code as id,crew_master_name as text,crew_master_rank as rankId,crew_master_nationality as nationalityId from crew_master";
+	public static final String GET_SEAMEN_NAME = "select crew_master_code as id,crew_master_name as text,crew_master_rank as rankId,\r\n"
+			+ " crew_master_nationality as nationalityId,rm.rank_name as rankName,co.nationality as nationalityName\r\n"
+			+ " from crew_master cm\r\n"
+			+ " left join rank_master rm on rm.rank_id = cm.crew_master_rank\r\n"
+			+ " left join country_master co on co.country_id = cm.crew_master_nationality";
 	
 	public static final String GET_EXP_ENGINE = "select engine_type_id as id,engine_type_name as text from engine_type";
 

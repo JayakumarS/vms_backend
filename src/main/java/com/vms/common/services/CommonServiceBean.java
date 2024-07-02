@@ -7,7 +7,21 @@ public class CommonServiceBean {
 	private String code;
 	private Integer RankId;
 	private Integer nationalityId;
+	public String nationalityName;
+	public String rankName;
 	
+	public String getNationalityName() {
+		return nationalityName;
+	}
+	public void setNationalityName(String nationalityName) {
+		this.nationalityName = nationalityName;
+	}
+	public String getRankName() {
+		return rankName;
+	}
+	public void setRankName(String rankName) {
+		this.rankName = rankName;
+	}
 	public Integer getNationalityId() {
 		return nationalityId;
 	}
