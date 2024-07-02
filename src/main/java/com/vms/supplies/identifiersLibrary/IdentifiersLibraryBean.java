@@ -14,9 +14,14 @@ public class IdentifiersLibraryBean {
 	private Integer itemId;
 	private Integer scale;
 	private Integer locationId;
+	private Integer luboilId;
 	
-	
-
+	public Integer getLuboilId() {
+		return luboilId;
+	}
+	public void setLuboilId(Integer luboilId) {
+		this.luboilId = luboilId;
+	}
 	public Integer getLocationId() {
 		return locationId;
 	}

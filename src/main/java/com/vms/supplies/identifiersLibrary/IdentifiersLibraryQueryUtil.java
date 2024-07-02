@@ -17,6 +17,9 @@ public class IdentifiersLibraryQueryUtil {
 	public static final String SAVE_location="Insert into location (location_code,location_name,created_by,created_dt)"
 			+ "values (:code2,:desc,:userName,now())";
 	
+	public static final String SAVE_luboil="Insert into lub_oil (lub_oil_code,lub_oil_name,created_by,created_dt)"
+			+ "values (:code1,:desc,:userName,now())";
+	
 	
 	public static final String DELETE_freight_type ="delete from freight_type where freight_type_id=?";
 	
@@ -31,6 +34,9 @@ public class IdentifiersLibraryQueryUtil {
 	public static final String getListdelivery="select item_delivery_id  as itemId,item_delivery_code as code1, item_delivery_name as description,item_delivery_scale as scale from item_delivery order by created_dt desc";
 	
 	public static final String getListlocation="select location_id  as locationId,location_code as code2,location_name as description from location order by created_dt desc";
+	
+	public static final String getListluboil="select lub_oil_id  as luboilId,lub_oil_code as code1,lub_oil_name as description from lub_oil order by created_dt desc";
+
 
 
 
@@ -59,6 +65,8 @@ public class IdentifiersLibraryQueryUtil {
 	public static String deletedelivery ="delete from item_delivery where item_delivery_id = ?";
 	
 	public static String deletelocation ="delete from location where location_id = ?";
+	
+	public static String deleteluboil ="delete from lub_oil where lub_oil_id = ?";
 
 	
 	public static String getEditdelivery="select item_delivery_id as itemId,item_delivery_code as code1, item_delivery_name as description,item_delivery_scale as scale from item_delivery  where item_delivery_id =?";
@@ -66,8 +74,12 @@ public class IdentifiersLibraryQueryUtil {
 	public static String UPDATE_delivery="update item_delivery set item_delivery_code=:code1,item_delivery_name=:description,item_delivery_scale=:scale,modified_by=:userName,modified_dt=now() where item_delivery_id = :itemId";
 	
 	public static String UPDATE_location="update location set location_code=:code2,location_name=:description, modified_by=:userName,modified_dt=now() where location_id = :locationId";
+	
+	public static String UPDATE_luboil="update lub_oil set lub_oil_code=:code1,lub_oil_name=:description, modified_by=:userName,modified_dt=now() where lub_oil_id = :luboilId";
 
 
+
+	public static String getEditluboil="select lub_oil_id as luboilId,lub_oil_code as code1,lub_oil_name  as description from lub_oil  where lub_oil_id =?";
 
 
 	public static String UPDATE_function="update function set function_code=:code2,function_name=:description,modified_by=:userName,modified_dt=now() where function_id = :functionId";

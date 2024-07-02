@@ -176,6 +176,26 @@ public class IdentifiersLibraryDaoImpl implements IdentifiersLibraryDao {
 	    }	
 		return resultBean;
 	}
+	
+	@Override
+	public IdentifiersLibraryResultBean deleteluboil(int id) {
+		IdentifiersLibraryResultBean resultBean = new IdentifiersLibraryResultBean();
+		String code = null; 
+		try {
+
+			
+			jdbcTemplate.update(IdentifiersLibraryQueryUtil.deleteluboil,id);
+			resultBean.setSuccess(true);
+		}
+	  catch (DataAccessException e) {
+	     
+	            e.printStackTrace();
+	            resultBean.setSuccess(false);
+	            resultBean.setMessage("error in delete");
+	        
+	    }	
+		return resultBean;
+	}
 	@Override
 	public IdentifiersLibraryResultBean update(IdentifiersLibraryBean bean) {
 		IdentifiersLibraryResultBean resultBean = new IdentifiersLibraryResultBean();
@@ -322,6 +342,36 @@ public class IdentifiersLibraryDaoImpl implements IdentifiersLibraryDao {
 	}
 	
 	@Override
+	public IdentifiersLibraryResultBean updateluboil(IdentifiersLibraryBean bean) {
+		IdentifiersLibraryResultBean resultBean = new IdentifiersLibraryResultBean();
+		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		
+		try {
+		
+			Map<String, Object> luboil = new HashMap<String, Object>();
+			
+		
+			luboil.put("userName", userDetails.getUsername());
+			luboil.put("code1", bean.getCode1());
+			luboil.put("description", bean.getDescription());
+			
+			luboil.put("luboilId", bean.getLuboilId());
+
+			
+				namedParameterJdbcTemplate.update(IdentifiersLibraryQueryUtil.UPDATE_luboil,luboil);
+			
+		
+		   resultBean.setSuccess(true);
+		  
+		}catch(Exception e) {
+			e.printStackTrace();
+			resultBean.setSuccess(false);
+			resultBean.setMessage("Not Updated");
+		}
+		return resultBean;
+	}
+	
+	@Override
 	public IdentifiersLibraryResultBean savestorage(IdentifiersLibraryBean bean) {
 		IdentifiersLibraryResultBean resultBean = new IdentifiersLibraryResultBean();
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -432,6 +482,35 @@ public class IdentifiersLibraryDaoImpl implements IdentifiersLibraryDao {
 		}
 		return resultBean;
 	}
+	
+	@Override
+	public IdentifiersLibraryResultBean saveluboil(IdentifiersLibraryBean bean) {
+		IdentifiersLibraryResultBean resultBean = new IdentifiersLibraryResultBean();
+		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		
+		try {
+			 
+			Map<String, Object> luboil = new HashMap<String, Object>();
+
+				
+			luboil.put("userName", userDetails.getUsername());
+			luboil.put("code1", bean.getCode1());
+			luboil.put("desc", bean.getDescription());
+			
+					
+				namedParameterJdbcTemplate.update(IdentifiersLibraryQueryUtil.SAVE_luboil,luboil);
+		
+			 resultBean.setSuccess(true);
+			 
+			 
+		   
+		}catch(Exception e) {
+			e.printStackTrace();
+			resultBean.setSuccess(false);
+			resultBean.setMessage("Not Updated");
+		}
+		return resultBean;
+	}
 	@Override
 	public IdentifiersLibraryResultBean getList() {
 		IdentifiersLibraryResultBean resultBean = new IdentifiersLibraryResultBean();
@@ -494,6 +573,20 @@ public class IdentifiersLibraryDaoImpl implements IdentifiersLibraryDao {
 		
 		try {
 			listBean = jdbcTemplate.query(IdentifiersLibraryQueryUtil.getListlocation,new BeanPropertyRowMapper<IdentifiersLibraryBean>(IdentifiersLibraryBean.class));
+			resultBean.setList(listBean);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return resultBean;
+	}
+	
+	@Override
+	public IdentifiersLibraryResultBean getLuboillist() {
+		IdentifiersLibraryResultBean resultBean = new IdentifiersLibraryResultBean();
+		List<IdentifiersLibraryBean> listBean = new ArrayList<IdentifiersLibraryBean>();
+		
+		try {
+			listBean = jdbcTemplate.query(IdentifiersLibraryQueryUtil.getListluboil,new BeanPropertyRowMapper<IdentifiersLibraryBean>(IdentifiersLibraryBean.class));
 			resultBean.setList(listBean);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -572,6 +665,19 @@ public class IdentifiersLibraryDaoImpl implements IdentifiersLibraryDao {
 		resultBean.setSuccess(false);
 		try {
 			resultBean.setList(jdbcTemplate.query(IdentifiersLibraryQueryUtil.getEditlocation,new Object[] { id }, new BeanPropertyRowMapper<IdentifiersLibraryBean>(IdentifiersLibraryBean.class)));
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		return resultBean; 
+	}
+	
+	@Override
+	public IdentifiersLibraryResultBean editluboil(Integer id) {		
+		IdentifiersLibraryResultBean resultBean = new IdentifiersLibraryResultBean();
+		resultBean.setSuccess(false);
+		try {
+			resultBean.setList(jdbcTemplate.query(IdentifiersLibraryQueryUtil.getEditluboil,new Object[] { id }, new BeanPropertyRowMapper<IdentifiersLibraryBean>(IdentifiersLibraryBean.class)));
 		}
 		catch(Exception e){
 			e.printStackTrace();

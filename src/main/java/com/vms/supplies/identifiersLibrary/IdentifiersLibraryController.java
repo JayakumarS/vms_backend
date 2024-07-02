@@ -268,6 +268,8 @@ public class IdentifiersLibraryController {
 		
 	}
 	
+	//location
+	
 	@RequestMapping(value="/listlocation")
 	public IdentifiersLibraryResultBean listlocation() {
 		IdentifiersLibraryResultBean rbean = new IdentifiersLibraryResultBean();
@@ -323,5 +325,64 @@ public class IdentifiersLibraryController {
 		return rbean;
 		
 	}
+	
+	//luboil
+	
+	@RequestMapping(value="/listluboil")
+	public IdentifiersLibraryResultBean listluboil() {
+		IdentifiersLibraryResultBean rbean = new IdentifiersLibraryResultBean();
+		try {
+			rbean = IdentifiersLibraryService.getLuboillist();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+   		return rbean;
+   	}
+	
+	@RequestMapping(value="/saveluboil")
+	public IdentifiersLibraryResultBean saveluboil(@RequestBody IdentifiersLibraryBean bean) {
+		IdentifiersLibraryResultBean rbean = new IdentifiersLibraryResultBean();
+		try {
+			rbean = IdentifiersLibraryService.saveluboil(bean);
+		}catch(Exception e){
+			e.printStackTrace();	
+		}
+		return rbean;
+	}
+	
+	@RequestMapping(value="/editluboil")
+	public IdentifiersLibraryResultBean editluboil(@RequestParam("id") int id) {
+		IdentifiersLibraryResultBean rbean = new IdentifiersLibraryResultBean();
+		try {
+			rbean = IdentifiersLibraryService.editluboil(id);
+		}catch(Exception e){
+			e.printStackTrace();	
+		}
+		return rbean;
+	}
+	
+	@RequestMapping(value="/updateluboil")
+	public IdentifiersLibraryResultBean updateluboil(@RequestBody IdentifiersLibraryBean bean) {
+		IdentifiersLibraryResultBean rbean = new IdentifiersLibraryResultBean();
+		try {
+			rbean = IdentifiersLibraryService.updateluboil(bean);
+		}catch(Exception e){
+			e.printStackTrace();	
+		}
+		return rbean;
+	}
+	
+	@RequestMapping(value="/deleteluboil")
+	public IdentifiersLibraryResultBean deleteluboil(@RequestParam("id") int id) {
+		IdentifiersLibraryResultBean rbean = new IdentifiersLibraryResultBean();
+		try {
+			rbean = IdentifiersLibraryService.deleteluboil(id);
+		}catch(Exception e){
+			e.printStackTrace();	
+		}
+		return rbean;
+		
+	}
+	
 
 }

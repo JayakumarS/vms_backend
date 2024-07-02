@@ -15,6 +15,8 @@ public interface IdentifiersLibraryDao {
 	
 	public IdentifiersLibraryResultBean savelocation(IdentifiersLibraryBean bean);
 	
+	public IdentifiersLibraryResultBean saveluboil(IdentifiersLibraryBean bean);
+	
 	public IdentifiersLibraryResultBean edit(Integer id);
 	
 	public IdentifiersLibraryResultBean editstorage(Integer id);
@@ -24,6 +26,8 @@ public interface IdentifiersLibraryDao {
 	public IdentifiersLibraryResultBean editdelivery(Integer id);
 	
 	public IdentifiersLibraryResultBean editlocation(Integer id);
+	
+	public IdentifiersLibraryResultBean editluboil(Integer id);
 	
 	public IdentifiersLibraryResultBean getList();
 	
@@ -36,6 +40,8 @@ public interface IdentifiersLibraryDao {
 	public IdentifiersLibraryResultBean deletedelivery(int id);
 	
 	public IdentifiersLibraryResultBean deletelocation(int id);
+	
+	public IdentifiersLibraryResultBean deleteluboil(int id);
 
 	
 	public IdentifiersLibraryResultBean update(IdentifiersLibraryBean bean);
@@ -47,6 +53,8 @@ public interface IdentifiersLibraryDao {
 	public IdentifiersLibraryResultBean updatedelivery(IdentifiersLibraryBean bean);
 	
 	public IdentifiersLibraryResultBean updatelocation(IdentifiersLibraryBean bean);
+	
+	public IdentifiersLibraryResultBean updateluboil(IdentifiersLibraryBean bean);
 
 	
 	public IdentifiersLibraryResultBean getList1();
@@ -56,6 +64,8 @@ public interface IdentifiersLibraryDao {
 	public IdentifiersLibraryResultBean getList3();
 	
 	public IdentifiersLibraryResultBean getLocationlist();
+	
+	public IdentifiersLibraryResultBean getLuboillist();
 	
 	public IdentifiersLibraryBean getCodemax();
 	

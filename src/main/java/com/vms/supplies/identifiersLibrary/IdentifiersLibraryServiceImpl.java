@@ -48,6 +48,12 @@ public class IdentifiersLibraryServiceImpl implements IdentifiersLibraryService 
 	}
 	
 	@Override
+	public IdentifiersLibraryResultBean saveluboil(IdentifiersLibraryBean bean) {
+		// TODO Auto-generated method stub
+		return IdentifiersLibraryDao.saveluboil(bean);
+	}
+	
+	@Override
 	public IdentifiersLibraryResultBean edit(Integer id) {
 		// TODO Auto-generated method stub
 		return IdentifiersLibraryDao.edit(id);
@@ -75,6 +81,12 @@ public class IdentifiersLibraryServiceImpl implements IdentifiersLibraryService 
 	public IdentifiersLibraryResultBean editlocation(Integer id) {
 		// TODO Auto-generated method stub
 		return IdentifiersLibraryDao.editlocation(id);
+	}
+	
+	@Override
+	public IdentifiersLibraryResultBean editluboil(Integer id) {
+		// TODO Auto-generated method stub
+		return IdentifiersLibraryDao.editluboil(id);
 	}
 	
 	
@@ -106,6 +118,12 @@ public class IdentifiersLibraryServiceImpl implements IdentifiersLibraryService 
 	public IdentifiersLibraryResultBean getLocationlist() {
 		// TODO Auto-generated method stub
 		return IdentifiersLibraryDao.getLocationlist();
+	}
+	
+	@Override
+	public IdentifiersLibraryResultBean getLuboillist() {
+		// TODO Auto-generated method stub
+		return IdentifiersLibraryDao.getLuboillist();
 	}
 	
 	@Override
@@ -149,6 +167,12 @@ public class IdentifiersLibraryServiceImpl implements IdentifiersLibraryService 
 		return IdentifiersLibraryDao.updatelocation(bean);
 	}
 	
+	@Override
+	public IdentifiersLibraryResultBean updateluboil(IdentifiersLibraryBean bean) {
+		// TODO Auto-generated method stub
+		return IdentifiersLibraryDao.updateluboil(bean);
+	}
+	
 	
 	@Override
 	public IdentifiersLibraryResultBean delete(int id) {
@@ -180,6 +204,12 @@ public class IdentifiersLibraryServiceImpl implements IdentifiersLibraryService 
 	public IdentifiersLibraryResultBean deletelocation(int id) {
 		// TODO Auto-generated method stub
 		return IdentifiersLibraryDao.deletelocation(id);
+	}
+	
+	@Override
+	public IdentifiersLibraryResultBean deleteluboil(int id) {
+		// TODO Auto-generated method stub
+		return IdentifiersLibraryDao.deleteluboil(id);
 	}
 
 

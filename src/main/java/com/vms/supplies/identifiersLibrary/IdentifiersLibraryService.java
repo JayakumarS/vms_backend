@@ -9,6 +9,8 @@ public interface IdentifiersLibraryService {
 	public IdentifiersLibraryResultBean savefunction(IdentifiersLibraryBean bean);
 	
 	public IdentifiersLibraryResultBean savelocation(IdentifiersLibraryBean bean);
+	
+	public IdentifiersLibraryResultBean saveluboil(IdentifiersLibraryBean bean);
 
 	
 	public IdentifiersLibraryResultBean edit(Integer id);
@@ -20,6 +22,8 @@ public interface IdentifiersLibraryService {
 	public IdentifiersLibraryResultBean editdelivery(Integer id);
 	
 	public IdentifiersLibraryResultBean editlocation(Integer id);
+	
+	public IdentifiersLibraryResultBean editluboil(Integer id);
 	
 	public IdentifiersLibraryResultBean getList3();
 	
@@ -38,6 +42,8 @@ public interface IdentifiersLibraryService {
 	public IdentifiersLibraryResultBean deletedelivery(int id);
 	
 	public IdentifiersLibraryResultBean deletelocation(int id);
+	
+	public IdentifiersLibraryResultBean deleteluboil(int id);
 
 	
 	public IdentifiersLibraryResultBean update(IdentifiersLibraryBean bean);
@@ -49,11 +55,16 @@ public interface IdentifiersLibraryService {
 	public IdentifiersLibraryResultBean updatedelivery(IdentifiersLibraryBean bean);
 	
 	public IdentifiersLibraryResultBean updatelocation(IdentifiersLibraryBean bean);
+	
+	public IdentifiersLibraryResultBean updateluboil(IdentifiersLibraryBean bean);
 
 	
 	public IdentifiersLibraryResultBean getList2();
 	
 	public IdentifiersLibraryResultBean getLocationlist();
+	
+	public IdentifiersLibraryResultBean getLuboillist();
+
 
 	
 	public IdentifiersLibraryBean getCodemax();

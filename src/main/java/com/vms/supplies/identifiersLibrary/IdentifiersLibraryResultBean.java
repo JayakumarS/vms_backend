@@ -20,6 +20,14 @@ public class IdentifiersLibraryResultBean {
 	
 	private List<IdentifiersLibraryBean> locationlist;
 	
+	private List<IdentifiersLibraryBean> luboillist;
+	
+	public List<IdentifiersLibraryBean> getLuboillist() {
+		return luboillist;
+	}
+	public void setLuboillist(List<IdentifiersLibraryBean> luboillist) {
+		this.luboillist = luboillist;
+	}
 	public List<IdentifiersLibraryBean> getLocationlist() {
 		return locationlist;
 	}
