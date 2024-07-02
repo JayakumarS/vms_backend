@@ -22,6 +22,14 @@ public class IdentifiersLibraryResultBean {
 	
 	private List<IdentifiersLibraryBean> luboillist;
 	
+	private List<IdentifiersLibraryBean> paymentlist;
+	
+	public List<IdentifiersLibraryBean> getPaymentlist() {
+		return paymentlist;
+	}
+	public void setPaymentlist(List<IdentifiersLibraryBean> paymentlist) {
+		this.paymentlist = paymentlist;
+	}
 	public List<IdentifiersLibraryBean> getLuboillist() {
 		return luboillist;
 	}

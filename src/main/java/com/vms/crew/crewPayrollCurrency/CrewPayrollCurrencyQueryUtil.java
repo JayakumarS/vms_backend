@@ -19,10 +19,20 @@ public class CrewPayrollCurrencyQueryUtil {
 	
 	public static final String getNationality="select nationality as nationality from country_master where country_code=?";
 	
-	public static final String getEdit = "select crew_payroll_currency_id as currencyid, crew_payroll_currency_country_name as countryname,crew_payroll_currency_code as currencycode,crew_payroll_currency_validation as validation\r\n"
-			+ " from crew_payroll_currency cp LEFT JOIN \r\n"
-			+ " country_master cm ON  cm.country_id  = cp.crew_payroll_currency_country_name\r\n"
-			+ " where crew_payroll_currency_id = ?";
+	public static final String getEdit = "SELECT "
+			+ " cp.crew_payroll_currency_id AS currencyid,"
+			+ " cp.crew_payroll_currency_country_name AS countryname,"
+			+ " cm1.nationality AS countryname1,"
+			+ " cp.crew_payroll_currency_code AS currencycode,"
+			+ " cp.crew_payroll_currency_validation AS validation"
+			+ " FROM "
+			+ " crew_payroll_currency cp"
+			+ " LEFT JOIN "
+			+ " country_master cm1 ON cm1.country_id = cp.crew_payroll_currency_country_name"
+			+ " LEFT JOIN "
+			+ " country_master cm2 ON cm2.country_id = cp.crew_payroll_currency_country_name"
+			+ " WHERE "
+			+ " cp.crew_payroll_currency_id = ?";
 	
 	public static final String delete = "delete from crew_payroll_currency where crew_payroll_currency_id = ? ";
 	

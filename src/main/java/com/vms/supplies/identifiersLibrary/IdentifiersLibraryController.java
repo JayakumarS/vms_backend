@@ -384,5 +384,62 @@ public class IdentifiersLibraryController {
 		
 	}
 	
+	//payment terms
+	
+	@RequestMapping(value="/listpayment")
+	public IdentifiersLibraryResultBean listpayment() {
+		IdentifiersLibraryResultBean rbean = new IdentifiersLibraryResultBean();
+		try {
+			rbean = IdentifiersLibraryService.getPaymentlist();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+   		return rbean;
+   	}
+	
+	@RequestMapping(value="/savepayment")
+	public IdentifiersLibraryResultBean savepayment(@RequestBody IdentifiersLibraryBean bean) {
+		IdentifiersLibraryResultBean rbean = new IdentifiersLibraryResultBean();
+		try {
+			rbean = IdentifiersLibraryService.savepayment(bean);
+		}catch(Exception e){
+			e.printStackTrace();	
+		}
+		return rbean;
+	}
+	
+	@RequestMapping(value="/editpayment")
+	public IdentifiersLibraryResultBean editpayment(@RequestParam("id") int id) {
+		IdentifiersLibraryResultBean rbean = new IdentifiersLibraryResultBean();
+		try {
+			rbean = IdentifiersLibraryService.editpayment(id);
+		}catch(Exception e){
+			e.printStackTrace();	
+		}
+		return rbean;
+	}
+	
+	@RequestMapping(value="/updatepayment")
+	public IdentifiersLibraryResultBean updatepayment(@RequestBody IdentifiersLibraryBean bean) {
+		IdentifiersLibraryResultBean rbean = new IdentifiersLibraryResultBean();
+		try {
+			rbean = IdentifiersLibraryService.updatepayment(bean);
+		}catch(Exception e){
+			e.printStackTrace();	
+		}
+		return rbean;
+	}
+	
+	@RequestMapping(value="/deletepayment")
+	public IdentifiersLibraryResultBean deletepayment(@RequestParam("id") int id) {
+		IdentifiersLibraryResultBean rbean = new IdentifiersLibraryResultBean();
+		try {
+			rbean = IdentifiersLibraryService.deletepayment(id);
+		}catch(Exception e){
+			e.printStackTrace();	
+		}
+		return rbean;
+		
+	}
 
 }

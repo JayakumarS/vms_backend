@@ -11,6 +11,8 @@ public interface IdentifiersLibraryService {
 	public IdentifiersLibraryResultBean savelocation(IdentifiersLibraryBean bean);
 	
 	public IdentifiersLibraryResultBean saveluboil(IdentifiersLibraryBean bean);
+	
+	public IdentifiersLibraryResultBean savepayment(IdentifiersLibraryBean bean);
 
 	
 	public IdentifiersLibraryResultBean edit(Integer id);
@@ -24,6 +26,8 @@ public interface IdentifiersLibraryService {
 	public IdentifiersLibraryResultBean editlocation(Integer id);
 	
 	public IdentifiersLibraryResultBean editluboil(Integer id);
+	
+	public IdentifiersLibraryResultBean editpayment(Integer id);
 	
 	public IdentifiersLibraryResultBean getList3();
 	
@@ -44,6 +48,8 @@ public interface IdentifiersLibraryService {
 	public IdentifiersLibraryResultBean deletelocation(int id);
 	
 	public IdentifiersLibraryResultBean deleteluboil(int id);
+	
+	public IdentifiersLibraryResultBean deletepayment(int id);
 
 	
 	public IdentifiersLibraryResultBean update(IdentifiersLibraryBean bean);
@@ -57,6 +63,8 @@ public interface IdentifiersLibraryService {
 	public IdentifiersLibraryResultBean updatelocation(IdentifiersLibraryBean bean);
 	
 	public IdentifiersLibraryResultBean updateluboil(IdentifiersLibraryBean bean);
+	
+	public IdentifiersLibraryResultBean updatepayment(IdentifiersLibraryBean bean);
 
 	
 	public IdentifiersLibraryResultBean getList2();
@@ -65,7 +73,7 @@ public interface IdentifiersLibraryService {
 	
 	public IdentifiersLibraryResultBean getLuboillist();
 
-
+	public IdentifiersLibraryResultBean getPaymentlist();
 	
 	public IdentifiersLibraryBean getCodemax();
 	

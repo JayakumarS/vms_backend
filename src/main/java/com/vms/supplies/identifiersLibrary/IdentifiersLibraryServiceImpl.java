@@ -54,6 +54,12 @@ public class IdentifiersLibraryServiceImpl implements IdentifiersLibraryService 
 	}
 	
 	@Override
+	public IdentifiersLibraryResultBean savepayment(IdentifiersLibraryBean bean) {
+		// TODO Auto-generated method stub
+		return IdentifiersLibraryDao.savepayment(bean);
+	}
+	
+	@Override
 	public IdentifiersLibraryResultBean edit(Integer id) {
 		// TODO Auto-generated method stub
 		return IdentifiersLibraryDao.edit(id);
@@ -87,6 +93,12 @@ public class IdentifiersLibraryServiceImpl implements IdentifiersLibraryService 
 	public IdentifiersLibraryResultBean editluboil(Integer id) {
 		// TODO Auto-generated method stub
 		return IdentifiersLibraryDao.editluboil(id);
+	}
+	
+	@Override
+	public IdentifiersLibraryResultBean editpayment(Integer id) {
+		// TODO Auto-generated method stub
+		return IdentifiersLibraryDao.editpayment(id);
 	}
 	
 	
@@ -124,6 +136,12 @@ public class IdentifiersLibraryServiceImpl implements IdentifiersLibraryService 
 	public IdentifiersLibraryResultBean getLuboillist() {
 		// TODO Auto-generated method stub
 		return IdentifiersLibraryDao.getLuboillist();
+	}
+	
+	@Override
+	public IdentifiersLibraryResultBean getPaymentlist() {
+		// TODO Auto-generated method stub
+		return IdentifiersLibraryDao.getPaymentlist();
 	}
 	
 	@Override
@@ -173,6 +191,12 @@ public class IdentifiersLibraryServiceImpl implements IdentifiersLibraryService 
 		return IdentifiersLibraryDao.updateluboil(bean);
 	}
 	
+	@Override
+	public IdentifiersLibraryResultBean updatepayment(IdentifiersLibraryBean bean) {
+		// TODO Auto-generated method stub
+		return IdentifiersLibraryDao.updatepayment(bean);
+	}
+	
 	
 	@Override
 	public IdentifiersLibraryResultBean delete(int id) {
@@ -210,6 +234,12 @@ public class IdentifiersLibraryServiceImpl implements IdentifiersLibraryService 
 	public IdentifiersLibraryResultBean deleteluboil(int id) {
 		// TODO Auto-generated method stub
 		return IdentifiersLibraryDao.deleteluboil(id);
+	}
+	
+	@Override
+	public IdentifiersLibraryResultBean deletepayment(int id) {
+		// TODO Auto-generated method stub
+		return IdentifiersLibraryDao.deletepayment(id);
 	}
 
 

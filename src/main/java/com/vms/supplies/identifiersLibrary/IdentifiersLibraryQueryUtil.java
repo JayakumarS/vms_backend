@@ -20,6 +20,9 @@ public class IdentifiersLibraryQueryUtil {
 	public static final String SAVE_luboil="Insert into lub_oil (lub_oil_code,lub_oil_name,created_by,created_dt)"
 			+ "values (:code1,:desc,:userName,now())";
 	
+	public static final String SAVE_payment="Insert into payment_terms (payment_terms_code,payment_terms_name,payment_terms_scale,advance_payment,created_by,created_dt)"
+			+ "values (:code2,:desc,:scale,:advpayment,:userName,now())";
+	
 	
 	public static final String DELETE_freight_type ="delete from freight_type where freight_type_id=?";
 	
@@ -37,6 +40,7 @@ public class IdentifiersLibraryQueryUtil {
 	
 	public static final String getListluboil="select lub_oil_id  as luboilId,lub_oil_code as code1,lub_oil_name as description from lub_oil order by created_dt desc";
 
+	public static final String getListpayment="select payment_terms_id  as paymentId,payment_terms_code as code2,payment_terms_name as description,payment_terms_scale as scale,advance_payment as advpayment from payment_terms order by created_dt desc";
 
 
 
@@ -67,6 +71,9 @@ public class IdentifiersLibraryQueryUtil {
 	public static String deletelocation ="delete from location where location_id = ?";
 	
 	public static String deleteluboil ="delete from lub_oil where lub_oil_id = ?";
+	
+	public static final String deletepayment= "delete from payment_terms where payment_terms_id = ? ";
+
 
 	
 	public static String getEditdelivery="select item_delivery_id as itemId,item_delivery_code as code1, item_delivery_name as description,item_delivery_scale as scale from item_delivery  where item_delivery_id =?";
@@ -77,6 +84,7 @@ public class IdentifiersLibraryQueryUtil {
 	
 	public static String UPDATE_luboil="update lub_oil set lub_oil_code=:code1,lub_oil_name=:description, modified_by=:userName,modified_dt=now() where lub_oil_id = :luboilId";
 
+	public static String UPDATE_payment="update payment_terms set payment_terms_code=:code2,payment_terms_name=:description,payment_terms_scale=:scale,advance_payment as advpayment, modified_by=:userName,modified_dt=now() where payment_terms_id = :paymentId";
 
 
 	public static String getEditluboil="select lub_oil_id as luboilId,lub_oil_code as code1,lub_oil_name  as description from lub_oil  where lub_oil_id =?";
@@ -85,6 +93,9 @@ public class IdentifiersLibraryQueryUtil {
 	public static String UPDATE_function="update function set function_code=:code2,function_name=:description,modified_by=:userName,modified_dt=now() where function_id = :functionId";
 
 	public static String getEditfunction="select function_id as functionId,function_code as code2, function_name as description from function  where function_id =?";
+	
+	public static String getEditpayment="select payment_terms_id as paymentId,payment_terms_code as code2, payment_terms_name as description,payment_terms_scale as scale ,advance_payment as advpayment from payment_terms  where payment_terms_id =?";
+
 			
 	
 

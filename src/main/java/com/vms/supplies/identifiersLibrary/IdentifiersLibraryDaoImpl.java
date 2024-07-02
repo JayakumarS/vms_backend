@@ -196,6 +196,26 @@ public class IdentifiersLibraryDaoImpl implements IdentifiersLibraryDao {
 	    }	
 		return resultBean;
 	}
+	
+	@Override
+	public IdentifiersLibraryResultBean deletepayment(int id) {
+		IdentifiersLibraryResultBean resultBean = new IdentifiersLibraryResultBean();
+		String code = null; 
+		try {
+
+			
+			jdbcTemplate.update(IdentifiersLibraryQueryUtil.deletepayment,id);
+			resultBean.setSuccess(true);
+		}
+	  catch (DataAccessException e) {
+	     
+	            e.printStackTrace();
+	            resultBean.setSuccess(false);
+	            resultBean.setMessage("error in delete");
+	        
+	    }	
+		return resultBean;
+	}
 	@Override
 	public IdentifiersLibraryResultBean update(IdentifiersLibraryBean bean) {
 		IdentifiersLibraryResultBean resultBean = new IdentifiersLibraryResultBean();
@@ -372,6 +392,37 @@ public class IdentifiersLibraryDaoImpl implements IdentifiersLibraryDao {
 	}
 	
 	@Override
+	public IdentifiersLibraryResultBean updatepayment(IdentifiersLibraryBean bean) {
+		IdentifiersLibraryResultBean resultBean = new IdentifiersLibraryResultBean();
+		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		
+		try {
+		
+			Map<String, Object> payment = new HashMap<String, Object>();
+			
+		
+			payment.put("userName", userDetails.getUsername());
+			payment.put("code2", bean.getCode2());
+			payment.put("description", bean.getDescription());
+			payment.put("scale", bean.getScale());
+			payment.put("advpayment", bean.getAdvancePayment());
+			payment.put("paymentId", bean.getPaymentId());
+
+			
+				namedParameterJdbcTemplate.update(IdentifiersLibraryQueryUtil.UPDATE_payment,payment);
+			
+		
+		   resultBean.setSuccess(true);
+		  
+		}catch(Exception e) {
+			e.printStackTrace();
+			resultBean.setSuccess(false);
+			resultBean.setMessage("Not Updated");
+		}
+		return resultBean;
+	}
+	
+	@Override
 	public IdentifiersLibraryResultBean savestorage(IdentifiersLibraryBean bean) {
 		IdentifiersLibraryResultBean resultBean = new IdentifiersLibraryResultBean();
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -511,6 +562,37 @@ public class IdentifiersLibraryDaoImpl implements IdentifiersLibraryDao {
 		}
 		return resultBean;
 	}
+	
+	@Override
+	public IdentifiersLibraryResultBean savepayment(IdentifiersLibraryBean bean) {
+		IdentifiersLibraryResultBean resultBean = new IdentifiersLibraryResultBean();
+		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		
+		try {
+			 
+			Map<String, Object> payment = new HashMap<String, Object>();
+
+				
+			payment.put("userName", userDetails.getUsername());
+			payment.put("code2", bean.getCode2());
+			payment.put("desc", bean.getDescription());
+			payment.put("scale", bean.getScale());
+			payment.put("advpayment", bean.getAdvancePayment());
+			
+					
+				namedParameterJdbcTemplate.update(IdentifiersLibraryQueryUtil.SAVE_payment,payment);
+		
+			 resultBean.setSuccess(true);
+			 
+			 
+		   
+		}catch(Exception e) {
+			e.printStackTrace();
+			resultBean.setSuccess(false);
+			resultBean.setMessage("Not Updated");
+		}
+		return resultBean;
+	}
 	@Override
 	public IdentifiersLibraryResultBean getList() {
 		IdentifiersLibraryResultBean resultBean = new IdentifiersLibraryResultBean();
@@ -587,6 +669,20 @@ public class IdentifiersLibraryDaoImpl implements IdentifiersLibraryDao {
 		
 		try {
 			listBean = jdbcTemplate.query(IdentifiersLibraryQueryUtil.getListluboil,new BeanPropertyRowMapper<IdentifiersLibraryBean>(IdentifiersLibraryBean.class));
+			resultBean.setList(listBean);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return resultBean;
+	}
+	
+	@Override
+	public IdentifiersLibraryResultBean getPaymentlist() {
+		IdentifiersLibraryResultBean resultBean = new IdentifiersLibraryResultBean();
+		List<IdentifiersLibraryBean> listBean = new ArrayList<IdentifiersLibraryBean>();
+		
+		try {
+			listBean = jdbcTemplate.query(IdentifiersLibraryQueryUtil.getListpayment,new BeanPropertyRowMapper<IdentifiersLibraryBean>(IdentifiersLibraryBean.class));
 			resultBean.setList(listBean);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -678,6 +774,19 @@ public class IdentifiersLibraryDaoImpl implements IdentifiersLibraryDao {
 		resultBean.setSuccess(false);
 		try {
 			resultBean.setList(jdbcTemplate.query(IdentifiersLibraryQueryUtil.getEditluboil,new Object[] { id }, new BeanPropertyRowMapper<IdentifiersLibraryBean>(IdentifiersLibraryBean.class)));
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		return resultBean; 
+	}
+	
+	@Override
+	public IdentifiersLibraryResultBean editpayment(Integer id) {		
+		IdentifiersLibraryResultBean resultBean = new IdentifiersLibraryResultBean();
+		resultBean.setSuccess(false);
+		try {
+			resultBean.setList(jdbcTemplate.query(IdentifiersLibraryQueryUtil.getEditpayment,new Object[] { id }, new BeanPropertyRowMapper<IdentifiersLibraryBean>(IdentifiersLibraryBean.class)));
 		}
 		catch(Exception e){
 			e.printStackTrace();

@@ -15,7 +15,21 @@ public class IdentifiersLibraryBean {
 	private Integer scale;
 	private Integer locationId;
 	private Integer luboilId;
+	private Integer paymentId;
+	private Boolean advancePayment;
 	
+	public Integer getPaymentId() {
+		return paymentId;
+	}
+	public void setPaymentId(Integer paymentId) {
+		this.paymentId = paymentId;
+	}
+	public Boolean getAdvancePayment() {
+		return advancePayment;
+	}
+	public void setAdvancePayment(Boolean advancePayment) {
+		this.advancePayment = advancePayment;
+	}
 	public Integer getLuboilId() {
 		return luboilId;
 	}
