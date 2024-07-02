@@ -42,6 +42,12 @@ public class IdentifiersLibraryServiceImpl implements IdentifiersLibraryService 
 	}
 	
 	@Override
+	public IdentifiersLibraryResultBean savelocation(IdentifiersLibraryBean bean) {
+		// TODO Auto-generated method stub
+		return IdentifiersLibraryDao.savelocation(bean);
+	}
+	
+	@Override
 	public IdentifiersLibraryResultBean edit(Integer id) {
 		// TODO Auto-generated method stub
 		return IdentifiersLibraryDao.edit(id);
@@ -63,6 +69,12 @@ public class IdentifiersLibraryServiceImpl implements IdentifiersLibraryService 
 	public IdentifiersLibraryResultBean editdelivery(Integer id) {
 		// TODO Auto-generated method stub
 		return IdentifiersLibraryDao.editdelivery(id);
+	}
+	
+	@Override
+	public IdentifiersLibraryResultBean editlocation(Integer id) {
+		// TODO Auto-generated method stub
+		return IdentifiersLibraryDao.editlocation(id);
 	}
 	
 	
@@ -88,6 +100,12 @@ public class IdentifiersLibraryServiceImpl implements IdentifiersLibraryService 
 	public IdentifiersLibraryResultBean getList3() {
 		// TODO Auto-generated method stub
 		return IdentifiersLibraryDao.getList3();
+	}
+	
+	@Override
+	public IdentifiersLibraryResultBean getLocationlist() {
+		// TODO Auto-generated method stub
+		return IdentifiersLibraryDao.getLocationlist();
 	}
 	
 	@Override
@@ -125,6 +143,12 @@ public class IdentifiersLibraryServiceImpl implements IdentifiersLibraryService 
 		return IdentifiersLibraryDao.updatedelivery(bean);
 	}
 	
+	@Override
+	public IdentifiersLibraryResultBean updatelocation(IdentifiersLibraryBean bean) {
+		// TODO Auto-generated method stub
+		return IdentifiersLibraryDao.updatelocation(bean);
+	}
+	
 	
 	@Override
 	public IdentifiersLibraryResultBean delete(int id) {
@@ -150,6 +174,12 @@ public class IdentifiersLibraryServiceImpl implements IdentifiersLibraryService 
 	public IdentifiersLibraryResultBean deletedelivery(int id) {
 		// TODO Auto-generated method stub
 		return IdentifiersLibraryDao.deletedelivery(id);
+	}
+	
+	@Override
+	public IdentifiersLibraryResultBean deletelocation(int id) {
+		// TODO Auto-generated method stub
+		return IdentifiersLibraryDao.deletelocation(id);
 	}
 
 

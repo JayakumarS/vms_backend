@@ -13,8 +13,16 @@ public class IdentifiersLibraryBean {
 	private Integer functionId;
 	private Integer itemId;
 	private Integer scale;
+	private Integer locationId;
+	
 	
 
+	public Integer getLocationId() {
+		return locationId;
+	}
+	public void setLocationId(Integer locationId) {
+		this.locationId = locationId;
+	}
 	public Integer getScale() {
 		return scale;
 	}

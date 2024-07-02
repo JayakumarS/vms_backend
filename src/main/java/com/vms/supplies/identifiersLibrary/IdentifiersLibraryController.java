@@ -106,6 +106,9 @@ public class IdentifiersLibraryController {
    		return rbean;
    	}
 	
+	
+	
+	
 	@RequestMapping(value="/codemax")
 	public IdentifiersLibraryBean codemax() {
 		IdentifiersLibraryBean rbean = new IdentifiersLibraryBean();
@@ -258,6 +261,62 @@ public class IdentifiersLibraryController {
 		IdentifiersLibraryResultBean rbean = new IdentifiersLibraryResultBean();
 		try {
 			rbean = IdentifiersLibraryService.deletedelivery(id);
+		}catch(Exception e){
+			e.printStackTrace();	
+		}
+		return rbean;
+		
+	}
+	
+	@RequestMapping(value="/listlocation")
+	public IdentifiersLibraryResultBean listlocation() {
+		IdentifiersLibraryResultBean rbean = new IdentifiersLibraryResultBean();
+		try {
+			rbean = IdentifiersLibraryService. getLocationlist();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+   		return rbean;
+   	}
+	
+	@RequestMapping(value="/savelocation")
+	public IdentifiersLibraryResultBean savelocation(@RequestBody IdentifiersLibraryBean bean) {
+		IdentifiersLibraryResultBean rbean = new IdentifiersLibraryResultBean();
+		try {
+			rbean = IdentifiersLibraryService.savelocation(bean);
+		}catch(Exception e){
+			e.printStackTrace();	
+		}
+		return rbean;
+	}
+	
+	@RequestMapping(value="/editlocation")
+	public IdentifiersLibraryResultBean editlocation(@RequestParam("id") int id) {
+		IdentifiersLibraryResultBean rbean = new IdentifiersLibraryResultBean();
+		try {
+			rbean = IdentifiersLibraryService.editlocation(id);
+		}catch(Exception e){
+			e.printStackTrace();	
+		}
+		return rbean;
+	}
+	
+	@RequestMapping(value="/updatelocation")
+	public IdentifiersLibraryResultBean updatelocation(@RequestBody IdentifiersLibraryBean bean) {
+		IdentifiersLibraryResultBean rbean = new IdentifiersLibraryResultBean();
+		try {
+			rbean = IdentifiersLibraryService.updatelocation(bean);
+		}catch(Exception e){
+			e.printStackTrace();	
+		}
+		return rbean;
+	}
+	
+	@RequestMapping(value="/deletelocation")
+	public IdentifiersLibraryResultBean deletelocation(@RequestParam("id") int id) {
+		IdentifiersLibraryResultBean rbean = new IdentifiersLibraryResultBean();
+		try {
+			rbean = IdentifiersLibraryService.deletelocation(id);
 		}catch(Exception e){
 			e.printStackTrace();	
 		}

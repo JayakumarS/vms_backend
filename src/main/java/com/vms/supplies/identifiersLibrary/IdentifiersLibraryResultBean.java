@@ -18,6 +18,14 @@ public class IdentifiersLibraryResultBean {
 	private List<IdentifiersLibraryBean> list2;
 	private List<IdentifiersLibraryBean> list3;
 	
+	private List<IdentifiersLibraryBean> locationlist;
+	
+	public List<IdentifiersLibraryBean> getLocationlist() {
+		return locationlist;
+	}
+	public void setLocationlist(List<IdentifiersLibraryBean> locationlist) {
+		this.locationlist = locationlist;
+	}
 	public List<IdentifiersLibraryBean> getList3() {
 		return list3;
 	}
