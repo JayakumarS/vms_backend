@@ -499,5 +499,63 @@ public class IdentifiersLibraryController {
 		return rbean;
 		
 	}
+	
+	//supplier evaluation scores
+	
+	@RequestMapping(value="/listscores")
+	public IdentifiersLibraryResultBean listscores() {
+		IdentifiersLibraryResultBean rbean = new IdentifiersLibraryResultBean();
+		try {
+			rbean = IdentifiersLibraryService.getScoreslist();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+   		return rbean;
+   	}
+	
+	@RequestMapping(value="/savescores")
+	public IdentifiersLibraryResultBean savescores(@RequestBody IdentifiersLibraryBean bean) {
+		IdentifiersLibraryResultBean rbean = new IdentifiersLibraryResultBean();
+		try {
+			rbean = IdentifiersLibraryService.savescores(bean);
+		}catch(Exception e){
+			e.printStackTrace();	
+		}
+		return rbean;
+	}
+	
+	@RequestMapping(value="/editscores")
+	public IdentifiersLibraryResultBean editscores(@RequestParam("id") int id) {
+		IdentifiersLibraryResultBean rbean = new IdentifiersLibraryResultBean();
+		try {
+			rbean = IdentifiersLibraryService.editscores(id);
+		}catch(Exception e){
+			e.printStackTrace();	
+		}
+		return rbean;
+	}
+	
+	@RequestMapping(value="/updatescores")
+	public IdentifiersLibraryResultBean updatescores(@RequestBody IdentifiersLibraryBean bean) {
+		IdentifiersLibraryResultBean rbean = new IdentifiersLibraryResultBean();
+		try {
+			rbean = IdentifiersLibraryService.updatescores(bean);
+		}catch(Exception e){
+			e.printStackTrace();	
+		}
+		return rbean;
+	}
+	
+	@RequestMapping(value="/deletescores")
+	public IdentifiersLibraryResultBean deletescores(@RequestParam("id") int id) {
+		IdentifiersLibraryResultBean rbean = new IdentifiersLibraryResultBean();
+		try {
+			rbean = IdentifiersLibraryService.deletescores(id);
+		}catch(Exception e){
+			e.printStackTrace();	
+		}
+		return rbean;
+		
+	}
 
 }

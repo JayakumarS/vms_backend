@@ -21,6 +21,8 @@ public interface IdentifiersLibraryDao {
 	
 	public IdentifiersLibraryResultBean saveoffice(IdentifiersLibraryBean bean);
 	
+	public IdentifiersLibraryResultBean savescores(IdentifiersLibraryBean bean);
+	
 	public IdentifiersLibraryResultBean edit(Integer id);
 	
 	public IdentifiersLibraryResultBean editstorage(Integer id);
@@ -36,6 +38,8 @@ public interface IdentifiersLibraryDao {
 	public IdentifiersLibraryResultBean editpayment(Integer id);
 	
 	public IdentifiersLibraryResultBean editoffice(Integer id);
+	
+	public IdentifiersLibraryResultBean editscores(Integer id);
 	
 	public IdentifiersLibraryResultBean getList();
 	
@@ -55,6 +59,9 @@ public interface IdentifiersLibraryDao {
 	
 	public IdentifiersLibraryResultBean deleteoffice(int id);
 	
+	public IdentifiersLibraryResultBean deletescores(int id);
+
+	
 	public IdentifiersLibraryResultBean update(IdentifiersLibraryBean bean);
 	
 	public IdentifiersLibraryResultBean updatestorage(IdentifiersLibraryBean bean);
@@ -70,6 +77,8 @@ public interface IdentifiersLibraryDao {
 	public IdentifiersLibraryResultBean updatepayment(IdentifiersLibraryBean bean);
 	
 	public IdentifiersLibraryResultBean updateoffice(IdentifiersLibraryBean bean);
+	
+	public IdentifiersLibraryResultBean updatescores(IdentifiersLibraryBean bean);
 
 	
 	public IdentifiersLibraryResultBean getList1();
@@ -85,6 +94,8 @@ public interface IdentifiersLibraryDao {
 	public IdentifiersLibraryResultBean getPaymentlist();
 	
 	public IdentifiersLibraryResultBean getOfficelist();
+	
+	public IdentifiersLibraryResultBean getScoreslist();
 	
 	public IdentifiersLibraryBean getCodemax();
 	

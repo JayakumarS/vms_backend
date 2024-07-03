@@ -66,6 +66,12 @@ public class IdentifiersLibraryServiceImpl implements IdentifiersLibraryService 
 	}
 	
 	@Override
+	public IdentifiersLibraryResultBean savescores(IdentifiersLibraryBean bean) {
+		// TODO Auto-generated method stub
+		return IdentifiersLibraryDao.savescores(bean);
+	}
+	
+	@Override
 	public IdentifiersLibraryResultBean edit(Integer id) {
 		// TODO Auto-generated method stub
 		return IdentifiersLibraryDao.edit(id);
@@ -111,6 +117,12 @@ public class IdentifiersLibraryServiceImpl implements IdentifiersLibraryService 
 	public IdentifiersLibraryResultBean editoffice(Integer id) {
 		// TODO Auto-generated method stub
 		return IdentifiersLibraryDao.editoffice(id);
+	}
+	
+	@Override
+	public IdentifiersLibraryResultBean editscores(Integer id) {
+		// TODO Auto-generated method stub
+		return IdentifiersLibraryDao.editscores(id);
 	}
 	
 	
@@ -160,6 +172,12 @@ public class IdentifiersLibraryServiceImpl implements IdentifiersLibraryService 
 	public IdentifiersLibraryResultBean getOfficelist() {
 		// TODO Auto-generated method stub
 		return IdentifiersLibraryDao.getOfficelist();
+	}
+	
+	@Override
+	public IdentifiersLibraryResultBean getScoreslist() {
+		// TODO Auto-generated method stub
+		return IdentifiersLibraryDao.getScoreslist();
 	}
 	
 	@Override
@@ -221,6 +239,12 @@ public class IdentifiersLibraryServiceImpl implements IdentifiersLibraryService 
 		return IdentifiersLibraryDao.updateoffice(bean);
 	}
 	
+	@Override
+	public IdentifiersLibraryResultBean updatescores(IdentifiersLibraryBean bean) {
+		// TODO Auto-generated method stub
+		return IdentifiersLibraryDao.updatescores(bean);
+	}
+	
 	
 	@Override
 	public IdentifiersLibraryResultBean delete(int id) {
@@ -270,6 +294,12 @@ public class IdentifiersLibraryServiceImpl implements IdentifiersLibraryService 
 	public IdentifiersLibraryResultBean deleteoffice(int id) {
 		// TODO Auto-generated method stub
 		return IdentifiersLibraryDao.deleteoffice(id);
+	}
+	
+	@Override
+	public IdentifiersLibraryResultBean deletescores(int id) {
+		// TODO Auto-generated method stub
+		return IdentifiersLibraryDao.deletescores(id);
 	}
 
 

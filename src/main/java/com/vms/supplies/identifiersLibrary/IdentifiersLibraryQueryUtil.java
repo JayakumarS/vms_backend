@@ -26,6 +26,9 @@ public class IdentifiersLibraryQueryUtil {
 	public static final String SAVE_office="Insert into supplier_office (supplier_office_code,supplier_office_name,created_by,created_dt)"
 			+ "values (:code2,:desc,:userName,now())";
 	
+	public static final String SAVE_scores="Insert into supplier_scores (supplier_scores_code,supplier_scores_name,supplier_scores_scale,created_by,created_dt)"
+			+ "values (:code2,:desc,:scale,:userName,now())";
+	
 	
 	public static final String DELETE_freight_type ="delete from freight_type where freight_type_id=?";
 	
@@ -47,6 +50,7 @@ public class IdentifiersLibraryQueryUtil {
 	
 	public static final String getListoffice="select supplier_office_id  as supplierofficeId, supplier_office_code as code2, supplier_office_name as description from supplier_office order by created_dt desc";
 
+	public static final String getListscores="select supplier_scores_id  as supplierscoresId, supplier_scores_code as code2, supplier_scores_name as description,supplier_scores_scale as scale from supplier_scores order by created_dt desc";
 
 
 
@@ -81,6 +85,8 @@ public class IdentifiersLibraryQueryUtil {
 	public static final String deletepayment= "delete from payment_terms where payment_terms_id = ? ";
 	
 	public static final String deleteoffice= "delete from supplier_office where supplier_office_id = ? ";
+	
+	public static final String deletescores= "delete from supplier_scores where supplier_scores_id = ? ";
 
 
 	
@@ -95,6 +101,8 @@ public class IdentifiersLibraryQueryUtil {
 	public static String UPDATE_payment="update payment_terms set payment_terms_code=:code2,payment_terms_name=:description,payment_terms_scale=:scale,advance_payment as advancePayment, modified_by=:userName,modified_dt=now() where payment_terms_id = :paymentId";
 	
 	public static String UPDATE_office="update supplier_office set supplier_office_code=:code2,supplier_office_name=:description, modified_by=:userName,modified_dt=now() where supplier_office_id = :supplierofficeId";
+	
+	public static String UPDATE_scores="update supplier_scores set supplier_scores_code=:code2,supplier_scores_name=:description,supplier_scores_scale=:scale, modified_by=:userName,modified_dt=now() where supplier_scores_id = :supplierscoresId";
 
 
 
@@ -107,6 +115,9 @@ public class IdentifiersLibraryQueryUtil {
 	public static String getEditfunction="select function_id as functionId,function_code as code2, function_name as description from function  where function_id =?";
 	
 	public static String getEditpayment="select payment_terms_id as paymentId,payment_terms_code as code2, payment_terms_name as description,payment_terms_scale as scale ,advance_payment as advancePayment from payment_terms  where payment_terms_id =?";
+	
+	public static String getEditscores="select supplier_scores_id as supplierscoresId,supplier_scores_code as code2, supplier_scores_name as description,supplier_scores_scale as scale  from supplier_scores  where supplier_scores_id =?";
+
 
 			
 	

@@ -26,6 +26,14 @@ public class IdentifiersLibraryResultBean {
 	
 	private List<IdentifiersLibraryBean> officelist;
 	
+	private List<IdentifiersLibraryBean> scoreslist;
+	
+	public List<IdentifiersLibraryBean> getScoreslist() {
+		return scoreslist;
+	}
+	public void setScoreslist(List<IdentifiersLibraryBean> scoreslist) {
+		this.scoreslist = scoreslist;
+	}
 	public List<IdentifiersLibraryBean> getOfficelist() {
 		return officelist;
 	}
