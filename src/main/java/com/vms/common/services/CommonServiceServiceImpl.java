@@ -179,4 +179,10 @@ public class CommonServiceServiceImpl implements CommonServiceService{
 		// TODO Auto-generated method stub
 		return commonServicesDao.getUom();
 	}
+
+	@Override
+	public List<CommonServiceBean> getSupplieDepartment() {
+		// TODO Auto-generated method stub
+		return commonServicesDao.getSupplieDepartment();
+	}
 }

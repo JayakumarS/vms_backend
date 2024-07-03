@@ -13,6 +13,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
+import com.vms.crew.applications.ApplicationsBean;
+import com.vms.crew.applications.ApplicationsQueryUtil;
 import com.vms.vessel.vesselParticular.VesselParticularBean;
 import com.vms.vessel.vesselParticular.VesselParticularQueryUtil;
 import com.vms.vessel.vesselParticular.VesselParticularResultBean;
@@ -41,7 +43,7 @@ public class PersonMaintenanceDaoImpl implements PersonMaintenanceDao{
 			//Header
 			personMaintenanceMap.put("userName", userDetails.getUsername());
 			personMaintenanceMap.put("code", bean.getCode());
-			personMaintenanceMap.put("appCode", Integer.parseInt(bean.getApplCode()));
+			personMaintenanceMap.put("appCode", (bean.getApplCode() == null || bean.getApplCode().isEmpty()) ? null : Integer.parseInt(bean.getApplCode()));
 			personMaintenanceMap.put("surname", bean.getSurname());
 			personMaintenanceMap.put("name", bean.getName());
 			personMaintenanceMap.put("middle", bean.getMiddle());
@@ -106,6 +108,51 @@ public class PersonMaintenanceDaoImpl implements PersonMaintenanceDao{
 			if(bean.getRank() != null && !bean.getRank().isEmpty()) {
 			  namedParameterJdbcTemplate.update(PersonMaintenanceQueryUtil.SAVE_RANK_DTLS,personMaintenanceMap);
 			}
+			
+		     List<ApplicationsBean> certificates = bean.getCertificates();
+		     if (certificates != null && !certificates.isEmpty()) {
+			        for (ApplicationsBean certificate : certificates) {
+			            List<ApplicationsBean> splitCertificateNames = certificate.getSplitCertificateNames();
+			            if (splitCertificateNames != null && !splitCertificateNames.isEmpty()) {
+			                for (ApplicationsBean splitCertificateName : splitCertificateNames) {
+			                    Map<String, Object> certificateMap = new HashMap<>();
+			                    certificateMap.put("userName", userDetails.getUsername());
+			                    certificateMap.put("code", code);
+			                    certificateMap.put("rankCode", Integer.parseInt(bean.getRank()));
+			                    certificateMap.put("certifiCode", certificate.getCertifiCode());
+			                    certificateMap.put("mcertificateCode", null);
+			                    certificateMap.put("mandatoryValid", splitCertificateName.getMandatoryValid());
+			                    certificateMap.put("mandatoryInvalid", splitCertificateName.getMandatoryInvalid());
+			                    certificateMap.put("optionalInvalid", splitCertificateName.getOptionalInvalid());
+	
+			                    namedParameterJdbcTemplate.update(PersonMaintenanceQueryUtil.SAVE_CERTIFICATE, certificateMap);
+			                }
+			            }
+			        }
+			    }
+
+			    //Medical certificates
+			    List<ApplicationsBean> medicalCertificates = bean.getMedicalcertificates();
+			    if (medicalCertificates != null && !medicalCertificates.isEmpty()) {
+			        for (ApplicationsBean mcertificate : medicalCertificates) {
+			            List<ApplicationsBean> splitCertificateMedicalNames = mcertificate.getSplitCertificateMedicalNames();
+			            if (splitCertificateMedicalNames != null && !splitCertificateMedicalNames.isEmpty()) {
+			                for (ApplicationsBean splitCertificateName : splitCertificateMedicalNames) {
+			                    Map<String, Object> certificateMap = new HashMap<>();
+			                    certificateMap.put("userName", userDetails.getUsername());
+			                    certificateMap.put("code", code);
+			                    certificateMap.put("rankCode", Integer.parseInt(bean.getRank()));
+			                    certificateMap.put("certifiCode", null);
+			                    certificateMap.put("mcertificateCode", mcertificate.getMcertificateCode());
+			                    certificateMap.put("mandatoryValid", splitCertificateName.getMmandatoryValid());
+			                    certificateMap.put("mandatoryInvalid", splitCertificateName.getMmandatoryInvalid());
+			                    certificateMap.put("optionalInvalid", splitCertificateName.getMoptionalInvalid());
+
+			                    namedParameterJdbcTemplate.update(PersonMaintenanceQueryUtil.SAVE_CERTIFICATE, certificateMap);
+			                }
+			            }
+			        }
+			    }
 			
 		   resultBean.setSuccess(true);
 		}catch(Exception e) {
@@ -180,7 +227,14 @@ public class PersonMaintenanceDaoImpl implements PersonMaintenanceDao{
 				String rankDate = jdbcTemplate.queryForObject(PersonMaintenanceQueryUtil.GET_RANK_DATE,new Object[]{id}, String.class);
 				resultBean.getCrewMasterDtls().setRankDate(rankDate);
 			}
+			
+			PersonMaintenanceBean list = resultBean.getCrewMasterDtls();
+			Integer rankId = Integer.parseInt(list.getRank());
+			List<ApplicationsBean> checkListDtls = jdbcTemplate.query(PersonMaintenanceQueryUtil.GET_CHECKLIST_DTLS, new Object[]{id,id,rankId,id,rankId}, new BeanPropertyRowMapper<>(ApplicationsBean.class));
+			
 			resultBean.setCrewMasterDocDtls(results.isEmpty() ? crewMasterDtls : results.get(0));
+			resultBean.setCheckListDtls(checkListDtls);
+			
 		}
 		catch(Exception e){
 			e.printStackTrace();
@@ -199,7 +253,7 @@ public class PersonMaintenanceDaoImpl implements PersonMaintenanceDao{
 			//Header
 			personMaintenanceMap.put("userName", userDetails.getUsername());
 			personMaintenanceMap.put("code", bean.getCode());
-			personMaintenanceMap.put("appCode", Integer.parseInt(bean.getApplCode()));
+			personMaintenanceMap.put("appCode", (bean.getApplCode() == null || bean.getApplCode().isEmpty()) ? null : Integer.parseInt(bean.getApplCode()));
 			personMaintenanceMap.put("surname", bean.getSurname());
 			personMaintenanceMap.put("name", bean.getName());
 			personMaintenanceMap.put("middle", bean.getMiddle());
@@ -266,6 +320,52 @@ public class PersonMaintenanceDaoImpl implements PersonMaintenanceDao{
 			   namedParameterJdbcTemplate.update(PersonMaintenanceQueryUtil.SAVE_RANK_DTLS,personMaintenanceMap);
 			}
 			
+			 namedParameterJdbcTemplate.update(PersonMaintenanceQueryUtil.DELETE_CERTIFICATES, personMaintenanceMap);	
+		     List<ApplicationsBean> certificates = bean.getCertificates();
+		     if (certificates != null && !certificates.isEmpty()) {
+			        for (ApplicationsBean certificate : certificates) {
+			            List<ApplicationsBean> splitCertificateNames = certificate.getSplitCertificateNames();
+			            if (splitCertificateNames != null && !splitCertificateNames.isEmpty()) {
+			                for (ApplicationsBean splitCertificateName : splitCertificateNames) {
+			                    Map<String, Object> certificateMap = new HashMap<>();
+			                    certificateMap.put("userName", userDetails.getUsername());
+			                    certificateMap.put("code", bean.getCode());
+			                    certificateMap.put("rankCode", Integer.parseInt(bean.getRank()));
+			                    certificateMap.put("certifiCode", certificate.getCertifiCode());
+			                    certificateMap.put("mcertificateCode", null);
+			                    certificateMap.put("mandatoryValid", splitCertificateName.getMandatoryValid());
+			                    certificateMap.put("mandatoryInvalid", splitCertificateName.getMandatoryInvalid());
+			                    certificateMap.put("optionalInvalid", splitCertificateName.getOptionalInvalid());
+	
+			                    namedParameterJdbcTemplate.update(PersonMaintenanceQueryUtil.SAVE_CERTIFICATE, certificateMap);
+			                }
+			            }
+			        }
+			    }
+		     		
+			    //Medical certificates
+			    List<ApplicationsBean> medicalCertificates = bean.getMedicalcertificates();
+			    if (medicalCertificates != null && !medicalCertificates.isEmpty()) {
+			        for (ApplicationsBean mcertificate : medicalCertificates) {
+			            List<ApplicationsBean> splitCertificateMedicalNames = mcertificate.getSplitCertificateMedicalNames();
+			            if (splitCertificateMedicalNames != null && !splitCertificateMedicalNames.isEmpty()) {
+			                for (ApplicationsBean splitCertificateName : splitCertificateMedicalNames) {
+			                    Map<String, Object> certificateMap = new HashMap<>();
+			                    certificateMap.put("userName", userDetails.getUsername());
+			                    certificateMap.put("code", bean.getCode());
+			                    certificateMap.put("rankCode", Integer.parseInt(bean.getRank()));
+			                    certificateMap.put("certifiCode", null);
+			                    certificateMap.put("mcertificateCode", mcertificate.getMcertificateCode());
+			                    certificateMap.put("mandatoryValid", splitCertificateName.getMmandatoryValid());
+			                    certificateMap.put("mandatoryInvalid", splitCertificateName.getMmandatoryInvalid());
+			                    certificateMap.put("optionalInvalid", splitCertificateName.getMoptionalInvalid());
+
+			                    namedParameterJdbcTemplate.update(PersonMaintenanceQueryUtil.SAVE_CERTIFICATE, certificateMap);
+			                }
+			            }
+			        }
+			    }
+			
 		   resultBean.setSuccess(true);
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -306,13 +406,54 @@ public class PersonMaintenanceDaoImpl implements PersonMaintenanceDao{
 		try {
 			resultBean.setCrewMasterDtls(jdbcTemplate.queryForObject(PersonMaintenanceQueryUtil.GET_DOC_CHECK_LIST,new Object[] { id }, new BeanPropertyRowMapper<PersonMaintenanceBean>(PersonMaintenanceBean.class)));
 			
-			List<PersonMaintenanceBean> results = jdbcTemplate.query(
+			List<PersonMaintenanceBean> cList = jdbcTemplate.query(
 				    PersonMaintenanceQueryUtil.GET_CERTIFICATE_CHECK_LIST,
 				    new Object[] { id },
 				    new BeanPropertyRowMapper<>(PersonMaintenanceBean.class)
 			);
 			
-			resultBean.setList(results);
+			List<PersonMaintenanceBean> mList = jdbcTemplate.query(
+				    PersonMaintenanceQueryUtil.GET_MEDICAL_CERTIFICATE_CHECK_LIST,
+				    new Object[] { id },
+				    new BeanPropertyRowMapper<>(PersonMaintenanceBean.class)
+			);
+			
+			resultBean.setMedicalCertificateList(mList);
+			resultBean.setList(cList);
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		return resultBean; 
+	}
+
+	@Override
+	public PersonMaintenanceResultBean getCheckListDtl(String id) {		
+		PersonMaintenanceResultBean resultBean = new PersonMaintenanceResultBean();
+		resultBean.setSuccess(false);
+		try {
+//			resultBean.setCrewMasterDtls(jdbcTemplate.queryForObject(PersonMaintenanceQueryUtil.GET_CREW_DOC_CHECK_LIST,new Object[] { id }, new BeanPropertyRowMapper<PersonMaintenanceBean>(PersonMaintenanceBean.class)));
+			List<PersonMaintenanceBean> dList = jdbcTemplate.query(
+				    PersonMaintenanceQueryUtil.GET_CREW_DOC_CHECK_LIST,
+				    new Object[] { id },
+				    new BeanPropertyRowMapper<>(PersonMaintenanceBean.class)
+			);
+			
+			List<PersonMaintenanceBean> cList = jdbcTemplate.query(
+				    PersonMaintenanceQueryUtil.GET_CREW_CERTIFICATE_CHECK_LIST,
+				    new Object[] { id },
+				    new BeanPropertyRowMapper<>(PersonMaintenanceBean.class)
+			);
+			
+			List<PersonMaintenanceBean> mList = jdbcTemplate.query(
+				    PersonMaintenanceQueryUtil.GET_CREW_MEDICAL_CERTIFICATE_CHECK_LIST,
+				    new Object[] { id },
+				    new BeanPropertyRowMapper<>(PersonMaintenanceBean.class)
+			);
+			
+			resultBean.setMedicalCertificateList(mList);
+			resultBean.setList(cList);
+			resultBean.setCrewMasterDocDtsl(dList);
 		}
 		catch(Exception e){
 			e.printStackTrace();

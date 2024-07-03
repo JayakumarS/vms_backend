@@ -131,6 +131,17 @@ public class PersonMaintenanceController {
 		return rbean;
 	}
 	
+	@RequestMapping(value="/crewCheckListDtl")
+	public PersonMaintenanceResultBean getcrewCheckListDtl(@RequestParam("id") String id) {
+		PersonMaintenanceResultBean rbean = new PersonMaintenanceResultBean();
+		try {
+			rbean = personMaintenanceService.getcrewCheckListDtl(id);
+		}catch(Exception e){
+			e.printStackTrace();	
+		}
+		return rbean;
+	}
+	
 	@RequestMapping("/uploadfile")
 	public @ResponseBody PersonMaintenanceResultBean saveuploadfile(@RequestBody MultipartFile file, HttpServletRequest request) throws CustomException {
 		PersonMaintenanceResultBean resultBean= new PersonMaintenanceResultBean();

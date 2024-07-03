@@ -97,7 +97,8 @@ public class PersonMaintenanceQueryUtil {
 			+ "appl_passport as passPort, appl_passport_issue as pIssuePlace, to_char(appl_passport_expiry_date,'dd/mm/yyyy') as pExpiry, "
 			+ "appl_licence as licence, "
 			+ "cv_operations_file_path,rm.rank_name as rankName,applicant_image_path as imgPath,applicant_image_file_name as imgName from crew_applicant ca "
-			+ "left join rank_master rm on rm.rank_id = ca.appl_rank ";
+			+ "left join rank_master rm on rm.rank_id = ca.appl_rank "
+			+ "where crew_applicant_code not in (select applicant_code from crew_master where applicant_code is not null) ";
 	
 	public static final String GET_RANK_DTL_COUNT = "select count(*) from crew_master_rank_dtl where crew_master_code = ? ";
 	
@@ -111,5 +112,56 @@ public class PersonMaintenanceQueryUtil {
 	
 	public static final String GET_CERTIFICATE_CHECK_LIST = "select cm.certificate_name as name,appl_mandatory_valid as valid,appl_mandatory_invalid as inValid,appl_optional_invalid as optional from appl_checklist ac "
 			+ "left join certificate_master cm on cm.certificate_id = ac.appl_certificate_code "
-			+ "where appl_code = ? ";
+			+ "where appl_code = ? and appl_certificate_code is not null ";
+	
+	public static final String GET_MEDICAL_CERTIFICATE_CHECK_LIST = "select mm.medical_name as name,appl_mandatory_valid as valid,appl_mandatory_invalid as inValid, "
+			+ "appl_optional_invalid as optional from appl_checklist ac "
+			+ "left join medical_master mm on mm.medical_id = ac.appl_medicalcertificate_code "
+			+ "where appl_code = ? and appl_medicalcertificate_code is not null ";
+	
+	public static final String SAVE_CERTIFICATE = "Insert into crew_master_checklist(crew_master_code,crew_master_rank_code,crew_master_certificate_code,crew_master_medicalcertificate_code,crew_master_mandatory_valid,crew_master_mandatory_invalid,crew_master_optional_invalid,created_by,created_dt) "
+			+ "values (:code,:rankCode,:certifiCode,:mcertificateCode,:mandatoryValid,:mandatoryInvalid,:optionalInvalid,:userName,now()) ";
+	
+	public static final String GET_CHECKLIST_DTLS = "SELECT cmc.crew_master_code AS applcode,cmc.crew_master_rank_code AS rankCode,cmc.crew_master_certificate_code AS CertifiCode, "
+			+ "cm.certificate_name AS certificateName,cmc.crew_master_medicalcertificate_code AS mcertificateCode, "
+			+ " mm.medical_name AS mcertificateName,cmc.crew_master_mandatory_valid AS mandatoryValid, "
+			+ " cmc.crew_master_mandatory_invalid AS mandatoryInvalid, "
+			+ " cmc.crew_master_optional_invalid AS optionalInvalid "
+			+ " FROM crew_master_checklist cmc LEFT JOIN certificate_master cm ON cmc.crew_master_certificate_code = cm.certificate_id "
+			+ " LEFT JOIN medical_master mm ON cmc.crew_master_medicalcertificate_code = mm.medical_id "
+			+ " WHERE cmc.crew_master_code = ? "
+			+ " UNION ALL "
+			+ " SELECT NULL AS crew_mastercode,rc.rank_code AS rankCode,cm.certificate_id AS CertifiCode, "
+			+ " STRING_AGG(cm.certificate_name, ', ') AS certificateName,NULL AS mcertificateCode,NULL AS mcertificateName, "
+			+ " NULL AS mandatoryValid, NULL AS mandatoryInvalid,NULL AS optionalInvalid "
+			+ " FROM rank_certificate rc "
+			+ " LEFT JOIN certificate_master cm ON rc.certificate_code = cm.certificate_id "
+			+ " LEFT JOIN crew_master_checklist cmc ON cm.certificate_id = cmc.crew_master_certificate_code AND cmc.crew_master_code = ? "
+			+ " WHERE rc.rank_code = ? AND cmc.crew_master_certificate_code IS NULL "
+			+ " GROUP BY rc.rank_code, cm.certificate_id "
+			+ " UNION ALL "
+			+ " SELECT NULL AS crew_mastercode,rm.rank_code AS rankCode,NULL AS CertifiCode,NULL AS certificateName, "
+			+ " cm.medical_id AS mcertificateCode,STRING_AGG(cm.medical_name, ', ') AS mcertificateName,NULL AS mandatoryValid, "
+			+ " NULL AS mandatoryInvalid,NULL AS optionalInvalid "
+			+ " FROM rank_medicals rm "
+			+ " LEFT JOIN medical_master cm ON rm.medical_code = cm.medical_id "
+			+ " LEFT JOIN crew_master_checklist cmc ON cm.medical_id = cmc.crew_master_medicalcertificate_code AND cmc.crew_master_code = ? "
+			+ " WHERE rm.rank_code = ? AND cmc.crew_master_medicalcertificate_code IS NULL "
+			+ " GROUP BY rm.rank_code, cm.medical_id ";
+	
+	public static final String GET_CREW_DOC_CHECK_LIST = "select 'Password' as passPort,to_char(passport_expiry ,'dd/mm/yyyy') as pExpiry,'S.book' as sBook, "
+			+ "to_char(s_book_expiry ,'dd/mm/yyyy') as sExpiry from crew_master_document ca "
+			+ "where crew_master_code = ? ";
+	
+	public static final String GET_CREW_CERTIFICATE_CHECK_LIST = "select cm.certificate_name as name,crew_master_mandatory_valid as valid,crew_master_mandatory_invalid as inValid, "
+			+ "crew_master_optional_invalid as optional from crew_master_checklist cmc "
+			+ "left join certificate_master cm on cm.certificate_id = cmc.crew_master_certificate_code "
+			+ "where crew_master_code = ? and crew_master_certificate_code is not null ";
+	
+	public static final String GET_CREW_MEDICAL_CERTIFICATE_CHECK_LIST = "select mm.medical_name as name,crew_master_mandatory_valid as valid,crew_master_mandatory_invalid as inValid, "
+			+ "crew_master_optional_invalid as optional from crew_master_checklist ac "
+			+ "left join medical_master mm on mm.medical_id = ac.crew_master_medicalcertificate_code "
+			+ "where crew_master_code = ? and crew_master_medicalcertificate_code is not null ";
+	
+	public static final String DELETE_CERTIFICATES = "delete from crew_master_checklist where crew_master_code = :code ";
 }

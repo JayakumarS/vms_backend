@@ -65,4 +65,10 @@ public class PersonMaintenanceServiceImpl implements PersonMaintenanceService{
 		return personMaintenanceDao.getCheckListDtl(id);
 	}
 
+	@Override
+	public PersonMaintenanceResultBean getcrewCheckListDtl(String id) {
+		// TODO Auto-generated method stub
+		return personMaintenanceDao.getCheckListDtl(id);
+	}
+
 }

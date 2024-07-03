@@ -61,6 +61,8 @@ public interface CommonServiceService {
 
 	public List<CommonServiceBean> getUom();
 
+	public List<CommonServiceBean> getSupplieDepartment();
+
 
 
 }

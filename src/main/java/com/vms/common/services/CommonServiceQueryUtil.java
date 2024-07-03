@@ -71,4 +71,6 @@ public class CommonServiceQueryUtil {
 	public static final String GET_NATIONALITY = "select country_id as id ,nationality as text from country_master";
 	
 	public static final String GET_UOM = "select uom_id as id,uom_code as text from unit_of_measurement ";
+	
+	public static final String GET_SUPPLIE_DEPARTMENT = "select supplie_department_id as id,supplie_dep_code || '-' || supplie_department_name as text from supplie_department ";
 }

@@ -61,5 +61,7 @@ public interface CommonServiceDao {
 
 	public List<CommonServiceBean> getUom();
 
+	public List<CommonServiceBean> getSupplieDepartment();
+
 
 }

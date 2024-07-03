@@ -20,5 +20,7 @@ public interface PersonMaintenanceDao {
 
 	public PersonMaintenanceResultBean getCheckListDtl(Integer id);
 
+	public PersonMaintenanceResultBean getCheckListDtl(String id);
+
 
 }

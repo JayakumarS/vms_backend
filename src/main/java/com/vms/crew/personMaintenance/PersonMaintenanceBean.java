@@ -2,6 +2,8 @@ package com.vms.crew.personMaintenance;
 
 import java.util.List;
 
+import com.vms.crew.applications.ApplicationsBean;
+
 
 public class PersonMaintenanceBean {
 	private List<PersonMaintenanceBean> list;
@@ -40,8 +42,28 @@ public class PersonMaintenanceBean {
 	private boolean valid;
 	private boolean inValid;
 	private boolean optional;
+	public List<ApplicationsBean> certificates;
+    public List<ApplicationsBean> medicalcertificates;
+    public List<ApplicationsBean> splitCertificateMedicalNames;
 	
-	
+	public List<ApplicationsBean> getCertificates() {
+		return certificates;
+	}
+	public void setCertificates(List<ApplicationsBean> certificates) {
+		this.certificates = certificates;
+	}
+	public List<ApplicationsBean> getMedicalcertificates() {
+		return medicalcertificates;
+	}
+	public void setMedicalcertificates(List<ApplicationsBean> medicalcertificates) {
+		this.medicalcertificates = medicalcertificates;
+	}
+	public List<ApplicationsBean> getSplitCertificateMedicalNames() {
+		return splitCertificateMedicalNames;
+	}
+	public void setSplitCertificateMedicalNames(List<ApplicationsBean> splitCertificateMedicalNames) {
+		this.splitCertificateMedicalNames = splitCertificateMedicalNames;
+	}
 	public boolean isValid() {
 		return valid;
 	}

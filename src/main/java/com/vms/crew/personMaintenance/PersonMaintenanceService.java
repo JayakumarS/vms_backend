@@ -20,4 +20,6 @@ public interface PersonMaintenanceService {
 
 	public PersonMaintenanceResultBean getCheckListDtl(Integer id);
 
+	public PersonMaintenanceResultBean getcrewCheckListDtl(String id);
+
 }

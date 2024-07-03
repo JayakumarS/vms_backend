@@ -367,6 +367,19 @@ public class CommonServiceController {
 				e.printStackTrace();
 			}
 			return commonUtilityResultBean;
-		}	
+		}
+		
+		//Supplies Department List
+		@RequestMapping("/getSupplieDepartment")
+		public @ResponseBody CommonServicesResultBean getSupplieDepartment() throws CustomException {
+			CommonServicesResultBean commonUtilityResultBean = new CommonServicesResultBean();
+			try {
+				commonUtilityResultBean.setlCommonUtilityBean(commonServicesService.getSupplieDepartment());
+				commonUtilityResultBean.setSuccess(true);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return commonUtilityResultBean;
+		}
 
 }
